@@ -8,6 +8,9 @@ html {
     display: flex;
     flex-direction: column;
  }
+ table caption {
+     display: none;
+ }
 .btn-blue {
     background-color: #00b3e8;
     border-color: #00b3e8;
@@ -63,4 +66,25 @@ html {
 #footer .social .social-navi a {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.presence-calc:first-child {
+    border-bottom: 1px solid #a8a8a8;
+}
+.presence-calc-wrap {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.presence-calc.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.presence-calc div[class^="col-"] {
+    padding: 25px;
+}
+
+.presence-calc div[class^="col-"] .in-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

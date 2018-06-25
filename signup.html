@@ -1,0 +1,160 @@
+
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+<title> </title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" media="all" href="css/common.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary nav-blue">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="img/common/Popcon_Logo.png">
+          </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarsExample07" style="">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">거래내역</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">입출금</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">마이페이지</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">고객센터</a>
+            </li>
+          </ul>
+            <div class="nav-bar-logininfo">
+              <i class="fas fa-user-circle fa-2x"></i> 게스트님
+            </div>
+              <button type="button" class="btn btn-outline-light">로그인</button>
+        </div>
+      </div><!--nav container-->
+</nav>
+    <div class="container mt11"  >
+       <div class="card max-width5 Regular shadow">
+          <div class="card-header"><h5>회원가입</h5></div>
+        <form class="p-3">
+          <div class="form-group">
+            <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="email" placeholder="이메일">
+          </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              이메일은 필수입력입니다.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+          <div class="form-group">
+            <input type="password" class="form-control form-control-sm" id="Password" placeholder="비밀번호">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control form-control-sm" id="confimPassword" placeholder="비밀번호 확인">
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control form-control-sm" placeholder="성">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control form-control-sm" placeholder="이름">
+            </div>
+          </div>
+            <div class="input-group mb-3 mt-3">
+              <input type="text" class="form-control form-control-sm" placeholder="우편번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary btn-sm" type="button">주소찾기</button>
+              </div>
+            </div>
+            <div class="form-group">
+            <input type="password" class="form-control form-control-sm" id="addr" placeholder="주소">
+          </div>
+            <div class="form-group">
+            <input type="password" class="form-control form-control-sm" id="addr2" placeholder="상세주소입력">
+          </div>
+            <div class="form-group text-center"> CAPTCHA</div>
+             <div class="col-auto my-1">
+            <div class="form-group  ml-2">
+                <input type="checkbox" class="custom-control-input" id="policy">
+                 <label class="custom-control-label" for="policy">이용약관 동의</label>
+              <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#policy_content"> 약관내용 보기 <i class="fas fas fa-external-link-alt"> </i></button> 
+            </div>
+              <div class="form-group ml-2"> 
+                  <input type="checkbox" class="custom-control-input" id="policy2">
+                 <label class="custom-control-label" for="policy2">개인정보처리방침 동의</label>
+                <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#policy_content2"> 약관내용 보기 <i class="fas fas fa-external-link-alt"> </i></button> 
+              </div>
+            </div>
+
+          <button type="submit" class="btn btn-primary btn-block mt-3">회원가입</button>
+        </form>
+        </div> <!--card-->
+        
+       <div class="mt-7">
+           <div class="container"> Copyright ©POPCON Co., Ltd. All rights reserved.</div>
+       </div>   
+    </div> <!--container-->
+
+
+    <!-- Modal -->
+<div class="modal fade" id="policy_content" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">팝콘 이용약관</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       대법원은 15일 "김 대법원장이 오늘 대국민 담화문 형식으로 사법행정권 남용행위 관련자들에 대한 형사상 조치에 관한 입장을 발표할 예정"이라고 밝혔다. 정확한 발표 시각은 아직 정해지지 않았다.
+          
+이 의혹은 양승태 전 대법원장 시절 법원행정처가 박근혜 정부 청와대로부터 상고법원 도입에 관한 협조를 얻기 위해 특정 재판을 협상 카드로 삼아 거래를 시도한 정황이 담긴 문건이 최근 대법원 특별조사단 조사에서 발견되면서 불거졌다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> <!--// Modal -->
+    
+<!-- Modal -->
+<div class="modal fade" id="policy_content2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">팝콘 개인정보 약관</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       대법원은 15일 "김 대법원장이 오늘 대국민 담화문 형식으로 사법행정권 남용행위 관련자들에 대한 형사상 조치에 관한 입장을 발표할 예정"이라고 밝혔다. 정확한 발표 시각은 아직 정해지지 않았다.
+          
+이 의혹은 양승태 전 대법원장 시절 법원행정처가 박근혜 정부 청와대로부터 상고법원 도입에 관한 협조를 얻기 위해 특정 재판을 협상 카드로 삼아 거래를 시도한 정황이 담긴 문건이 최근 대법원 특별조사단 조사에서 발견되면서 불거졌다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> <!--// Modal -->
+    
+    
+    
+</body>
+</html>

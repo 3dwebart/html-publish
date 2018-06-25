@@ -1,0 +1,125 @@
+
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+<title> </title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" media="all" href="css/common.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="img/common/Popcon_Logo.png">
+          </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="navbar-collapse  offcanvas-collapse" id="gnb">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">거래내역</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">입출금</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">마이페이지</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">고객센터</a>
+            </li>
+          </ul>
+            <div class="nav-bar-logininfo">
+              <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
+            </div>
+              <button type="button" class="btn btn-outline-light">로그인</button>
+        </div>
+      </div>
+</nav> <!--GNB--> 
+    
+    <div class="container mt11 mb-4">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                  <div class="card shadow-sm pb-3  mb-3 bg-white rounded ">
+                    <h5 class="snb-title">고객센터</h5>
+                      <ul class="snb">
+                       <li><a href=""> 공지사항</a> </li>
+                       <li class="active"> <a href=""> 1:1문의</a></li>
+                       <li><a href=""> 이용안내</a> </li>
+                       <li><a href=""> FAQ</a> </li>
+                      </ul>
+                </div>
+            </div>
+            <div class="col-md-9 mb-3 pb-3">
+                <div class="card shadow-sm bg-white rounded h-100">
+                    <div class="card-header position-relative">  <h5 class="pt-2 pb-1 mb-0">1:1문의</h5>
+                    <a class="btn btn-primary position-absolute btn-position btn-sm weight300" href="#" role="button"><i class="far fa-question-circle" style="font-size: 14px;"></i> 문의하기</a>
+                    </div>
+                    <div class="pl-4 pr-4 mb-3 ">
+                        <table class="table qa-board">
+                                <colgroup>
+                                    <col width="">
+                                    <col width="">
+                                    <col width="">
+                                    <col width="">
+                                </colgroup>
+                              <thead>
+                                <tr>
+                                  <th scope="col" class="">순번</th>
+                                  <th scope="col">문의유형</th>
+                                  <th scope="col">문의일</th>
+                                <th scope="col">문의상태</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                    <td class="text-muted"> 1</td>
+                                    <td><a href="">일반질문</a></td>
+                                    <td class="text-muted">2018-05-31 16:19:46</td>
+                                    <td class="text-danger">접수</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-muted"> 1</td>
+                                    <td><a href="">일반질문</a></td>
+                                    <td class="text-muted">2018-05-31 16:19:46</td>
+                                    <td class="text-primary">답변완료</td>
+                                  </tr>
+                                  </tbody>
+                              </table>
+                                <!--페이징-->
+                                    <nav aria-label="Page navigation example">
+                                      <ul class="pagination justify-content-center">
+                                        <li class="page-item disabled">
+                                          <a class="page-link" href="#" tabindex="-1">이전</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                          <a class="page-link" href="#">다음</a>
+                                        </li>
+                                      </ul>
+                                    </nav> <!--END 페이징-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+       
+    </div> <!--container-->
+    
+    
+    
+</body>
+</html>

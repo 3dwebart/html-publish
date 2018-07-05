@@ -42,7 +42,17 @@
             <div class="nav-bar-logininfo">
               <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
             </div>
-              <button type="button" class="btn btn-outline-light">로그인</button>
+              <button type="button" class="btn btn-outline-light btn-round">로그아웃</button>
+            <!--언어선택-->
+                   <div class="lang">
+                            <a href="#" class="ko"><i class="fas fa-globe" style="font-size: 14px;"></i> </a>
+                            <ul>
+                                <li class="ko"><a href="javascript:Utils.setLanguage('ko')"><span>KOR</span></a></li>
+                                <li class="en"><a href="javascript:Utils.setLanguage('en')"><span>ENG</span></a></li>				
+                                <li class="zh"><a href="javascript:Utils.setLanguage('zh')"><span>CHN</span></a></li>			
+                            </ul>		
+                        </div>
+                <!--END 언어선택-->
         </div>
       </div>
 </nav> <!--GNB--> 
@@ -132,7 +142,7 @@
                          <div class="tab-content" id="trade">
                             <!--입금요청-->  
                              <div class="tab-pane fade show active" id="nav-deposit" role="tabpanel" aria-labelledby="nav-buy-tab">
-                                  <form class=" p-3">
+                            <form class=" p-3">
                               <div class="form-group row">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">입금자명</label>
                                 <div class="col-sm-10">
@@ -145,9 +155,28 @@
                                   <input type="" class="form-control" id="" placeholder="금액을 입력해주세요.">
                                 </div>
                               </div>
-                            <button type="submit" class="btn btn-secondary d-block w-100 btn-sm">원화 입금요청</button>
+                            <button type="submit" class="btn btn-secondary d-block w-100 btn-sm mb-2">원화 입금요청</button>
                             </form>
-                             <div class="card-footer text-muted dotum">
+                             <!--전자화폐입금시 보여지는폼-->    
+                              <form class=" p-3">
+                                <p class="text-center"> <img src="img/img-qrcode-otp.png" width="110" height="110"> </p>
+                               <div class="input-group mb-3">
+                                  <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2" value="3JgpBY7Af2AaBo3j5wRcAowiJzPEbthD4a" disabled>
+                                  <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary btn-sm" type="button">복사</button>
+                                  </div>
+                                </div>
+                                    <div class="alert alert-warning" role="alert">
+                                        위 전자지갑 주소로 코인을 입금해주세요.<br>
+                                        네트워크에서 입금거래가 1 confirmation이 발생한 이후 자동 반영됩니다.<br>
+                                        반영 시점 : 코인 입금 거래 후, 10~30분 이후 자동으로 반영됩니다.
+                            </div>
+                            <button type="submit" class="btn btn-secondary d-block w-100 btn-sm">주소생성</button>
+                                 </form>
+                             <!--END 전자화폐입금시 보여지는폼-->  
+                                 
+                                 
+                             <div class="border-top text-muted dotum pt-3 pl-3">
                                 <b> 입금할 계좌번호  </b><br>
                                 은행명 : 은행<br>
                                 예금주 : (주)골든퓨쳐스<br>
@@ -194,7 +223,7 @@
                                   </div>
                                 <button type="submit" class="btn btn-secondary d-block w-100 btn-sm">출금요청</button>
                                 </form>
-                             <div class="card-footer text-muted dotum">
+                             <div class="border-top text-muted dotum pt-3 pl-3">
                                 <b> KRW 출금 전 알아두세요.  </b><br>
                                충전된 KRW포인트를 회원님의 은행계좌에 환급 받을 수 있습니다.<br> 
                                출금은 본인 명의 계좌로만 가능합니다.

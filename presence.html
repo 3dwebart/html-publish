@@ -7,314 +7,260 @@
 <title> </title>
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
 <link rel="stylesheet" media="all" href="css/common.css">
-<link rel="stylesheet" media="all" href="css/common2.css">
-<link rel="stylesheet" media="all" href="css/custom.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
+     <script src="js/popper.min.js"></script>   
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
-<!-- BIGIN :: nav -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
-	<div class="container">
-		<a class="navbar-brand" href="#">
-			<img src="img/common/Popcon_Logo.png">
-		</a>
-		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="img/common/Popcon_Logo.png">
+          </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-		<div class="navbar-collapse collapse" id="navbarsExample07" style="">
-			<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">거래내역</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">입출금</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">마이페이지</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">고객센터</a>
-			</li>
-			</ul>
-			<div class="nav-bar-logininfo">
-				<i class="fas fa-user-circle fa-2x"></i> 게스트님
-			</div>
-			<button type="button" class="btn btn-outline-light">로그인</button>
-		</div>
-	</div>
-</nav>
-<!-- END :: nav -->
-<!-- BIGIN :: inner tab menu -->
-<!--
-<ul class="tabs">
-	<li>
-		<a href="#"></a>
-	</li>
-	<li>
-		<a href="#"></a>
-	</li>
-	<li>
-		<a href="#"></a>
-	</li>
-</ul>
--->
-<!-- END :: inner tab menu -->
-<!-- BIGIN content container -->
-<div class="content-container container mt11 mb-4">
-	<div class="row">
-		<!-- BIGIN :: card - content -->
-		<div class="col-md-3 mb-3">
-			<div class="card shadow-sm pb-3  mb-3 bg-white rounded ">
-				<h5 class="snb-title">거래내역</h5>
-				<ul class="snb">
-					<li class="active"><a href="presence.html">보유코인</a> </li>
-					<li> <a href="tradecomplete.html"> 체결내역</a></li>
-					<li ><a href=""> 미체결내역</a> </li>
-				</ul>
-			</div>
-		</div>
-		<div class="col-md-9 mb-3 pb-3">
-			<div class="card shadow-sm bg-white rounded h-100">
-				<div class="card-header">  
-					<h5 class="pt-2 pb-1 mb-0 d-inline">보유코인</h5>
-					<!-- 코인선택-->
-					<select class="custom-select   w-25 float-right">
-						<option  selected value="1">BTC</option>
-						<option value="2">BCH</option>
-						<option value="3">LTC</option>
-					</select>
-					<!--END 코인선택-->
-				</div>
-				<div class="presence-calc-wrap">
-					<div class="row presence-calc">
-						<div class="col-4">
-							<div class="in-box">
-								<span>총 매수금액</span>
-								<span>0 KRW</span>
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="in-box">
-								<span>총 평가손익</span>
-								<span>0 KRW</span>
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="in-box">
-								<span>보유 KRW</span>
-								<span>0 KRW</span>
-							</div>
-						</div>
-					</div>
-					<div class="row presence-calc">
-						<div class="col-4">
-							<div class="in-box">
-								<span>총 평가금액</span>
-								<span>0 KRW</span>
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="in-box">
-								<span>총 평가수익률</span>
-								<span>0 KRW</span>
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="in-box">
-								<span>보유자산</span>
-								<span>0 KRW</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="">
-					<table id="presence_table" class="table table-striped table-bordered table-hover mb-3 text-center text-nowrap dotum" summary="코인 종류별 보유코인, 코인보유수량, 매수평균가, 매수금액, 평가금액, 평가손익, 바로 주문 버튼등의 요소가 있는 테이블 입니다,">
-						<caption>코인의 종류에 따른 자동 계산 테이블.</caption>
-						<colgroup>
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
-							<col width="10%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th>보유코인</th>
-								<th>보유수량</th>
-								<th>매수평균가</th>
-								<th>매수금액</th>
-								<th>평가금액</th>
-								<th>평가손익</th>
-								<th>주문</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>비트코인 (BTC)</td>
-								<td>111.08177920 BTC</td>
-								<td>560,608 KRW</td>
-								<td>62,273,433 KRW</td>
-								<td>767,797,257 KRW</td>
-								<td>
-									<span class="blue">8.1</span> %<br />
-									<span class="blue">705,523,824</span> KRW
-								</td>
-								<td>
-									<button type="button" class="btn btn-default">주문</button>
-								</td>
-							</tr>
-							<tr>
-								<td>비트코인 캐시 (BCH)</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
-								<td>5</td>
-								<td>6</td>
-								<td>
-									<button type="button" class="btn btn-default">주문</button>
-								</td>
-							</tr>
-							<tr>
-								<td>라이트코인 (LTC)	</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
-								<td>5</td>
-								<td>6</td>
-								<td>
-									<button type="button" class="btn btn-default">주문</button>
-								</td>
-							</tr>
-							<tr>
-								<td>이더리움 (ETH)</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
-								<td>5</td>
-								<td>6</td>
-								<td>
-									<button type="button" class="btn btn-default">주문</button>
-								</td>
-							</tr>
-							<tr>
-								<td>이더리움 클래식 (ETC)</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
-								<td>5</td>
-								<td>6</td>
-								<td>
-									<button type="button" class="btn btn-default">주문</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<!-- END :: card - content -->
-</div>
-</div>
-<!--container-->
-<!-- BIGIN :: footer -->
-<div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
-	<div class="container">
-		<div class="row">
-			<!-- BIGIN :: Footer logo & copyright/address -->
-			<div class="col-md-4 footer-addr">
-				<span class="logo">
-					<img src="img/common/footer_logo.png" alt="footer logo" class="img-fluid" />
-				</span>
-				<span class="copy">Copyright 2018ⓒPOPCON. All rights reserved.</span>
-				<span>
-					서울시 송파구 중대로 109. 대동빌딩 12층<br />
-					골든퓨쳐스 대표자 : 이수식  사업자등록번호 791-81-00992
-				</span>
-			</div>
-			<!-- END :: Footer logo & copyright/address -->
-			<!-- BIGIN :: Customer center / footer navigation / social button -->
-			<div class="offset-md-2 offset-lg-2 offset-xl-2 col-md-2">
-				<h4 class="title font-white">
-					고객센터
-				</h4>
-				<ul>
-					<li>고객센터 02-400-5651</li>
-					<li>운영시간 평일 09:00~18:00</li>
-					<li>온라인 1:1 고객문의</li>
-					<li>help@popcon-ex.com</li>
-				</ul>
-			</div>
-			<div class="col-md-2">
-				<h4 class="title font-white">
-					QUICK LINKS
-				</h4>
-				<ul class="quick-link">
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">이용약관</a></li>
-					<li><a href="#">자주묻는질문</a></li>
-					<li><a href="#">개인정보취급방침</a></li>
-				</ul>
-			</div>
-			<div class="col-md-2 col-lg-2 col-xl-2 social">
-				<div class="social-navi">
-					<a href="#"><img src="img/common/footer_ico_facebook.png" alt="" /></a>
-					<a href="#"><img src="img/common/footer_ico_twitter.png" alt=""></a>
-				</div>
-			</div>
-			<!-- END :: Customer center / footer navigation / social button -->
-		</div>
-	</div>
-</div>
-<!-- END :: footer -->
-<!-- Modal -->
-<div class="modal fade" id="policy_content" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalCenterTitle">팝콘 이용약관</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			</div>
-			<div class="modal-body">
-				대법원은 15일 "김 대법원장이 오늘 대국민 담화문 형식으로 사법행정권 남용행위 관련자들에 대한 형사상 조치에 관한 입장을 발표할 예정"이라고 밝혔다. 정확한 발표 시각은 아직 정해지지 않았다.
-				이 의혹은 양승태 전 대법원장 시절 법원행정처가 박근혜 정부 청와대로부터 상고법원 도입에 관한 협조를 얻기 위해 특정 재판을 협상 카드로 삼아 거래를 시도한 정황이 담긴 문건이 최근 대법원 특별조사단 조사에서 발견되면서 불거졌다.
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!--// Modal -->
+        <div class="navbar-collapse  offcanvas-collapse" id="gnb">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">거래내역</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">입출금</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">마이페이지</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">고객센터</a>
+            </li>
+          </ul>
+            <div class="nav-bar-logininfo">
+              <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
+            </div>
+              <button type="button" class="btn btn-outline-light btn-round ">로그아웃</button>
+        </div>
+      </div>
+</nav> <!--END GNB-->
     
-<!-- Modal -->
-<div class="modal fade" id="policy_content2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalCenterTitle">팝콘 개인정보 약관</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				대법원은 15일 "김 대법원장이 오늘 대국민 담화문 형식으로 사법행정권 남용행위 관련자들에 대한 형사상 조치에 관한 입장을 발표할 예정"이라고 밝혔다. 정확한 발표 시각은 아직 정해지지 않았다.
-				이 의혹은 양승태 전 대법원장 시절 법원행정처가 박근혜 정부 청와대로부터 상고법원 도입에 관한 협조를 얻기 위해 특정 재판을 협상 카드로 삼아 거래를 시도한 정황이 담긴 문건이 최근 대법원 특별조사단 조사에서 발견되면서 불거졌다.
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div> <!--// Modal -->
+    <!--서브메뉴-->
+    <div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
+      <nav id="nav-sub-wrap" class="nav nav-underline">
+          <div class="spacing"> </div>
+        <a class="nav-link active" href="#">보유코인</a>
+        <a class="nav-link" href="#">체결내역</a>
+        <a class="nav-link" href="#">미체결내역</a>
+      </nav>
+    </div>
+   <!--END 서브메뉴-->
+    
+    <div id="container" class="container submenu-container mb-4">
+            <div class="col  mb-3 pb-3">
+                <div class="card shadow-sm bg-white rounded h-100">
+                    <div class="card-header">  
+                        <h5 class="pt-2 pb-1 mb-0 d-inline">보유코인</h5>
+                    </div>
+                    <div class="pc-myasset">
+                       <div class="my-asset-status">
+                          <div>
+                             <ul style="background:none">
+                                <li><em> 총 매수금액</em> <strong><span> KRW</span></strong><strong class="mb_krw_total_buy_price">61,506,781</strong> </li>
+                                <li><em> 총 평가금액</em> <strong><span> KRW</span></strong><strong class="mb_krw_total_evaluation_price">1,002,979,313</strong> </li>
+                             </ul>
+                          </div>
+                          <div>
+                             <ul>
+                                <li><em> 총 평가손익</em> <strong><span> KRW</span></strong><strong class="mb_krw_total_profit">-941,472,532</strong> </li>
+                                <li><em> 총 평가수익률</em> <strong><span> %</span></strong><strong class="mb_krw_total_profit_rate">6</strong> </li>
+                             </ul>
+                          </div>
+                          <div>
+                             <ul>
+                                <li><em> 보유 KRW</em> <strong><span> KRW</span></strong><strong class="mb_krw_total">933,063,519</strong> </li>
+                                <li><em> 총 보유자산</em> <strong><span> KRW</span></strong><strong class="mb_krw_total_asset_held">1,936,042,832</strong> </li>
+                             </ul>
+                          </div>
+                       </div>
+                       <table class="my-asset">
+                          <colgroup>
+                             <col width="15%">
+                             <col width="15%">
+                             <col width="15%">
+                             <col width="15%">
+                             <col width="15%">
+                             <col width="15%">
+                             <col width="10%">
+                          </colgroup>
+                          <thead>
+                             <tr>
+                                <th>보유코인</th>
+                                <th>보유수량</th>
+                                <th>매수평균가</th>
+                                <th>매수금액</th>
+                                <th>평가금액</th>
+                                <th>평가손익</th>
+                                <th>주문</th>
+                             </tr>
+                          </thead>
+                          <tbody>
+                             <tr>
+                                <td><em>비트코인</em> <span>(BTC)</span></td>
+                                <td><strong><span>111.08177920</span></strong> 
+                                    <span class="color-grey">BTC</span>
+                                </td>
+                                <td><strong><span>560,608</span></strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td> <strong><span>62,273,433</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td><strong> <span>781,238,153</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td class="text-danger"> <strong> <span class="text-danger">8.0</span> </strong>
+                                    <span class="color-grey"> %</span> <br> <strong >718,964,720</strong> 
+                                    <span class="color-grey">KRW</span> 
+                                </td>
+                                <td><button class="order" >주문</button> </td>
+                             </tr>
+                             <tr>
+                                <td><em>비트코인 캐시</em> <span>(BCH)</span></td>
+                                <td><strong><span>99.99819196</span></strong> 
+                                    <span class="color-grey">BCH</span>
+                                </td>
+                                <td><strong><span>-715</span></strong> 
+                                    <span class="color-grey">KRW</span>
+                                 </td>
+                                <td> <strong><span>-71,453</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td><strong> <span>139,997,468</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td  class="text-primary"> <strong> <span  class="text-primary">-0.1</span> </strong>
+                                    <span class="color-grey"> %</span> <br> 
+                                    <strong class="mb_bch_profit_rate_calc">140,068,921</strong> 
+                                    <span class="color-grey">KRW</span> 
+                                </td>
+                                <td><button class="order" onclick="onOrder('krw-bch')">주문</button> </td>
+                             </tr>
+                             <tr>
+                                <td><em>라이트코인</em> <span>(LTC)</span></td>
+                                <td><strong><span class="mb_ltc_total">99.97656520</span></strong> 
+                                    <span class="color-grey">LTC</span>
+                                </td>
+                                <td><strong><span class="mb_ltc_average_buy_price">-238</span></strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td> <strong><span class="mb_ltc_po_point">-23,771</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td><strong> <span class="mb_ltc_evaluation_price">15,196,437</span> 
+                                    </strong> <span class="color-grey">KRW</span>
+                                </td>
+                                <td class="text-primary"> <strong> <span class="mb_ltc_profit_rate text-primary">-0.2</span> </strong>
+                                    <span class="color-grey"> %</span> <br> 
+                                    <strong class="mb_ltc_profit_rate_calc">15,220,208</strong> 
+                                    <span class="color-grey">KRW</span> 
+                                </td>
+                                <td><button class="order" onclick="onOrder('krw-ltc')">주문</button> </td>
+                             </tr>
+                             <tr>
+                                <td><em>라이트코인</em> <span>(LTC)</span></td>
+                                <td><strong><span class="mb_ltc_total">99.97656520</span></strong> 
+                                    <span class="color-grey">LTC</span>
+                                </td>
+                                <td><strong><span class="mb_ltc_average_buy_price">-238</span></strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td> <strong><span class="mb_ltc_po_point">-23,771</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td><strong> <span class="mb_ltc_evaluation_price">15,196,437</span> 
+                                    </strong> <span class="color-grey">KRW</span>
+                                </td>
+                                <td class="text-danger"> <strong> <span class="text-danger">8.0</span> </strong>
+                                    <span class="color-grey"> %</span> <br> <strong >718,964,720</strong> 
+                                    <span class="color-grey">KRW</span> 
+                                </td>
+                                <td><button class="order" onclick="onOrder('krw-ltc')">주문</button> </td>
+                             </tr>
+                             <tr>
+                                <td><em>라이트코인</em> <span>(LTC)</span></td>
+                                <td><strong><span class="mb_ltc_total">99.97656520</span></strong> 
+                                    <span class="color-grey">LTC</span>
+                                </td>
+                                <td><strong><span class="mb_ltc_average_buy_price">-238</span></strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td> <strong><span class="mb_ltc_po_point">-23,771</span> </strong> 
+                                    <span class="color-grey">KRW</span>
+                                </td>
+                                <td><strong> <span class="mb_ltc_evaluation_price">15,196,437</span> 
+                                    </strong> <span class="color-grey">KRW</span>
+                                </td>
+                                <td class="text-danger"> <strong> <span class="text-danger">8.0</span> </strong>
+                                    <span class="color-grey"> %</span> <br> <strong >718,964,720</strong> 
+                                    <span class="color-grey">KRW</span> 
+                                </td>
+                                <td><button class="order" onclick="onOrder('krw-ltc')">주문</button> </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    
+                </div> <!--card-->
+            </div>
+        </div>
+ <!--container-->
+    
+ <!--footer-->
+        <div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
+        <div class="footer-wrap">
+            <div class="footer-left"> <em>Copyright 2018ⓒPOPCON. All rights reserved.</em>
+            서울시 송파구 중대로 109. 대동빌딩 12층<br>
+            골든퓨쳐스 대표자 : 이수식 <span></span> 사업자등록번호 791-81-00992
+            </div>
+            <div class="footer-right">
+                <ul>
+                    <li>
+                        <h5>고객센터 </h5>
+                        고객센터 02-400-5651<br>
+                        운영시간 평일 09:00~18:00<br>
+                        <a href="/customer/questionlist">온라인 1:1 고객문의</a><br>
+                        <a href="mailto:help@popcon-ex.com">help@popcon-ex.com</a>
+                    </li>
+                    <li> 
+                        <h5>QUICK LINKS </h5>
+                        <a href="/customer/main">공지사항</a><br>
+                        <a href="/about/terms">이용약관</a><br>
+                        <a href="/customer/faq"> 자주묻는질문</a><br>
+                        <a href="/about/privacy">개인정보취급방침</a>
+                    </li>
+                    <li> <span class="ico-fb"> </span>
+                         <span class="ico-twitter"> </span> 
+                    </li>
+                </ul>
+            </div>
+       </div>
+</div>
+    <!-- END FOOTER-->
+    
+    <script>
+        $(function () {
+          'use strict'
+
+          $('[data-toggle="offcanvas"]').on('click', function () {
+            $('.offcanvas-collapse').toggleClass('open')
+          })
+        })  
+    </script>  
+    
+    
 </body>
 </html>

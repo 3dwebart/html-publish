@@ -7,6 +7,7 @@
 <title> </title>
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
 <link rel="stylesheet" media="all" href="css/common.css">
+ 
     <link rel="stylesheet" media="all" href="css/jquery.mCustomScrollbar.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  <script src="js/popper.min.js"></script>   
@@ -21,7 +22,7 @@
         <a class="navbar-brand" href="#">
           <img src="img/common/Popcon_Logo.png">
           </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -46,7 +47,17 @@
             <div class="nav-bar-logininfo">
               <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
             </div>
-              <button type="button" class="btn btn-outline-light btn-sm ">로그아웃</button>
+              <button type="button" class="btn btn-outline-light btn-round ">로그아웃</button>
+            <!--언어선택-->
+                   <div class="lang">
+                            <a href="#" class="ko"><i class="fas fa-globe" style="font-size: 14px;"></i> </a>
+                            <ul>
+                                <li class="ko"><a href="javascript:Utils.setLanguage('ko')"><span>KOR</span></a></li>
+                                <li class="en"><a href="javascript:Utils.setLanguage('en')"><span>ENG</span></a></li>				
+                                <li class="zh"><a href="javascript:Utils.setLanguage('zh')"><span>CHN</span></a></li>			
+                            </ul>		
+                        </div>
+                <!--END 언어선택-->
         </div>
       </div>
 </nav>
@@ -582,6 +593,9 @@
                               </thead>
                               <tbody>
                                 <tr>
+                                  <td colspan="4" class="text-center"> 미체결 주문내역이 없습니다.</td>
+                                </tr>
+                                <tr>
                                   <th scope="row">06.18 <em>13:18</em>	</th>
                                   <td class="text-primary">0.00019719	</td>
                                   <td>75.71568422	</td>
@@ -605,12 +619,7 @@
                                   <td>75.71568422	</td>
                                   <td>0.01493038</td>
                                 </tr>
-                                <tr>
-                                  <th scope="row">06.18 <em>13:18</em>	</th>
-                                  <td class="text-danger">0.00019719	</td>
-                                  <td>75.71568422	</td>
-                                  <td>0.01493038</td>
-                                </tr>
+
                                   </tbody>
                               </table> <!--END 미체결주문-->
                             </div>
@@ -667,7 +676,38 @@
         
         </div>
     </div> <!--container-->
-    
+
+<!-- BIGIN :: footer -->
+<div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
+        <div class="footer-wrap">
+            <div class="footer-left"> <em>Copyright 2018ⓒPOPCON. All rights reserved.</em>
+            서울시 송파구 중대로 109. 대동빌딩 12층<br>
+            골든퓨쳐스 대표자 : 이수식 <span></span> 사업자등록번호 791-81-00992
+            </div>
+            <div class="footer-right">
+                <ul>
+                    <li>
+                        <h5>고객센터 </h5>
+                        고객센터 02-400-5651<br>
+                        운영시간 평일 09:00~18:00<br>
+                        <a href="/customer/questionlist">온라인 1:1 고객문의</a><br>
+                        <a href="mailto:help@popcon-ex.com">help@popcon-ex.com</a>
+                    </li>
+                    <li> 
+                        <h5>QUICK LINKS </h5>
+                        <a href="/customer/main">공지사항</a><br>
+                        <a href="/about/terms">이용약관</a><br>
+                        <a href="/customer/faq"> 자주묻는질문</a><br>
+                        <a href="/about/privacy">개인정보취급방침</a>
+                    </li>
+                    <li> <span class="ico-fb"> </span>
+                         <span class="ico-twitter"> </span> 
+                    </li>
+                </ul>
+            </div>
+       </div>
+</div>
+    <!-- END FOOTER-->
     
     
     

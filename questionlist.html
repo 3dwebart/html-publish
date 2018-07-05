@@ -42,25 +42,27 @@
             <div class="nav-bar-logininfo">
               <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
             </div>
-              <button type="button" class="btn btn-outline-light">로그인</button>
+              <button type="button" class="btn btn-outline-light btn-round">로그인</button>
         </div>
       </div>
 </nav> <!--GNB--> 
     
-    <div class="container mt11 mb-4">
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                  <div class="card shadow-sm pb-3  mb-3 bg-white rounded ">
-                    <h5 class="snb-title">고객센터</h5>
-                      <ul class="snb">
-                       <li><a href=""> 공지사항</a> </li>
-                       <li class="active"> <a href=""> 1:1문의</a></li>
-                       <li><a href=""> 이용안내</a> </li>
-                       <li><a href=""> FAQ</a> </li>
-                      </ul>
-                </div>
-            </div>
-            <div class="col-md-9 mb-3 pb-3">
+    <!--서브메뉴-->
+    <div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
+      <nav id="nav-sub-wrap" class="nav nav-underline">
+          <div class="spacing"> </div>
+            <a class="nav-link" href="#">공지사항</a>
+            <a class="nav-link active" href="#"> 1:1문의</a>
+            <a class="nav-link" href="#">이용안내</a>
+            <a class="nav-link " href="#">FAQ</a>
+      </nav>
+    </div>
+   <!--END 서브메뉴-->
+ 
+    
+        <div class="container submenu-container mb-4 max-1000 ">
+
+            <div class="col mb-3 pb-3">
                 <div class="card shadow-sm bg-white rounded h-100">
                     <div class="card-header position-relative">  <h5 class="pt-2 pb-1 mb-0">1:1문의</h5>
                     <a class="btn btn-primary position-absolute btn-position btn-sm weight300" href="#" role="button"><i class="far fa-question-circle" style="font-size: 14px;"></i> 문의하기</a>
@@ -114,10 +116,7 @@
                 </div>
             </div>
         </div>
-        
-        
-       
-    </div> <!--container-->
+<!--container-->
     
     
     

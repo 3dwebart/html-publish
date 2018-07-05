@@ -1,6 +1,4 @@
-# Golden Picture html publish git management
-<<<<<<< HEAD
-## master
-=======
-## develop
->>>>>>> develop
+# MOBILE CSS guide information
+## common.css
+## custom.css
+## custom_temp.css

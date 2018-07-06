@@ -335,108 +335,157 @@
                 <div class="row"> 
                     <div class="col-7">
                         <div class="h-100 mr-2 bg-white rounded shadow-sm p-3 quotes-data">
-                           <!-- <nav>
-                          <div class="nav nav-tabs tab-col3" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="quote" data-toggle="tab" href="#nav-quote" role="tab" aria-controls="nav-home" aria-selected="true">일반호가</a>
-                            <a class="nav-item nav-link" id="quote" data-toggle="tab" href="#nav-quote" role="tab" aria-controls="nav-home" aria-selected="false">누적호가</a>
-                            <a class="nav-item nav-link" id="quote-order" data-toggle="tab" href="#nav-quote-order" role="tab" aria-controls="nav-profile" aria-selected="false">호가주문</a>
-                          </div>
-                        </nav> -->
-                            <div class="row pl-3 pr-3">
-                                <div class="col-md-4 p-0">
-                                    <div class="col  text-right quotes-blue">0.0017</div>
-                                     <div class="col  text-right quotes-blue">0.0017 </div>
-                                     <div class="col  text-right quotes-blue">0.0017 </div>
-                                     <div class="col  text-right quotes-blue">0.0017 </div>
-                                     <div class="col  text-right quotes-blue">0.0017 </div>
-                                     <div class="col text-right quotes-blue">0.0017 </div>
-                                     <div class="col  text-right quotes-blue">0.0017 </div>
-                                </div>
-                                <div class="col-md-4  p-0 font-weight-bold">
-                                    <div class="col quotes-blue text-center">7,538,000</div>
-                                    <div class="col quotes-blue text-center">7,538,000 </div>
-                                    <div class="col quotes-blue text-center">7,538,000 </div>
-                                    <div class="col quotes-blue text-center">7,538,000 </div>
-                                    <div class="col quotes-blue text-center">7,538,000 </div>
-                                    <div class="col quotes-blue text-center">7,538,000 </div>
-                                    <div class="col quotes-blue text-center">7,538,000 </div>
-                                </div>
-                                <div class="col-md-4 p-0   font-11">
-                                     <div class="col quotes-grey">현재가 <span class="float-right"> 7,189,000</span> </div>
-                                    <div class="col quotes-grey">전일대비	 <span class="float-right"> 0.00%</span> </div>
-                                    <div class="col quotes-grey">현재가 <span class="float-right"> 7,189,000</span> </div>
-                                    <div class="col quotes-grey">고가 <span class="float-right text-primary "> 7,189,000</span> </div>
-                                    <div class="col quotes-grey">저가 <span class="float-right text-danger "> 7,189,000</span> </div>
-                                    <div class="col quotes-grey">거래량 <span class="float-right"> 0.00000000</span> </div>
-                                    <div class="col quotes-grey text-white">&nbsp; </div>
-                                    
-                                 
-                                    
-                                    
-                                </div>
-                            </div>
-                            <!--END 매도 호가-->
+                        <table class="quotes-table" cellspacing="0" cellpadding="0">
+                            <colgroup>
+                                <col width="33.33333333333333%">
+                                <col width="33.33333333333333%">
+                                <col width="33.33333333333333%">
+                            </colgroup>
+                          <thead>
+                          </thead>
+                            <tbody>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center">7,538,000 </td> 
+                                 <td rowspan="7" class="no-padding">
+                                    <table class="coin-status-table">
+                                        <colgroup>
+                                            <col width="50%">
+                                            <col width="50%">
+                                        </colgroup>
+                                        <thead>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>현재가 </th>
+                                                <td>7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>전일대비 </th>
+                                                <td class="text-danger">3.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <th>고가 </th>
+                                                <td class="text-danger">7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>저가 </th>
+                                                <td class="text-primary">7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>거래량 </th>
+                                                <td>7,189,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                <!--END coin-status-table-->
+                                </td> 
+                            </tr>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 7,538,000 </td> 
+                            </tr>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 7,538,000 </td> 
+                            </tr>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 7,538,000 </td> 
+                            </tr>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 
+                                     <span class="quotes-select"></span>
+                                     7,538,000 </td> 
+                            </tr>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 7,538,000 </td> 
+                            </tr>
+                            <tr>
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 7,538,000 </td> 
+                            </tr>
+                        <!--END 매도 호가-->
+                            <tr>
+                                 <td rowspan="7" class="no-padding"> 
+                       <table class="trade-volume-table">
+                            <colgroup>
+                                <col width="50%">
+                                <col width="50%">
+                            </colgroup>
+                          <thead>
+                          </thead>
+                            <tbody>
+                                <tr>
+                                    <th>체결가 </th>
+                                    <th>체결량 </th>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">7,341,000 </td>
+                                    <td class="text-primary">0.0092 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">7,341,000 </td>
+                                    <td class="text-primary">0.0092 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-danger">7,341,000 </td>
+                                    <td class="text-danger">0.0092 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-danger">7,341,000 </td>
+                                    <td class="text-danger">0.0092 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-danger">7,341,000 </td>
+                                    <td class="text-danger">0.0092 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-danger">7,341,000 </td>
+                                    <td class="text-danger">0.0092 </td>
+                                </tr>
+                           </tbody>
+                    </table>
+                        <!-- END trade volume-->
+                                
+                                </td>
+                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                            <tr>
+                                 <td class="quotes-red-center active"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                            <tr>
+                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                            <tr>
+                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                            <tr>
+                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                            <tr>
+                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                            <tr>
+                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                                 <td class="quotes-red"> 0.0017</td>  
+                            </tr>
+                          <!--END 매수 호가-->
+                            </tbody>
+                            </table>
+
                             
-                           <div class="row pl-3 pr-3">
-                              <div class="col-md-4 h-100  p-0 quotes-grey d-inline">
-                                   <table class="table quotes-history mb-0">
-                                       <tr>
-                                            <th>체결가 </th>
-                                            <th> 체결량</th>
-                                       </tr>
-                                       <tr>
-                                            <td>7,189,000 </td>
-                                            <td class="text-danger">0.015 </td>
-                                       </tr>
-                                       <tr>
-                                            <td>7,189,000 </td>
-                                            <td class="text-danger">0.015 </td>
-                                       </tr>
-                                       <tr>
-                                            <td>7,189,000 </td>
-                                            <td class="text-primary">0.015 </td>
-                                       </tr>
-                                       <tr>
-                                            <td>7,189,000 </td>
-                                            <td class="text-danger">0.0150 </td>
-                                       </tr>
-                                       <tr>
-                                            <td>7,189,000 </td>
-                                            <td class="text-danger">0.0150 </td>
-                                       </tr>
-                                       <tr>
-                                            <td>7,189,000 </td>
-                                            <td class="text-danger">0.01503 </td>
-                                       </tr>
-                                       
-                                  </table>
-                                  
-                                </div>
-                                <div class="col-md-4  p-0 font-weight-bold">
-                                    <div class="col quotes-red text-center ">7,538,000</div>
-                                    <div class="col quotes-red text-center">7,538,000 </div>
-                                    <div class="col quotes-red text-center">7,538,000 </div>
-                                    <div class="col quotes-red text-center">7,538,000 </div>
-                                    <div class="col quotes-red text-center">7,538,000 </div>
-                                    <div class="col quotes-red text-center">7,538,000 </div>
-                                    <div class="col quotes-red text-center">7,538,000 </div>
-                                </div>
-                                <div class="col-md-4 h-100  p-0 quotes-grey d-inline">
-                                    <div class="col  text-left quotes-red">                             0.00417 
-                                       </div>
-                                     <div class="col  text-left quotes-red">0.0017 </div>
-                                     <div class="col  text-left quotes-red">0.0017 </div>
-                                     <div class="col  text-left quotes-red">0.0017 </div>
-                                     <div class="col  text-left quotes-red">0.0017 </div>
-                                     <div class="col text-left quotes-red">0.0017 </div>
-                                     <div class="col  text-left quotes-red">0.0017 </div>
-                               </div>
-                            </div>
-                            <!--END 매수 호가-->
-                            
-                        </div>
+                        </div> <!--quotes-->
                     </div>
-                     <!--END 호가 -->
+                  
                     <div class="col-5 p-3 bg-white rounded shadow-sm">
                       <nav>
                           <div class="nav nav-tabs tab-col2" id="nav-tab" role="tablist">

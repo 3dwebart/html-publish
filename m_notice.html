@@ -6,54 +6,69 @@
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
 <title> </title>
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
-<link rel="stylesheet" media="all" href="css/common.css">
+<link rel="stylesheet" media="all" href="css/common_m.css">
 <link rel="stylesheet" media="all" href="css/custom.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
-		 <script src="js/popper.min.js"></script>   
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
-<body class="normal">
+<body class="flex-normal">
+<a href="#" class="m-nav-close"></a>
+<div class="navbar-collapse offcanvas-collapse" id="gnb">
+	<div class="m-nav-wrap">
+		<!-- BIGIN :: Main navigation -->
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">거래내역</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">입출금</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">마이페이지</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">고객센터</a>
+			</li>
+		</ul>
+		<!-- END :: Main navigation -->
+		<!-- BIGIN :: NAME TAG & Login/Logout -->
+		<div class="nav-bar-logininfo">
+			<i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
+		</div>
+		<button type="button" class="btn btn-outline-light btn-round ">로그아웃</button>
+		<!-- END :: NAME TAG & Login/Logout -->
+	</div>
+	<ul class="m-lang">
+		<li>
+			<a href="#" class="ko" data-lang="ko"></a>
+		</li>
+		<li>
+			<a href="#" class="en" data-lang="en"></a>
+		</li>
+		<li>
+			<a href="#" class="cn" data-lang="cn"></a>
+		</li>
+		<li>
+			<a href="#" class="jp" data-lang="jp"></a>
+		</li>
+	</ul>
+</div>
+<div class="offcanvas-collapse-bg"></div>
 <!-- BIGIN :: GNB-->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
 	<div class="container">
 		<a class="navbar-brand" href="#">
 			<img src="img/common/Popcon_Logo.png">
-			</a>
+		</a>
 		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
-		<div class="navbar-collapse  offcanvas-collapse" id="gnb">
-			<!-- BIGIN :: Main navigation -->
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">거래내역</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">입출금</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">마이페이지</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">고객센터</a>
-				</li>
-			</ul>
-			<!-- END :: Main navigation -->
-			<!-- BIGIN :: NAME TAG & Login/Logout -->
-			<div class="nav-bar-logininfo">
-				<i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
-			</div>
-			<button type="button" class="btn btn-outline-light btn-round ">로그아웃</button>
-			<!-- END :: NAME TAG & Login/Logout -->
-		</div>
 	</div>
 </nav>
 <!--END :: GNB-->
+
 <!-- BIGIN :: 서브메뉴 -->
 <div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
 	<nav id="nav-sub-wrap" class="nav nav-underline">
@@ -67,9 +82,21 @@
 <!-- END :: 서브메뉴-->
 <!-- BIGIN :: 서브메뉴 - 모바일 -->
 <div id="nav-sub-m" class="" style="padding-top: 80px;">
-	<div class="row">
-		<div class="col-3">고객센터</div>
-		<div class="col-9">드롭다운</div>
+	<div class="row m-cate-nav">
+		<div class="col-5 m-cate text-center">고객센터</div>
+		<div class="col-7 m-sub-nav">
+			<div class="dropdown">
+				<a class="btn btn-secondary dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    				공지사항
+				</a>
+
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item" href="#">1:1 문의</a>
+					<a class="dropdown-item" href="#">이용안내</a>
+					<a class="dropdown-item" href="#">FAQ</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- END :: 서브메뉴 - 모바일 -->
@@ -131,13 +158,29 @@
 	</div>
 </div>
 <!-- BIGIN :: container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+
 <script>
 	$(function() {
 		'use strict'
 
 		$('[data-toggle="offcanvas"]').on('click', function () {
-			$('.offcanvas-collapse').toggleClass('open')
-		})
+			$('.offcanvas-collapse').toggleClass('open');
+			$('.offcanvas-collapse-bg').toggleClass('open');
+			$('.m-nav-close').addClass('open');
+		});
+		$('.offcanvas-collapse-bg').on('click', function () {
+			$('.offcanvas-collapse').removeClass('open');
+			$('.offcanvas-collapse-bg').removeClass('open');
+			$('.m-nav-close').removeClass('open');
+		});
+		$('.m-nav-close').on('click', function () {
+			$('.offcanvas-collapse').removeClass('open');
+			$('.offcanvas-collapse-bg').removeClass('open');
+			$('.m-nav-close').removeClass('open');
+		});
 	});
 </script>
 </body>

@@ -61,9 +61,7 @@ a{color: #565656;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
-#container{ min-height: 71vh;}
 .navbar-dark .navbar-toggler{ border-color: #bcf8ff;}
- *::-ms-backdrop, .navbar-toggler{ position: absolute; top: 20px; right: 20px;}
 
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
@@ -151,9 +149,7 @@ a{color: #565656;
 ::-moz-placeholder { 
   color: ccc; font-size: 12px
 }
-:-ms-input-placeholder {  
-  color: ccc; font-size: 12px
-}
+ 
 :-moz-placeholder {  
   color: cc; font-size: 12px
 }
@@ -206,14 +202,53 @@ a{color: #565656;
 .ctype-table th{ color: #9d9d9d; font-weight: 200}
 .ctype-table td:first-child{ font-size: 14px; }
 .ctype-table td em{ font-size: 12px}
-.quotes-blue{ background: #f5faff; color: #0238b9;  margin: 0; padding: 8px;   
-    box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset;}
-.quotes-blue:hover{ background: #d6e8fa; color: #006cff; }
 
-.quotes-red{ background: #fff5f8; color: #cb4140;margin: 0; padding: 8px;   
-    box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset;}
-.quotes-red:hover{ background: #fcd2d2; color: #ec0200; }
+
+.quotes-table{width: 100%;  border-collapse:collapse; border-spacing: 0px;
+      }
+.quotes-table td{ padding: 7px 15px 8px 15px !important;  margin: 0!important; border: 1px solid #dee2e6; background-clip: padding-box; }
+.quotes-table td.quotes-blue{color: #0238b9; position: relative; text-align: right; background-color: #f5faff;  }
+.quotes-table td.quotes-blue:hover{ background: #d6e8fa; color: #006cff; }
+
+.quotes-table td.quotes-blue.active{ background: #d6e8fa; color: #006cff; }
+.quotes-table td.quotes-blue-center{ background: #f5faff; color: #0238b9;  margin: 0; padding: 8px;   position: relative; text-align: center; background-clip: padding-box; font-weight: bold}
+.quotes-table td.quotes-blue-center:hover{ background: #d6e8fa; color: #006cff; }
+.quotes-table td.quotes-blue-center.active{ background: #d6e8fa; color: #006cff; }
+
+
+.quotes-table td.quotes-red{ background: #fff5f8; color: #cb4140;margin: 0; padding: 8px;  position: relative; background-clip: padding-box;}
+.quotes-table td.quotes-red:hover{ background: #fcd2d2; color: #ec0200; }
+.quotes-table td.quotes-red.active{ background: #fcd2d2; color: #ec0200; }
+.quotes-table td.quotes-red-center{ font-weight: bold; background: #fff5f8; color: #cb4140;margin: 0; padding: 8px;  position: relative; text-align: center; background-clip: padding-box;}
+.quotes-table td.quotes-red-center:hover{ background: #fcd2d2; color: #ec0200; }
+.quotes-table td.quotes-red-center.active{ background: #fcd2d2; color: #ec0200; }
+.quotes-table td.no-padding{ padding: 0 !important; margin: 0!important;}
+
+
+
+.quotes-blue1{ background: #f5faff; color: #0238b9;  margin: 0; padding: 8px;   
+    box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; position: relative;}
+.quotes-blue1:hover{ background: #d6e8fa; color: #006cff; }
+.quotes-blue1.active{ background: #d6e8fa; color: #006cff; }
+
+.quotes-red1{ background: #fff5f8; color: #cb4140;margin: 0; padding: 8px;   
+    box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; position: relative;}
+.quotes-red1:hover{ background: #fcd2d2; color: #ec0200; }
+.quotes-red1.active{ background: #fcd2d2; color: #ec0200; }
 .quotes-grey{  box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; padding: 8px; min-height: 34px;}
+
+.trade-volume-table{ width: 100%;}
+.trade-volume-table td{    padding: 7px 15px 8px 15px ;  margin: 0!important; border: 1px solid #dee2e6;}
+.trade-volume-table th{font-weight: 500;  border-top: none;  padding: 7px 15px 8px 15px ; text-align: center; border: 1px solid #dee2e6; border-top: none} 
+
+.coin-status-table{ width: 100%; vertical-align: top;}
+.coin-status-table td{ padding: 0 ;  margin: 0!important; border: 1px solid #dee2e6;   border-left: none;}
+.coin-status-table th{ text-align: center; font-weight: 100;  padding: 0 ;  margin: 0!important; border: 1px solid #dee2e6; border-left: none; border-right: none;}
+
+
+ 
+.quotes-select{ position: absolute; top: 0; left:0 ; z-index: 2; background: url(../img/select_quotes.svg) no-repeat; background-size: 100% 100%; width: 100%; height: 100%; display: block;}
+ 
 .quotes-data{ font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif !important;}
 .dotum{ font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif !important;}
 .ctype-maxheight{ height: 1205px; overflow-y: scroll;}
@@ -221,8 +256,8 @@ a{color: #565656;
 .quotes-history{ max-height: 252px; text-align: center;
     font-size: 11px;
     min-height: 226px;}
-.quotes-history th{ padding: 11px 8px 12px 0 !important; margin: 0 !important; text-align: center !important;}
-.quotes-history td{ padding: 8px !important; margin: 0 !important; text-align: right !important;}
+.quotes-history th{ padding: 9px 8px 8px 0 !important;margin: 0 !important; text-align: center !important;}
+.quotes-history td{ padding: 9px 8px 8px 7px !important;    margin: 0 !important;    text-align: right !important;}
 .mCSB_scrollTools{ right: -8px !important;}
 .nounderline { text-decoration: none !important}
 .font-11{ font-size: 11px;}
@@ -391,5 +426,20 @@ a{color: #565656;
 .my-asset td .color-grey, .color-grey {
     color: #808080;}
 .my-asset td em{ font-style: normal;}
+#quotes-buy { width: 100%}
+#quotes-buy tr:nth-first-child(1) > td{ border-top: none !important}
+#quotes-sell tr:nth-last-child(3) > td{ border-bottom: none !important;}
     
-}
+/*############## ONLY IE10,11  ########### */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+#container{ min-height: 71vh;}
+.navbar-toggler{ position: absolute; top: 20px; right: 20px;}
+.form-control{padding: 10px 10px;  font-size:12px; line-height: 10px;  border-radius: 0.2rem; }
+:-ms-input-placeholder{   font-size: 12px; font-weight: 300; vertical-align: middle;}
+select{ padding:5px !important;}
+    .quotes-history{ min-width:145px;  }
+.quotes-history th{ padding: 8px 8px 8px 0 !important;margin: 0 !important; text-align: center !important;}
+.quotes-history td{ padding: 8.6px 8px 8px 7px !important;  margin: 0 !important;    text-align: right !important;}
+    
+    
+}/*############## END  ONLY IE  ########### */

@@ -335,52 +335,15 @@
                 <div class="row"> 
                     <div class="col-7">
                         <div class="h-100 mr-2 bg-white rounded shadow-sm p-3 quotes-data">
-                        <table class="quotes-table" cellspacing="0" cellpadding="0">
+                        <div class="row pl-2 pr-2">
+                            <div class="col p-0 ">
+                                   <!--######  매도 호가  ####### -->
+                                <table id="quotes-sell" class="quotes-table" cellspacing="0" cellpadding="0">
                             <colgroup>
-                                <col width="33.33333333333333%">
-                                <col width="33.33333333333333%">
-                                <col width="33.33333333333333%">
-                            </colgroup>
-                          <thead>
-                          </thead>
-                            <tbody>
-                            <tr>
-                                 <td class="quotes-blue"> 0.0017</td>  
-                                 <td class="quotes-blue-center">7,538,000 </td> 
-                                 <td rowspan="7" class="no-padding">
-                                    <table class="coin-status-table">
-                                        <colgroup>
-                                            <col width="50%">
-                                            <col width="50%">
-                                        </colgroup>
-                                        <thead>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>현재가 </th>
-                                                <td>7,189,000</td>
-                                            </tr>
-                                            <tr>
-                                                <th>전일대비 </th>
-                                                <td class="text-danger">3.00%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>고가 </th>
-                                                <td class="text-danger">7,189,000</td>
-                                            </tr>
-                                            <tr>
-                                                <th>저가 </th>
-                                                <td class="text-primary">7,189,000</td>
-                                            </tr>
-                                            <tr>
-                                                <th>거래량 </th>
-                                                <td>7,189,000</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                <!--END coin-status-table-->
-                                </td> 
-                            </tr>
+                                <col width="50%">
+                                <col width="50%">
+                              </colgroup>
+                            
                             <tr>
                                  <td class="quotes-blue"> 0.0017</td>  
                                  <td class="quotes-blue-center"> 7,538,000 </td> 
@@ -407,16 +370,60 @@
                                  <td class="quotes-blue"> 0.0017</td>  
                                  <td class="quotes-blue-center"> 7,538,000 </td> 
                             </tr>
-                        <!--END 매도 호가-->
                             <tr>
-                                 <td rowspan="7" class="no-padding"> 
-                       <table class="trade-volume-table">
+                                 <td class="quotes-blue"> 0.0017</td>  
+                                 <td class="quotes-blue-center"> 7,538,000 </td> 
+                            </tr>
+                            </table>
+                                 <!--###### END 매도 호가  ####### -->
+                            </div>
+                            <div class="col col-lg-4 p-0">
+                            <!--######  현재가  ####### -->
+                                <table class="coin-status-table h-100">
+                                        <colgroup>
+                                            <col width="50%">
+                                            <col width="50%">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <th>현재가 </th>
+                                                <td>7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>전일대비 </th>
+                                                <td class="text-danger">3.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <th>고가 </th>
+                                                <td class="text-danger">7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>저가 </th>
+                                                <td class="text-primary">7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th>거래량 </th>
+                                                <td>7,189,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"> &nbsp; </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"> &nbsp; </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                  <!--###### END 현재가  ####### -->
+                            </div>
+                        </div> <!--end row-->
+                         <div class="row pl-2 pr-2">
+                             <div class="col col-lg-4 p-0"> 
+            <!--###### 체결 볼륨 ####### -->
+                 <table class="trade-volume-table h-100">
                             <colgroup>
                                 <col width="50%">
                                 <col width="50%">
                             </colgroup>
-                          <thead>
-                          </thead>
                             <tbody>
                                 <tr>
                                     <th>체결가 </th>
@@ -448,10 +455,18 @@
                                 </tr>
                            </tbody>
                     </table>
-                        <!-- END trade volume-->
-                                
-                                </td>
-                                 <td class="quotes-red-center"> 7,538,000 </td> 
+                          <!--###### END 체결 볼륨  ####### -->
+                             </div>
+                             <div class="col p-0">
+                    <!--######  매수호가  ####### -->
+                     <table id="quotes-buy" class="quotes-table h-100">
+                            <colgroup>
+                                <col width="50%">
+                                <col width="50%">
+                            </colgroup>
+                                <tbody>
+                            <tr>
+                                 <td class="quotes-red-center" style="border-top: none !important"> 7,538,000 </td> 
                                  <td class="quotes-red"> 0.0017</td>  
                             </tr>
                             <tr>
@@ -478,10 +493,12 @@
                                  <td class="quotes-red-center"> 7,538,000 </td> 
                                  <td class="quotes-red"> 0.0017</td>  
                             </tr>
-                          <!--END 매수 호가-->
-                            </tbody>
-                            </table>
-
+                         </tbody>  
+                         </table>
+                        <!--###### END 매수호가  ####### -->
+                             </div>
+                        
+                        </div>    
                             
                         </div> <!--quotes-->
                     </div>

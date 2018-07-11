@@ -173,7 +173,6 @@
 	content: "";
 	position: absolute;
 	z-index: 99999999;
-	
 }
 .m-sub-nav .dropdown-menu.show:before {
     margin-left: 50%;

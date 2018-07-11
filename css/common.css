@@ -24,10 +24,15 @@
  
 html{ -ms-overflow-style: -ms-autohiding-scrollbar; -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale; height: 100%;}
- body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; padding: 0; margin: 0;  background: #eff0f5;     min-height: 100%;
-    justify-content: space-between;
+body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; padding: 0; margin: 0;  background: #eff0f5;     min-height: 100%;
+    
     display: flex;
     flex-direction: column;}
+@media(min-width: 769px) {
+  body{
+    justify-content: space-between;
+  }
+}
 .navbar-brand img{ width: 100px; height: 43px;}
 .nav-link{ font-size: 16px}
 .navbar-nav li{ padding: 0 10px 0 10px;}

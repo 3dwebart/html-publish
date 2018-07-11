@@ -25,7 +25,7 @@
 html{ -ms-overflow-style: -ms-autohiding-scrollbar; -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale; height: 100%;}
 body{
-	-size: 12px;
+	font-size: 12px;
 	font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif;
 	padding: 0;
 	margin: 0;
@@ -472,6 +472,8 @@ a{color: #565656;
 	color: #333333;
 	border: 1px solid #dee2e6;
 }
+/* END :: pagenation */
+/* BIGIN :: Mobile sub navigation */
 .m-cate-nav {
 	background-color: transparent;
 }
@@ -514,7 +516,7 @@ a{color: #565656;
 	border-right: 80px solid transparent;
 	top: -10px;
 }
-
+/* END :: Mobile sub navigation */
 /* BIGIN :: Bootstrap tab nav */
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;

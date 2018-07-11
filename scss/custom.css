@@ -1,4 +1,12 @@
 .btn {
   font-size: .8rem; }
 
+#presence_table tbody tr td:nth-child(1) {
+  text-align: left; }
+#presence_table tbody tr td:nth-child(2), #presence_table tbody tr td:nth-child(3), #presence_table tbody tr td:nth-child(4), #presence_table tbody tr td:nth-child(5), #presence_table tbody tr td:nth-child(6) {
+  text-align: right; }
+
+#show-hide-info-btn {
+  text-decoration: none; }
+
 /*# sourceMappingURL=custom.css.map */

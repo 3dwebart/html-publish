@@ -15,7 +15,9 @@
 		<h3>CSS Guide</h3>
 		<article class="side-nav">
 			<h4 class="device my4"><span>PC</span></h4>
-			<h4 class="device my4"><span>Mobile</span></h4>
+			<div><a href="#default-Preferences">기본 횐경</a></div>
+			<div><a href="#top-menu-guide">상단메뉴 가이드</a></div>
+			<h4 class="device mobile my4"><span>Mobile</span></h4>
 			<div><a href="#m-sub-nav">모바일 서브 메뉴</a></div>
 			<div><a href="#tab">탭 메뉴</a></div>
 			<div><a href="#accordian">아코디언 메뉴</a></div>
@@ -28,33 +30,151 @@
 		<article>
 			<div>
 				<span>
+					<strong id="default-Preferences" class="title"><span>Default preferences</span></strong>
+				</span>
+				<div class="my-3">
+					본솔루션 프론트엔드는 부트스트랩 기반으로 레이아웃이 작성되어있습니다.
+				</div>
+				<h2 class="label label-info">스타일시트 link</h2>
+				<span class="label label-info">부트스트랩 CSS link</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;link rel="stylesheet" media="all" href=“bootstrap.css"&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">커스텀 css,버튼,폰트,아이콘,테이블, IE관련 버그픽스</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;link rel="stylesheet" media="all" href=“common.css"&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">아이콘폰트</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">커스텀 스크롤바 css</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;link rel="stylesheet" media="all" href="jquery.mCustomScrollbar.min.css"&gt;<!--
+					--></code><!--
+				--></pre>
+				<h2 class="label label-info">자바스크립트 link</h2>
+				<span class="label label-info">제이쿼리 js밑에 부트스트랩js를 삽입해야 정상작동합니다.</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"&gt;&lt;/script&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">툴팁관련 js</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;script src="popper.min.js"&gt;&lt;/script&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">부트스트랩 js (popper js 밑에 있어야 합니다.)</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;script src="bootstrap.js"&gt;&lt;/script&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">커스텀 스크롤바 js</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;script src="js/jquery.mCustomScrollbar.concat.min.js"&gt;&lt;/script&gt;<!--
+					--></code><!--
+				--></pre>
+			</div>
+			<div>
+				<span>
+					<strong id="top-menu-guide" class="title"><span>Top menu guide</span></strong>
+				</span>
+				<div class="my-3">
+					<img src="img-css-guide/pc-main-nav.png" alt="상단 메뉴 이미지" title="상단 메뉴 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">HTML</span>
+				<pre class="mb-0"><!--
+					--><code class="html"><!--
+						-->&lt;nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue“&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-grey">Fixed-top ( 상단 고정-fixed속성),   Nav-blue (상단 배경색상)</span>
+				<div class="my-3">
+					<img src="img-css-guide/pc-main-nav2.png" alt="상단 메뉴 로고강조 이미지" title="상단 메뉴 로고강조 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">로고 이미지 사이즈를 변경원할 경우</span>
+				<span class="label label-grey">navbar-brand img</span>
+				<span class="label label-info">로고 파일을 변경원할경우</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;a class="navbar-brand" href="#"&gt;
+ 	&lt;img src="img/common/Popcon_Logo.png"&gt;
+ &lt;/a&gt;<!--
+					--></code><!--
+				--></pre>
+				<div class="my-3">
+					<img src="img-css-guide/pc-main-nav3.png" alt="상단 메뉴 회원아이콘강조 이미지" title="상단 메뉴 회원아이콘강조 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">회원아이콘</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;i class="fas fa-user-circle fa-2x align-middle"&gt;&lt;i&gt;<!--
+					--></code><!--
+				--></pre>
+			</div>
+			<div>
+				<span>
 					<strong id="m-sub-nav" class="title"><span>Mobile sub navigation</span></strong>
 				</span>
 				<div class="my-3">
 					<img src="img-css-guide/m-sub-nav.png" alt="mobile sub navigation image">
 				</div>
-				<span class="label label-info">기본 Bootstrap의 변경 CSS</span>
+				<span class="label label-info">기본 Bootstrap의 변경 및 추가 CSS</span>
 				<pre><!--
 					--><code class="css"><!--
-						-->
+						-->.m-cate-nav {
+	background-color: transparent;
+}
+.m-cate-nav > div[class^="col-"] {
+	min-height: 33px;
+	line-height: 33px;
+}
+.m-cate-nav .m-cate {
+	background-color: #ffffff;
+	position: relative;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-						<!--
+.m-cate-nav .m-cate:after {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: -12px;
+	border-top: 16.5px solid transparent;
+	border-bottom: 16.5px solid transparent;
+	border-left: 13px solid #ffffff;
+	z-index: 1;
+}
+.m-sub-nav .dropdown-menu {
+	position: relative;
+	top: 10px !important;
+	width: 100%;
+}
+.m-sub-nav .dropdown-menu.show:before, .m-sub-nav .dropdown-menu.show:after {
+	content: "";
+	position: absolute;
+	z-index: 99999999;
+	
+}
+.m-sub-nav .dropdown-menu.show:before {
+    margin-left: 50%;
+    transform: translateX(-50%);
+	border-top: 5px solid #545b62;
+	border-left: 80px solid transparent;
+	border-right: 80px solid transparent;
+	top: -10px;
+}<!--
 					--></code><!--
 				--></pre>
 				<span class="label label-info">동작</span>

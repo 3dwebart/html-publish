@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body class="flex-normal">
+
 <a href="#" class="m-nav-close"></a>
 <div class="navbar-collapse offcanvas-collapse" id="gnb">
 	<div class="m-nav-wrap">
@@ -87,12 +88,11 @@
 		<div class="col-7 m-sub-nav pl-0 pr-0">
 			<div class="dropdown">
 				<a class="btn btn-secondary dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    				공지사항
+    				이용안내
 				</a>
-
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" href="m_qna.html">1:1 문의</a>
-					<a class="dropdown-item" href="m_operation_guide.html">이용안내</a>
+					<a class="dropdown-item" href="m_notice.html">공지사항</a>
+					<a class="dropdown-item" href="m_qna.html">1:1문의</a>
 					<a class="dropdown-item" href="m_faq.html">FAQ</a>
 				</div>
 			</div>
@@ -107,54 +107,14 @@
 			<div class="card shadow-sm bg-white rounded h-100">
 				<div class="card-header">
 					<h5 class="pt-2 pb-1 mb-0">
-						<i class="fas fa-align-justify"></i>
-						공지사항
+						<i class="fas fa-book"></i>
+						이용안내
 					</h5>
 				</div>
-				<div class="pl-4 pr-4 mb-3 ">
-					<!-- BIGIN :: Notice table -->
-					<table class="table notice-board mobile" style="word-break: keep-all">
-						<colgroup>
-							<col width="*">
-							<col width="30%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col" class="text-center">제목</th>
-								<th scope="col">날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="subj"><a href=""> 공지사항 테스트</a></td>
-								<td class="text-muted">05-31</td>
-							</tr>
-							<tr>
-								<td class="subj"><a href=""> 공지사항 테스트 입니다. 해당공지는 테스트입니다.</a></td>
-								<td class="text-muted">05-31</td>
-							</tr>
-							<tr>
-								<td class="subj"><a href=""> 공지사항 테스트</a></td>
-								<td class="text-muted">05-31</td>
-							</tr>
-						</tbody>
-					</table>
-					<!-- END :: Notice table -->
-					<!-- BIGIN :: 페이징 -->
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<li class="page-item disabled">
-								<a class="page-link" href="#" tabindex="-1">이전</a>
-							</li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item">
-								<a class="page-link" href="#">다음</a>
-							</li>
-						</ul>
-					</nav>
-					<!-- END :: 페이징 -->
+				<div class="pl-4 pr-4 py-3 mb-3 ">
+					<!-- BIGIN :: 이용안내 -->
+					이용안내 내용
+					<!-- END :: 이용안내 -->
 				</div>
 			</div>
 		</div>
@@ -165,5 +125,6 @@
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/MobileMainNavSubNav.js"></script>
+</script>
 </body>
 </html>

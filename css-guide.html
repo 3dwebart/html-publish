@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" href="highlight/styles/dark.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="css/common_m.css">
+<link rel="stylesheet" media="all" href="css/css-guide.css">
+</head>
+<body>
+<div class="row css-guide-wrap p0">
+	<section class="col-3 side-nav-wrap foo foo--inside">
+		<h3>CSS Guide</h3>
+		<article class="side-nav">
+			<h4 class="device my4"><span>PC</span></h4>
+			<h4 class="device my4"><span>Mobile</span></h4>
+			<div><a href="#m-sub-nav">모바일 서브 메뉴</a></div>
+			<div><a href="#tab">탭 메뉴</a></div>
+			<div><a href="#accordian">아코디언 메뉴</a></div>
+		</article>
+		<article>
+			<div class="copy mb-4">copyright</div>
+		</article>
+	</section>
+	<section class="col-9">
+		<article>
+			<div>
+				<span>
+					<strong id="m-sub-nav" class="title"><span>Mobile sub navigation</span></strong>
+				</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-sub-nav.png" alt="mobile sub navigation image">
+				</div>
+				<span class="label label-info">기본 Bootstrap의 변경 CSS</span>
+				<pre><!--
+					--><code class="css"><!--
+						-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">동작</span>
+				<!-- BIGIN :: 서브메뉴 - 모바일 -->
+				<div id="nav-sub-m" class="mb-3">
+					<div class="row m-cate-nav mt-3 ml-0 mr-0 pl-3 pr-3">
+						<div class="col-5 m-cate text-center pl-0 pr-0">고객센터</div>
+						<div class="col-7 m-sub-nav pl-0 pr-0">
+							<div class="dropdown">
+								<a class="btn btn-secondary dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    				공지사항
+								</a>
+
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="m_qna.html">1:1 문의</a>
+									<a class="dropdown-item" href="m_operation_guide.html">이용안내</a>
+									<a class="dropdown-item" href="m_faq.html">FAQ</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END :: 서브메뉴 - 모바일 -->
+				<span class="label label-info">HTML</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;!-- BIGIN :: 서브메뉴 - 모바일 --&gt;
+&lt;div id="nav-sub-m" class="" style="padding-top: 80px;"&gt;
+	&lt;div class="row m-cate-nav mt-3 ml-0 mr-0 pl-3 pr-3"&gt;
+		&lt;div class="col-5 m-cate text-center pl-0 pr-0"&gt;고객센터&lt;/div&gt;
+		&lt;div class="col-7 m-sub-nav pl-0 pr-0"&gt;
+			&lt;div class="dropdown"&gt;
+				&lt;a class="btn btn-secondary dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+    				공지사항
+				&lt;/a&gt;
+
+				&lt;div class="dropdown-menu" aria-labelledby="dropdownMenuLink"&gt;
+					&lt;a class="dropdown-item" href="m_qna.html"&gt;1:1 문의&lt;/a&gt;
+					&lt;a class="dropdown-item" href="m_operation_guide.html"&gt;이용안내&lt;/a&gt;
+					&lt;a class="dropdown-item" href="m_faq.html"&gt;FAQ&lt;/a&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- END :: 서브메뉴 - 모바일 --&gt;<!--
+					--></code><!--
+				--></pre>
+			</div>
+			<div>
+				<span>
+					<strong id="tab" class="title"><span>TAB</span></strong>
+				</span>
+				<div class="my-3">
+					<img src="img-css-guide/tabs-nav.png" alt="tab menu part image">
+				</div>
+				<span class="label label-info">기본 Bootstrap의 변경 CSS</span>
+				<pre><!--
+					--><code class="css"><!--
+						-->.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+	color: #fff;
+	background-color: #6c757d; /* 기본 탭 메뉴 버튼 background color 변경 - 기본 컬러 : blue */
+	border-color: #6c757d; /* 기본 탭 메뉴 버튼 border color 변경 - 기본 컬러 : blue */
+	border-radius: 0;
+	text-decoration: none;
+}
+.nav-link {
+	display: block;
+	padding: 0.125rem 0.5rem;
+}<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">동작</span>
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="faq1-tab" data-toggle="pill" href="#faq1" role="tab" aria-controls="faq1" aria-selected="true">회원가입</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="faq2-tab" data-toggle="pill" href="#faq2" role="tab" aria-controls="faq2" aria-selected="false">정보변경</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="faq3-tab" data-toggle="pill" href="#faq3" role="tab" aria-controls="faq3" aria-selected="false">입금 및 출금</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="faq4-tab" data-toggle="pill" href="#faq4" role="tab" aria-controls="faq4" aria-selected="false">거래</a>
+					</li>
+				</ul>
+				<div class="tab-content mb-4" id="pills-tabContent">
+					<div class="tab-pane fade show active" id="faq1" role="tabpanel" aria-labelledby="faq1-tab">
+						회원가입 내용
+					</div>
+					<div class="tab-pane fade" id="faq2" role="tabpanel" aria-labelledby="faq2-tab">
+						정보변경 내용
+					</div>
+					<div class="tab-pane fade" id="faq3" role="tabpanel" aria-labelledby="faq3-tab">
+						입금 및 출금 내용
+					</div>
+					<div class="tab-pane fade" id="faq4" role="tabpanel" aria-labelledby="faq4-tab">
+						거래 내용
+					</div>
+				</div>
+				<span class="label label-info">HTML</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"&gt;
+	&lt;li class="nav-item"&gt;
+		&lt;a class="nav-link active" id="faq1-tab" data-toggle="pill" href="#faq1" role="tab" aria-controls="faq1" aria-selected="true"&gt;회원가입&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li class="nav-item"&gt;
+		&lt;a class="nav-link" id="faq2-tab" data-toggle="pill" href="#faq2" role="tab" aria-controls="faq2" aria-selected="false"&gt;정보변경&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li class="nav-item"&gt;
+		&lt;a class="nav-link" id="faq3-tab" data-toggle="pill" href="#faq3" role="tab" aria-controls="faq3" aria-selected="false"&gt;입금 및 출금&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li class="nav-item"&gt;
+		&lt;a class="nav-link" id="faq4-tab" data-toggle="pill" href="#faq4" role="tab" aria-controls="faq4" aria-selected="false"&gt;거래&lt;/a&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="tab-content" id="pills-tabContent"&gt;
+	&lt;div class="tab-pane fade show active" id="faq1" role="tabpanel" aria-labelledby="faq1-tab"&gt;
+		회원가입 내용
+	&lt;/div&gt;
+	&lt;div class="tab-pane fade" id="faq2" role="tabpanel" aria-labelledby="faq2-tab"&gt;
+		정보변경 내용
+	&lt;/div&gt;
+	&lt;div class="tab-pane fade" id="faq3" role="tabpanel" aria-labelledby="faq3-tab"&gt;
+		입금 및 출금 내용
+	&lt;/div&gt;
+	&lt;div class="tab-pane fade" id="faq4" role="tabpanel" aria-labelledby="faq4-tab"&gt;
+		거래 내용
+	&lt;/div&gt;
+&lt;/div&gt;<!--
+					--></code><!--
+				--></pre>
+			</div>
+			<div>
+				<span>
+					<strong id="accordian" class="title"><span>Faq Accordian</span></strong>
+				</span>
+				<div class="my-3">
+					<img src="img-css-guide/faq-accordian.png" alt="faq accordian manu image">
+				</div>
+				<span class="label label-info">기본 Bootstrap의 변경 CSS</span>
+				<pre><!--
+					--><code class="css"><!--
+						-->.tab-content .tab-pane .card {
+	border-top: 0;
+}
+.tab-content .tab-pane .card:first-child {
+	border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.tab-content .tab-pane .card .card-header {
+	padding-left: 0;
+	padding-right: 0;
+	background-color: #ffffff;
+}
+.tab-content .tab-pane .card .card-header h5 button {
+	padding-left: 40px;
+	background: url("../img/common/icon_faq_q.png") 13px 4px no-repeat;
+	text-decoration: none;
+	color: #333333;
+	font-weight: bold;
+	font-size: 14px;
+	white-space: normal;
+	text-align: left;
+}
+.tab-content .tab-pane .card .card-header h5 button:hover {
+	text-decoration: none;
+	color: #333333;
+}
+.tab-content .tab-pane .card .card-body {
+	background-color: #f8f8f8;
+	font-weight: normal;
+	font-size: 14px;
+}<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">동작</span>
+				<div class="tab-content">
+					<div class="tab-pane show active">
+						<div id="faq_menber">
+							<div class="card">
+								<div class="card-header" id="faq_menber_head1">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#faq_menber_body1" aria-expanded="true" aria-controls="faq_menber_body1">
+											미성년자도 가입 및 거래가 가능한가요?
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body1" class="collapse show" aria-labelledby="faq_menber_head1" data-parent="#faq_menber">
+									<div class="card-body">
+										미성년자, 만19세 미만의 회원님들은 거래가 불가능합니다.<br />
+										(2018년 기준, 태어난 해가 1999년 이하부터 거래가 가능합니다.)
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="faq_menber_head2">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body2" aria-expanded="false" aria-controls="faq_menber_body2">
+											외국인이 가입할 수 있나요?
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body2" class="collapse" aria-labelledby="faq_menber_head2" data-parent="#faq_menber">
+									<div class="card-body">
+										불가능합니다. 팝콘은 국내 내국인만 가입 가능합니다.
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="faq_menber_head3">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body3" aria-expanded="false" aria-controls="faq_menber_body3">
+											이메일 인증 코드를 받지 못했습니다.
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body3" class="collapse" aria-labelledby="faq_menber_head3" data-parent="#faq_menber">
+									<div class="card-body">
+										이메일 계정에 따라 수신 되기 까지 최대 5분까지 소요 될 수 있습니다.<br />
+										5분이 지나도 이메일을 수신하지 못한 경우 신청하신 계정 정보로 로그인하여 가입 인증 이메일 재요청을 하시기 바랍니다.
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="faq_menber_head4">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body4" aria-expanded="false" aria-controls="faq_menber_body4">
+											회원 가입시 지인 혹은 가족의 휴대폰 번호로 등록할 수 있나요?
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body4" class="collapse" aria-labelledby="faq_menber_head4" data-parent="#faq_menber">
+									<div class="card-body">
+										보안 및 정책상 반드시 본인의 명의로 가입 해주셔야 합니다.
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="faq_menber_head5">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body5" aria-expanded="false" aria-controls="faq_menber_body5">
+											해외에 거주하고 있습니다. 해외 휴대전화로 인증가능 한가요?
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body5" class="collapse" aria-labelledby="faq_menber_head5" data-parent="#faq_menber">
+									<div class="card-body">
+										정부 정책 준수와 안정적인 서비스 운영을 위하여 본인명의 휴대폰으로 인증해야 합니다.
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="faq_menber_head6">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body6" aria-expanded="false" aria-controls="faq_menber_body6">
+											여러 개의 계정을 이용할 수 있나요?
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body6" class="collapse" aria-labelledby="faq_menber_head6" data-parent="#faq_menber">
+									<div class="card-body">
+										팝콘 거래소는 1인 1계정 원칙으로 하고 있습니다. 타인의 정보를 도용하여 계정을 생성/이용 하는 경우, 
+										이용제재 및 추가 조치를 취할 수 있습니다.
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="faq_menber_head7">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body7" aria-expanded="false" aria-controls="faq_menber_body7">
+											회원탈퇴 방법
+										</button>
+									</h5>
+								</div>
+								<div id="faq_menber_body7" class="collapse" aria-labelledby="faq_menber_head7" data-parent="#faq_menber">
+									<div class="card-body">
+										회원 탈퇴는정부 정책 준수와 안정적인 서비스 운영을 위하여 본인명의 휴대폰으로 인증해야 합니다.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<span class="label label-info">HTML</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;div id="faq_menber"&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head1"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link" data-toggle="collapse" data-target="#faq_menber_body1" aria-expanded="true" aria-controls="faq_menber_body1"&gt;
+					미성년자도 가입 및 거래가 가능한가요?
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body1" class="collapse show" aria-labelledby="faq_menber_head1" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				미성년자, 만19세 미만의 회원님들은 거래가 불가능합니다.&lt;br /&gt;
+				(2018년 기준, 태어난 해가 1999년 이하부터 거래가 가능합니다.)
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head2"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body2" aria-expanded="false" aria-controls="faq_menber_body2"&gt;
+					외국인이 가입할 수 있나요?
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body2" class="collapse" aria-labelledby="faq_menber_head2" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				불가능합니다. 팝콘은 국내 내국인만 가입 가능합니다.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head3"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body3" aria-expanded="false" aria-controls="faq_menber_body3"&gt;
+					이메일 인증 코드를 받지 못했습니다.
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body3" class="collapse" aria-labelledby="faq_menber_head3" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				이메일 계정에 따라 수신 되기 까지 최대 5분까지 소요 될 수 있습니다.&lt;br /&gt;
+				5분이 지나도 이메일을 수신하지 못한 경우 신청하신 계정 정보로 로그인하여 가입 인증 이메일 재요청을 하시기 바랍니다.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head4"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body4" aria-expanded="false" aria-controls="faq_menber_body4"&gt;
+					회원 가입시 지인 혹은 가족의 휴대폰 번호로 등록할 수 있나요?
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body4" class="collapse" aria-labelledby="faq_menber_head4" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				보안 및 정책상 반드시 본인의 명의로 가입 해주셔야 합니다.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head5"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body5" aria-expanded="false" aria-controls="faq_menber_body5"&gt;
+					해외에 거주하고 있습니다. 해외 휴대전화로 인증가능 한가요?
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body5" class="collapse" aria-labelledby="faq_menber_head5" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				정부 정책 준수와 안정적인 서비스 운영을 위하여 본인명의 휴대폰으로 인증해야 합니다.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head6"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body6" aria-expanded="false" aria-controls="faq_menber_body6"&gt;
+					여러 개의 계정을 이용할 수 있나요?
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body6" class="collapse" aria-labelledby="faq_menber_head6" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				팝콘 거래소는 1인 1계정 원칙으로 하고 있습니다. 타인의 정보를 도용하여 계정을 생성/이용 하는 경우, 
+				이용제재 및 추가 조치를 취할 수 있습니다.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="card"&gt;
+		&lt;div class="card-header" id="faq_menber_head7"&gt;
+			&lt;h5 class="mb-0"&gt;
+				&lt;button class="btn btn-link collapsed" data-toggle="collapse" data-target="#faq_menber_body7" aria-expanded="false" aria-controls="faq_menber_body7"&gt;
+					회원탈퇴 방법
+				&lt;/button&gt;
+			&lt;/h5&gt;
+		&lt;/div&gt;
+		&lt;div id="faq_menber_body7" class="collapse" aria-labelledby="faq_menber_head7" data-parent="#faq_menber"&gt;
+			&lt;div class="card-body"&gt;
+				회원 탈퇴는정부 정책 준수와 안정적인 서비스 운영을 위하여 본인명의 휴대폰으로 인증해야 합니다.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;<!--
+					--></code><!--
+				--></pre>
+			</div>
+		</article>
+	</section>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+(function($) {
+	var body = $("html, body");
+	$('.side-nav a').on('click', function() {
+		var ElementID = $(this).attr('href');
+		var scTop = $(ElementID).offset().top;
+		console.log(scTop);
+		body.stop().animate({scrollTop: scTop}, 300);
+	});
+})(jQuery);
+</script>
+</html>

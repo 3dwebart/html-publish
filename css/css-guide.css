@@ -1,0 +1,144 @@
+@charset "utf-8";
+
+@font-face{
+ font-family:'BareunDotum';
+ font-style:normal;
+ font-weight:400;
+ src:url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro2.woff2') format('woff2'),
+		 url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro2.woff') format('woff');
+}
+@font-face{
+ font-family:'BareunDotum';
+ font-style:normal;
+ font-weight:700;
+ src:url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro3.woff2') format('woff2'),
+		 url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro3.woff') format('woff');
+}
+@font-face{
+ font-family:'BareunDotum';
+ font-style:normal;
+ font-weight:300;
+ src:url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff2') format('woff2'),
+		 url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff') format('woff');
+}
+
+html{ -ms-overflow-style: -ms-autohiding-scrollbar; -webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale; height: 100%;}
+body{
+	-size: 12px;
+	font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif;
+	padding: 0;
+	margin: 0;
+}
+* {
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.label {
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+.label-info {
+	border-left-color: #2a8af5;
+	background-color: #b1d4fb;
+	color: #000000;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+strong.title {
+	display: block;
+	background-color: #fbdbb1;
+	margin-top: 10px;
+}
+strong.title span {
+	position: relative;
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #e09934;
+	height: 30px;
+}
+strong.title span:after {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 0;
+	right: -10px;
+	border-left: 10px solid #e09934;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+}
+.css-guide-wrap {}
+.side-nav-wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: #666666;
+}
+.side-nav {
+	position: fixed;
+	padding: 10px 0;
+	height: calc(100% - 41px - 60px);
+	width: calc(25% - 23px);
+	margin-top: 41px;
+	/*padding-bottom: 60px;*/
+	overflow-y: auto;
+}
+.device {
+	position: relative;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #ffffff;
+	margin-bottom: 50px;
+}
+.device span:before, .device span:after {
+	position: absolute;
+	content: "";
+	left: 20px;
+}
+.device span:before {
+	width: calc(100% - 40px);
+	height: 1px;
+	background-color: #cccccc;
+	bottom: -5px;
+}
+.device span:after {
+	width: 30%;
+	height: 2px;
+	background-color: #ffffff;
+	bottom: -10px;
+}
+.side-nav-wrap h3,
+.side-nav-wrap article .copy {
+	color: #ffffff;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.side-nav a {
+	display: block;
+	padding: 5px 10px;
+	color: #ffffff;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-decoration: none;
+	transition: all .3s ease;
+}
+.side-nav a:hover {
+	background-color: #333333;
+	position: relative;
+}
+.side-nav a:hover:after {
+	position: absolute;
+	content: "";
+	width: 0;
+	height: 0;
+	right: 20px;
+	top: 12px;
+	border-left: 5px solid #ffffff;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+}

@@ -4,76 +4,126 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-<title> </title>
+<title>비밀번호 변경</title>
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
 <link rel="stylesheet" media="all" href="css/common.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
+<link rel="stylesheet" media="all" href="css/common_m.css">
+<link rel="stylesheet" media="all" href="css/custom.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-
-
-
 </head>
-<body>
+<body class="flex-normal">
+<!-- BIGIN :: Mobile navigation -->
+<div id="panel-list" class="h-100 panel-bg w-100 ">
+	<ul class="list-group list-group-flush font-weight-light">
+		<li class="list-group-item color64a">
+			<i class="fas fa-user-astronaut align-middle" style="font-size: 22px;"></i> 게스트
+			<button type="button" class="btn btn-outline-light btn-sm font-12 d-inline btn-round"> 로그아웃</button>  
+			<button type="button" class="close text-light" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+				  <button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'">로그인</button>
+				</div>
+				<div class="col">
+				  <button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'">회원가입</button>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item"><a href="trade.html" class="trade"> 거래소 </a></li>
+		<li class="list-group-item">
+			<a href="presence.html" class="invest">거래내역 </a>
+			<span class="badge badge-danger badge-pill float-right">
+			<i class="far fa-bell align-middle" style="font-size: 13px;"></i> 14
+			</span>
+		</li>
+		<li class="list-group-item"><a href="balances.html" class="cashout">입출금 </a></li>
+		<li class="list-group-item"><a href="verificationcenter.html" class="mypage">마이페이지</a></li>
+		<li class="list-group-item"><a href="m_notice.html" class="customer">고객센터 </a></li>
+		<li class="list-group-item">
+			<!-- BIGIN :: 언어선택 -->
+			<div class="dropdown">
+				<a class="btn btn-outline-light dropdown-toggle btn-sm w-100 border-light-blue align-middle" href="#" role="button" id="selectLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-globe" style="font-size: 17px;"></i>
+					KOR
+				</a>
+				<div class="dropdown-menu w-100" aria-labelledby="selectLang">
+					<a class="dropdown-item" href="#">KOR</a>
+					<a class="dropdown-item" href="#">ENG</a>
+					<a class="dropdown-item" href="#">CHN</a>
+				</div>
+			</div>
+		  <!-- END :: 언어선택 -->
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-twitter" style="font-size: 20px;"></i>
+					</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-facebook-f " style="font-size: 20px;"></i>
+					</button>
+				</div>
+			</div>
+		</li>
+		<div class="text-light p-3">
+			<a class="btn btn-outline-light2 btn-block color64a text-uppercase" id="show-hide-info-btn" data-toggle="collapse" href="#footer-content" role="button" aria-expanded="false" aria-controls="footer-content">
+				<span class="show-hide">show</span> information
+				<i class="fas fa-angle-down"></i>
+			</a>
+			<div class="color64a mt-3">
+				Copyright 2018ⓒPOPCON.All rights reserved.
+			</div>
+			<div class="collapse" id="footer-content">
+				<div class="card card-body bg-transparent color64a p-0 border-0">
+					고객센터 02-400-5651 <br>
+					서울시 송파구 중대로 109. 대동빌딩 12층 <br>
+					골든퓨쳐스 대표자 : 이수식 <br>
+					사업자등록번호 791-81-00992<br>
+					운영시간 평일 09:00~18:00
+				</div>
+			</div>
+		</div>
+	</ul>
+</div>
+<!-- END :: Mobile navigation -->
+<!-- BIGIN :: GNB-->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="img/common/Popcon_Logo.png">
-          </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-          <div class="navbar-collapse  offcanvas-collapse" id="gnb">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래내역</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">입출금</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">마이페이지</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">고객센터</a>
-            </li>
-          </ul>
-            <div class="nav-bar-logininfo">
-              <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
-            </div>
-              <button type="button" class="btn btn-outline-light btn-round">로그인</button>
-        </div>
-      </div>
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
 </nav>
-    <div class="container mt11 mb-4">
-       <div class="card max-width5 box-shadow">
-          <div class="card-header"><h5>비밀번호를 변경해 주세요.</h5></div>
-        <form class="p-3">
-            
-          <div class="form-group">
-            
-            <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="비밀번호">
- 
-          </div>
-          <div class="form-group">
-           
-            <input type="password2" class="form-control" id="password2" placeholder="비밀번호를 변경해 주세요.">
-          </div>
-             
-          <button type="submit" class="btn btn-primary btn-block">비밀번호 변경 </button>
-        </form>
+<!--END :: GNB-->
+<!-- BIGIN :: container -->
+<div class="container bigin-m my-3">
+	<div class="card max-width5 box-shadow">
+		<div class="card-header"><h5>비밀번호를 변경해 주세요.</h5></div>
+		<form class="p-3">
 
-        </div> <!--card-->
-        
-       <div class="fixed-bottom">footer</div>    
-    </div> <!--container-->
-    
-    
-    
+			<div class="form-group">
+				<input type="password" class="form-control" id="password" aria-describedby="password" placeholder="비밀번호">
+			</div>
+			<div class="form-group">
+				<input type="password2" class="form-control" id="password2" placeholder="비밀번호를 변경해 주세요.">
+			</div>
+			<button type="submit" class="btn btn-primary btn-block">비밀번호 변경 </button>
+		</form>
+	</div> <!--card-->
+</div>
+<!-- BIGIN :: container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/MobileMainNavSubNav.js"></script>
 </body>
 </html>

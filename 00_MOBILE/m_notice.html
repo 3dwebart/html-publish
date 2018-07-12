@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-<title> </title>
+<title>공지사항</title>
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
 <link rel="stylesheet" media="all" href="css/common.css">
 <link rel="stylesheet" media="all" href="css/common_m.css">
@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body class="flex-normal">
+<!-- BIGIN :: Mobile navigation -->
 <div id="panel-list" class="h-100 panel-bg w-100 ">
 	<ul class="list-group list-group-flush font-weight-light">
 		<li class="list-group-item color64a">
@@ -24,23 +25,23 @@
 		<li class="list-group-item">
 			<div class="row"> 
 				<div class="col">
-					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline">로그인</button>
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'">로그인</button>
 				</div>
 				<div class="col">
-					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline">회원가입</button>
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'">회원가입</button>
 				</div>
 			</div>
 		</li>
-		<li class="list-group-item"><a href="#" class="trade"> 거래소 </a></li>
+		<li class="list-group-item"><a href="trade.html" class="trade"> 거래소 </a></li>
 		<li class="list-group-item">
-			<a href="#" class="invest">거래내역 </a>
+			<a href="presence.html" class="invest">거래내역 </a>
 			<span class="badge badge-danger badge-pill float-right">
 				<i class="far fa-bell align-middle" style="font-size: 13px;"></i> 14
 			</span>
 		</li>
-		<li class="list-group-item"><a href="#" class="cashout">입출금 </a></li>
-		<li class="list-group-item"><a href="#" class="mypage">마이페이지</a></li>
-		<li class="list-group-item"><a href="#" class="customer">고객센터 </a></li>
+		<li class="list-group-item"><a href="balances.html" class="cashout">입출금 </a></li>
+		<li class="list-group-item"><a href="verificationcenter.html" class="mypage">마이페이지</a></li>
+		<li class="list-group-item"><a href="m_notice.html" class="customer">고객센터 </a></li>
 		<li class="list-group-item">
 			<!-- BIGIN :: 언어선택 -->
 			<div class="dropdown">
@@ -90,6 +91,7 @@
 		</div>
 	</ul>
 </div>
+<!-- END :: Mobile navigation -->
 <!-- BIGIN :: GNB-->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
 	<div class="container">
@@ -102,20 +104,8 @@
 	</div>
 </nav>
 <!--END :: GNB-->
-
-<!-- BIGIN :: 서브메뉴 -->
-<div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
-	<nav id="nav-sub-wrap" class="nav nav-underline">
-		<div class="spacing"></div>
-		<a class="nav-link active" href="#">공지사항</a>
-		<a class="nav-link" href="#">1:1문의</a>
-		<a class="nav-link" href="#">이용안내</a>
-		<a class="nav-link" href="#">FAQ</a>
-	</nav>
-</div>
-<!-- END :: 서브메뉴-->
 <!-- BIGIN :: 서브메뉴 - 모바일 -->
-<div id="nav-sub-m" class="" style="padding-top: 45px;">
+<div id="nav-sub-m" class="bigin-m">
 	<div class="row m-cate-nav mx-0 pl-3">
 		<div class="col-5 pr-0 m-cate text-center">고객센터</div>
 		<div class="col-7 pl-0 m-sub-nav">
@@ -125,9 +115,9 @@
 				</a>
 
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" href="#">1:1 문의</a>
-					<a class="dropdown-item" href="#">이용안내</a>
-					<a class="dropdown-item" href="#">FAQ</a>
+					<a class="dropdown-item" href="questionlist.html">1:1 문의</a>
+					<a class="dropdown-item" href="m_operation_guide.html">이용안내</a>
+					<a class="dropdown-item" href="m_faq.html">FAQ</a>
 				</div>
 			</div>
 		</div>
@@ -135,7 +125,7 @@
 </div>
 <!-- END :: 서브메뉴 - 모바일 -->
 <!-- BIGIN :: container -->
-<div class="container submenu-container mb-4 max-1000">
+<div class="container submenu-container my-3 max-1000">
 	<div class="row">
 		<div class="col mb-3 pb-3">
 			<div class="card shadow-sm bg-white rounded h-100">
@@ -195,29 +185,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
-
-<script>
-	$(function() {
-		'use strict'
-
-		$('[data-toggle="offcanvas"]').on('click', function () {
-			$('#panel-list').addClass('open');
-		});
-		$('.close').on('click', function () {
-			$('#panel-list').removeClass('open');
-		});
-		var x = 0;
-		$('#show-hide-info-btn').on('click', function () {
-			x = (x - 1) * -1;
-			if(x == 0) {
-				$(this).find('.show-hide').text('show');
-				$(this).find('.fas').attr('class', 'fas fa-angle-down');
-			} else {
-				$(this).find('.show-hide').text('hide');
-				$(this).find('.fas').attr('class', 'fas fa-angle-up');
-			}
-		});
-	});
-</script>
+<script src="js/MobileMainNavSubNav.js"></script>
 </body>
 </html>

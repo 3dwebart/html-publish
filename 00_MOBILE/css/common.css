@@ -481,9 +481,53 @@ a {
 #panel-list ul li a.cashout{ padding: 14px 0 0 55px; color: #fff; position: absolute; top: 0; left: 0; width: calc(100% - 55px);  background:url(../img/common/nav_cashout_ico.png) 20px -64px no-repeat; background-size:24px 126px;}
 #panel-list ul li a.mypage{ padding: 14px 0 0 55px; color: #fff; position: absolute; top: 0; left: 0; width: calc(100% - 55px);  background:url(../img/common/nav_mypage_ico.png) 20px -64px no-repeat; background-size:24px 126px;}
 #panel-list ul li a.customer{ padding: 14px 0 0 55px; color: #fff; position: absolute; top: 0; left: 0; width: calc(100% - 55px);  background:url(../img/common/nav_customer_ico.png) 20px -64px no-repeat; background-size:24px 126px;}
-
+#panel-list ul li .dropdown .btn.btn-outline-light {height: 32px;}
 .panel-icon{ width: 50px; height: 50px; vertical-align: middle;  display: inline;}
 .color64a{ color: #64a9dc  !important}
 .close{    transform: scale(1.5);}
 .border-light-blue{ border-color: #45a0e2 !important;  color: #ceeaff}
 .panel-sns-link{    color: #57b0f1; background-color: #0070c2;   border-color: #1e7abd; }
+
+.mobile-nav-cart { z-index: 9;  background:#00164f;  position: fixed;   bottom: 0;  width: 100%;    display: block; z-index: 10000;
+    }
+.mobile-nav-cart ul{ padding: 0; margin: 0}    
+.mobile-nav-cart li{ float: left; width: 20%; text-align: center; padding:0; margin: 0;     list-style: none; font-size: 12.5px;}
+.mobile-nav-cart li a{ padding:20px 0 20px 0; display: block; text-decoration: none;     color: #75809e;  }
+.mobile-nav-cart li a.active{ color: #fff !important;  background:url(../img/common/ico_cart_nav_active.png) top center no-repeat;}    
+.btn-m-back {  display: block;   position: fixed;   left: 0;   top: 10px;  bottom: 0;  padding: 1px 0 0 24px;
+        background: url(../img/common/ico_back_arrow.png) no-repeat 8px 0;   background-size:10px 19px ;
+        height: 24px; z-index: 8000; color: #fff;  font-size: 15px; font-weight: 300;  } 
+.btn-m-back:hover{ text-decoration: none; color: #fff; }
+.btn-m-back em {font-size: 8px; color: #80bbe3; padding: 0 0 0 5px; font-style: normal;}
+#order-tab > li {
+    width: 33.3%;
+    height: 35px;
+    background-color: #919ab0;
+    border-right: 1px solid #fff;}
+
+#order-tab > li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 35px;
+    color: #ffffff; background-color:#919ab0; font-size: 12px; font-weight: 300; padding: 0; border-bottom: 0} 
+    
+    #order-tab > li a.active{
+    color: #cb1e00; background-color: #fff
+}
+    
+.order-coin-status{     height: 40px;
+    border-bottom: 1px solid #ccc;
+    display: block;
+    background: #fff;
+    margin-top: 46px;}
+.display1{ font-size: 1.02rem;}
+.order-quotes-wrap{ height: calc(100% - 145px); overflow-x: scroll}
+.order-quotes-wrap table tr:first-child td{ border-top: none}
+.order-quotes-wrap table tr td:first-child{ border-left: none}
+.order-quotes-wrap table tr td{ padding: 7px !important;}
+#quotes-sell tr:first-child td{ border-top: none }
+#coinStatus tr:first-child th{ border-top: none }
+#coinStatus tr:first-child td{ border-top: none }
+#quotes-buy td:first-child{ border-left: none}

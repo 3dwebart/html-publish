@@ -1,0 +1,234 @@
+
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+<title> </title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" media="all" href="css/common.css">
+<link rel="stylesheet" media="all" href="css/common_m.css">
+<link rel="stylesheet" media="all" href="css/custom.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<style>
+.table th, .table td {
+	white-space: nowrap;
+}
+</style>
+</head>
+<body class="flex-normal">
+<!-- BIGIN :: Mobile navigation -->
+<div id="panel-list" class="h-100 panel-bg w-100 ">
+	<ul class="list-group list-group-flush font-weight-light">
+		<li class="list-group-item color64a">
+			<i class="fas fa-user-astronaut align-middle" style="font-size: 22px;"></i> 게스트
+			<button type="button" class="btn btn-outline-light btn-sm font-12 d-inline btn-round"> 로그아웃</button>  
+			<button type="button" class="close text-light" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'">로그인</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'">회원가입</button>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item"><a href="trade.html" class="trade"> 거래소 </a></li>
+		<li class="list-group-item">
+			<a href="presence.html" class="invest">거래내역 </a>
+			<span class="badge badge-danger badge-pill float-right">
+				<i class="far fa-bell align-middle" style="font-size: 13px;"></i> 14
+			</span>
+		</li>
+		<li class="list-group-item"><a href="balances.html" class="cashout">입출금 </a></li>
+		<li class="list-group-item"><a href="verificationcenter.html" class="mypage">마이페이지</a></li>
+		<li class="list-group-item"><a href="m_notice.html" class="customer">고객센터 </a></li>
+		<li class="list-group-item">
+			<!-- BIGIN :: 언어선택 -->
+			<div class="dropdown">
+				<a class="btn btn-outline-light dropdown-toggle btn-sm w-100 border-light-blue align-middle" href="#" role="button" id="selectLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-globe" style="font-size: 17px;"></i>
+					KOR
+				</a>
+				<div class="dropdown-menu w-100" aria-labelledby="selectLang">
+					<a class="dropdown-item" href="#">KOR</a>
+					<a class="dropdown-item" href="#">ENG</a>
+					<a class="dropdown-item" href="#">CHN</a>
+				</div>
+			</div>
+			<!-- END :: 언어선택 -->
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-twitter" style="font-size: 20px;"></i>
+					</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-facebook-f " style="font-size: 20px;"></i>
+					</button>
+				</div>
+			</div>
+		</li>
+		<div class="text-light p-3">
+			<a class="btn btn-outline-light2 btn-block color64a text-uppercase" id="show-hide-info-btn" data-toggle="collapse" href="#footer-content" role="button" aria-expanded="false" aria-controls="footer-content">
+				<span class="show-hide">show</span> information
+				<i class="fas fa-angle-down"></i>
+			</a>
+			<div class="color64a mt-3">
+				Copyright 2018ⓒPOPCON.All rights reserved.
+			</div>
+			<div class="collapse" id="footer-content">
+				<div class="card card-body bg-transparent color64a p-0 border-0">
+					고객센터 02-400-5651 <br>
+					서울시 송파구 중대로 109. 대동빌딩 12층 <br>
+					골든퓨쳐스 대표자 : 이수식 <br>
+					사업자등록번호 791-81-00992<br>
+					운영시간 평일 09:00~18:00
+				</div>
+			</div>
+		</div>
+	</ul>
+</div>
+<!-- END :: Mobile navigation -->
+<!-- BIGIN :: GNB-->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</nav>
+<!--END :: GNB-->
+<!-- BIGIN :: container -->
+<div id="" class="container submenu-container bigin-m my-3">
+	<div class="row">
+		<div class="col-sm-12 d-md-block">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="shadow-sm p-3 mb-4 bg-white rounded">
+						<h5 class="d-inline d-block">
+							<span class="float-left mr-2"><img src="img/coin/BTC.svg" width="20" height="20"></span>
+							<a class="dropdown-toggle text-dark nounderline font-16" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">비트코인 (BTC)</a>
+							<div id="ctype-drop" class="dropdown-menu font-12 shadow">
+								<a class="dropdown-item" href="#">비트코인캐시 (BTCC) </a>
+								<a class="dropdown-item" href="#">에테리움 (ETH)</a>
+								<a class="dropdown-item" href="#">이오스 (EOS)</a>
+								<a class="dropdown-item" href="#">비트코인캐시 (BTCC) </a>
+								<a class="dropdown-item" href="#">에테리움 (ETH)</a>
+								<a class="dropdown-item" href="#">이오스 (EOS)</a>
+								<a class="dropdown-item" href="#">비트코인캐시 (BTCC) </a>
+								<a class="dropdown-item" href="#">에테리움 (ETH)</a>
+								<a class="dropdown-item" href="#">이오스 (EOS)</a>
+								<a class="dropdown-item" href="#">비트코인캐시 (BTCC) </a>
+								<a class="dropdown-item" href="#">에테리움 (ETH)</a>
+								<a class="dropdown-item" href="#">이오스 (EOS)</a>
+							</div>  
+							<span class="text-primary pl-2 font-15">7,295,000 </span>  <small class="text-muted  font-14">KRW </small>
+						</h5>
+						<h6 class="d-inline pl-4 text-danger font-14">7,355,000 <small class="text-muted">고가 </small> </h6>
+						<h6 class="d-inline pl-4 text-primary font-14">7,355,000 <small class="text-muted">저가 </small> </h6>
+						<h6 class="d-inline pl-4 text-danger font-14 d-block">
+							<i class="fas fa-sort-up"></i> 130,314 <small class="text-muted">1.81% </small>
+						</h6>
+					</div>
+				</div>
+				<!--코인 현재가-->
+
+				<div class="col-sm-12">
+					<!-- BIGIN ::CHART-->
+					<div class="shadow-sm p-3 mb-4 bg-white rounded min-height300">
+						<!-- TradingView Widget BEGIN -->
+						<div class="tradingview-widget-container">
+							<div id="tradingview_30702"></div>
+
+							<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+							<script type="text/javascript">
+								new TradingView.widget({
+									"autosize": true,
+									"symbol": "COINBASE:BTCUSD",
+									"interval": "D",
+									"timezone": "Etc/UTC",
+									"theme": "Light",
+									"style": "1",
+									"locale": "kr",
+									"toolbar_bg": "#f1f3f6",
+									"enable_publishing": false,
+									"allow_symbol_change": true,
+									"container_id": "tradingview_30702"
+								});
+							</script>
+						</div>
+						<!-- TradingView Widget END -->
+					</div>
+					<!--END :: CHART-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END :: container -->    
+<!--MOBILE bottom nav -->
+<div class="mobile-nav-bottom">
+	<ul>
+		<li><a class="mobile-nav-market" href="#">거래소</a></li>
+		<li><a class="mobile-nav-invest active" href="#">거래내역</a></li>
+		<li><a class="mobile-nav-cashout" href="#">입출금</a></li>
+		<li><a class="mobile-nav-mypage" href="#">마이페이지 </a></li>
+	</ul>
+</div>
+<!--END MOBILE bottom nav -->
+<!-- BIGIN :: Modal -->
+<div class="modal fade" id="policy_content" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalCenterTitle">팝콘 이용약관</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+			 대법원은 15일 "김 대법원장이 오늘 대국민 담화문 형식으로 사법행정권 남용행위 관련자들에 대한 형사상 조치에 관한 입장을 발표할 예정"이라고 밝혔다. 정확한 발표 시각은 아직 정해지지 않았다.
+
+				이 의혹은 양승태 전 대법원장 시절 법원행정처가 박근혜 정부 청와대로부터 상고법원 도입에 관한 협조를 얻기 위해 특정 재판을 협상 카드로 삼아 거래를 시도한 정황이 담긴 문건이 최근 대법원 특별조사단 조사에서 발견되면서 불거졌다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END :: Modal --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/MobileMainNavSubNav.js"></script>
+<script>
+$(function () {
+	// $(window).on("load",function(){
+	// 	$(".ctype-maxheight").mCustomScrollbar({
+	// 		scrollButtons:{enable:true,scrollType:"stepped"},
+	// 		keyboard:{scrollType:"stepped"},
+	// 		mouseWheel:{scrollAmount:188},
+	// 		theme:"rounded-dark",
+	// 		autoExpandScrollbar:true,
+	// 		snapAmount:188,
+	// 		snapOffset:65
+	// 	});
+	// });
+	var fullWidth = $(document).height() - 236;
+	$('div[id^="tradingview_"]').height(fullWidth);
+});
+</script>  
+</body>
+</html>

@@ -18,6 +18,7 @@
 			<div><a href="#default-Preferences">기본 횐경</a></div>
 			<div><a href="#top-menu-guide">상단메뉴 가이드</a></div>
 			<h4 class="device mobile my4"><span>Mobile</span></h4>
+			<div><a href="#m-main-nav">모바일 메인 메뉴</a></div>
 			<div><a href="#m-sub-nav">모바일 서브 메뉴</a></div>
 			<div><a href="#tab">탭 메뉴</a></div>
 			<div><a href="#accordian">아코디언 메뉴</a></div>
@@ -120,6 +121,214 @@
 				<pre><!--
 					--><code class="html"><!--
 						-->&lt;i class="fas fa-user-circle fa-2x align-middle"&gt;&lt;i&gt;<!--
+					--></code><!--
+				--></pre>
+			</div>
+			<div>
+				<span>
+					<strong id="m-main-nav" class="title"><span>Mobile main navigation</span></strong>
+				</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-main-nav1.png" alt="상단 메뉴 이미지" title="상단 메뉴 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">기본 Bootstrap의 변경 및 추가 CSS</span>
+				<pre class="mb-0"><!--
+					--><code class="css"><!--
+						-->.navbar-dark .navbar-toggler {
+	border-color: #bcf8ff;
+}
+.navbar-toggler {
+	padding: 0.20rem;
+	border: none;
+}
+button {
+	font-weight: 300 !important;
+}<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-grey">버튼 클릭시 왼쪽에서 오른쪽으로 메뉴애니메이션 되면서 나옴</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-main-nav2.png" alt="모바일 메뉴 이미지" title="모바일 메뉴 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">기본 Bootstrap의 변경 및 추가 CSS</span>
+				<pre class="mb-0"><!--
+					--><code class="css"><!--
+						-->#panel-list.open {
+	left: 0;
+	transition: all .3s ease;
+}
+#panel-list {
+	position: fixed;
+	top: 0;
+	left: -100%;
+	z-index: 1999;
+	transition: all .3s ease;
+	overflow-y: auto;
+}
+.panel-bg {
+	background-color: #003358 !important;
+	background: url(../img/common/mobile_panel_bg.png) 50% 20% no-repeat;
+}
+.color64a {
+	color: #64a9dc !important;
+}
+.list-group-item {
+	background-color: transparent;
+	border-color: #3e8cc5 !important;
+	color: #fff !important;
+	font-size: 14px;
+	position: relative;
+	min-height: 47px;
+}
+.btn-round {
+	padding: 0.25rem 0.5rem;
+	font-size: 0.8rem;
+	line-height: 1.5;
+	border-radius: 1rem;
+	font-weight: 100 !important;
+}
+.font-12 {
+	font-size: 12px;
+}<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">HTML</span>
+				<pre class="mb-0"><!--
+					--><code class="html"><!--
+						-->&lt;!-- BIGIN :: Mobile navigation --&gt;
+&lt;div id="panel-list" class="h-100 panel-bg w-100 "&gt;
+	&lt;ul class="list-group list-group-flush font-weight-light"&gt;
+		&lt;li class="list-group-item color64a"&gt;
+			&lt;i class="fas fa-user-astronaut align-middle" style="font-size: 22px;"&gt;&lt;/i&gt; 게스트
+			&lt;button type="button" class="btn btn-outline-light btn-sm font-12 d-inline btn-round"&gt; 로그아웃&lt;/button&gt;  
+			&lt;button type="button" class="close text-light" aria-label="Close"&gt;
+				&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;
+			&lt;/button&gt;
+		&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;
+			&lt;div class="row"&gt; 
+				&lt;div class="col"&gt;
+					&lt;button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'"&gt;로그인&lt;/button&gt;
+				&lt;/div&gt;
+				&lt;div class="col"&gt;
+					&lt;button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'"&gt;회원가입&lt;/button&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;&lt;a href="trade.html" class="trade"&gt; 거래소 &lt;/a&gt;&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;
+			&lt;a href="presence.html" class="invest"&gt;거래내역 &lt;/a&gt;
+			&lt;span class="badge badge-danger badge-pill float-right"&gt;
+				&lt;i class="far fa-bell align-middle" style="font-size: 13px;"&gt;&lt;/i&gt; 14
+			&lt;/span&gt;
+		&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;&lt;a href="balances.html" class="cashout"&gt;입출금 &lt;/a&gt;&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;&lt;a href="verificationcenter.html" class="mypage"&gt;마이페이지&lt;/a&gt;&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;&lt;a href="m_notice.html" class="customer"&gt;고객센터 &lt;/a&gt;&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;
+			&lt;!-- BIGIN :: 언어선택 --&gt;
+			&lt;div class="dropdown"&gt;
+				&lt;a class="btn btn-outline-light dropdown-toggle btn-sm w-100 border-light-blue align-middle" href="#" role="button" id="selectLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+					&lt;i class="fas fa-globe" style="font-size: 17px;"&gt;&lt;/i&gt;
+					KOR
+				&lt;/a&gt;
+				&lt;div class="dropdown-menu w-100" aria-labelledby="selectLang"&gt;
+					&lt;a class="dropdown-item" href="#"&gt;KOR&lt;/a&gt;
+					&lt;a class="dropdown-item" href="#"&gt;ENG&lt;/a&gt;
+					&lt;a class="dropdown-item" href="#"&gt;CHN&lt;/a&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;!-- END :: 언어선택 --&gt;
+		&lt;/li&gt;
+		&lt;li class="list-group-item"&gt;
+			&lt;div class="row"&gt; 
+				&lt;div class="col"&gt;
+					&lt;button type="button" class="btn btn-primary w-100 panel-sns-link"&gt;
+						&lt;i class="fab fa-twitter" style="font-size: 20px;"&gt;&lt;/i&gt;
+					&lt;/button&gt;
+				&lt;/div&gt;
+				&lt;div class="col"&gt;
+					&lt;button type="button" class="btn btn-primary w-100 panel-sns-link"&gt;
+						&lt;i class="fab fa-facebook-f " style="font-size: 20px;"&gt;&lt;/i&gt;
+					&lt;/button&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/li&gt;
+		&lt;div class="text-light p-3"&gt;
+			&lt;a class="btn btn-outline-light2 btn-block color64a text-uppercase" id="show-hide-info-btn" data-toggle="collapse" href="#footer-content" role="button" aria-expanded="false" aria-controls="footer-content"&gt;
+				&lt;span class="show-hide"&gt;show&lt;/span&gt; information
+				&lt;i class="fas fa-angle-down"&gt;&lt;/i&gt;
+			&lt;/a&gt;
+			&lt;div class="color64a mt-3"&gt;
+				Copyright 2018ⓒPOPCON.All rights reserved.
+			&lt;/div&gt;
+			&lt;div class="collapse" id="footer-content"&gt;
+				&lt;div class="card card-body bg-transparent color64a p-0 border-0"&gt;
+					고객센터 02-400-5651 &lt;br&gt;
+					서울시 송파구 중대로 109. 대동빌딩 12층 &lt;br&gt;
+					골든퓨쳐스 대표자 : 이수식 &lt;br&gt;
+					사업자등록번호 791-81-00992&lt;br&gt;
+					운영시간 평일 09:00~18:00
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!-- END :: Mobile navigation --&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">언어선택을 버튼 클릭</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-main-nav3.png" alt="모바일 메뉴 중 언어 선택 클릭 화면 이미지" title="모바일 메뉴 중 언어 선택 클릭 화면 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">드롭다운 메뉴로 언어 선택 가능</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-main-nav4.png" alt="모바일 메뉴 중 언어 선택 화면 이미지" title="모바일 메뉴 중 언어 선택 화면 이미지" class="img-fluid">
+				</div>
+				<span class="label label-info">카피라이터 정보 더 보기 버튼 클릭</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-main-nav5.png" alt="모바일 회사 정보 더보기 버튼" title="모바일 회사 정보 더보기 버튼" class="img-fluid">
+				</div>
+				<span class="label label-info">카피라이터 정보 확장</span>
+				<div class="my-3">
+					<img src="img-css-guide/m-main-nav6.png" alt="모바일 회사 정보 확장" title="모바일 회사 정보 확장" class="img-fluid">
+				</div>
+				<span class="label label-info">모바일 메뉴 및 드롭다운 등 추가 스크립트</span>
+				<span class="label label-grey">스크립트 링크</span>
+				<pre class="mb-0"><!--
+					--><code class="html"><!--
+						-->&lt;script src="js/MobileMainNavSubNav.js"&gt;&lt;/script&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">MobileMainNavSubNav.js 내용</span>
+				<pre class="mb-0"><!--
+					--><code class="js"><!--
+						-->(function($) {
+	$('[data-toggle="offcanvas"]').on('click', function () {
+		$('#panel-list').addClass('open');
+	});
+	$('.close').on('click', function () {
+		$('#panel-list').removeClass('open');
+	});
+	var x = 0;
+	$('#show-hide-info-btn').on('click', function () {
+		x = (x - 1) * -1;
+		if(x == 0) {
+			$(this).find('.show-hide').text('show');
+			$(this).find('.fas').attr('class', 'fas fa-angle-down');
+		} else {
+			$(this).find('.show-hide').text('hide');
+			$(this).find('.fas').attr('class', 'fas fa-angle-up');
+		}
+	});
+	$('.dropdown').on('show.bs.dropdown', function(e){
+		$(this).find('.dropdown-menu').first().stop(true, true).slideDown(300);
+	});
+
+	$('.dropdown').on('hide.bs.dropdown', function(e){
+		$(this).find('.dropdown-menu').first().stop(true, true).slideUp(200);
+	});
+})(jQuery);<!--
 					--></code><!--
 				--></pre>
 			</div>

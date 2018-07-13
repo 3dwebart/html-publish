@@ -119,12 +119,6 @@
 	}
 }
 
-@media(max-width: 340px) {
-	.navbar-toggler {
-		margin-right: 30px;
-	}
-}
-
 /* BIGIN :: pagenation */
 .page-item.active .page-link {
 		z-index: 1;

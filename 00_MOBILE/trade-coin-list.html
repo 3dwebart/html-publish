@@ -1,0 +1,370 @@
+
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+<title> </title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" media="all" href="css/common.css">
+<link rel="stylesheet" media="all" href="css/common_m.css">
+<link rel="stylesheet" media="all" href="css/custom.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<style>
+.table th, .table td {
+  white-space: nowrap;
+}
+</style>
+</head>
+<body class="flex-normal">
+<!-- BIGIN :: Mobile navigation -->
+<div id="panel-list" class="h-100 panel-bg w-100 ">
+	<ul class="list-group list-group-flush font-weight-light">
+		<li class="list-group-item color64a">
+			<i class="fas fa-user-astronaut align-middle" style="font-size: 22px;"></i> 게스트
+			<button type="button" class="btn btn-outline-light btn-sm font-12 d-inline btn-round"> 로그아웃</button>  
+			<button type="button" class="close text-light" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'">로그인</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'">회원가입</button>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item"><a href="trade.html" class="trade"> 거래소 </a></li>
+		<li class="list-group-item">
+			<a href="presence.html" class="invest">거래내역 </a>
+			<span class="badge badge-danger badge-pill float-right">
+				<i class="far fa-bell align-middle" style="font-size: 13px;"></i> 14
+			</span>
+		</li>
+		<li class="list-group-item"><a href="balances.html" class="cashout">입출금 </a></li>
+		<li class="list-group-item"><a href="verificationcenter.html" class="mypage">마이페이지</a></li>
+		<li class="list-group-item"><a href="m_notice.html" class="customer">고객센터 </a></li>
+		<li class="list-group-item">
+			<!-- BIGIN :: 언어선택 -->
+			<div class="dropdown">
+				<a class="btn btn-outline-light dropdown-toggle btn-sm w-100 border-light-blue align-middle" href="#" role="button" id="selectLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-globe" style="font-size: 17px;"></i>
+					KOR
+				</a>
+				<div class="dropdown-menu w-100" aria-labelledby="selectLang">
+					<a class="dropdown-item" href="#">KOR</a>
+					<a class="dropdown-item" href="#">ENG</a>
+					<a class="dropdown-item" href="#">CHN</a>
+				</div>
+			</div>
+			<!-- END :: 언어선택 -->
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-twitter" style="font-size: 20px;"></i>
+					</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-facebook-f " style="font-size: 20px;"></i>
+					</button>
+				</div>
+			</div>
+		</li>
+		<div class="text-light p-3">
+			<a class="btn btn-outline-light2 btn-block color64a text-uppercase" id="show-hide-info-btn" data-toggle="collapse" href="#footer-content" role="button" aria-expanded="false" aria-controls="footer-content">
+				<span class="show-hide">show</span> information
+				<i class="fas fa-angle-down"></i>
+			</a>
+			<div class="color64a mt-3">
+				Copyright 2018ⓒPOPCON.All rights reserved.
+			</div>
+			<div class="collapse" id="footer-content">
+				<div class="card card-body bg-transparent color64a p-0 border-0">
+					고객센터 02-400-5651 <br>
+					서울시 송파구 중대로 109. 대동빌딩 12층 <br>
+					골든퓨쳐스 대표자 : 이수식 <br>
+					사업자등록번호 791-81-00992<br>
+					운영시간 평일 09:00~18:00
+				</div>
+			</div>
+		</div>
+	</ul>
+</div>
+<!-- END :: Mobile navigation -->
+<!-- BIGIN :: GNB-->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</nav>
+<!--END :: GNB-->
+<div id="m-container" class="container submenu-container bigin-m py-3">
+	<div class="row">
+		<!-- BIGIN :: coin list-->
+		<div class="col-md-4">
+			<div class="shadow-sm p-3 mb-4 bg-white rounded text-truncate">
+				<!-- BIGIN :: coin Search -->
+				<div class="input-group search-icon mb-3">
+					<input type="text" class="form-control" placeholder="코인명 / 심볼검색" aria-label="Username" aria-describedby="basic-addon1" />
+			 		<span class="fa fa-search form-control-feedback"> </span>
+				</div>
+		  		<!-- END :: coin Search -->
+				<div class="col p-0">
+					<nav>
+						<div class="nav nav-tabs tab-col5" id="ctype-trade-tab" role="tablist">
+							<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#trade-won" role="tab" aria-controls="nav-home" aria-selected="true">원화거래</a>
+							<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#trade-btc" role="tab" aria-controls="nav-profile" aria-selected="false">BTC</a>
+							<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#trade-eth" role="tab" aria-controls="nav-contact" aria-selected="false">ETH</a>
+							<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#trade-usdt" role="tab" aria-controls="nav-contact" aria-selected="false">USDT</a>
+							<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#my-asset" role="tab" aria-controls="nav-contact" aria-selected="false">보유코인</a>
+						</div>
+					</nav>
+					<!--BIGIN :: tab content-->
+					<div class="tab-content" id="nav-tabContent">
+						<!-- BIGIN :: 원화거래 -->
+						<div class="tab-pane fade show active" id="trade-won" role="tabpanel" aria-labelledby="nav-home-tab">
+							<table class="table ctype-table-title mb-0">
+								<colgroup>
+									<col width="100">
+									<col width="*">
+									<col width="90">
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col" class="text-center">코인명</th>
+										<th scope="col" class="text-center">현재가</th>
+										<th scope="col" class="text-center">전일대비</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+							<div class="ctype-maxheight">
+								<table class="table table-hover ctype-table">
+									<colgroup>
+										<col width="">
+										<col width="">
+										<col width="">
+									</colgroup>
+									<tbody>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BTC.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BCH.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인캐시<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/ETC.svg" width="20" height="20"></span>
+												<span class="float-left"> 에테리움<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/EOS.svg" width="20" height="20"></span>
+												<span class="float-left"> 이오스<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/REP-alt.svg" width="20" height="20"></span>
+												<span class="float-left"> 리플<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BTC.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BCH.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인캐시<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/ETC.svg" width="20" height="20"></span>
+												<span class="float-left"> 에테리움<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/EOS.svg" width="20" height="20"></span>
+												<span class="float-left"> 이오스<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/REP-alt.svg" width="20" height="20"></span>
+												<span class="float-left"> 리플<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+											
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BTC.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BCH.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인캐시<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/ETC.svg" width="20" height="20"></span>
+												<span class="float-left"> 에테리움<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/EOS.svg" width="20" height="20"></span>
+												<span class="float-left"> 이오스<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/REP-alt.svg" width="20" height="20"></span>
+												<span class="float-left"> 리플<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BTC.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/BCH.svg" width="20" height="20"></span>
+												<span class="float-left"> 비트코인캐시<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/ETC.svg" width="20" height="20"></span>
+												<span class="float-left"> 에테리움<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/EOS.svg" width="20" height="20"></span>
+												<span class="float-left"> 이오스<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+										<tr>
+											<td>
+												<span class="float-left m-1"><img src="img/coin/REP-alt.svg" width="20" height="20"></span>
+												<span class="float-left"> 리플<em class="d-block"> BTC/KRW</em></span> 	</td>
+											<td class="align-middle">7,348,000</td>
+											<td class="text-primary align-middle">0.00%</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--scroll wrap-->
+						</div>
+						<!-- END :: 원화거래-->
+
+						<!-- BIGIN :: 비트코인거래 -->
+						<div class="tab-pane fade" id="trade-btc" role="tabpanel" aria-labelledby="nav-home-tab"> 
+							비트코인거래
+						</div>
+						<!-- END :: 비트코인거래 -->
+				   
+						<!-- BIGIN :: 에테리움거래 -->
+						<div class="tab-pane fade" id="trade-eth" role="tabpanel" aria-labelledby="nav-home-tab"> 
+							ETH
+						</div>
+						<!-- END :: 에테리움거래 -->
+
+						<!-- BIGIN :: usdt거래 -->
+						<div class="tab-pane fade" id="trade-usdt" role="tabpanel" aria-labelledby="nav-home-tab"> 
+							usdt
+						</div>
+						<!-- END :: usdt거래 -->
+
+						<!-- BIGIN 보유코인 -->
+						<div class="tab-pane fade" id="my-asset" role="tabpanel" aria-labelledby="nav-home-tab"> 
+							보유코인
+						</div>
+						<!-- END :: 보유코인 -->
+					</div>
+					<!--END :: tab content-->
+				</div>
+			</div>
+		</div>
+		<!-- END :: coin list-->
+	</div>
+</div>
+<!-- END :: container -->
+<!--MOBILE bottom nav -->
+<div class="mobile-nav-bottom">
+	<ul>
+		<li><a class="mobile-nav-market" href="#">거래소</a></li>
+		<li><a class="mobile-nav-invest active" href="#">거래내역</a></li>
+		<li><a class="mobile-nav-cashout" href="#">입출금</a></li>
+		<li><a class="mobile-nav-mypage" href="#">마이페이지 </a></li>
+	</ul>
+</div>
+<!--END MOBILE bottom nav -->
+<script>
+$(function() {
+	$(window).on("load",function() {
+		$(".ctype-maxheight").mCustomScrollbar({
+			scrollButtons:{enable:true,scrollType:"stepped"},
+			keyboard:{scrollType:"stepped"},
+			mouseWheel:{scrollAmount:188},
+			theme:"rounded-dark",
+			autoExpandScrollbar:true,
+			snapAmount:188,
+			snapOffset:65
+		});
+	});
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/MobileMainNavSubNav.js"></script>
+</body>
+</html>

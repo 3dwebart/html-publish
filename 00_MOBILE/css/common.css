@@ -392,7 +392,7 @@ a {
 .footer-left span{ width: 2px; height: 12px; display: inline-block; background: #abd2ee; margin: 0 2px; }
 .footer-right{ float: right; padding-top: 30px; min-width: 550px;}
 .footer-right li{ float: left; width: 33.33333333333333%; list-style: none;}
-    .footer-right li:last-child{ margin-top: 30px;}
+.footer-right li:last-child{ margin-top: 30px;}
 .footer-right li a{color: #abd2ee; }
 .footer-right h5{ color: #fff; font-size: 12px; padding: 0; margin: 0 0 5px 0;}
 .footer-right .ico-fb{ width: 31px; height: 31px; background: url(../img/common/footer_ico_facebook.png) no-repeat; display: block; margin: 0 10px 0 0; float: left;}
@@ -531,3 +531,9 @@ a {
 #coinStatus tr:first-child th{ border-top: none }
 #coinStatus tr:first-child td{ border-top: none }
 #quotes-buy td:first-child{ border-left: none}
+
+.dropdown-menu .dropdown-item:active {
+  color: #fff;
+  background-color: #545b62;
+  border-color: #4e555b;
+}

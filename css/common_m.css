@@ -531,18 +531,18 @@ a{color: #565656;
 }
 /* END :: Bootstrap tab nav */
 /* END :: Bootstrap accordian nav */
-.tab-content .tab-pane .card {
+.faq .card {
     border-top: 0;
 }
-.tab-content .tab-pane .card:first-child {
+.faq .card:first-child {
     border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
-.tab-content .tab-pane .card .card-header {
+.faq .card .card-header {
 	padding-left: 0;
 	padding-right: 0;
 	background-color: #ffffff;
 }
-.tab-content .tab-pane .card .card-header h5 button {
+.faq .card .card-header h5 button {
 	padding-left: 40px;
     background: url("../img/common/icon_faq_q.png") 13px 4px no-repeat;
     text-decoration: none;
@@ -552,11 +552,11 @@ a{color: #565656;
     white-space: normal;
     text-align: left;
 }
-.tab-content .tab-pane .card .card-header h5 button:hover {
+.faq .card .card-header h5 button:hover {
 	text-decoration: none;
 	color: #333333;
 }
-.tab-content .tab-pane .card .card-body {
+.faq .card .card-body {
 	background-color: #f8f8f8;
 	font-weight: normal;
 	font-size: 14px;

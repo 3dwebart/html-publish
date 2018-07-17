@@ -205,7 +205,7 @@
 	padding-right: 0;
 	background-color: #ffffff;
 }
-.faq .card .card-header h5 button, .faq .card .card-header h5 button:active {
+.faq .card .card-header h5 button, .faq .card .card-header h5 button:active, .faq .card .card-header h5 button:focus {
 	padding-left: 40px;
     background: url("../img/common/icon_faq_q.png") 13px 4px no-repeat;
     text-decoration: none;
@@ -214,6 +214,7 @@
     font-size: 14px;
     white-space: normal;
     text-align: left;
+    outline: none;
 }
 .faq .card .card-header h5 button:hover {
 	text-decoration: none;

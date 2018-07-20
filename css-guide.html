@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="highlight/styles/dark.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link rel="stylesheet" media="all" href="css/common_m.css">
+<link rel="stylesheet" media="all" href="css/custom.css">
 <link rel="stylesheet" media="all" href="css/css-guide.css">
 </head>
 <body>
@@ -22,6 +23,8 @@
 			<div><a href="#m-sub-nav">모바일 서브 메뉴</a></div>
 			<div><a href="#tab">탭 메뉴</a></div>
 			<div><a href="#accordian">아코디언 메뉴</a></div>
+			<h4 class="device mobile my4"><span>Common</span></h4>
+			<div><a href="#custom-component">Custom component</a></div>
 		</article>
 		<article>
 			<div class="copy mb-4">copyright</div>
@@ -29,6 +32,8 @@
 	</section>
 	<section class="col-9">
 		<article>
+			<!-- ***** BIGIN :: PC ***** -->
+			<!-- BIGIN :: 기본 횐경 -->
 			<div>
 				<span>
 					<strong id="default-Preferences" class="title"><span>Default preferences</span></strong>
@@ -87,6 +92,8 @@
 					--></code><!--
 				--></pre>
 			</div>
+			<!-- END :: 기본 횐경 -->
+			<!-- BIGIN :: 상단메뉴 가이드 -->
 			<div>
 				<span>
 					<strong id="top-menu-guide" class="title"><span>Top menu guide</span></strong>
@@ -124,6 +131,10 @@
 					--></code><!--
 				--></pre>
 			</div>
+			<!-- END :: 상단메뉴 가이드 -->
+			<!-- ***** END :: PC ***** -->
+			<!-- ***** BIGIN :: Mobile ***** -->
+			<!-- BIGIN :: 모바일 메인 메뉴 가이드 -->
 			<div>
 				<span>
 					<strong id="m-main-nav" class="title"><span>Mobile main navigation</span></strong>
@@ -332,6 +343,8 @@ button {
 					--></code><!--
 				--></pre>
 			</div>
+			<!-- END :: 모바일 메인 메뉴 가이드 -->
+			<!-- BIGIN :: 모바일 서브 메뉴 가이드 -->
 			<div>
 				<span>
 					<strong id="m-sub-nav" class="title"><span>Mobile sub navigation</span></strong>
@@ -433,6 +446,8 @@ button {
 					--></code><!--
 				--></pre>
 			</div>
+			<!-- END :: 모바일 서브 메뉴 가이드 -->
+			<!-- BIGIN :: 모바일 탭 메뉴 가이드 -->
 			<div>
 				<span>
 					<strong id="tab" class="title"><span>TAB</span></strong>
@@ -519,6 +534,8 @@ button {
 					--></code><!--
 				--></pre>
 			</div>
+			<!-- END :: 모바일 탭 메뉴 가이드 -->
+			<!-- BIGIN :: 모바일 아코디언 메뉴 가이드 -->
 			<div>
 				<span>
 					<strong id="accordian" class="title"><span>Faq Accordian</span></strong>
@@ -778,6 +795,360 @@ button {
 					--></code><!--
 				--></pre>
 			</div>
+			<!-- END :: 모바일 아코디언 메뉴 가이드 -->
+			<!-- ***** END :: Mobile ***** -->
+			<!-- ***** BIGIN :: Common ***** -->
+			<!-- BIGIN :: 컴포넘트 모음 가이드 -->
+			<div>
+				<span>
+					<strong id="custom-component" class="title"><span>Custom component</span></strong>
+				</span>
+				<!-- BIGIN :: label -->
+				<div class="my-3">
+					<div class="label label-info">preview label</div>
+				</div>
+				<div class="my-3">
+					<div class="row">
+						<div class="col-6">
+							<div class="label label-info">label-info</div>
+						</div>
+						<div class="col-6">
+							<div class="label label-grey">label-grey</div>
+						</div>
+						<div class="col-6 my-2">
+							<div class="label label-success">label-success</div>
+						</div>
+						<div class="col-6 my-2">
+							<div class="label label-warning">label-warning</div>
+						</div>
+						<div class="col-6">
+							<div class="label label-danger">label-danger</div>
+						</div>
+						<div class="col-6">
+							<div class="label label-purple">label-purple</div>
+						</div>
+					</div>
+				</div>
+				<span class="label label-info">HTML</span>
+				<pre><!--
+					--><code class="html"><!--
+						-->&lt;div class="label label-info"&gt;label-info&lt;/div&gt;&lt;!-- 파란색 라벨 --&gt;
+&lt;div class="label label-grey"&gt;label-grey&lt;/div&gt;&lt;!-- 회색 라벨 --&gt;
+&lt;div class="label label-success"&gt;label-success&lt;/div&gt;&lt;!-- 그린색 라벨 --&gt;
+&lt;div class="label label-warning"&gt;label-warning&lt;/div&gt;&lt;!-- 주황색 라벨 --&gt;
+&lt;div class="label label-danger"&gt;label-danger&lt;/div&gt;&lt;!-- 빨간색 라벨 --&gt;
+&lt;div class="label label-purple"&gt;label-purple&lt;/div&gt;&lt;!-- 보라색 라벨 --&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">CSS</span>
+				<pre><!--
+					--><code class="css"><!--
+						-->.label {
+	display: block;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+.label-grey {
+	border-left-color: #666666;
+	background-color: #dedede;
+	color: #333333;
+}
+.label-info {
+	border-left-color: #035fa2;
+	background-color: #b1d4fb;
+	color: #163d5a;
+}
+.label-success {
+	border-left-color: #00773c;
+	background-color: #b9f9d9;
+	color: #0c311f;
+}
+.label-warning {
+	border-left-color: #e09934;
+	background-color: #fbdbb1;
+	color: #46351c;
+}
+.label-danger {
+	border-left-color: #af1010;
+	background-color: #f6dcdc;
+	color: #331515;
+}
+.label-purple {
+	border-left-color: #5b108a;
+	background-color: #e3cbf2;
+	color: #1b0e23;
+}<!--
+					--></code><!--
+				--></pre>
+				<!-- BIGIN :: label -->
+				<!-- BIGIN :: checkbox -->
+				<div class="my-3">
+					<div class="label label-info">preview checkbox</div>
+				</div>
+				<div class="my-3">
+					<div><strong>default</strong></div>
+					<label for="chk1" class="component-checkbox default">
+						<input type="checkbox" id="chk1">
+						<span class="virtual-checkbox"></span>
+						<span class="text">체크박스 default 1</span>
+					</label>
+					<label for="chk2" class="component-checkbox default">
+						<input type="checkbox" id="chk2">
+						<span class="virtual-checkbox"></span>
+						<span class="text">체크박스 default 2</span>
+					</label>
+					<div><strong>middle</strong></div>
+					<label for="chk3" class="component-checkbox middle">
+						<input type="checkbox" id="chk3">
+						<span class="virtual-checkbox"></span>
+						<span class="text">체크박스 middle 1</span>
+					</label>
+					<label for="chk4" class="component-checkbox middle">
+						<input type="checkbox" id="chk4">
+						<span class="virtual-checkbox"></span>
+						<span class="text">체크박스 middle 2</span>
+					</label>
+					<div><strong>large</strong></div>
+					<label for="chk5" class="component-checkbox large">
+						<input type="checkbox" id="chk5">
+						<span class="virtual-checkbox"></span>
+						<span class="text">체크박스 large 1</span>
+					</label>
+					<label for="chk6" class="component-checkbox large">
+						<input type="checkbox" id="chk6">
+						<span class="virtual-checkbox"></span>
+						<span class="text">체크박스 large 2</span>
+					</label>
+				</div>
+				<span class="label label-info">HTML</span>
+				<pre><!--
+					--><code class="html"><!--
+					-->&lt;div&gt;&lt;strong&gt;default&lt;/strong&gt;&lt;/div&gt;
+&lt;label for="chk1" class="component-checkbox default"&gt;
+	&lt;input type="checkbox" id="chk1"&gt;
+	&lt;span class="virtual-checkbox"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;체크박스 default 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;label for="chk2" class="component-checkbox default"&gt;
+	&lt;input type="checkbox" id="chk2"&gt;
+	&lt;span class="virtual-checkbox"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;체크박스 default 2&lt;/span&gt;
+&lt;/label&gt;
+&lt;div&gt;&lt;strong&gt;middle&lt;/strong&gt;&lt;/div&gt;
+&lt;label for="chk3" class="component-checkbox middle"&gt;
+	&lt;input type="checkbox" id="chk3"&gt;
+	&lt;span class="virtual-checkbox"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;체크박스 middle 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;label for="chk4" class="component-checkbox middle"&gt;
+	&lt;input type="checkbox" id="chk4"&gt;
+	&lt;span class="virtual-checkbox"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;체크박스 middle 2&lt;/span&gt;
+&lt;/label&gt;
+&lt;div&gt;&lt;strong&gt;large&lt;/strong&gt;&lt;/div&gt;
+&lt;label for="chk5" class="component-checkbox large"&gt;
+	&lt;input type="checkbox" id="chk5"&gt;
+	&lt;span class="virtual-checkbox"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;체크박스 large 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;label for="chk6" class="component-checkbox large"&gt;
+	&lt;input type="checkbox" id="chk6"&gt;
+	&lt;span class="virtual-checkbox"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;체크박스 large 2&lt;/span&gt;
+&lt;/label&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">CSS - checkbox-only</span>
+				<pre><!--
+					--><code class="css"><!--
+					-->/* BIGIN :: checkbox component */
+label.component-checkbox .virtual-checkbox {
+	position: relative;
+	display: block;
+	border: 1px solid #333;
+	float: left;
+	margin: 4px 10px 0 0;
+}
+label.component-checkbox .virtual-checkbox:after {
+	content: "\2713";
+	font-weight: bold;
+	/*outline: 1px solid #ffffff;*/
+	color: #333333;
+	text-shadow:
+   -1px -1px 0 #fff,  
+	1px -1px 0 #fff,
+	-1px 1px 0 #fff,
+	 1px 1px 0 #fff;
+	position: absolute;
+	opacity: 0;
+	transition: all .3s ease;
+}
+label.component-checkbox.default .virtual-checkbox:after {
+	font-size: 16px;
+	left: 1px;
+	top: -8px;
+}
+label.component-checkbox.middle .virtual-checkbox:after {
+	font-size: 22px;
+	left: 2px;
+	top: -11px;
+}
+label.component-checkbox.large .virtual-checkbox:after {
+	font-size: 30px;
+	left: 3px;
+	top: -16px;
+}
+label.component-checkbox input[type="checkbox"]:checked + span.virtual-checkbox:after {
+	opacity: 1;
+	transition: all .3s ease;
+}
+/* END :: checkbox component */<!--
+					--></code><!--
+				--></pre>
+				<!-- END :: checkbox -->
+				<!-- BIGIN :: radio buttton -->
+				<div class="my-3">
+					<div class="label label-info">preview radio button</div>
+				</div>
+				<div class="my-3">
+					<div><strong>default</strong></div>
+					<label for="radio1" class="component-radio default">
+						<input type="radio" name="radio" id="radio1">
+						<span class="virtual-radio"></span>
+						<span class="text">라디오버튼 default 1</span>
+					</label>
+					<label for="radio2" class="component-radio default">
+						<input type="radio" name="radio" id="radio2">
+						<span class="virtual-radio"></span>
+						<span class="text">라디오버튼 default 2</span>
+					</label>
+					<div><strong>middle</strong></div>
+					<label for="radio3" class="component-radio middle">
+						<input type="radio" name="radio-m" id="radio3">
+						<span class="virtual-radio"></span>
+						<span class="text">라디오버튼 middle 1</span>
+					</label>
+					<label for="radio4" class="component-radio middle">
+						<input type="radio" name="radio-m" id="radio4">
+						<span class="virtual-radio"></span>
+						<span class="text">라디오버튼 middle 2</span>
+					</label>
+					<div><strong>large</strong></div>
+					<label for="radio5" class="component-radio large">
+						<input type="radio" name="radio-l" id="radio5">
+						<span class="virtual-radio"></span>
+						<span class="text">라디오버튼 large 1</span>
+					</label>
+					<label for="radio6" class="component-radio large">
+						<input type="radio" name="radio-l" id="radio6">
+						<span class="virtual-radio"></span>
+						<span class="text">라디오버튼 large 2</span>
+					</label>
+				</div>
+				<span class="label label-info">HTML</span>
+				<pre><!--
+					--><code class="html"><!--
+					-->&lt;div&gt;&lt;strong&gt;default&lt;/strong&gt;&lt;/div&gt;
+&lt;label for="radio1" class="component-radio default"&gt;
+	&lt;input type="radio" name="radio" id="radio1"&gt;
+	&lt;span class="virtual-radio"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;라디오버튼 default 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;label for="radio2" class="component-radio default"&gt;
+	&lt;input type="radio" name="radio" id="radio2"&gt;
+	&lt;span class="virtual-radio"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;라디오버튼 default 2&lt;/span&gt;
+&lt;/label&gt;
+&lt;div&gt;&lt;strong&gt;middle&lt;/strong&gt;&lt;/div&gt;
+&lt;label for="radio3" class="component-radio middle"&gt;
+	&lt;input type="radio" name="radio-m" id="radio3"&gt;
+	&lt;span class="virtual-radio"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;라디오버튼 middle 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;label for="radio4" class="component-radio middle"&gt;
+	&lt;input type="radio" name="radio-m" id="radio4"&gt;
+	&lt;span class="virtual-radio"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;라디오버튼 middle 2&lt;/span&gt;
+&lt;/label&gt;
+&lt;div&gt;&lt;strong&gt;large&lt;/strong&gt;&lt;/div&gt;
+&lt;label for="radio5" class="component-radio large"&gt;
+	&lt;input type="radio" name="radio-l" id="radio5"&gt;
+	&lt;span class="virtual-radio"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;라디오버튼 large 1&lt;/span&gt;
+&lt;/label&gt;
+&lt;label for="radio6" class="component-radio large"&gt;
+	&lt;input type="radio" name="radio-l" id="radio6"&gt;
+	&lt;span class="virtual-radio"&gt;&lt;/span&gt;
+	&lt;span class="text"&gt;라디오버튼 large 2&lt;/span&gt;
+&lt;/label&gt;<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">CSS - radio button only</span>
+				<pre><!--
+					--><code class="css"><!--
+					-->/* BIGIN :: radio component */
+label.component-radio .virtual-radio {
+	position: relative;
+	display: block;
+	border: 1px solid #333;
+	border-radius: 50%;
+	float: left;
+	margin: 4px 10px 0 0;
+}
+label.component-radio .virtual-radio:after {
+	content: "";
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background-color: #333333;
+	opacity: 0;
+	transition: all .3s ease;
+}
+label.component-radio input[type="radio"]:checked + span.virtual-radio:after {
+	opacity: 1;
+	transition: all .3s ease;
+}
+/* END :: radio component */<!--
+					--></code><!--
+				--></pre>
+				<span class="label label-info">CSS - checkbox &amp; radio button combination</span>
+				<pre><!--
+					--><code class="css"><!--
+					-->label.component-checkbox,
+label.component-radio {
+	display: inline-block;
+	width: auto;
+}
+label.component-checkbox input[type="checkbox"],
+label.component-radio input[type="radio"] {
+	display: none;
+}
+label.component-checkbox.default .virtual-checkbox,
+label.component-radio.default .virtual-radio {
+	width: 12px;
+	height: 12px;
+}
+label.component-checkbox.middle .virtual-checkbox,
+label.component-radio.middle .virtual-radio {
+	width: 16px;
+	height: 16px;
+}
+label.component-checkbox.large .virtual-checkbox,
+label.component-radio.large .virtual-radio {
+	width: 20px;
+	height: 20px;
+}<!--
+					--></code><!--
+				--></pre>
+				<!-- END :: radio button -->
+			</div>
+			<!-- END :: 컴포넌트 모음 가이드 -->
+			<!-- ***** END :: Common ***** -->
 		</article>
 	</section>
 </div>

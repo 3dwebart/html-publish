@@ -29,4 +29,116 @@
   background-color: #b1d4fb;
   color: #163d5a; }
 
+.label-success {
+  border-left-color: #00773c;
+  background-color: #b9f9d9;
+  color: #0c311f; }
+
+.label-warning {
+  border-left-color: #e09934;
+  background-color: #fbdbb1;
+  color: #46351c; }
+
+.label-danger {
+  border-left-color: #af1010;
+  background-color: #f6dcdc;
+  color: #331515; }
+
+.label-purple {
+  border-left-color: #5b108a;
+  background-color: #e3cbf2;
+  color: #1b0e23; }
+
+/********** BIGIN :: checkbox & radio button component **********/
+label.component-checkbox,
+label.component-radio {
+  display: inline-block;
+  width: auto; }
+
+label.component-checkbox input[type="checkbox"],
+label.component-radio input[type="radio"] {
+  display: none; }
+
+label.component-checkbox.default .virtual-checkbox,
+label.component-radio.default .virtual-radio {
+  width: 12px;
+  height: 12px; }
+
+label.component-checkbox.middle .virtual-checkbox,
+label.component-radio.middle .virtual-radio {
+  width: 16px;
+  height: 16px; }
+
+label.component-checkbox.large .virtual-checkbox,
+label.component-radio.large .virtual-radio {
+  width: 20px;
+  height: 20px; }
+
+/* BIGIN :: checkbox component */
+label.component-checkbox .virtual-checkbox {
+  position: relative;
+  display: block;
+  border: 1px solid #333;
+  float: left;
+  margin: 4px 10px 0 0; }
+
+label.component-checkbox .virtual-checkbox:after {
+  content: "\2713";
+  font-weight: bold;
+  /*outline: 1px solid #ffffff;*/
+  color: #333333;
+  text-shadow: -1px -1px 0 #fff,   1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  position: absolute;
+  opacity: 0;
+  transition: all .3s ease; }
+
+label.component-checkbox.default .virtual-checkbox:after {
+  font-size: 16px;
+  left: 1px;
+  top: -8px; }
+
+label.component-checkbox.middle .virtual-checkbox:after {
+  font-size: 22px;
+  left: 2px;
+  top: -11px; }
+
+label.component-checkbox.large .virtual-checkbox:after {
+  font-size: 30px;
+  left: 3px;
+  top: -16px; }
+
+label.component-checkbox input[type="checkbox"]:checked + span.virtual-checkbox:after {
+  opacity: 1;
+  transition: all .3s ease; }
+
+/* END :: checkbox component */
+/* BIGIN :: radio component */
+label.component-radio .virtual-radio {
+  position: relative;
+  display: block;
+  border: 1px solid #333;
+  border-radius: 50%;
+  float: left;
+  margin: 4px 10px 0 0; }
+
+label.component-radio .virtual-radio:after {
+  content: "";
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333333;
+  opacity: 0;
+  transition: all .3s ease; }
+
+label.component-radio input[type="radio"]:checked + span.virtual-radio:after {
+  opacity: 1;
+  transition: all .3s ease; }
+
+/* END :: radio component */
+/********** END :: checkbox & radio button component **********/
+
 /*# sourceMappingURL=custom.css.map */

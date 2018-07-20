@@ -42,15 +42,35 @@ body{
 	border-left-width: 5px;
 	border-left-style: solid;
 }
-.label-info {
-	border-left-color: #2a8af5;
-	background-color: #b1d4fb;
-	color: #000000;
-}
 .label-grey {
-	border-left-color: #666666;
-	background-color: #dddddd;
-	color: #000000;
+    border-left-color: #666666;
+    background-color: #dedede;
+    color: #333333;
+}
+.label-info {
+    border-left-color: #035fa2;
+    background-color: #b1d4fb;
+    color: #163d5a;
+}
+.label-success {
+    border-left-color: #00773c;
+    background-color: #b9f9d9;
+    color: #0c311f;
+}
+.label-warning {
+    border-left-color: #e09934;
+    background-color: #fbdbb1;
+    color: #46351c;
+}
+.label-danger {
+    border-left-color: #af1010;
+    background-color: #f6dcdc;
+    color: #331515;
+}
+.label-purple {
+    border-left-color: #5b108a;
+    background-color: #e3cbf2;
+    color: #1b0e23;
 }
 strong.title {
 	display: block;

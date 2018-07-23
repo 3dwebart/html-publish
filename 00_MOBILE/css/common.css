@@ -201,7 +201,7 @@ a{color: #565656;
     font-size: 13px;
 }
 #tab-deposit a{ font-size: 13px !important; background: #ececec; border-right: 1px solid #fff}
-#tab-deposit a.active{ background: #007bff}
+#tab-deposit a.active{ /*background: #007bff;*/background-color: #666666;}
 @media (max-width: 900px)  {
         .footer-right{ display: none}  
         .footer-left{ margin-left: 13px;}

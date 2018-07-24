@@ -88,41 +88,43 @@
 <!--END :: GNB-->
 <!-- BIGIN :: container -->
 <div id="container" class="container submenu-container bigin-m-4 mb-3 otp-size">
-	<div class="col mb-3 pb-3">
-		<div class="card shadow-sm bg-white rounded h-100">
-			<div class="card-header"><h5 class="pt-2 pb-1 mb-0">모바일 인증</h5></div>
-			<div class="pl-4 pr-4 mb-3 pc-spacing">
-				<form class=" p-3">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text font-12" for="inputGroupSelect01">국가</label>
+	<div class="row">
+		<div class="col mb-3 pb-3">
+			<div class="card shadow-sm bg-white rounded h-100">
+				<div class="card-header"><h5 class="pt-2 pb-1 mb-0">모바일 인증</h5></div>
+				<div class="pl-4 pr-4 mb-3 pc-spacing">
+					<form class=" p-3">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text font-12" for="inputGroupSelect01">국가</label>
+							</div>
+							<select class="custom-select" id="inputGroupSelect01" disabled>
+								<option selected>Korea,Republic of (대한민국)</option>
+							</select>
 						</div>
-						<select class="custom-select" id="inputGroupSelect01" disabled>
-							<option selected>Korea,Republic of (대한민국)</option>
-						</select>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text font-12" for="inputGroupSelect01">휴대폰번호</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text font-12" for="inputGroupSelect01">휴대폰번호</label>
+							</div>
+							<select class="custom-select" id="inputGroupSelect01">
+								<option selected>SK</option>
+								<option value="1">KT</option>
+								<option value="2">LG</option>
+							</select>
+							<input type="text" class="form-control" placeholder="휴대폰번호 입력">
 						</div>
-						<select class="custom-select" id="inputGroupSelect01">
-							<option selected>SK</option>
-							<option value="1">KT</option>
-							<option value="2">LG</option>
-						</select>
-						<input type="text" class="form-control" placeholder="휴대폰번호 입력">
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text font-12" id="">인증번호</span>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text font-12" id="">인증번호</span>
+							</div>
+							<input type="text" class="form-control" placeholder="인증번호 입력">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary btn-sm font-12" type="button">인증번호 요청</button>
+							</div>
 						</div>
-						<input type="text" class="form-control" placeholder="인증번호 입력">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary btn-sm font-12" type="button">인증번호 요청</button>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-dark d-block w-100 btn-sm mx-auto">인증 요청</button>
-				</form>
+						<button type="submit" class="btn btn-dark d-block w-100 btn-sm mx-auto">인증 요청</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

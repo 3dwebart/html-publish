@@ -1,376 +1,450 @@
 <!doctype html>
 <html>
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-      <title> </title>
-      <link rel="stylesheet" media="all" href="css/bootstrap.css">
-      <link rel="stylesheet" media="all" href="css/common.css">
-      <link rel="stylesheet" media="all" href="css/jquery.mCustomScrollbar.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>   
-      <script src="js/bootstrap.js"></script>
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-      <style> 
-         body{ height: 100%; overflow-y: hidden;  overflow-x: hidden;background: #fff}
-            #trade-history  td{     padding: 0.25rem; }
-      </style>
-   </head>
-   <body>
-      <!--MOBILE BOTTOM NAV -->    
-      <div class="mobile-nav-cart">
-         <ul>
-            <li><a href=" " class="active">주문</a></li>
-            <li><a href="">호가</a></li>
-            <li><a href=" ">차트</a></li>
-            <li><a href=" ">시세</a></li>
-            <li><a href=" ">정보</a></li>
-         </ul>
-      </div>
-      <!--MOBILE BOTTOM NAV -->
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
-         <div class="container">
-            <a href="/" class="btn-m-back">이더리움<em>ETH/KRW</em></a>
-            <a class="navbar-brand" href="javascript:void(0)"></a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-         </div>
-      </nav>
-      <div  class="container h-100 " style="margin: 45px auto 0 auto; padding: 0">
-         <div class="order-coin-status">
-            <div class="row h-100 p-0 m-0 ">
-               <div class="col h-100 p-0 m-0"> 
-                  <span class="pl-2 pt-2 d-block "> 현재가 
-                  <strong class="text-primary display1 text-capitalize">1,400,000,00 </strong> 
-                  </span>
-               </div>
-               <!--현재가-->
-               <div class="col h-100"> 
-                  <span class="pl-2 pt-2 d-block "> 수익률 
-                  <strong class="text-primary display1 pl-2 "> 0.0% </strong> 
-                  </span>
-               </div>
-            </div>
-            <!--row-->
-         </div>
-         <!--현재코인 현재가 -->
-         <div class="d-flex h-100 m-0">
-            <div class="flex-fill h-100 p-0 position-relative" style="max-width: 45%">
-               <div class="order-quotes-wrap">
-                  <table class="quotes-table h-50" cellspacing="0" cellpadding="0">
-                     <colgroup>
-                        <col width="50%">
-                        <col width="50%">
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td class="quotes-blue"> 0.00850000 </td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-blue"> 0</td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-blue"> 0</td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-blue"> 0</td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-blue"> 0</td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-blue"> 0</td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-blue"> 0</td>
-                           <td class="quotes-blue-center"> 7,538,000 </td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <table class="quotes-table h-50">
-                     <colgroup>
-                        <col width="50%">
-                        <col width="50%">
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td class="quotes-red"> 0 </td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-red"> 0</td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-red"> 0</td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-red"> 0</td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-red"> 0</td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-red"> 0</td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                        <tr>
-                           <td class="quotes-red"> 0</td>
-                           <td class="quotes-red-center"> 7,538,000 </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-            <!--호가-->        
-            <div class="flex-fill p-0">
-               <ul class="nav nav-tabs" id="order-tab" role="tablist">
-                  <li class="nav-item">
-                     <a class="nav-link active" data-toggle="tab" href="#order-buy" role="tab" aria-controls="home" aria-selected="true">매수</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link"  data-toggle="tab" href="#order-sell" role="tab"  aria-selected="false">매도</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link"  data-toggle="tab" href="#history-ing" role="tab" aria-selected="false">미체결</a>
-                  </li>
-               </ul>
-               <!-- BIGIN :: 매수 -->
-               <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane show active pl-2 pr-2 h-100 font10" id="order-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
-                     <label class="mt-1 mb-0 text-muted">사용가능 금액</label>
-                     <p class="m-0 p-0 font13">343,080,190 KRW </p>
-                     <label class="mt-1 mb-0 text-muted" for="basic-url">구매량</label>
-                     <div class="input-group input-group-sm ">
-                        <input type="text" class="form-control" placeholder="" >
-                        <div class="input-group-append">
-                           <button class="btn btn-outline-secondary" type="button">최대</button>
-                        </div>
-                     </div>
-                     <label class="mt-1 mb-0 text-muted" for="basic-url">구매가(1BCH)</label>
-                     <div class="input-group input-group-sm ">
-                        <input type="text" class="form-control" placeholder="" >
-                        <div class="input-group-append">
-                           <button class="btn btn-outline-secondary" type="button">-</button>
-                           <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                     </div>
-                     <label class="mt-1 mb-0 text-muted" for="basic-url">총 구매가격</label>
-                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" placeholder="0" value="" disabled>
-                        <div class="input-group-append">
-                           <span class="input-group-text">원</span>
-                        </div>
-                     </div>
-                     <label class="text-muted">수수료 : 대기주문(0.08%),즉시체결(0.2%)</label>
-                     <label>주문총액</label>
-                     <div class="alert bg-light p-2 m-0" role="alert">
-                        <strong class="text-danger  display1"> 2484167.35  <span class="text-muted font10">BCH</span></strong>
-                     </div>
-                     <!--주문총액-->
-                     <button type="submit" class="btn btn-danger btn-block btn-sm">매수</button>
-                  </div>
-                  <!-- END :: 매수 -->
-                 
-                   <div class="tab-pane fade  pl-2 pr-2 h-100 font10" id="order-sell" role="tabpanel" >
-                       <label class="mt-1 mb-0 text-muted">사용가능 코인</label>
-                     <p class="m-0 p-0 font13">343,080,190 BCH </p>
-                     <label class="mt-1 mb-0 text-muted" for="basic-url">판매량</label>
-                     <div class="input-group input-group-sm ">
-                        <input type="text" class="form-control" placeholder="" >
-                        <div class="input-group-append">
-                           <button class="btn btn-outline-secondary" type="button">최대</button>
-                        </div>
-                     </div>
-                     <label class="mt-1 mb-0 text-muted" for="basic-url">판매가(1BCH)</label>
-                     <div class="input-group input-group-sm ">
-                        <input type="text" class="form-control" placeholder="" >
-                        <div class="input-group-append">
-                           <button class="btn btn-outline-secondary" type="button">-</button>
-                           <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                     </div>
-                     <label class="mt-1 mb-0 text-muted" for="basic-url">총 판매가격</label>
-                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" placeholder="0" value="" disabled>
-                        <div class="input-group-append">
-                           <span class="input-group-text">원</span>
-                        </div>
-                     </div>
-                     <label class="text-muted">수수료 : 대기주문(0.08%),즉시체결(0.2%)</label>
-                     <label>총판매가격</label>
-                     <div class="alert bg-light p-2 m-0" role="alert">
-                        <strong class="text-primary  display1"> 2484167.35  <span class="text-muted font10">원</span></strong>
-                     </div>
-                     <!--주문총액-->
-                     <button type="submit" class="btn btn-primary btn-block btn-sm">매도</button>
-                   
-                   </div><!-- END 매도-->
-                   
-                   
-                   
-                  <div class="tab-pane fade" id="history-ing" role="tabpanel" >
-                     <div style="overflow-x: scroll; overflow-y: scroll; max-height: 70%; max-width: 55%" class="position-fixed table-responsive">
-                        <table id="trade-history" class="table table-striped   mb-3 text-center text-nowrap dotum  ">
-                           <thead>
-                              <tr>
-                                 <th scope="col" class="border-top-0">주문</th>
-                                 <th scope="col" class="border-top-0">주문시간</th>
-                                 <th scope="col" class="border-top-0">주문가</th>
-                                 <th scope="col" class="border-top-0">주문량</th>
-                                 <th scope="col" class="border-top-0">체결시간</th>
-                                 <th scope="col" class="border-top-0">수수료</th>
-                                 <th scope="col" class="border-top-0">체결량</th>
-                                 <th scope="col" class="border-top-0">체결가(평균)</th>
-                                 <th scope="col" class="border-top-0">체결총액(평균)</th>
-                                 <th scope="col" class="border-top-0">비고</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <tr>
-                                 <td  colspan="10" class="text-center"> 미체결 주문 내역이 없습니다.</td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="sell_11">
-                                 <td><b>매도</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                              <tr id="buy_11">
-                                 <td><b>매수</b> </td>
-                                 <td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
-                                 <td>6,981,000 </td>
-                                 <td>0.00320000</td>
-                                 <td> </td>
-                                 <td>45</td>
-                                 <td> 0.00320000</td>
-                                 <td>6,981,000 </td>
-                                 <td>22,339	</td>
-                                 <td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div> <!--END 미체결 -->
-                  </div>
-               </div>
-               <!--tab content--> 
-            </div>
-            <!--col-->
-         </div>
-         <!--row-->
-      </div>
-      <!--container-->
-   </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+<title>주문</title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" media="all" href="css/common.css">
+<link rel="stylesheet" media="all" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<style> 
+	body{height: 100%; overflow-y: hidden;  overflow-x: hidden;background: #fff}
+	#trade-history  td{padding: 0.25rem; }
+</style>
+</head>
+<body>
+<!-- BIGIN :: Mobile navigation -->
+<div id="panel-list" class="h-100 panel-bg w-100 ">
+	<ul class="list-group list-group-flush font-weight-light">
+		<li class="list-group-item color64a">
+			<i class="fas fa-user-astronaut align-middle" style="font-size: 22px;"></i> 게스트
+			<button type="button" class="btn btn-outline-light btn-sm font-12 d-inline btn-round"> 로그아웃</button>  
+			<button type="button" class="close text-light" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'">로그인</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'">회원가입</button>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item"><a href="trade.html" class="trade"> 거래소 </a></li>
+		<li class="list-group-item">
+			<a href="presence.html" class="invest">거래내역 </a>
+			<span class="badge badge-danger badge-pill float-right">
+				<i class="far fa-bell align-middle" style="font-size: 13px;"></i> 14
+			</span>
+		</li>
+		<li class="list-group-item"><a href="balances.html" class="cashout">입출금 </a></li>
+		<li class="list-group-item"><a href="verificationcenter.html" class="mypage">마이페이지</a></li>
+		<li class="list-group-item"><a href="m_notice.html" class="customer">고객센터 </a></li>
+		<li class="list-group-item">
+			<!-- BIGIN :: 언어선택 -->
+			<div class="dropdown">
+				<a class="btn btn-outline-light dropdown-toggle btn-sm w-100 border-light-blue align-middle" href="#" role="button" id="selectLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-globe" style="font-size: 17px;"></i>
+					KOR
+				</a>
+				<div class="dropdown-menu w-100" aria-labelledby="selectLang">
+					<a class="dropdown-item" href="#">KOR</a>
+					<a class="dropdown-item" href="#">ENG</a>
+					<a class="dropdown-item" href="#">CHN</a>
+				</div>
+			</div>
+			<!-- END :: 언어선택 -->
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-twitter" style="font-size: 20px;"></i>
+					</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-facebook-f " style="font-size: 20px;"></i>
+					</button>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- END :: Mobile navigation -->
+<!-- BIGIN :: GNB-->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</nav>
+<!--END :: GNB-->
+<!-- BIGIN :: container -->
+<div  class="container h-100 " style="margin: 45px auto 0 auto; padding: 0">
+	<div class="order-coin-status">
+		<div class="row h-100 p-0 m-0 ">
+			<div class="col h-100 p-0 m-0"> 
+				<span class="pl-2 pt-2 d-block "> 현재가 
+					<strong class="text-primary display1 text-capitalize">1,400,000,00 </strong> 
+				</span>
+			</div>
+			<!--현재가-->
+			<div class="col h-100"> 
+				<span class="pl-2 pt-2 d-block "> 수익률 
+					<strong class="text-primary display1 pl-2 "> 0.0% </strong> 
+				</span>
+			</div>
+		</div>
+	  <!--row-->
+	</div>
+	<!--현재코인 현재가 -->
+	<div class="d-flex h-100 m-0">
+		<div class="flex-fill h-100 p-0 position-relative" style="max-width: 45%">
+		 <div class="order-quotes-wrap">
+			<table class="quotes-table h-50" cellspacing="0" cellpadding="0">
+			   <colgroup>
+				  <col width="50%">
+				  <col width="50%">
+			   </colgroup>
+			   <tbody>
+				  <tr>
+					 <td class="quotes-blue"> 0.00850000 </td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-blue"> 0</td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-blue"> 0</td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-blue"> 0</td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-blue"> 0</td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-blue"> 0</td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-blue"> 0</td>
+					 <td class="quotes-blue-center"> 7,538,000 </td>
+				  </tr>
+			   </tbody>
+			</table>
+			<table class="quotes-table h-50">
+			   <colgroup>
+				  <col width="50%">
+				  <col width="50%">
+			   </colgroup>
+			   <tbody>
+				  <tr>
+					 <td class="quotes-red"> 0 </td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-red"> 0</td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-red"> 0</td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-red"> 0</td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-red"> 0</td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-red"> 0</td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+				  <tr>
+					 <td class="quotes-red"> 0</td>
+					 <td class="quotes-red-center"> 7,538,000 </td>
+				  </tr>
+			   </tbody>
+			</table>
+		 </div>
+		</div>
+		<!--호가-->        
+		<div class="flex-fill p-0">
+			<ul class="nav nav-tabs" id="order-tab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#order-buy" role="tab" aria-controls="home" aria-selected="true">매수</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"  data-toggle="tab" href="#order-sell" role="tab"  aria-selected="false">매도</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"  data-toggle="tab" href="#history-ing" role="tab" aria-selected="false">미체결</a>
+				</li>
+			</ul>
+		 	
+			<div class="tab-content" id="myTabContent">
+				<!-- BIGIN :: 매수 - tab1 -->
+				<div class="tab-pane show active pl-2 pr-2 h-100 font10" id="order-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
+					<label class="mt-1 mb-0 text-muted">사용가능 금액</label>
+					<p class="m-0 p-0 font13">343,080,190 KRW </p>
+					<label class="mt-1 mb-0 text-muted" for="basic-url">구매량</label>
+					<div class="input-group input-group-sm">
+						<input type="text" class="form-control" placeholder="" >
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button">최대</button>
+						</div>
+					</div>
+					<label class="mt-1 mb-0 text-muted" for="basic-url">구매가(1BCH)</label>
+					<div class="input-group input-group-sm ">
+						<input type="text" class="form-control" placeholder="" >
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button">-</button>
+							<button class="btn btn-outline-secondary" type="button">+</button>
+						</div>
+					</div>
+					<label class="mt-1 mb-0 text-muted" for="basic-url">총 구매가격</label>
+					<div class="input-group input-group-sm">
+						<input type="text" class="form-control" placeholder="0" value="" disabled>
+						<div class="input-group-append">
+							<span class="input-group-text">원</span>
+						</div>
+					</div>
+					<label class="text-muted">수수료 : 대기주문(0.08%),즉시체결(0.2%)</label>
+					<label>주문총액</label>
+					<div class="alert bg-light p-2 m-0" role="alert">
+						<strong class="text-danger  display1"> 2484167.35 <span class="text-muted font10">BCH</span></strong>
+					</div>
+					<!--주문총액-->
+					<button type="submit" class="btn btn-danger btn-block btn-sm">매수</button>
+				</div>
+				<!-- END :: 매수 - tab1 -->
+				<!-- BIGIN :: 매도 - tab2 -->
+				<div class="tab-pane fade  pl-2 pr-2 h-100 font10" id="order-sell" role="tabpanel" >
+					<!-- BIGIN :: 사용가능 코인 -->
+					<label class="mt-1 mb-0 text-muted">사용가능 코인</label>
+					<p class="m-0 p-0 font13">343,080,190 BCH </p>
+					<label class="mt-1 mb-0 text-muted" for="basic-url">판매량</label>
+					<div class="input-group input-group-sm ">
+						<input type="text" class="form-control" placeholder="" >
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button">최대</button>
+						</div>
+					</div>
+					<!-- END :: 사용가능 코인 -->
+					<!-- BIGIN :: 판매가(1BCH) -->
+					<label class="mt-1 mb-0 text-muted" for="basic-url">판매가(1BCH)</label>
+					<div class="input-group input-group-sm ">
+						<input type="text" class="form-control" placeholder="" >
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button">-</button>
+							<button class="btn btn-outline-secondary" type="button">+</button>
+						</div>
+					</div>
+					<!-- END :: 판매가(1BCH) -->
+					<!-- BIGIN :: 총 판매가격 -->
+					<label class="mt-1 mb-0 text-muted" for="basic-url">총 판매가격</label>
+					<div class="input-group input-group-sm">
+						<input type="text" class="form-control" placeholder="0" value="" disabled>
+						<div class="input-group-append">
+							<span class="input-group-text">원</span>
+						</div>
+					</div>
+					<!-- END :: 총 판매가격 -->
+					<!-- BIGIN :: 주문총액 -->
+					<label class="text-muted">수수료 : 대기주문(0.08%),즉시체결(0.2%)</label>
+					<label>총판매가격</label>
+					<div class="alert bg-light p-2 m-0" role="alert">
+						<strong class="text-primary  display1"> 2484167.35  <span class="text-muted font10">원</span></strong>
+					</div>
+					<!-- END :: 주문총액 -->
+				   <button type="submit" class="btn btn-primary btn-block btn-sm">매도</button>
+				</div>
+				<!-- END :: 매도 - tab2 -->
+				<!-- BIGIN :: 미체결 - tab3 -->
+				<div class="tab-pane fade" id="history-ing" role="tabpanel" >
+					<div style="overflow-x: scroll; overflow-y: scroll; max-height: 70%; max-width: 55%" class="position-fixed table-responsive">
+						<table id="trade-history" class="table table-striped   mb-3 text-center text-nowrap dotum  ">
+							<thead>
+								<tr>
+									<th scope="col" class="border-top-0">주문</th>
+									<th scope="col" class="border-top-0">주문시간</th>
+									<th scope="col" class="border-top-0">주문가</th>
+									<th scope="col" class="border-top-0">주문량</th>
+									<th scope="col" class="border-top-0">체결시간</th>
+									<th scope="col" class="border-top-0">수수료</th>
+									<th scope="col" class="border-top-0">체결량</th>
+									<th scope="col" class="border-top-0">체결가(평균)</th>
+									<th scope="col" class="border-top-0">체결총액(평균)</th>
+									<th scope="col" class="border-top-0">비고</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td  colspan="10" class="text-center"> 미체결 주문 내역이 없습니다.</td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="sell_11">
+									<td><b>매도</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+								<tr id="buy_11">
+									<td><b>매수</b> </td>
+									<td class="text-muted">2018-06-25 <em>13:31:30 </em></td>
+									<td>6,981,000 </td>
+									<td>0.00320000</td>
+									<td> </td>
+									<td>45</td>
+									<td> 0.00320000</td>
+									<td>6,981,000 </td>
+									<td>22,339	</td>
+									<td><button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle" style="font-size: 15px;"></i></button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div> <!--END 미체결 -->
+				</div>
+				<!-- END :: 미체결 - tab3 -->
+			</div>
+			<!--tab content--> 
+		</div>
+		<!--col-->
+	</div>
+	<!--row-->
+</div>
+<!-- END :: container -->
+<!-- BIGIN :: MOBILE BOTTOM NAV -->    
+<div class="mobile-nav-cart">
+	<ul>
+		<li><a href="#" class="active">주문</a></li>
+		<li><a href="#">호가</a></li>
+		<li><a href="#">차트</a></li>
+		<li><a href="#">시세</a></li>
+		<li><a href="#">정보</a></li>
+	</ul>
+</div>
+<!-- END :: MOBILE BOTTOM NAV -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/MobileMainNavSubNav.js"></script>
+</body>
 </html>

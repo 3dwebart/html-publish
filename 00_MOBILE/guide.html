@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-<title> </title>
+<title>이용안내</title>
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
 <link rel="stylesheet" media="all" href="css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -12,70 +12,107 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
+<!-- BIGIN :: Mobile navigation -->
+<div id="panel-list" class="h-100 panel-bg w-100 ">
+	<ul class="list-group list-group-flush font-weight-light">
+		<li class="list-group-item color64a">
+			<i class="fas fa-user-astronaut align-middle" style="font-size: 22px;"></i> 게스트
+			<button type="button" class="btn btn-outline-light btn-sm font-12 d-inline btn-round"> 로그아웃</button>  
+			<button type="button" class="close text-light" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signin.html'">로그인</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-outline-light btn-sm font-12 w-100 d-inline" onclick="window.location='signup.html'">회원가입</button>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item"><a href="trade.html" class="trade"> 거래소 </a></li>
+		<li class="list-group-item">
+			<a href="presence.html" class="invest">거래내역 </a>
+			<span class="badge badge-danger badge-pill float-right">
+				<i class="far fa-bell align-middle" style="font-size: 13px;"></i> 14
+			</span>
+		</li>
+		<li class="list-group-item"><a href="balances.html" class="cashout">입출금 </a></li>
+		<li class="list-group-item"><a href="verificationcenter.html" class="mypage">마이페이지</a></li>
+		<li class="list-group-item"><a href="m_notice.html" class="customer">고객센터 </a></li>
+		<li class="list-group-item">
+			<!-- BIGIN :: 언어선택 -->
+			<div class="dropdown">
+				<a class="btn btn-outline-light dropdown-toggle btn-sm w-100 border-light-blue align-middle" href="#" role="button" id="selectLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-globe" style="font-size: 17px;"></i>
+					KOR
+				</a>
+				<div class="dropdown-menu w-100" aria-labelledby="selectLang">
+					<a class="dropdown-item" href="#">KOR</a>
+					<a class="dropdown-item" href="#">ENG</a>
+					<a class="dropdown-item" href="#">CHN</a>
+				</div>
+			</div>
+			<!-- END :: 언어선택 -->
+		</li>
+		<li class="list-group-item">
+			<div class="row"> 
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-twitter" style="font-size: 20px;"></i>
+					</button>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-primary w-100 panel-sns-link">
+						<i class="fab fa-facebook-f " style="font-size: 20px;"></i>
+					</button>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- END :: Mobile navigation -->
+<!-- BIGIN :: GNB-->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="img/common/Popcon_Logo.png">
-          </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse collapse" id="gnb">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래내역</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">입출금</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">마이페이지</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">고객센터</a>
-            </li>
-          </ul>
-            <div class="nav-bar-logininfo">
-              <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
-            </div>
-              <button type="button" class="btn btn-outline-light btn-round">로그인</button>
-        </div>
-      </div>
-</nav> <!--GNB--> 
-    <!--서브메뉴-->
-    <div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
-      <nav id="nav-sub-wrap" class="nav nav-underline">
-          <div class="spacing"> </div>
-          <a class="nav-link" href="#">공지사항</a>
-          <a class="nav-link" href="#">1:1문의</a>
-          <a class="nav-link active" href="#">이용안내</a>
-          <a class="nav-link" href="#">FAQ</a>
-      </nav>
-    </div>
-   <!--END 서브메뉴-->
-    
-    <div id="container" class="container submenu-container mb-4">
-
-            <div class="col mb-3 pb-3">
-                <div class="card shadow-sm bg-white rounded h-100">
-                    <div class="card-header position-relative">  
-                        <h5 class="pt-2 pb-1 mb-0">이용안내</h5>
-                  </div>
-                    <div class="pl-4 pr-4 mb-3 mt-3">
-                        내용입력
-                         
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-  <!--container-->
-    
-    
-    
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</nav>
+<!--END :: GNB-->
+<!-- BIGIN :: container -->
+<div id="container" class="container submenu-container mb-3 bigin-m-4">
+	<div class="col mb-3 pb-3">
+		<div class="card shadow-sm bg-white rounded h-100">
+			<div class="card-header position-relative">  
+				<h5 class="pt-2 pb-1 mb-0">이용안내</h5>
+			</div>
+			<div class="pl-4 pr-4 mb-3 mt-3">
+				내용입력
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END :: container -->
+<!--MOBILE bottom nav -->
+<div class="mobile-nav-bottom">
+	<ul>
+		<li><a class="mobile-nav-market" href="trade.html">거래소</a></li>
+		<li><a class="mobile-nav-invest" href="presence.html">거래내역</a></li>
+		<li><a class="mobile-nav-cashout active" href="balances.html">입출금</a></li>
+		<li><a class="mobile-nav-mypage" href="verificationcenter.html">마이페이지 </a></li>
+	</ul>
+</div>
+<!--END MOBILE bottom nav -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/MobileMainNavSubNav.js"></script>
 </body>
 </html>

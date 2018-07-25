@@ -22,17 +22,12 @@
      url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff') format('woff');
 }
  
-html{ -ms-overflow-style: -ms-autohiding-scrollbar; -webkit-font-smoothing: antialiased;
+html{ -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale; height: 100%;}
-body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; padding: 0; margin: 0;  background: #eff0f5;     min-height: 100%;
-    
+ body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; padding: 0; margin: 0;  background: #eff0f5;     min-height: 100%;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;}
-@media(min-width: 769px) {
-  body{
-    justify-content: space-between;
-  }
-}
 .navbar-brand img{ width: 100px; height: 43px;}
 .nav-link{ font-size: 16px}
 .navbar-nav li{ padding: 0 10px 0 10px;}
@@ -44,6 +39,7 @@ body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verd
 .nav-bar-logininfo{ margin: 0 20px 0 0; color: #cdf3ff; font-size: 13px;line-height: 64px; font-weight: 300; vertical-align: middle}
 .max-width8{ max-width: 800px; margin: 0 auto;}
 .max-width5{ max-width: 500px; margin: 0 auto;}
+.max-width6{ max-width: 600px; margin: 0 auto;}
 .box-shadow{ box-shadow: rgba(33, 102, 212, 0.15) 0px 7px 30px 0px;}
 .center{ margin: 0 auto}
 .font13{ font-size: 13px;}
@@ -88,6 +84,7 @@ a{color: #565656;
     left: 0;
     visibility: visible;
   }
+    #trade-volume{ max-width: auto}
 } /* media 991 */
 
 
@@ -149,14 +146,14 @@ a{color: #565656;
 
 
 ::-webkit-input-placeholder {  
-  color: ccc; font-size: 12px
+  color:#ccc; font-size: 12px
 }
 ::-moz-placeholder { 
-  color: ccc; font-size: 12px
+  color: #ccc; font-size: 12px
 }
  
 :-moz-placeholder {  
-  color: cc; font-size: 12px
+  color:#ccc; font-size: 12px
 }
 .tab-col2 a{
     width: 50%;
@@ -208,7 +205,7 @@ a{color: #565656;
 .ctype-table td:first-child{ font-size: 14px; }
 .ctype-table td em{ font-size: 12px}
 
-
+.quotes-recent{font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif;  background-color: #e2e2e2;}
 .quotes-table{width: 100%;  border-collapse:collapse; border-spacing: 0px;
       }
 .quotes-table td{ padding: 7px 15px 8px 15px !important;  margin: 0!important; border: 1px solid #dee2e6; background-clip: padding-box; }
@@ -231,6 +228,7 @@ a{color: #565656;
 
 
 
+
 .quotes-blue1{ background: #f5faff; color: #0238b9;  margin: 0; padding: 8px;   
     box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; position: relative;}
 .quotes-blue1:hover{ background: #d6e8fa; color: #006cff; }
@@ -242,24 +240,25 @@ a{color: #565656;
 .quotes-red1.active{ background: #fcd2d2; color: #ec0200; }
 .quotes-grey{  box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; padding: 8px; min-height: 34px;}
 
-.trade-volume-table{ width: 100%;}
+.trade-volume-table{  width: 100%; }
 .trade-volume-table td{    padding: 7px 15px 8px 15px ;  margin: 0!important; border: 1px solid #dee2e6;}
 .trade-volume-table th{font-weight: 500;  border-top: none;  padding: 7px 15px 8px 15px ; text-align: center; border: 1px solid #dee2e6; border-top: none} 
 
 .coin-status-table{ width: 100%; vertical-align: top;}
 .coin-status-table td{ padding: 0 ;  margin: 0!important; border: 1px solid #dee2e6;   border-left: none;}
 .coin-status-table th{ text-align: center; font-weight: 100;  padding: 0 ;  margin: 0!important; border: 1px solid #dee2e6; border-left: none; border-right: none;}
-
-
  
 .quotes-select{ position: absolute; top: 0; left:0 ; z-index: 2; background: url(../img/select_quotes.svg) no-repeat; background-size: 100% 100%; width: 100%; height: 100%; display: block;}
  
 .quotes-data{ font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif !important;}
 .dotum{ font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif !important;}
-.ctype-maxheight{ height: 1205px; overflow-y: scroll;}
-.ctype-maxheight::-webkit-scrollbar {width: 0;}
-.quotes-history{ max-height: 252px; text-align: center;
-    font-size: 11px;
+.ctype-maxheight{ height: 1190px; overflow-y: scroll; -ms-overflow-style: none;}
+.ctype-maxheight::-webkit-scrollbar {width: 0; display: none;}
+.quotes-maxheight{ height: 510px; overflow-y: scroll;  -ms-overflow-style: none;}
+.quotes-maxheight::-webkit-scrollbar {width: 0; display: none;  -ms-overflow-style: none;}
+.recent-trade{ height: 215px;overflow-y: atuo;  -ms-overflow-style: none; }
+.recent-trade::-webkit-scrollbar {width: 0; display: none;  -ms-overflow-style: none;}
+.quotes-history{ max-height: 252px; text-align: center;    font-size: 11px;
     min-height: 226px;}
 .quotes-history th{ padding: 9px 8px 8px 0 !important;margin: 0 !important; text-align: center !important;}
 .quotes-history td{ padding: 9px 8px 8px 7px !important;    margin: 0 !important;    text-align: right !important;}
@@ -293,6 +292,15 @@ a{color: #565656;
     white-space: nowrap;
     padding: 0 10px;
     text-align: right;}
+.quotes-bar-red{background:rgba(230, 174, 174, 0.5); height: 20px; }
+.quotes-bar-data-red{ display: block; line-height: 20px; font-size: 12px;
+    white-space: nowrap;  padding: 0 10px; text-align: right; position: absolute; right: 5px;}
+.quotes-bar-blue{background:#d2e3f5; height: 20px; }
+.quotes-bar-data-blue{ display: block; line-height: 20px; font-size: 12px;
+    white-space: nowrap;  padding: 0 10px; text-align: right; position: absolute; right: 5px;}
+
+
+
 .balance-table .active{ background: #e9f4ff;}
 .snb-title{ height: 62px;
     padding-left: 30px;
@@ -431,10 +439,28 @@ a{color: #565656;
 .my-asset td .color-grey, .color-grey {
     color: #808080;}
 .my-asset td em{ font-style: normal;}
-#quotes-buy { width: 100%}
-#quotes-buy tr:nth-first-child(1) > td{ border-top: none !important}
-#quotes-sell tr:nth-last-child(3) > td{ border-bottom: none !important;}
-    
+#trade-volume{ max-width: 159px;}
+#quotes-buy tr td:first-child{ width: 159px; }
+#quotes-buy tr:first-child td{ border-top: none}
+#coin-status-table{ border-bottom: 1px solid #dee2e6;}
+#coin-status-table tr:first-child td{ border-top: none;}
+#quotes-sell tr:first-child td{ border-top: none;}
+#mCSB_6{ border-top: 1px solid #dee2e6;  border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;}
+
+.layer-login-bg{  background-color: #008bd1;  min-height: 375px;  background: url(../img/layer_login_bg.png) bottom center no-repeat  #008bd1; }
+.layer-login-input{background: none!important; border: none;  border-bottom: 2px solid #0070c2 ;    border-radius: 0; }
+.layer-login-deco{ position: absolute; background: url(../img/login_layer_arrow.png) no-repeat; width: 24px; height: 33px; top: 182px; right: -18px;; }
+
+
+.p_agree{margin-bottom:10px;height:100px;overflow-y:scroll;border:1px solid #ccc;padding:0 20px; background: #f3f3f3;}
+.p_agree h3{color:#06C;font-size:14px;font-weight:700;margin:20px 0}
+.p_agree h4{color:#000;font-size:13px;font-weight:700;margin:10px 0}
+.p_agree ol li, .p_agree p{line-height:18px}
+.p_agree ol li ul li{background:url(../img/comm/bn_dot.png?v=1) 0 8px no-repeat;padding-left:10px}
+.p_agree ol li ul li ul li{background:url(../img/comm/bn_min.gif?v=1) 0px 7px no-repeat;padding-left:10px}
+.p_agree ol li ul li ul li ul li{background:url(../img/comm/bn_min_u.gif?v=1) 0px 7px no-repeat;padding-left:6px}
+
+
 /*############## ONLY IE10,11  ########### */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 #container{ min-height: 71vh;}
@@ -442,9 +468,12 @@ a{color: #565656;
 .form-control{padding: 10px 10px;  font-size:12px; line-height: 10px;  border-radius: 0.2rem; }
 :-ms-input-placeholder{   font-size: 12px; font-weight: 300; vertical-align: middle;}
 select{ padding:5px !important;}
-    .quotes-history{ min-width:145px;  }
+.quotes-history{ min-width:145px;  }
 .quotes-history th{ padding: 8px 8px 8px 0 !important;margin: 0 !important; text-align: center !important;}
 .quotes-history td{ padding: 8.6px 8px 8px 7px !important;  margin: 0 !important;    text-align: right !important;}
-    
+#trade-volume{ min-width: 160px;}
+.coin-status-table tr:last-child td{ border-bottom: none}    
+.quotes-buy td:first-child{ border-left: none; }
+.trade-volume-table td,th:last-child{ border-right: none}
     
 }/*############## END  ONLY IE  ########### */

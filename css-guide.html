@@ -1160,6 +1160,23 @@ label.component-radio.large .virtual-radio {
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
 (function($) {
+	var scPos = $(document).scrollTop();
+	var navLength = $('.side-nav div a').length;
+	//alert(navLength);
+	var activeNav = new Array();
+	var x = 0;
+	$('.side-nav div a').each(function() {
+		activeNav[x] = $(this).attr('href');
+		x++;
+	});
+	/*
+	for(var i = 0; i < activeNav.length; i++) {
+		//
+	}
+	*/
+	console.log(activeNav[2]);
+	console.log(activeNav[4]);
+	console.log(activeNav[5]);
 	var body = $("html, body");
 	$('.side-nav a').on('click', function() {
 		var ElementID = $(this).attr('href');

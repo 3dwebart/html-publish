@@ -117,7 +117,7 @@ a{color: #565656;
 }
 
 .nav-underline .nav-link:hover {
-  color: #007bff;
+  color: #0070c2;
 }
 
 .nav-underline .active {
@@ -175,7 +175,7 @@ a{color: #565656;
     font-size: 13px;
 }
 #tab-deposit a{ font-size: 13px !important; background: #ececec; border-right: 1px solid #fff}
-#tab-deposit a.active{ background: #007bff}
+#tab-deposit a.active{ background: #0070c2;}
 @media (max-width: 900px)  {
         .footer-right{ display: none}  
         .footer-left{ margin-left: 13px;}
@@ -337,7 +337,7 @@ a{color: #565656;
 #trade-history tr[id^="sell_"] td:nth-child(7),
 #trade-history tr[id^="sell_"] td:nth-child(8),
 #trade-history tr[id^="sell_"] td:nth-child(9) {
-    color: #007bff ; font-weight: bold;
+    color: #0070c2 ; font-weight: bold;
 }
 #trade-history tr.more{
     background: #ececec;
@@ -380,13 +380,13 @@ a{color: #565656;
 #nav-sub-wrap{     width: 1400px;  margin: 0 auto;}
 #nav-sub-wrap a{ font-size: 12px !important;}
 #nav-sub-wrap .spacing{ padding-left: 135px;}
-.nav-underline a.active{border-bottom: 2px solid #007bff; color: #007bff }
+.nav-underline a.active{border-bottom: 2px solid #0070c2; color: #0070c2; }
 .submenu-container{ margin-top: 150px !important;}
 .otp-size{ max-width: 650px; }
 .max-950{ max-width: 950px; }
 .max-1000{ max-width: 1000px; }
-.verification > div h6{opacity: 0.5 }
-.verification > div.active{ background: #f6fbff; opacity: 1 }
+.verification > div h6{opacity: 0.5; }
+.verification > div.active{ background: #f6fbff; opacity: 1; }
 .verification > div.active:before{ content: '';
     position: absolute;
     left: 50%;
@@ -477,3 +477,36 @@ select{ padding:5px !important;}
 .trade-volume-table td,th:last-child{ border-right: none}
     
 }/*############## END  ONLY IE  ########### */
+/* BIGIN :: pagenation */
+.page-item.active .page-link {
+    background-color: #0070c2;
+    border-color: #0070c2;
+}
+.page-link {
+  color: #0070c2;
+}
+/* END :: pagenation */
+/* BIGIN :: btn-* class color change */
+.btn-blue,
+.btn-primary {
+    background-color: #0f79c7;
+    border-color: #0f79c7;
+    color: #ffffff;
+}
+.btn-blue:hover,
+.btn-primary:hover {
+    background-color: #0070c2;
+    border-color: #0070c2;
+}
+.btn-blue:focus,
+.btn-primary:focus {
+    border: 0;
+    box-shadow: 0 0;
+}
+.footer-addr{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 140px;
+}
+/* END :: btn-* class color change */

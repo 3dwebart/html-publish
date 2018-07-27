@@ -8,8 +8,8 @@
 <link rel="stylesheet" media="all" href="css/bootstrap.css">
 <link rel="stylesheet" media="all" href="css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
 <script src="js/bootstrap.js"></script>
-     <script src="js/popper.min.js"></script>   
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
@@ -185,6 +185,7 @@
         $(function () {
           'use strict'
 
+          $('[data-toggle="tooltip"]').tooltip();
           $('[data-toggle="offcanvas"]').on('click', function () {
             $('.offcanvas-collapse').toggleClass('open')
           })

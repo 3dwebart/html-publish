@@ -8,21 +8,6 @@ html {
     display: flex;
     flex-direction: column;
  }
-.btn-blue {
-    background-color: #00b3e8;
-    border-color: #00b3e8;
-    color: #ffffff;
-}
-.btn-blue:hover {
-    background-color: #0070c2;
-    border-color: #0070c2;
-}
-.footer-addr{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 140px;
-}
 #footer {
     justify-content: flex-end;
 }

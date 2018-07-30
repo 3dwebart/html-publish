@@ -1,0 +1,201 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+<style>
+    .sameline{
+        background: #333;
+        
+        
+    }
+    .sameline td{
+        color:#f1f1f1 !important;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                   <tr>
+                        <th colspan="4">출금요청내역</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr >
+                        <th width="10%">출금상태</th><td width="40%">
+                           <span id="odStatus"></span> &nbsp;&nbsp;&nbsp;
+                            <button class="btn-default small" onclick="getUserBalance()">잔액다시불러오기</button> 
+                            <button class="btn-default small" onclick="window.open('/?mode=WebMember&sf=mb_no&sv='+bean.data.mbNo)">회원확인</button> 
+                            <button class="btn-default small" onclick="window.open('/?mode=WebMemberBalance&sf=mb_no&sv='+bean.data.mbNo)">잔액확인</button> 
+                        </td>
+                        <th width="10%">회원정보</th><td width="40%"><span id="mbNo"></span> &nbsp;<span id="mbId"></span>
+                            &nbsp;&nbsp; Level : <span id="mbLevel"></span> &nbsp;&nbsp; Name : <span id="mbName"></span>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <th>처리결과메시지</th>
+                        <td colspan="3">(출금보류사유 등) <span id="odStatusMsg"></span></td>
+                    </tr>
+                    
+                    <tr id="get-user-balance" style="display: none;">
+                        <td colspan="4">
+                            
+                        </td>
+                    </tr>
+                
+                    
+                            
+                    <tr>
+                        <th>이메일인증여부</th>
+                        <td><span id="isUserConfirmYn"></span> , 인증시간 : <span id="isUserConfirmDt"></span></td>
+                        <th>이메일인증IP</th>
+                        <td><span id="isUserConfirmIp"></span></td>
+                    </tr>
+
+
+
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">출금처리</th>
+                    </tr>
+                    <tr>
+                        <th>관리자확인</th>
+                        <td>
+                            <div id="admin-confirm-btn"></div>
+                            
+                        </td>
+                        <th>관리자확인시간</th>
+                        <td><span id="isAdminConfirmDt"></span></td>
+                    </tr>
+                    <tr bgcolor="#d8eeff">
+                        <th>요청수량</th>
+                        <td><b><span id="odTempAmount"></span></b> <span id="poType"></span> (BTC환산 : <span id="odTempCurrencyTotal"></span>)</td>
+                        <th>처리완료수량</th>
+                        <td><span id="odReceiptAmount"></span></td>
+                    </tr><tr>
+                        <th>수수료</th>
+                        <td><span id="odFee"></span></td>
+                        <th>TXID</th>
+                        <td><span id="odTxid"></span></td>
+                    </tr><tr>
+
+                        <th>출금지갑주소</th>
+                        <td><span id="odAddr"></span></td>
+                        <th>비고</th>
+                        <td><span id="odAddrMsg"></span> <span id="odSendto"></span></td>
+
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">자산처리</th>
+                    </tr>
+
+                    <tr>
+                        <th>자산구분</th>
+                        <td><span id="poType"></span></td>
+                        <th>자산수량</th>
+                        <td><span id="poAmount"></span></td>
+                    </tr><tr>
+                        <th>자산지급여부</th>
+                        <td><span id="poPayYn"></span></td>
+                        <th>자산지급시간</th>
+                        <td><span id="poPayDt"></span></td>
+                    </tr>
+                     <tr>
+                        <th>자산처리여부</th><td colspan="3">
+                            <div id="point_result"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>등록일</th>
+                        <td colspan="3"><span id="odRegDt"></span></td>
+                    </tr>
+                            
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+    <script>
+    function getUserBalance(){
+        var ubdom = $('#get-user-balance');
+        var listItems = [];
+        $.getJSON('/?mode=WebMemberBalance/lists&sf=mb_no&sv='+$('span#mbNo').html(),function(lists){
+            
+            
+            
+            var list = lists[0];
+            if(list){
+                
+                $('span#mbId').html(list.mbId);
+                $('span#mbLevel').html(list.mbLevel);
+                $('span#mbName').html(list.mbName);
+                
+                
+                
+                ubdom.show();
+                listItems.push('<table style="width:98%;margin:10px auto;border:1px solid #e1e1e1">');
+                listItems.push('<tr style="background:#f5f5f5"><td>자산구분</td><td>총자산</td><td>사용가능</td><td>트레이딩중</td><td>출금중</td><td>랜딩중</td></tr>');
+                for(var k=0;k<list.balance.length;k++){
+                    var dto = list.balance[k];
+                    var poss = dto.poTotal - (dto.poOnTrade - dto.poOnEtc - dto.poOnLend);
+                    poss = poss.toFixed(8);
+                    var cssbold = '';
+                    if(bean.data.poType == dto.poType){
+                        cssbold = 'sameline';
+                    }
+
+                    listItems.push('<tr class="'+cssbold+'"><td>'+(dto.poType+'').toUpperCase()+'</td><td>'+dto.poTotal+'</td><td>'+poss+'</td><td>'+dto.poOnTrade+'</td><td>'+dto.poOnEtc+'</td><td>'+dto.poOnLend+'</td></tr>');
+                }
+                if(k==0) listItems.push('<tr><td colspan="6" align="center">자산 내역이 없습니다.</td></tr>');
+                listItems.push('</table>');
+
+                ubdom.children('td').html(listItems.join(''));
+            }
+
+        });
+    }
+    
+    function requestAdminConfirm(){
+        $.post('',function(){
+            
+        });
+    }
+    function writeAdminConfirm(){
+        var dom = $('#admin-confirm-btn');
+        if(bean.data.isAdminConfirmYn=='Y'){
+            dom.html('<b>관리자 확인이 되었습니다. 출금을 진행해 주세요.</b>');
+        }else{
+            if(bean.data.isUserConfirmYn=='N'){
+                dom.html('<b>사용자가 이메일 인증을 하지 않은 상태입니다.</b><input type="button" class="btn-default orange" value="관리자확인" onclick="requestAdminConfirm();" />');
+            }else if(bean.data.isUserConfirmYn=='Y'){
+                dom.html('<input type="button" class="btn-default orange" value="관리자확인" onclick="requestAdminConfirm();" />');
+            }
+            
+        }                   
+    }
+
+    window.onload = function(){
+        getUserBalance();
+        writeAdminConfirm();
+        $('span#poType').html(bean.data.poType);
+    }
+    </script>
+</body>

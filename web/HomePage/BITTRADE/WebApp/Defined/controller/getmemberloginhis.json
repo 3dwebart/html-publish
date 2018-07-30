@@ -1,0 +1,27 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+
+    "listsenv":{
+        "description":"web_member_login_his 페이징 설정값 - 20ea",
+        "sql":"SELECT COUNT(lh_no) AS totalcount, CONCAT('20') AS rowlimit FROM web_member_login_his WHERE mb_id=?",
+        "mapkeys":{
+            "mb_id":{"default":"SS_MB_ID"}
+        },
+        "authlevel":0
+    },
+    "lists":{
+        "description":"web_member_login_his 설정값 - 20ea",
+        "sql":"SELECT lh_no, lh_result_code, lh_result_msg, lh_reg_dt, lh_reg_ip FROM web_member_login_his WHERE mb_id=? ORDER BY lh_no DESC limit ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "mb_id":{"default":"SS_MB_ID"}
+        },
+        "authlevel":0
+    }
+
+  }
+}

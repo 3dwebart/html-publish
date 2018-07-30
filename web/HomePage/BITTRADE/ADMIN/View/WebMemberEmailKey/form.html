@@ -1,0 +1,68 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="mkNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                                <th>mbNo</th>
+                                <td><input type="text" name="mbNo" required /></td>
+                            </tr><tr>
+                                <th>mbId</th>
+                                <td><input type="text" name="mbId" required /></td>
+                            </tr><tr>
+                                <th>mkType</th>
+                                <td><input type="text" name="mkType" required /></td>
+                            </tr><tr>
+                                <th>mkExplain</th>
+                                <td><input type="text" name="mkExplain" required /></td>
+                            </tr><tr>
+                                <th>mkEmailKey</th>
+                                <td><input type="text" name="mkEmailKey" required /></td>
+                            </tr><tr>
+                                <th>mkConfirmYn</th>
+                                <td><input type="text" name="mkConfirmYn" required /></td>
+                            </tr><tr>
+                                <th>mkConfirmIp</th>
+                                <td><input type="text" name="mkConfirmIp" required /></td>
+                            </tr><tr>
+                                <th>mkExpireDt</th>
+                                <td><input type="text" name="mkExpireDt" required /></td>
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

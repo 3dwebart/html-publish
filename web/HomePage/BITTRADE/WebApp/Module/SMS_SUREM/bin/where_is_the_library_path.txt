@@ -1,0 +1,4 @@
+Set external jar library at >>>
+%root%/runtime/
+
+VM automatically recognize files.

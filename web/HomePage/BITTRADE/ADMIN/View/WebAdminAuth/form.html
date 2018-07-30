@@ -1,0 +1,102 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="auNo" value="" />
+        <input type="hidden" name="token" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>해당별 관리자의 메뉴 접근을 차단합니다.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>관리자아이디</th>
+                            <td><input type="text" name="mbId" required style="width:100px;"/></td>
+                        </tr>
+                    <tr>
+                    <th>접근제한 메뉴</th>
+                        <td>
+                            <select name="auMenu" id="auMenu"><option value="">접근 권한을 제한할 메뉴를 선택하세요.</option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                    <th>차단할 권한</th>
+                        <td>
+                            <input type="checkbox" id="auth4" name="auAuth[]" value="4" />읽기(리스트/내용)
+                            <input type="checkbox" id="auth2" name="auAuth[]" value="2" checked />등록/수정
+                            <input type="checkbox" id="auth1" name="auAuth[]" value="1" checked />삭제
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="submit" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+    <script type="text/javascript">
+        if(bean.data.mbId){
+            $('input[name=mbId]').attr("readonly",true).css("background","#f5f5f5").css("color","#999");
+        }
+
+        $.getJSON('/?mode=IndexMain/getMenu', 'json', function (menuJson) {
+            //menuJson
+            for (var key in menuJson.categorySub){
+                var pname = menuJson.category[key];
+                var subdata = menuJson.categorySub[key];
+                for (var subkey in subdata){
+                    if(subkey.indexOf('-line')==-1){
+                        $("<option></option>")
+                        .text('['+pname+'] '+subdata[subkey])
+                        .attr("value", subkey)
+                        .appendTo("select[name='auMenu']");
+                    }
+                }
+            }
+
+            $('select[name=auMenu]').val(bean.data.auMenu);
+        });
+
+        if(bean.data.auNo){
+            if (bean.data.auAuth.indexOf("4") >= 0)
+                $('#auth4').attr("checked",true);
+            else
+                $('#auth4').removeAttr("checked");
+
+            if (bean.data.auAuth.indexOf("2") >= 0)
+                $('#auth2').attr("checked",true);
+            else
+                $('#auth2').removeAttr("checked");
+
+            if (bean.data.auAuth.indexOf("1") >= 0)
+                $('#auth1').attr("checked",true);
+            else
+                $('#auth1').removeAttr("checked");
+        }
+
+    </script>
+</body>

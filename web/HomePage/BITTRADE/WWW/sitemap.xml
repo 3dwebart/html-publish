@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="https://bittrade.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="https://bittrade.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://bittrade.sitemaps.org/schemas/sitemap/0.9
+            https://bittrade.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://bittrade.funhansoft.com/</loc>
+  <lastmod>2016-02-23T08:11:35+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://bittrade.funhansoft.com/chart/main</loc>
+  <lastmod>2016-02-23T08:11:35+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://bittrade.funhansoft.com/customer/main</loc>
+  <lastmod>2016-02-23T08:11:35+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>

@@ -1,0 +1,99 @@
+<div id="ajax-content" class="example-popup">
+    <p>Content</p>
+</div>
+<table>
+    <tbody>
+        <tr>
+            <td>2312</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>1231</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5465</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5353</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5343</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>1231</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4354</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>5646</td>
+        </tr>
+        <!---->
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>4235</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>9875</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>8678</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>5464</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>3345</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0</td>
+            <td>9743</td>
+        </tr>
+    </tbody>
+</table>
+<style>
+.example-popup {
+    position: relative;
+    background: #FFF;
+    padding: 20px;
+    width: auto;
+    max-width: 500px;
+    margin: 20px auto;
+}
+table {min-width: 100%;}
+</style>
+<script>
+    var data = new Array();
+    var maxData = 0;
+    data = [1234,2541,7866,9542,7856,3643,3435,3453,4545,9863,4568,2546,6984,9542];
+    for(var i = 0; i < data.length; i++) {
+        console.log('Real data = ' + data[i]);
+        maxData = Math.max(maxData, data[i]);
+        console.log('Max data = ' + maxData);
+    }
+</script>

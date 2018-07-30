@@ -1,0 +1,103 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view-adm.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>아이디</th>
+                        <td><span id="mbId"></span></td>
+                    </tr><tr>
+                        <th>관리자이름</th>
+                        <td><span id="mbName"></span></td>
+                    </tr><tr>
+                        <th>관리자권한</th>
+                        <td><span id="mbAuth"></span></td>
+                    </tr><tr>
+                        <th>접근허용아이피</th>
+                        <td><span id="mbAccessIp"></span></td>
+                    </tr><tr>
+                        <th>최종로그인시간</th>
+                        <td><span id="mbTodayLogin"></span></td>
+                    </tr><tr>
+                        <th>로그인아이피</th>
+                        <td><span id="mbLoginIp"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <span id="span_btn_write" style="display:none"><input type="button" id="btn_write" name="btn_submit" class="btn-default right" value="등 록" /></span>
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.mbNo" />
+            <span id="span_btn_delete"><input type="button" id="btn_delete" name="btn_delete" class="btn-default right" value="삭 제" onclick="alertDelete();" /></span>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+$(document).ready(function(){
+    if( typeof (bean.auth)!='undefined' && bean.auth=='super' ){
+        $('#span_btn_write').css('display', 'block');
+    }
+});
+
+function deleteAction(){
+    var data = {'mbNo':bean.data.mbNo};
+    var result = -1;
+    $('body').showDialogProgress();
+    $.post(bean.link.del,
+        data,
+        function(json){
+            if(!json || !json.hasOwnProperty('result')){
+              $('body').viewDialogMessage('<p>삭제권한이 있는지 확인해 보세요.</p>', function(){
+                  $(location).attr('href',bean.link.list);
+              });
+              return;
+            }
+
+            result = parseInt(json.result);
+            if(result>0){
+                 $('body').viewDialogMessage('<p>해당 관리자를 삭제하였습니다.</p>', function(){
+                     $(location).attr('href',bean.link.list);
+                 });
+            }else if(result==0){
+                $('body').viewDialogMessage('<p>삭제에 실패하였습니다.</p>');
+            }else if(result==-210){
+                $('body').viewDialogMessage('<p>권한이 없습니다.</p>', function(){ $(location).attr('href',bean.link.list); });
+            }else{
+                $('body').viewDialogMessage('<p>삭제에 실패하였습니다.</p><p>Error code : '+result+'</p>');
+            }
+        }, "json")
+        .done(function() { $('body').hideDialogProgress();})
+        .fail(function() { $('body').viewDialogMessage('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>',reload); })
+        .always(function() {});
+    return false;
+}
+
+function alertDelete(){
+    $('body').viewConfirmDialogMessage('<p>정말 삭제하시겠습니까?</p>',deleteAction);
+}
+</script>
+</body>

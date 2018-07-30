@@ -1,0 +1,134 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{js}/sha256.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+<script type="text/javascript" src="$link{script}/json/nations.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="mbNo" value="" />
+        <input type="hidden" name="deId" value="" />
+        <input type="hidden" name="mbBitWallet" value="0" />
+        <input type="hidden" name="mbNick" value="" />
+        <input type="hidden" name="mbName" value="" />
+        <input type="hidden" name="mbNickDt" /><input type="hidden" name="mbPwd" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>아이디</th>
+                        <td><input type="text" name="mbId" style="width:200px" maxlength="50" required /></td>
+                        <th>이름</th>
+                        <td><input type="text" name="mbLastName" style="width:50px" placeholder="성" required />&nbsp;<input type="text" name="mbFirstName" style="width:150px" placeholder="이름" required /></td>
+                    </tr>
+                    <tr>
+                        <th>레벨(회원구분)</th>
+                        <td>
+                            <select name="mbLevel">
+                                <option value="0">일반회원(이메일미인증)</option>
+                                <option value="1">회원(본인인증필요)(LV.1)</option>
+                                <option value="2">회원(LV.2)</option>
+                                <option value="3">회원(LV.3)</option>
+                                <option value="4">회원(LV.4)</option>
+                                <option value="5">회원(LV.5)</option>
+                                </select></td>
+                        <th>본인인증</th>
+                        <td>
+                            <select name="mbCertificate">
+                                <option value="N">미인증</option>
+                                <option value="Y">인증</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>성별</th>
+                        <td>
+                            <select name="mbGender">
+                                <option value="M">남성</option>
+                                <option value="W">여성</option>
+                                <option value="E">기타</option>
+                            </select>
+                        </td>
+                        <th>생년월일</th>
+                        <td><input type="text" name="mbBirth" style="width:100px" /> &nbsp; <span class="explain">예)19780103</span></td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td><input type="text" name="mbEmail" /></td>
+                        <th>모바일번호</th>
+                        <td><input type="text" name="mbCountryDialCode" style="width:50px;" required />&nbsp;<input type="text" name="mbHp" style="width:130px;" /></td>
+                    </tr>
+                    <tr>
+                        <th>국가코드</th>
+                        <td colspan="3">
+                            <select name="contryCode"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>탈퇴/차단</th>
+                        <td colspan="3">
+                            <select name="mbDelYn">
+                                <option value="N">정상</option>
+                                <option value="Y">탈퇴</option>
+                                <option value="O">강제차단</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script type="text/javascript">
+if(bean.data.mbId){
+    $('input[name=mbId]').attr("readonly",true).css("background","#f5f5f5").css("color","#999");
+}
+$('input[name=mbCountryDialCode]').attr("readonly",true).css("background","#f5f5f5");
+
+for (var i=0;i<nations.length;i++){
+    $("<option></option>")
+    .text(nations[i].nation)
+    .attr("value", nations[i].code)
+    .attr("data-dial", nations[i].dial_code)
+    .appendTo("select[name='contryCode']");
+}
+
+if(bean.data.contryCode){
+    $('select[name=contryCode]').val(bean.data.contryCode);
+}else{
+    $('select[name=contryCode]').val('KR');
+    $("input[name='mbCountryDialCode']").val('+82');
+}
+
+$('select[name=contryCode]').change(function(){
+    $("input[name='mbCountryDialCode']").val($("select[name='contryCode'] option:selected").data('dial'));
+});
+</script>
+</body>

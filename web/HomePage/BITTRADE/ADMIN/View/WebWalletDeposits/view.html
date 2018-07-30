@@ -1,0 +1,87 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                                <th>전송구분</th>
+                                <td><span id="odCategory"></span></td>
+                            </tr><tr>
+                                <th>회원번호</th>
+                                <td><span id="mbNo"></span></td>
+                            </tr><tr>
+                                <th>입금수량</th>
+                                <td><span id="odAmount"></span></td>
+                            </tr><tr>
+                                <th>TXID</th>
+                                <td><span id="odTxid"></span></td>
+                            </tr><tr>
+                                <th>수수료</th>
+                                <td><span id="odFee"></span></td>
+                            </tr><tr>
+                                <th>출금지갑주소</th>
+                                <td><span id="odFromAddr"></span></td>
+                            </tr><tr>
+                                <th>입금지갑주소</th>
+                                <td><span id="odToAddr"></span></td>
+                            </tr><tr>
+                                <th>컨펌</th>
+                                <td><span id="odConfirm"></span></td>
+                            </tr><tr>
+                                <th>자산구분</th>
+                                <td><span id="poType"></span></td>
+                            </tr><tr>
+                                <th>충전수량</th>
+                                <td><span id="poAmount"></span></td>
+                            </tr><tr>
+                                <th>자산지급여부</th>
+                                <td><span id="poPayYn"></span></td>
+                            </tr><tr>
+                                <th>자산지급시간</th>
+                                <td><span id="poPayDt"></span></td>
+                            </tr><tr>
+                                <th>등록일</th>
+                                <td><span id="odRegDt"></span></td>
+                            </tr><tr>
+                                <th>기타1</th>
+                                <td><span id="odEtc1"></span></td>
+                            </tr><tr>
+                                <th>기타2</th>
+                                <td><span id="odEtc2"></span></td>
+                            </tr><tr>
+                                <th>기타3</th>
+                                <td><span id="odEtc3"></span></td>
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <input type="button" id="btn_write" name="btn_submit" class="btn-default right" value="등 록" />
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.odId" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

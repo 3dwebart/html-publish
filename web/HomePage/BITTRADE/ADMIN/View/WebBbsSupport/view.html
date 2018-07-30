@@ -1,0 +1,121 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="/Plugin/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="$link{script}/view-view-bbs.min.js"></script>
+
+<style>
+td span#content img{
+    max-width: 720px;
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div style="margin:0 0 10px 0">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <input type="button" id="btn_write" name="btn_submit" class="btn-default right" value="등 록" />
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.bbsNo" />
+            <input type="button" id="btn_delete" name="btn_delete" class="btn-default right" value="삭 제" onclick="alertDelete();" />
+        </div>
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    
+                    <tr id="enSubject">
+                        <th id="enSubject_header">제목</th>
+                        <td><span id="subject"></span></td>
+                    </tr>
+                    <tr id="krSubject">
+                        <th>[한글]제목</th>
+                        <td><span id="subjectKr"></span></td>
+                    </tr>
+                    <tr id="jpSubject">
+                        <th>[일어]제목</th>
+                        <td><span id="subjectJp"></span></td>
+                    </tr>
+                    <tr id="cnSubject">
+                        <th>[중문]제목</th>
+                        <td><span id="subjectCn"></span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <th id="enSubject_header">카테고리</th>
+                        <td><span id="cateNo"></span></td>
+                    </tr>
+                    <tr id="enContent">
+                        <th id="enContent_header">내용</th>
+                        <td>
+                            <div style="overflow:auto;min-height:200px;width:750px;padding:10px 0;">
+                                <span id="content"></span>
+                            </div>
+                         </td>
+                    </tr>
+                    <tr id="krContent">
+                        <th>[한글]내용</th>
+                        <td>
+                            <div style="overflow:auto;min-height:200px;width:750px;padding:10px 0;">
+                                <span id="contentKr"></span>
+                            </div>
+                         </td>
+                    </tr>
+                    <tr id="jpContent">
+                        <th>[일어]내용</th>
+                        <td>
+                            <div style="overflow:auto;min-height:200px;width:750px;padding:10px 0;">
+                                <span id="contentJp"></span>
+                            </div>
+                         </td>
+                    </tr>
+                    <tr id="cnContent">
+                        <th>[중문]내용</th>
+                        <td>
+                            <div style="overflow:auto;min-height:200px;width:750px;padding:10px 0;">
+                                <span id="contentCn"></span>
+                            </div>
+                         </td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <th>작성일</th>
+                        <td><span id="regDt"></span></td>
+                    </tr><tr>
+                        <th>수정일</th>
+                        <td><span id="modDt"></span></td>
+                    </tr><tr>
+                        <th>등록아이피</th>
+                        <td><span id="regIp"></span></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list2" name="btn_list2" class="btn-default" value="목 록" />
+            <input type="button" id="btn_write" name="btn_submit" class="btn-default right" value="등 록" />
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.bbsNo" />
+            <input type="button" id="btn_delete" name="btn_delete" class="btn-default right" value="삭 제" onclick="alertDelete();" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        
+    });
+</script>
+</body>

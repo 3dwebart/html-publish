@@ -1,0 +1,138 @@
+<head>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/sha256.min.js"></script>
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<style>
+html, body { height: 100%;}
+body { font: 12px 'Lucida Sans Unicode', 'Trebuchet MS', Arial, Helvetica; margin: 0; background:url('/Web/img/bg_login.jpg') no-repeat 50% 50% ; background-size:cover; }
+fieldset {  border: 0; padding: 0;margin: 0;}
+#inputs input {background: #f1f1f1 url(/Web/img/login-sprite.png) no-repeat; padding: 15px 15px 15px 30px;margin: 0 0 10px 0;  width: 353px; /* 353 + 2 + 45 = 400 */ border: 1px solid #ccc;  border-radius: 5px;  box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff; }
+#username{ background-position: 5px -2px !important;}
+#password { background-position: 5px -52px !important;}
+#actions { margin: 25px 0 0 0;}
+#actions a{ color: #3151A2;float: right; line-height: 35px; margin-left: 10px;}
+#back {  display: block; text-align: center;  position: relative; top: 60px; color: #999; }
+
+#login { width:400px; position:absolute; left:50%; top:50%; margin:-180px 0 0 -200px; height:310px;  box-shadow:none; padding:20px; border-radius:15px; box-shadow:0 0 7px rgba(0,0,0,0.2); background:rgba(255,255,255,0.7); }
+#login:before { display:none; }
+#inputs input { box-shadow:none; border-radius:0; outline:0; transition:all 0.3s ease; -webkit-transition:all 0.3s ease; border-radius:6px;}
+#inputs input:focus { outline:0; border:1px solid #5698dc; box-shadow:none; background-color:#fff; }
+#btn_submit { width:100%; height:40px; font-size:14px; color:#fff; background:#5698dc; border:0; cursor:pointer; border-radius:5px; }
+h1 { width:64px; height:64px; margin:-10px auto 20px; background:#fff url(/Web/img/ico_login.png) no-repeat 50% 50%; text-indent:-9999px;  border-radius:64px; margin-top:-50px; box-shadow:0 3px 3px rgba(0,0,0,0.2);  }
+
+</style>
+</head>
+<body>
+
+<form id="login">
+    <input type="hidden" name="token" value="" />
+    <h1>로그인</h1>
+    <fieldset id="inputs">
+        <input id="username" name="username" type="text" placeholder="Username" autofocus required>
+        <input id="password" name="password" type="password" placeholder="Password" required>
+    </fieldset>
+    <center><div class="g-recaptcha" data-sitekey="" style="margin:10px 0;"></div></center>
+    <fieldset id="actions">
+        <center><input type="submit" id="btn_submit" value="로그인"></center>
+    </fieldset>
+</form>
+<script>
+$(document).ready(function(){
+    var bean = $.parseJSON($.base64.decode(jsonObject));
+    $("input[name=token]").val(bean.token);
+    $("div.g-recaptcha").attr('data-sitekey', bean.sitekey);
+
+        $("#btn_submit").click(function(){
+            if(!$('#g-recaptcha-response').val() && bean.sitekey){
+                $('body').viewDialogMessage('<p>로봇이 아님을 증명해주세요.</p>');
+                return false;
+            }
+            var uid  = $("input[name=username]").val();
+            var upwd = $("input[name=password]").val();
+
+            var en_uid = $.base64.encode(uid);
+            var en_upwd = sha256_digest(upwd);
+            $("input[name=username]").val(en_uid);
+            $("input[name=password]").val(en_upwd);
+
+            var pdata = $("form").serialize();
+            $("input[name=username]").val(uid);
+
+            $('body').showDialogProgress();
+            //$("#btn_submit").attr("disabled",true);
+            $.post('/?mode=IndexMain/login&proc=1',
+                pdata,
+                function(json){
+                    if(parseInt(json.result)>0){
+                        //$('body').viewDialogMessage('<p>로그인되었습니다.</p>',main);
+                        main();
+                    }else if(parseInt(json.result)==0){
+                        $('body').viewDialogMessage('<p>올바른 회원인지 확인 후 이용하세요.</p>',reload);
+                        $(location).attr('href','/?mode=IndexMain/login');
+                    }else{
+                        $("#btn_submit").removeAttr("disabled");
+                        for (var key in json){
+                            if(json[key]==null || json[key].length==0 || json[key]=='null'){
+                                $('input[name='+key+']').addClass('errorinput');
+                            }else{
+                                $('input[name='+key+']').removeClass('errorinput');
+                                $('input[name='+key+']').val(json[key]);
+                            }
+                        }
+                        switch(parseInt(json.result)){
+                             case -90:
+                                $('body').viewDialogMessage('<p>올바른 회원인지 확인 후 이용하세요.</p>',reload);
+                            break;
+                            case -101:
+                                $('body').viewDialogMessage('<p>입력데이터 값을 정의해 주세요.</p>',reload);
+                            break;
+                            case -180:
+                                $('body').viewDialogMessage('<p>강조된 입력란에 모든 항목을 작성해 주세요.</p>',reload);
+                            break;
+                            case -181:
+                                $('body').viewDialogMessage('<p>아이디를 최소 4글자이상 입력하세요.</p>',reload);
+                            break;
+                            case -182:
+                                $('body').viewDialogMessage('<p>비밀번호를 최소 4글자이상 입력하세요.</p>',reload);
+                            break;
+                            case -200:
+                                $('body').viewDialogMessage('<p>해당 관리자의 접근IP가 올바르지 않습니다.</p>',reload);
+                            break;
+                            case -900:
+                                $('body').viewDialogMessage('<p>토큰 인증에러가 발생하였습니다.</p><p>새로고침(F5)을 누른 후 다시 시도해 주세요.</p>',reload);
+                            break;
+                            case -910:
+                                $('body').viewDialogMessage('<p>연속적인 데이터를 입력할 수 없습니다.</p><p>잠시 후 다시 시도해 주세요.</p>',reload);
+                            break;
+                            case -930:
+                                $('body').viewDialogMessage('<p>올바른 경로로 접근하세요.</p>',historyBack);
+                            break;
+                            case -950:
+                                $('body').viewDialogMessage('<p>로봇이 아님을 증명해 주세요.</p>',historyBack);
+                            break;
+                            case -190:
+                                $('body').viewDialogMessage('<p>비밀번호가 올바르지 않습니다.</p>',reload);
+                            break;
+                            default:
+                                $('body').viewDialogMessage('<p>예외가 발생되었습니다.</p><p>Error . '+json.result+'</p>',reload);
+                            break;
+                        }
+                    }
+                }, "json");
+            return false;
+        });
+});
+
+function reload(){
+    $(location).attr('href','/?mode=IndexMain/login');
+}
+function main(){
+    $(location).attr('href','/?mode=IndexMain');
+}
+function historyBack(){
+    history.go(-1);
+}
+</script>
+</body>
+

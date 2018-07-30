@@ -1,0 +1,59 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "request":{
+        "description":"인증센터 모바일 인증시 - SMS 인증 번호 요청",
+        "description":"SMS 인증번호 요청시 카운터 (하루 발송 제한5번)",
+        "sql_count_result":"SELECT sms_no FROM web_sms_certify WHERE sms_hp=? AND reg_dt >= DATE_FORMAT( DATE_ADD(NOW(), INTERVAL -1 DAY ), '%Y-%m-%d %H:00:00' );",
+        "mapkeys_count_result":{
+            "sms_hp":{"required":true,"maxlength":16}
+        },
+
+        "description":"SMS 인증번호 요청시 카운터 (하루 발송 제한5번)",
+        "sql_ip_count_result":"SELECT sms_no FROM web_sms_certify WHERE reg_ip=? AND reg_dt >= DATE_FORMAT( DATE_ADD(NOW(), INTERVAL -1 DAY ), '%Y-%m-%d %H:00:00' );",
+        "mapkeys_ip_count_result":{
+            "reg_ip":{"required":true,"maxlength":16}
+        },
+
+        "description":"SMS 인증번호 요청시 기존 요청 데이터가 있는지 확인 단 10분",
+        "sql_is_send_list":"SELECT sms_no, reg_dt FROM web_sms_certify WHERE sms_type='PROVE' AND sms_hp=? AND sms_status=? ORDER BY sms_no DESC limit 1",
+        "mapkeys_is_send_list":{
+            "sms_hp":{"required":true,"maxlength":16}
+            ,"sms_status":{"required":true,"maxlength":50}
+        },
+        "description":"SMS 인증번호 취소요청, 10분 인증시간",
+        "sql_update_sms_cancel":"UPDATE web_sms_certify SET sms_status=? WHERE sms_type='PROVE' AND sms_hp=? AND sms_status=? AND reg_dt >= DATE_FORMAT( DATE_ADD(NOW(), INTERVAL -10 MINUTE ), '%Y-%m-%d %H:00:00' )",
+        "mapkeys_update_sms_cancel":{
+            "new_sms_status":{"required":true,"maxlength":50}
+            ,"sms_hp":{"required":true,"maxlength":16,"number": true}
+            ,"old_sms_status":{"required":true,"maxlength":50}
+        },
+        "description":"SMS 인증번호 요청시 인증번호 랜덤(6자리) 생성후 데이터 삽입",
+        "sql_insert_sms_certify":"INSERT web_sms_certify (sms_id,sms_hp,sms_certify,sms_type,reg_ip) VALUES (?,?,?,?,?)",
+        "mapkeys_insert_sms_certify":{
+            "sms_id":{"required":true,"maxlength":50}
+            ,"sms_hp":{"required":true,"maxlength":16}
+            ,"sms_certify":{"required":true,"maxlength":12}
+            ,"sms_type":{"required":true,"maxlength":50}
+            ,"reg_ip":{"required":true,"maxlength":50}
+        },
+        "description":"SMS 공통 모듈 데이터 삽입 분기에 따라 SMS 전송 처리",
+        "sql_insert_sms_sender":"INSERT INTO web_sms_sender(mb_id, ss_is_mms, ss_is_inter, ss_tel_code, ss_tel_num, ss_content, ss_page_type, ss_provider) VALUES (?,?,?,?,?,?,?,?)",
+        "mapkeys_insert_sms_sender":{
+            "mb_id":{"required":true, "maxlength":100}
+            ,"ss_is_mms":{"required":true, "maxlength":10}
+            ,"ss_is_inter":{"required":false, "maxlength":10}
+            ,"ss_tel_code":{"required":false, "maxlength":10}
+            ,"ss_tel_num":{"required":true, "maxlength":20}
+            ,"ss_content":{"required":true, "maxlength":255}
+            ,"ss_page_type":{"required":true, "maxlength":20}
+            ,"ss_provider":{"required":false, "maxlength":50}
+        },
+        "datamodel":"SmsRequest",
+        "authlevel":0
+    }
+  }
+}

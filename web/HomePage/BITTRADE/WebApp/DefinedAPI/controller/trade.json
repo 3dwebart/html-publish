@@ -1,0 +1,241 @@
+{
+    "Database":{
+        "name":"fns_web"
+    },
+    "Controller":
+    {	
+        "order":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch","balance":"fns_trade_point"},
+            "sql":"INSERT INTO web_open_order_krw_{currency}(od_action,od_pay_status,od_market_price,od_total_cost,mb_no,mb_id,od_temp_coin,od_fee_rate,od_receipt_coin,od_receipt_fee,od_reg_ip)VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+            "mapkeys":{
+                "action":{"required":true,"maxlength":50}
+                ,"status":{"required":false,"maxlength":10}
+                ,"price":{"required":true}
+                ,"totalcost":{"required":true}
+                ,"mb_no":{"required":true}
+                ,"mb_id":{"required":true}
+                ,"amount":{"required":true}
+                ,"feerate":{"required":true}
+                ,"rcoin":{"required":true}
+                ,"rfee":{"required":false}
+                ,"regip":{"default":"CLIENT_IP"}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "sql_balancesum":"CALL proc_set_member_point_balance_action(?,?,?)",
+            "mapkeys_balancesum":{
+                "mb_no":{"required":true},
+                "market_type":{"default":"ALL"},
+                "ac":{"default":"API"}
+            },
+            "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss FROM trade_member_point_balance WHERE mb_no=?",
+            "mapkeys_balanceupdate":{
+                "mb_no":{"required":true}
+            },
+            "sql_balance_update":"UPDATE trade_member_point_balance SET po_on_trade = po_on_trade + ? WHERE mb_no = ? AND po_type = ?",
+            "mapkeys_balance_update":{
+                "po_on_trade":{"required":true},
+                "mb_no":{"required":true},
+                "po_type":{"required":true}
+            },
+            "sql_balance_update_krw":"UPDATE trade_member_point_balance SET po_on_trade = po_on_trade + ? WHERE mb_no = ? AND po_type = 'krw'",
+            "mapkeys_balance_update_krw":{
+                "po_on_trade":{"required":true},
+                "mb_no":{"required":true}
+            },
+            "datamodel":"TradeOrderReg",
+            "authlevel":1            
+        },
+        "cancel":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch", "balance":"fns_trade_point"},
+            "description":"거래소 트레이드 취소 액션",
+            "sql":"UPDATE mem_open_order_krw_{currency} SET od_pay_status=? WHERE (od_pay_status ='REQ' OR od_pay_status = 'PART') AND od_id=? AND mb_no=? limit 1",
+            "mapkeys":{
+                "status":{"default":"CAN"}
+                ,"orderid":{"required":true}
+                ,"mb_no":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance WHERE mb_no=?",
+            "mapkeys_balanceupdate":{
+                "mb_no":{"required":true}
+            },
+            "datamodel":"TradeOrderCancel",
+            "authlevel":1
+        },
+        "completehistory":{
+            "method":"POST",   
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+            "sql":"SELECT (od_action) as action, (od_pay_status) as status, (od_pay_po_ids) as pointids, (od_market_price) as price, (od_total_cost) as totalcost, (od_temp_coin) as amount, (od_receipt_coin) as rcoin, (od_receipt_fee) as rfee, (od_receipt_avg) as ravg, (od_reg_dt) as regdate, (od_receipt_dt) as rdate FROM web_trade_order_history_krw_{currency} WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? ORDER BY od_receipt_dt DESC, od_id DESC LIMIT ?,?",
+            "mapkeys":{
+                "mb_no":{"required":true}			
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "rowlimit":100,
+            "datamodel":"TradeCHistory",
+            "authlevel":1             
+        },
+        "openhistory":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+            "description":"거래소 미체결 내역 리스트 ",
+            "sql":"SELECT (od_id) as orderid, (od_action) as action, (od_pay_status) as status, (od_market_price) as price, (od_total_cost) as totalcost, (od_temp_coin) as amount, (od_receipt_coin) as rcoin, (od_reg_dt) as regdate, (od_receipt_avg) as ravg, (od_receipt_dt) as rdate FROM mem_open_order_krw_{currency} WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? ORDER BY od_id ASC limit ?,?",
+            "mapkeys":{
+                "mb_no":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "rowlimit":100,
+            "datamodel":"TradeCHistory",
+            "authlevel":1
+        },
+        "openhistorylessbyprice":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+            "description":"거래소 미체결 내역 리스트 ",
+            "sql":"SELECT (od_id) as orderid, (od_action) as action, (od_pay_status) as status, (od_market_price) as price, (od_total_cost) as totalcost, (od_temp_coin) as amount, (od_receipt_coin) as rcoin, (od_reg_dt) as regdate, (od_receipt_avg) as ravg, (od_receipt_dt) as rdate FROM mem_open_order_krw_{currency} WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? AND od_market_price < ? AND od_action = ? ORDER BY od_id ASC limit ?,?",
+            "mapkeys":{
+                "mb_no":{"required":true}
+                ,"price":{"required":true}
+                ,"action":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "rowlimit":100,
+            "datamodel":"TradeHistorybyPrice",
+            "authlevel":1
+        },
+        "openhistorythanbyprice":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+            "description":"거래소 미체결 내역 리스트 ",
+            "sql":"SELECT (od_id) as orderid, (od_action) as action, (od_pay_status) as status, (od_market_price) as price, (od_total_cost) as totalcost, (od_temp_coin) as amount, (od_receipt_coin) as rcoin, (od_reg_dt) as regdate, (od_receipt_avg) as ravg, (od_receipt_dt) as rdate FROM mem_open_order_krw_{currency} WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? AND od_market_price > ?  AND od_action = ? ORDER BY od_id ASC limit ?,?",
+            "mapkeys":{
+                "mb_no":{"required":true}
+                ,"price":{"required":true}
+                ,"action":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "rowlimit":100,
+            "datamodel":"TradeHistorybyPrice",
+            "authlevel":1
+        },
+        "openhistorybyprice":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+            "description":"거래소 미체결 내역 리스트 ",
+            "sql":"SELECT (od_id) as orderid, (od_action) as action, (od_pay_status) as status, (od_market_price) as price, (od_total_cost) as totalcost, (od_temp_coin) as amount, (od_receipt_coin) as rcoin, (od_reg_dt) as regdate, (od_receipt_avg) as ravg, (od_receipt_dt) as rdate FROM mem_open_order_krw_{currency} WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? AND od_market_price = ?  AND od_action = ? ORDER BY od_id ASC limit ?,?",
+            "mapkeys":{
+                "mb_no":{"required":true}
+                ,"price":{"required":true}
+                ,"action":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "rowlimit":100,
+            "datamodel":"TradeHistorybyPrice",
+            "authlevel":1
+        },
+        
+        "openhistorybyaction":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+            "description":"거래소 미체결 내역 리스트 ",
+            "sql":"SELECT (od_id) as orderid, (od_action) as action, (od_pay_status) as status, (od_market_price) as price, (od_total_cost) as totalcost, (od_temp_coin) as amount, (od_receipt_coin) as rcoin, (od_reg_dt) as regdate, (od_receipt_avg) as ravg, (od_receipt_dt) as rdate FROM mem_open_order_krw_{currency} WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? AND od_action = ? ORDER BY od_id ASC limit ?,?",
+            "mapkeys":{
+                "mb_no":{"required":true}            
+                ,"action":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "rowlimit":100,
+            "datamodel":"TradeHistorybyAction",
+            "authlevel":1
+        },
+        "allcancel":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch", "balance":"fns_trade_point"},
+            "description":"거래소 트레이드 취소 액션",
+            "sql":"UPDATE mem_open_order_krw_{currency} SET od_pay_status=? WHERE (od_pay_status = 'REQ' OR od_pay_status = 'PART') AND mb_no=?",
+            "mapkeys":{
+                "status":{"default":"CAN"}                
+                ,"mb_no":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance WHERE mb_no=?",
+            "mapkeys_balanceupdate":{
+                "mb_no":{"required":true}
+            },
+            "datamodel":"TradeAllOrderCancel",
+            "authlevel":1
+        },
+        "thancancel":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch", "balance":"fns_trade_point"},
+            "description":"거래소 트레이드 취소 액션",
+            "sql":"UPDATE mem_open_order_krw_{currency} SET od_pay_status=? WHERE (od_pay_status = 'REQ' OR od_pay_status = 'PART') AND mb_no=? AND ( od_market_price > ? OR od_reg_dt < (now() - INTERVAL 24 HOUR)) AND od_action = ?",
+            "mapkeys":{
+                "status":{"default":"CAN"}                
+                ,"mb_no":{"required":true}
+                ,"price":{"required":true}
+                ,"action":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance WHERE mb_no=?",
+            "mapkeys_balanceupdate":{
+                "mb_no":{"required":true}
+            },
+            "datamodel":"TradeMoreOrderCancel",
+            "authlevel":1
+        },
+        "lesscancel":{
+            "method":"POST",
+            "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch", "balance":"fns_trade_point"},
+            "description":"거래소 트레이드 취소 액션",
+            "sql":"UPDATE mem_open_order_krw_{currency} SET od_pay_status=? WHERE (od_pay_status = 'REQ' OR od_pay_status = 'PART') AND mb_no=? AND ( od_market_price < ? OR od_reg_dt < (now() - INTERVAL 24 HOUR)) AND od_action = ?",
+            "mapkeys":{
+                "status":{"default":"CAN"}                
+                ,"mb_no":{"required":true}
+                ,"price":{"required":true}
+                ,"action":{"required":true}
+            },
+            "sql_apikey":"SELECT mb_no, mb_id, mk_api_key, mk_secret, mk_expire_dt FROM web_member_api_key WHERE mk_api_key = ? ORDER BY mk_no DESC LIMIT 1",
+            "mapkeys_apikey":{
+                "apikey":{"required":true,"maxlength":100}
+            },
+            "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance WHERE mb_no=?",
+            "mapkeys_balanceupdate":{
+                "mb_no":{"required":true}
+            },
+            "datamodel":"TradeMoreOrderCancel",
+            "authlevel":1
+        }	
+    }
+}

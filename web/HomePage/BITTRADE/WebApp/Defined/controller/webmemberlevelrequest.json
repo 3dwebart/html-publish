@@ -1,0 +1,39 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "regist":{
+        "description":"레벨 승급 요청",
+        "method":"POST",
+        "sql_select":"SELECT COUNT(mb_no) AS cnt FROM web_member_level_request WHERE mb_no=? AND mb_req_level=? AND (admin_confirm='N') ORDER BY req_no DESC LIMIT 1",
+        "mapkeys_select":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"mb_req_level":{"required":true,"number": true}
+        },
+        "sql":"INSERT INTO web_member_level_request(mb_no,mb_id,mb_cur_level,mb_req_level,mb_prove_method,mb_prove_file1,mb_prove_file2,mb_prove_file3,req_ip)VALUES(?,?,?,?,?,?,?,?,?)",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"mb_cur_level":{"required":true,"number": true}
+            ,"mb_req_level":{"required":true,"number": true}
+            ,"mb_prove_method":{"required":true,"maxlength":10}
+            ,"mb_prove_file1":{"required":false,"maxlength":"255"}
+            ,"mb_prove_file2":{"required":false,"maxlength":"255"}
+            ,"mb_prove_file3":{"required":false,"maxlength":"255"}
+            ,"req_ip":{"default":"CLIENT_IP"}
+        },
+        "authlevel":0,
+        "datamodel":"LevelRequest"
+    },
+
+    "select":{
+        "description":"2레벨 조회",
+        "sql":"SELECT admin_confirm, admin_confirm_dt, admin_memo FROM web_member_level_request WHERE mb_no=? AND mb_req_level=2 ORDER BY req_no DESC LIMIT 1",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        }
+    }
+  }
+}

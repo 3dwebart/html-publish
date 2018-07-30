@@ -1,0 +1,120 @@
+{
+  "Database":{
+    "name":"fns_trade_point"
+  },
+  "Controller":
+  {
+    "regist":{
+        "database":{"wallet":"fns_web"},
+        "description":"KRW 입금 제한금액 조회",
+        "sql_depositlimit":"SELECT cf_max_deposit, cf_max_withdraw, cf_max_day FROM web_config_wallet_limit WHERE cf_country_code=? AND cf_wallet_type=? AND cf_mb_level=? LIMIT 1",
+        "mapkeys_depositlimit":{
+            "countrycode":{"required":true,"maxlength":10}
+            ,"wallettype":{"required":true,"maxlength":10}
+            ,"mblevel":{"required":true,"number": true}
+        },
+        "description":"KRW 입금 합계 조회",
+        "sql_depositsumkrw":"SELECT IFNULL(SUM(od_temp_bank), 0) AS sum_krw FROM web_cash_deposits WHERE mb_no=? AND it_id=2 AND it_id_pay='Y' AND (od_datetime BETWEEN DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -? DAY ), '%Y-%m-%d 00:00:00') AND NOW())",
+        "mapkeys_depositsumkrw":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"day":{"required":true,"number": true}
+        },
+        "description":"KRW 입금요청 순번 가져오기",
+        "sql_depositcnt":"SELECT COUNT(od_id) AS od_cnt FROM web_cash_deposits WHERE mb_no=? LIMIT 1 ",
+        "mapkeys_depositcnt":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "description":"KRW 입금요청",
+        "sql_regist":"INSERT INTO web_cash_deposits(it_id, it_name, mb_no, mb_id, od_name, od_email, od_tel, od_hp, od_temp_bank, od_deposit_name, od_bank_account, od_shop_memo, od_settle_case, od_hope_date, od_ip, od_cnt)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys_regist":{
+            "it_id":{"required":true,"maxlength":40}
+            ,"it_name":{"required":true,"maxlength":40}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"od_name":{"required":true,"maxlength":40}
+            ,"od_email":{"required":true,"maxlength":50}
+            ,"od_tel":{"required":false,"maxlength":50}
+            ,"od_hp":{"required":false,"maxlength":50}
+            ,"od_temp_bank":{"required":true,"maxlength":50}
+            ,"od_deposit_name":{"required":true,"maxlength":50}
+            ,"od_bank_account":{"required":true,"maxlength":50}
+            ,"od_shop_memo":{"required":false,"maxlength":50}
+            ,"od_settle_case":{"required":false,"maxlength":50}
+            ,"od_hope_date":{"required":false,"maxlength":50}
+            ,"od_ip":{"default":"CLIENT_IP"}
+            ,"od_cnt":{"required":true,"number":true}
+        },
+        "authlevel":0,
+        "datamodel":"CashDeposit"
+    },
+
+    "listsshort":{
+        "description":"KRW 충전 대기 내역 short",
+        "sql":"SELECT od_id, od_datetime, od_deposit_name, od_temp_bank, od_hope_date, od_bank_account FROM web_cash_deposits WHERE it_id_pay=? AND od_del_yn=? AND mb_no=?",
+        "rowlimit":20,
+        "mapkeys":{
+            "it_id_pay":{"required":true,"maxlength":10}
+            ,"od_del_yn":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+
+    "waitlistsenv":{
+        "description":"web_cash_deposits 입금대기 페이징 설정값 - 20ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM web_cash_deposits WHERE it_id_pay=? AND od_del_yn=? AND mb_no=? ORDER BY od_id DESC",
+        "mapkeys":{
+            "it_id_pay":{"required":true,"maxlength":10}
+            ,"od_del_yn":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+
+    "waitlists":{
+        "description":"web_cash_deposits 입금대기 페이징 설정값 - 20ea",
+        "sql":"SELECT od_id, od_datetime, od_deposit_name, od_temp_bank, od_hope_date, od_bank_account FROM web_cash_deposits WHERE it_id_pay=? AND od_del_yn=? AND mb_no=? ORDER BY od_id DESC",
+        "rowlimit":20,
+        "mapkeys":{
+            "it_id_pay":{"required":true,"maxlength":10}
+            ,"od_del_yn":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+
+
+    "listsenv":{
+        "description":"web_cash_deposits 페이징 설정값 - 20ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM web_cash_deposits WHERE it_id_pay=? AND od_del_yn=? AND mb_no=?",
+        "mapkeys":{
+            "it_id_pay":{"required":true,"maxlength":10}
+            ,"od_del_yn":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+
+    "lists":{
+        "description":"KRW 충전 대기 내역",
+        "sql":"SELECT od_id, od_datetime, od_deposit_name, od_temp_bank, od_hope_date, od_bank_account FROM web_cash_deposits WHERE it_id_pay=? AND od_del_yn=? AND mb_no=? ORDER BY od_id DESC limit ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "it_id_pay":{"required":true,"maxlength":10}
+            ,"od_del_yn":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+
+    "depositsumkrw":{
+        "description":"KRW 충전요청 합계",
+        "sql":"SELECT IFNULL(SUM(od_temp_bank), 0) AS sum_krw FROM web_cash_deposits WHERE mb_no=? AND it_id_pay='Y' AND (DATE(od_datetime) BETWEEN DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -? DAY ), '%Y-%m-%d 00:00:00') AND NOW())",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"day":{"required":true,"number": true}
+        },
+        "authlevel":0
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{site_name}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div style="width:400px;float:left;">
+            <div style="background-color:#fff;padding:5px 40px 8px 10px;color:#fff;margin: 10px 0;border-bottom:3px solid #2b71b1;">
+                <img src="{logo_url}">
+            </div>
+            <div style="padding: 10px;">
+                <span style="font-size:18px;font-weight:bold;color:#333;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+                    거래소체결 안내 메일입니다.
+                </span>
+
+                <br />
+                <span style="font-size:14px;color:#333;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;line-height:1.35">
+                    <p style="margin-bottom:20px"><b>{{mb_id}}님,</b>
+                      <br>
+                      <br>비트코인 거래소에서 {{it_pay_status}}이 완료되었습니다.
+                      <br>{{it_action}}주문량 : {{od_temp_btc}}BTC
+                      <br>주문가 : {{it_market_cost}}KRW
+                      <br>체결량 : {{po_point}}BTC
+                      <br>미체결량 : {{po_remain_point}}BTC
+                      <br>수수료 : {{od_receipt_fee}}
+                      <br>이용해주셔서 감사합니다.
+                    </p>
+                </span>
+                <div style="background-color:#ffffff;border-top:1px solid #ededed;height:1px;margin:10px 0 20px 0;"></div>
+                    <span style="font-size:13px;font-weight:bold;color:#333;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;line-height:1.6"> 거래내역확인 : </span>
+                    <span style="font-size:13px;color:#333;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;line-height:1.6">
+						<a href="{link_url}" target="_blank">{link_url}</a>
+					</span>
+                <div style="background-color:#ffffff;border-bottom:1px solid #ededed;height:1px;margin:20px 0 10px 0;"></div>
+
+                <div >
+                    <span style="font-size:14px;color:#333;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;line-height:1.35">
+                        <p>{site_name}를 이용해 주셔서 감사합니다.</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

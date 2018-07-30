@@ -1,0 +1,31 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+
+	"regist":{
+        "description":"인증센터 - 모바일 인증 등록",
+        "method":"POST",
+        "description":"인증센터 - 요청한 인증번호 가져오기",
+        "sql_get_sms_certify":"SELECT sms_certify FROM web_sms_certify WHERE sms_hp=? AND sms_type='PROVE' AND sms_status='REQ' AND reg_dt >= DATE_FORMAT( DATE_ADD(NOW(), INTERVAL -10 MINUTE ), '%Y-%m-%d %H:00:00' ) ORDER BY sms_no DESC LIMIT 1",
+        "mapkeys_get_sms_certify":{
+            "sms_hp":{"required":true, "maxlength":16}
+        },
+        "sql_regist":"INSERT INTO web_member_sms_certification(mb_no,mb_id,mb_name,mb_hp,contry_code,mb_country_dial_code,sc_reg_ip)VALUES(?,?,?,?,?,?,?)",
+        "mapkeys_regist":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"mb_name":{"required":true,"maxlength":50}
+            ,"mb_hp":{"required":true,"maxlength":20}
+            ,"contry_code":{"required":true,"maxlength":3}
+            ,"mb_country_dial_code":{"required":true,"maxlength":10}
+            ,"sc_reg_ip":{"default":"CLIENT_IP"}
+        },
+        "authlevel":0,
+        "datamodel":"SmsCertification"
+    }
+
+  }
+}

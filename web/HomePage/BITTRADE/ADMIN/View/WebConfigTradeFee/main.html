@@ -1,0 +1,130 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"cfNo":"No","cfMarketType":"마켓구분","cfTrTrackerFee":"트래커수수료(즉시체결)","cfTrMarketmakerFee":"마켓메이커수수료(대기주문)","cfOrderMinKrw":"KRW최소주문량","cfOrderMinCoin":"COIN최소주문량","cfCallUnitKrw":"KRW호가단위","cfCallUnitCoin":"COIN호가단위","feeApply":"적용","cfRegDt":"등록일"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+        headItems.push('<th width="50">' + val.cfNo + '</th>');
+        headItems.push('<th>' + val.cfMarketType + '</th>');
+        
+        headItems.push('<th>' + val.cfOrderMinKrw + '</th>');
+		headItems.push('<th>' + val.cfOrderMinCoin + '</th>');
+		headItems.push('<th>' + val.cfCallUnitKrw + '</th>');
+		headItems.push('<th>' + val.cfCallUnitCoin + '</th>');
+        headItems.push('<th>' + val.cfTrTrackerFee + '</th>');
+        headItems.push('<th>' + val.cfTrMarketmakerFee + '</th>');
+        headItems.push('<th>' + val.cfRegDt + '</th>');
+        headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    var feeApply = '';
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'" >');
+        listItems.push('<th class="num" onclick=\"viewLink(\''+val.cfNo+'\')\" >' + num + '</th>');
+        listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfMarketType + '</th>');
+        
+        listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfOrderMinKrw + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfOrderMinCoin + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfCallUnitKrw + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfCallUnitCoin + '</th>');
+        listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + (parseFloat(val.cfTrTrackerFee)*100) + ' %</th>');
+        listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + (parseFloat(val.cfTrMarketmakerFee)*100) + ' %</th>');
+        listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfRegDt + '</th>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+            <div class="list_search">
+                <input type="hidden" name="mode" value="WebConfigTradeFee" />
+                <span class="custom-dropdown custom-dropdown--white">
+                    <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="cf_no">번호</option>
+                    </select>
+                </span>
+                <input maxlength="24" type="text" name="sv" />
+                <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </div>
+
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            </div>
+        </form>
+        
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button"  class="right btn-default orange" value="사이트에 적용" onclick="makeFeeSiteJson();" />
+                <input type="button" name="btn_s" value="입 력" class="right btn-default" onclick="document.location.href=bean.link.write" />
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+        <div style="clear:both;margin:40px 0 0 0;background:#f5f5f5;padding:10px 20px;">
+            * 수수료율 변경 시 체결서버가 재시작되어야 합니다.<br />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+function makeFeeSiteJson(){
+    var backdata = '';
+    $.getJSON('/?mode=WebConfigTradeFee/makeFeeSiteJson', 'json', function (data) {
+        backdata = data;
+    })
+    .done(function() {
+        alert(backdata.msg);
+    })
+    .fail(function() {
+        alert(backdata.msg);
+    })
+    .always(function() {});
+}
+</script>
+</body>

@@ -1,0 +1,264 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+tr.itPayREQ td{
+    
+}
+tr.itPayHOLD td,tr.itPayN th{
+    color:#cccccc !important;
+}
+td.tmpcost{
+    color:#0084ff !important;
+}
+td.reccost{
+    color:#FF0000 !important;
+}
+</style>
+<script type="text/javascript">
+var listHeader = '[{"odId":"No","odStatus":"상태","odStatusMsg":"사용자메시지","mbNo":"회원번호","isUserConfirmYn":"인증여부","isUserConfirmDt":"인증시간","isUserConfirmIp":"인증IP","isAdminConfirmYn":"관리자확인","isAdminConfirmDt":"관리자확인시간","odTempAmount":"요청수량","odTempCurrencyTotal":"BTC환산량","odReceiptAmount":"완료수량","odAddr":"출금지갑주소","odAddrMsg":"비고","odSendto":"친구에게전송시","odFee":"수수료","odTxid":"TXID","poType":"자산구분","poAmount":"자산수량","poPayYn":"자산처리여부","odRegDt":"등록일"}]';
+function writeListHead(jsondata){
+     var headItems = [];
+    $.each(jsondata, function (key, val) {
+        	headItems.push('<thead><tr>');
+        
+		headItems.push('<th width="50">ID</th>');
+		headItems.push('<th width="50">' + val.odStatus + '</th>');
+        headItems.push('<th width="50">코인</th>');
+        headItems.push('<th width="50">인증</th>');
+		headItems.push('<th width="50">회원번호</th>');
+		headItems.push('<th width="100">요청수량<br />수수료</th>');
+        headItems.push('<th width="100">수수료제외금액</th>');
+		headItems.push('<th width="100">' + val.odReceiptAmount + '</th>');
+		headItems.push('<th width="100">관리자확인시간</th>');
+        headItems.push('<th width="120">요청주소</th>');
+        headItems.push('<th >전송ID</th>');
+        headItems.push('<th width="50">출금여부</th>');
+        headItems.push('<th width="50"><input type="checkbox" id="select-all" data-addr=""></th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+                
+        var reqstr = '';
+        var trcss = 'itPayREQ';
+        
+        //'WAIT','REQ','REJ','OK','HOLD','CAN'
+        //'대기','요청','거부','완료','중지','취소'
+        if(val.odStatus=='WAIT'){
+            reqstr='대기';
+        }else if(val.odStatus=='REQ'){
+            reqstr='요청';
+        }else if(val.odStatus=='REJ'){
+            reqstr='거부';
+        }else if(val.odStatus=='OK'){
+            reqstr='<span style="color:#0084ff;">완료</span>';
+        }else if(val.odStatus=='HOLD'){
+            reqstr='보류';
+            trcss = 'itPayHOLD';
+        }else if(val.odStatus=='CAN'){
+            reqstr='취소';
+            trcss = 'itPayHOLD';
+        }
+        
+        
+        
+        var coincurrency = val.poType.toUpperCase();
+        listItems.push('<tr class="list'+c+' '+trcss+'" >');
+		listItems.push('<th class="num">' + val.odId + '</th>');
+        
+        listItems.push('<th>' + reqstr + '</th>');
+        listItems.push('<td onclick=\"viewLink(\''+val.odId+'\')\" >' + coincurrency + '</td>');
+        var cert = '';
+        if(val.isUserConfirmYn=='Y') cert = '✔';
+		listItems.push('<td onclick=\"viewLink(\''+val.odId+'\')\" >' + cert + '</td>');
+		listItems.push('<th>' + val.mbNo + '</th>');
+        
+        var boldcolor = 'num';
+        if(val.odTempAmount>0) boldcolor = 'tmpcost';
+		listItems.push('<td class="'+boldcolor+'"  onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odTempAmount + '<br /><span style="color:#ccc;">' + val.odFee + '</span></td>');
+                
+        var receiptbtc = (val.odTempAmount>0)? ((val.odTempAmount- val.odFee).toFixed(8) ):0;
+        var admin_cost = (receiptbtc+"<font color=\"#999\"> "+coincurrency+"</font>") ;
+		listItems.push('<td onclick=\"viewLink(\''+val.odId+'\')\" >' + admin_cost + '</td>');
+		listItems.push('<td onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odReceiptAmount + '</td>');
+
+		listItems.push('<td class="num" >' + val.odRegDt + '</td>');
+        listItems.push('<td class="num" >' + val.odAddr + '</td>');
+        if(val.odSendto){
+            listItems.push('<td class="num" >내부회원 ' + val.odSendto + '</td>');
+        }else{
+            listItems.push('<td class="num" >' + val.odTxid + '</td>');
+        }
+        var pay_chk = '';
+        if(val.poPayYn=='Y') pay_chk = '✔';
+		listItems.push('<td  >' + pay_chk + '</td>');
+        if(val.odStatus != 'OK' && val.odStatus != 'CAN' && val.odStatus != 'HOLD'){
+            listItems.push('<th width="50"><input type="checkbox"  name="od_' + val.odId + '" data-addr="' +val.odAddr+ '" data-odid="' + val.odId + '"></th>');
+        }else{
+            listItems.push('<th width="50">-</th>');
+        }
+        
+		listItems.push('</tr>');
+            i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+            <div class="list_search">
+            <input type="hidden" name="mode" value="WithdrawalsSendBTC" />
+                <span class="custom-dropdown custom-dropdown--white">
+                    <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                            <option value="mb_no">회원번호</option>
+                    </select>
+                </span>
+                <input type="text" name="sv" />
+                <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </div>
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            </div>
+        </form>
+        <div style="float:right">
+            <input type="button" class="btn-default" value="BTC지갑서버" onclick="window.open('/?mode=WalletBTC')" />
+            <input type="button" class="btn-default orange" value="선택항목출금" onclick="requestAddressValidation();" id="btn-send-many" />
+        </div>
+        
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page"> 
+                <!-- optional left control buttons--> 					
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a> 
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added --> 
+                    </div>
+                </div>
+                <!-- optional right control buttons--> 
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a> 
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+function requestAddressValidation(){
+    
+    requestSendMany();
+    return;
+    
+    var addrs =  [];
+    $(':checkbox').each(function() {  
+        if( this.checked ) {
+            var tmp = $(this).data('addr');
+            if(tmp)  addrs.push(tmp);
+        }
+    });
+    
+    var param  = 'addrs='+addrs;
+    $.post('/?mode=WalletBTC/getValidateAddresss',param,function(json){
+        if(json && json.hasOwnProperty('iserror')){
+            if(json.iserror){
+                $('body').viewDialogMessage('<p>주소 중 유효하지 코인주소가 있습니다.</p>',function(){ });
+            }else{
+                
+            }
+        }
+    });
+}
+
+function requestSendMany(){
+    
+    $('#btn-send-many').attr('disabled',true);
+    
+    var odids =  [];
+    $(':checkbox').each(function() {  
+        if(this.checked){
+             var tmp = $(this).data('odid');
+            if(tmp) odids.push(tmp);
+        }
+    });
+    if(odids.length == 0){
+        $('body').viewDialogMessage('<p>선택된 주문서가 없습니다.</p>',function(){});
+        $('#btn-send-many').attr('disabled',false);
+        return;
+    }
+    
+    var param  = 'odids='+odids;
+    $.post('/?mode=WithdrawalsSendBTC/updateSendMany',param,function(json){
+        if(json && json.hasOwnProperty('result')){
+            if(json.result>0){
+                $('body').viewDialogMessage('<p>'+json.result+'건 대해 코인전송을 완료하였습니다.</p>',function(){ 
+                    location.reload();
+                });
+            }else if(json.result==0){
+                $('body').viewDialogMessage('<p>출금할 내용이 없습니다. 이미 지급되었는지 확인 바랍니다.</p>',function(){ 
+                    location.reload();
+                });
+            }else{
+                if(json.hasOwnProperty('msg')){
+                    $('body').viewDialogMessage('<p>'+json.msg+'</p>',function(){ });
+                }else{
+                    $('body').viewDialogMessage('<p>코인 출금에 실패하였습니다.</p>',function(){ });
+                }
+            }
+            
+        }else{
+            $('body').viewDialogMessage('<p>코인 출금에 실패하였습니다. 서버로 부터 올바른 응답값을 받지 못했습니다.</p>',function(){ });
+        }
+    }).done(function(){
+        $('#btn-send-many').attr('disabled',false);
+    });
+    
+}
+    
+$( document ).ready(function() {
+    $('#select-all').click(function(event) {   
+        if(this.checked) {
+            $(':checkbox').each(function() {
+                this.checked = true;                        
+            });
+        }else{
+             $(':checkbox').each(function() {
+                this.checked = false;                        
+            });
+        }
+    });
+});
+</script>
+</body>

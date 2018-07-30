@@ -1,0 +1,57 @@
+* Data Table
+
+SeqNo (int, key, auto inc, Not Null): 메시지 고유키값.
+InTime (char(14), Not Null): 최초 레코드 입력 시간.
+UserCode (char(30), Not Null): 유저코드.
+ReqName (varchar(32), Null): 발송자 명.
+ReqPhone (varchar(20), Null): 회신 번호.
+CallName (varchar(32), Null): 수신자 명.
+Country (varchar(10), Null): 국가 코드. (국제문자 전송 시 사용.)
+CallPhone (varchar(20), Not Null): 수신 번호.
+Subject (varchar(120), Null): 메시지 제목.
+Msg (varchar(4000), Not Null): 메시지 내용 (한글 1000자, 영문 2000자 까지 전송.)
+ReqTime (char(14), Not Null): 전송 요청 설정 시간. (예약 전송 시 미래 시간 입력. 즉시 전송 시 "00000000000000" 입력.)
+SentTime (char(14), Null): 실제 전송 요청 처리된 시간. 
+RecvTime (char(14), Null): 전송 결과 수신 시간.
+Result (char(1), Not Null): 처리 상태. (예약설정:'R', 즉시전송설정:'0', 전송요청완료:'Y', 전송요청실패:'N', 전송결과성공:'2',  전송결과실패:'4', 전송결과유효기간초과:'6', 사용자임의대기설정:'H')
+ErrCode (int, Null): 처리 결과 코드. (슈어엠 에러코드 표 참고.)
+Kind (char(1), Not Null): 메시지 종류. (단문메시지: 'S', 장문메시지,이미지전송: 'M', 국제문자:'I')
+FKContent (int, Null): 이미지 첨부 전송 시 Content Table의 Key값 입력.
+BatchFlag (int, default 0, Not Null): Batch에 의한 로그 테이블 이동 시 MarkUp 되는 필드.
+
+
+
+
+
+* Content Table
+
+SeqNo (int, key, auto inc, Not Null): 파일 고유키값.
+FileCnt (int, default 0, Not Null): 첨부 파일 수 (0~3).
+FilePath1 (varchar(255), Null): 파일 경로 (파일명, 확장자 포함).
+FilePath2 (varchar(255), Null): 파일 경로 (파일명, 확장자 포함).
+FilePath3 (varchar(255), Null): 파일 경로 (파일명, 확장자 포함).
+
+
+
+
+
+* Log Table
+
+SeqNo (int, unique, Not Null): 메시지 고유키값.
+InTime (char(14), Not Null): 최초 레코드 입력 시간.
+UserCode (char(30), Not Null): 유저코드.
+ReqName (varchar(32), Null): 발송자 명.
+ReqPhone (char(20), Null): 회신 번호.
+CallName (varchar(32), Null): 수신자 명.
+Country (varchar(10), Null): 국가 코드.
+CallPhone (varchar(20), Not Null): 수신 번호.
+Subject (varchar(120), Null): 메시지 제목.
+Msg (varchar(4000), Not Null): 메시지 내용.
+ReqTime (char(14), Not Null): 전송 요청 시간.
+SentTime (char(14), Null): 실제 전송 요청 처리된 시간. 
+RecvTime (char(14), Null): 전송 결과 수신 시간.
+Result (char(1), Not Null): 처리 결과. (전송요청실패:'N', 전송결과성공:'2',  전송결과실패:'4', 전송결과유효기간초과:'6')
+ErrCode (int, Null): 처리 결과 코드. (슈어엠 에러코드 표 참고.)
+Kind (char(1), Not Null): 메시지 종류. (단문메시지: 'S', 장문메시지,이미지전송: 'M', 국제문자:'I')
+FKContent (int, Null): 이미지 첨부 전송 시 Content Table의 Key값 입력.
+BatchFlag (int, default 0, Not Null): Batch에 의한 로그 테이블 이동 시 MarkUp 되는 필드.

@@ -1,0 +1,102 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"mbNo":"No","mbId":"아이디","mbName":"관리자이름","mbAuth":"권한","mbAccessIp":"접근허용아이피","mbTodayLogin":"최종로그인"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+        headItems.push('<th width="50">' + val.mbNo + '</th>');
+        headItems.push('<th>' + val.mbId + '</th>');
+        headItems.push('<th>' + val.mbName + '</th>');
+        headItems.push('<th>' + val.mbAuth + '</th>');
+        headItems.push('<th>' + val.mbAccessIp + '</th>');
+        headItems.push('<th>' + val.mbTodayLogin + '</th>');
+        headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'" onclick=\"viewLink(\''+val.mbNo+'\')\">');
+        listItems.push('<th class="num">' + num + '</td>');
+        listItems.push('<td width="100">' + val.mbId + '</td>');
+        listItems.push('<td width="100">' + val.mbName + '</td>');
+        listItems.push('<td align="center">' + val.mbAuth + '</td>');
+        listItems.push('<td align="center">' + val.mbAccessIp + '</td>');
+        listItems.push('<th class="time">' + val.mbTodayLogin + '</th>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="list_search">
+        <form name="search" method="get" action="/">
+            <input type="hidden" name="mode" value="WebAdminMember" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                    <option value="mb_id">아이디</option>
+                    <option value="mb_name">관리자이름</option>
+                </select>
+            </span>
+            <input type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+        </form>
+        </div>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <span id="span_btn_s" style="display:none"><input type="button" name="btn_s" value="입 력" class="right btn-default" onclick="document.location.href=bean.link.write" /></span>
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        if( typeof (bean.auth)!='undefined' && bean.auth=='super' ){
+            $('#span_btn_s').css('display', 'block');
+        }
+    });
+</script>
+</body>

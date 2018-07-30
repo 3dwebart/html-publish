@@ -1,0 +1,273 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+    .console{
+        width:350px;
+        overflow:auto;
+        word-break: break-all;
+        background: #000;
+        color:#f5f5f5;
+        font-size: 12px;
+        padding:10px;
+        display: none;
+        height: 300px;
+    }
+    .btn-rpctra{
+        background-color: #bebebe;
+        background-image: -webkit-gradient(linear,left top,left bottom,from(#fefefe),to(#e6e6e6));
+        background-image: -webkit-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: -moz-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: -ms-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: -o-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: linear-gradient(top,#fefefe,#e6e6e6);
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+        -moz-box-shadow: 0 0 1px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.3) inset;
+        -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.3) inset;
+        box-shadow: 0 0 1px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.3) inset;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #bababa #ababab #bebebe;
+        padding: 5px 10px;
+        cursor: pointer;
+        font: bold 15px Arial,Helvetica;
+        color: #6a6e77;
+        margin: 2px;
+        font-size:12px;
+        overflow: hidden;
+        width:100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .btn-transaction-info{
+        font-size:12px !important;
+    }
+
+    tr.itPayY td{
+
+    }
+
+    tr.itPayN td,tr.itPayN th{
+        color:#cccccc !important;
+    }
+    tr.send td,tr.send th{
+        color:#ff6868 !important;
+    }
+    span.red{
+        color:#ff6868 !important;
+    }
+    span.black{
+        color:#0016b0 !important;
+    }
+
+</style>
+<script type="text/javascript">
+var listHeader = '[{"odId":"No","odCategory":"전송구분","mbNo":"회원번호","odAmount":"입금수량","odTxid":"TXID","odFee":"수수료","odFromAddr":"출금지갑주소","odToAddr":"지갑주소","odConfirm":"컨펌","poType":"자산구분","poAmount":"충전수량","poPayYn":"자산지급여부","poPayDt":"자산지급시간","odRegDt":"등록일","odEtc1":"기타1","odEtc2":"기타2","odEtc3":"기타3"}]';
+function writeListHead(jsondata){
+     var headItems = [];
+    $.each(jsondata, function (key, val) {
+        	headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.odId + '</th>');
+		headItems.push('<th>' + val.odCategory + '</th>');
+		headItems.push('<th>' + val.mbNo + '</th>');
+		headItems.push('<th>' + val.odAmount + '</th>');
+		headItems.push('<th>' + val.odToAddr + '</th>');
+		
+		headItems.push('<th>' + val.poType + '</th>');
+		headItems.push('<th>' + val.poAmount + '</th>');
+		headItems.push('<th>' + val.odConfirm + '</th>');
+		headItems.push('<th>' + val.odRegDt + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+
+        var point_explain = '';
+        var classadd = 'itPayN';
+        if(val.isPointPayYn==='Y'){
+            classadd = 'itPayY';
+        }
+        if(val.odCategory=='send'){
+            classadd = 'send';
+            point_explain = '';
+        }else{
+            if(val.poPayDt){
+                point_explain = '<span class="black">자산 지급시간: ' + val.poPayDt + '</span>';
+            }else{
+                point_explain = '자산 지급시간 없음';
+            }
+        }
+        
+        listItems.push('<tr class="list'+classadd+' '+c+'" >');
+	listItems.push('<th class="num" >' + num + '</th>');
+        listItems.push('<td><b>' + val.odCategory + '</b></td>');
+        listItems.push('<td >' + val.mbNo + '</td>');
+        listItems.push('<td >' + val.odAmount + ' '+ (val.poType).toUpperCase()+'</td>');
+        listItems.push('<td  class="num">' + val.odToAddr + '</td>');
+
+        listItems.push('<td >' + (val.poType).toUpperCase() + '</td>');
+        listItems.push('<td >' + val.poAmount + '</td>');
+        listItems.push('<td >' + val.odConfirm + '</td>');
+        
+        listItems.push('<td >' + val.odRegDt + '</td>');
+        listItems.push('</tr>');
+        
+        
+        listItems.push('<tr class="list'+c+' '+classadd+'"  style="cursor:auto">');
+        if(val.category == 'member'){
+            listItems.push('<th class="num" colspan=2></th>');
+            listItems.push('<td colspan=4 align="left" class="num"><b>전송구분 : </b> ' + val.txid + '<div id="tran'+val.odId+'" class="console"></div></td>');
+        }else{
+            if(val.poType=='btc' || val.poType=='bch' || val.poType=='ltc'){
+                listItems.push('<th class="num" colspan=2><button class="btn-rpctra" onclick=\"gettransaction(\''+ val.odTxid +'\',\'#tran'+val.odId+'\',\''+ val.poType +'\')\">지갑콘솔</button></th>');
+            }else if(val.poType=='etc' || val.poType=='eth'){
+                listItems.push('<th class="num" colspan=2><button class="btn-rpctra" onclick=\"window.open(\'/?mode=Wallet' + (val.poType).toUpperCase() + '\')\">지갑콘솔</button></th>');
+            }
+            listItems.push('<td colspan=2 align="left" class="num"><b>txid:</b> ' + val.odTxid + '<div id="tran'+val.odId+'" class="console"></div></td>');
+            listItems.push('<td class="num" colspan=2 align="left"><input type="button" class="btn-default orange btn-transaction-info" onclick=\"goTransactionInfo(\''+ val.odTxid +'\',\''+ val.poType +'\')\" value="거래원장" /></td>');
+        }
+        
+//        listItems.push('<td class="num" colspan=1 align="right">' + val.walletconflicts + '</td>');
+        listItems.push('<td class="num" colspan=3 align="right">' + point_explain + '</td>');
+        listItems.push('</tr>');
+//        if(val.odConfirm){
+//            listItems.push('<tr class="list'+c+' '+classadd+'" style="cursor:auto">');
+//            listItems.push('<td class="num" colspan=9 align="right">walletconflicts : ' + val.odConfirm + '</td>');
+//            listItems.push('</tr>');
+//        }
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="list_search">
+        <form name="search" method="get" action="/">
+            <input type="hidden" name="mode" value="WebWalletDeposits" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="mb_no">회원번호</option>
+                        <option value="od_txid">TXID</option>
+                        <option value="od_to_addr">지갑주소</option>
+                </select>
+            </span>
+            <input type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+        </form>
+        </div>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page"> 
+                <!-- optional left control buttons--> 					
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a> 
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added --> 
+                    </div>
+                </div>
+                <!-- optional right control buttons--> 
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a> 
+<!--                <input type="button" name="btn_s" value="입 력" class="right btn-default" onclick="document.location.href=bean.link.write" />-->
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+    
+<script>
+function initLoadUnConfirmation(){
+    var backdata;
+    $.getJSON('/?mode=CronSchedule/initLoadUnConfirmation', 'json', function (data) {
+        backdata = data;
+    })
+    .done(function() {
+        alert(backdata.result+'건의 포인트지급이 안된 건을 승인요청 서버에 대기시켰습니다.');
+    })
+    .fail(function() {
+        $('body').viewDialogMessage('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+    })
+    .always(function() {$('#pageloading').hide();$('html, body').animate( {scrollTop:0} );});
+}
+
+
+function gettransaction(txid,domobjid,potype){
+    var domobj = $(domobjid);
+    domobj.html('loading..');
+    domobj.show();
+    
+    var jurl = '';
+    if(potype=='btc'){
+        jurl = '/?mode=WalletBTC/gettransaction&param='+txid;
+    }else if(potype=='ltc'){
+        jurl = '/?mode=WalletLTC/bitgetinfo&func=gettransaction&param='+txid;
+    }else if(potype=='bch'){
+        jurl = '/?mode=WalletBCH/bitgetinfo&func=gettransaction&param='+txid;
+    }
+
+    
+    $.getJSON(jurl, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( 'bitcoin# '+JSON.stringify(backdata, null, '<br />') );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+function goTransactionInfo(txid,potype){
+    var jurl = '';
+    if(potype=='btc'){
+        jurl = 'https://blockchain.info/tx/'+txid;
+    }else if(potype=='ltc'){
+        jurl = 'https://chainz.cryptoid.info/ltc/search.dws?q='+txid;
+    }else if(potype=='sc'){
+        jurl = 'https://explorer.siahub.info/hash/'+txid;
+    }else if(potype=='etc'){
+        jurl = 'https://gastracker.io/tx/'+txid;
+    }else if(potype=='eth'){
+        jurl = 'https://etherchain.org/tx/'+txid;
+    }else if(potype=='bch'){
+         jurl = 'https://blockchair.com/search?q='+txid;
+    }
+    
+    
+    window.open(jurl, 'transactioinfo');
+}
+</script>
+</body>

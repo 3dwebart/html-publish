@@ -1,0 +1,119 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th width=20%>아이디</th>
+                        <td colspan="3">[<span id="mbNo"></span>]<span id="mbId"></span></td>
+                    </tr><tr>
+                        <th>현재레벨</th>
+                        <td><span id="mbCurLevel"></span></td>
+                        <th>요청레벨</th>
+                        <td><span id="mbReqLevel"></span></td>
+                    </tr>
+                    <tr>
+                        <th>등록일</th>
+                        <td><span id="reqDt"></span></td>
+                        <th>등록IP</th>
+                        <td><span id="reqIp"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Birth</th>
+                        <td><span id="mbBirth"></span></td>
+                        <th>ID Card No</th>
+                        <td><span id="mbPassportId"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Street Address 1:</th>
+                        <td><span id="mbAddr1"></span></td>
+                        <th>Street Address 2:</th>
+                        <td><span id="mbAddr2"></span></td>
+                    </tr>
+                    <tr>
+                        <th>City:</th>
+                        <td><span id="mbCity"></span></td>
+                        <th>State:</th>
+                        <td><span id="mbState"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Postal Code:</th>
+                        <td><span id="mbZipcode"></span></td>
+                        <th>Phone Number:</th>
+                        <td><span id="mbDialCode"></span> <span id="mbPhone"></span></td>
+                    </tr>
+                    <tr>
+                        <th>관리자확인</th>
+                        <td><span id="adminConfirm"></span></td>
+                        <th>관리자확인일</th>
+                        <td><span id="adminConfirmDt"></span></td>
+                    </tr><tr>
+                        <th>사용자에게<br />보여줄 메시지<br />(거부사유 등)</th>
+                        <td colspan="3"><span id="adminMemo"></span></td>
+                    </tr><tr>
+                        <th>증명방법</th>
+                        <td colspan="3"><span id="mbProveMethod"></span></td>
+                    </tr><tr>
+                        <th>증명서1</th>
+                        <td colspan="3"><span id="mbProveFile1"></span></td>
+                    </tr><tr>
+                        <th>증명서2</th>
+                        <td colspan="3"><span id="mbProveFile2"></span></td>
+                    </tr>
+<!--                    <tr>
+                        <th>증명서3</th>
+                        <td colspan="3"><span id="mbProveFile3"></span></td>
+                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.reqNo" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        if(typeof(bean.data)!=='undefined'){
+            if(bean.data.mbProveMethod=='Fax'){
+                $('#mbProveMethod').html('팩스');
+            }else if(bean.data.mbProveMethod=='Email'){
+                $('#mbProveMethod').html('이메일');
+            }else if(bean.data.mbProveMethod=='Attach'){
+                $('#mbProveMethod').html('파일첨부');
+            }
+            if(bean.data.mbProveMethod=='Attach'){
+                if(bean.data.mbProveFile1){
+                    $('#mbProveFile1').html('<img src="/?mode=WebMemberLevelRequest%2Fgetimg&fn='+$.base64.encode(bean.data.mbProveFile1)+'" style="max-width:900px;"> ');
+                }
+                if(bean.data.mbProveFile2){
+                    $('#mbProveFile2').html('<img src="/?mode=WebMemberLevelRequest%2Fgetimg&fn='+$.base64.encode(bean.data.mbProveFile2)+'" style="max-width:900px;"> ');
+                }
+            }
+        }
+    });
+</script>
+</body>

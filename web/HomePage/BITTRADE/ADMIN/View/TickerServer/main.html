@@ -1,0 +1,241 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var bean = $.parseJSON($.base64.decode(jsonObject));
+
+</script>
+<style>
+    .resultbox{
+        border:1px solid #f5f5f5;overflow-y: auto;padding:10px;color:#f5f5f5; text-align:left;
+        margin:10px;
+        background: #333;
+        line-height: 150%;
+    }
+    td{
+        line-height: 150%;
+    }
+    td ul{
+        margin: 10px 30px;
+    }
+	.resultbox td{
+		color:#fff !important;
+	}
+
+</style>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    
+    <div id="content-main">
+        <div id="fwrite">
+        <table class="twrite_basic">
+            
+            <select name="type" onchange="location.href='/?mode=TickerServer&type='+this.value ">
+                <option value="">코인선택</option>
+                <option value="KRW_BTC">비트코인</option>
+                <option value="KRW_BCH">비트코인 캐시</option>
+                <option value="KRW_ETH">이더리움</option>
+                <option value="KRW_ETC">이더리움 클레식</option>
+                <option value="KRW_LTC">라이트코인</option>
+            </select>
+                <thead>
+                    <tr>
+                        <th colspan="4">시세서버 상태체크 Console</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th>서버상태
+                            <br /><input type="button"  class="btn-default" value="다시체크" onclick="getTickerServerStatus();" /></th>
+                        <td colspan="3">
+                            <div id="result-status" style="width:95%;height:230px;"  class="resultbox" >
+                            Loading..
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <th>서버명령
+                        </th>
+                        <td colspan="3">
+                            <input type="button"  class="btn-default orange" value="서버재시작" onclick="getTickerServerRestart();" />
+							<input type="button" id="btn_start" class="btn-default" style="margin:0 0 0 20px;" value="서버시작" onclick="getTickerServerStart();" />
+							<input type="button" id="btn_stop"  class="btn-default" style="margin:0 0 0 20px; display:none" value="서버중지" onclick="getTickerServerStop();" />
+							
+                        </td>
+                        
+                    </tr>
+					
+
+                    <tr>
+                        <td colspan="4" style='padding:20px 30px;'>
+                            <b>서버콘솔 작동시 유의 사항</b>
+                            <ul>
+                                
+                                <li>서버를 재시작할 경우 상황에 따라 30~60초 후에 정상화 됩니다.</li>
+								<li>서버를 재시작 시 페이지에 접속되어 있는 사용자들은 새로고침을 하기전 까지 시세를 받을 수 없습니다.</li>
+								<li>데이터베이스를 재시작할 경우 서버 상태를 다시 체크하셔야 합니다.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+        </table>
+        </div>
+        
+         
+        
+    </div>
+    <div id="footer"></div>
+</div>
+
+<script>
+var param_type = $.getUrlVar('type');
+if(!param_type) param_type = 'KRW_BTC';
+    
+    
+var server_count = 0;
+function writeServerBody(json){
+    
+	var html = '';
+	html += '<table border="0">';
+	html += '<tr>';
+	html += '<td>프로세서ID</td>';
+	html += '<td>서버명</td>';
+	
+	html += '<td>상태</td>';
+	html += '<td>실행시간</td>';
+    html += '<td>로그파일</td>';
+	html += '</tr>';
+	server_count = json.lists.length;
+	json.lists.forEach(function(server,idx){
+	
+		html += '<tr>';
+		html += '<td>'+server.pid+'</td>';
+		html += '<td>'+server.name+'</td>';
+		
+		var status = '??';
+		if(server.uptime=='STOPPED'){
+			status = '<font color="red"><b>정지됨</b></font>';
+		}else{
+			status = '<font ><b>시작됨</b></font>';
+		}
+		
+		html += '<td>'+status+'</td>';
+		html += '<td>'+server.uptime+'</td>';
+        html += '<td>'+server.logfile+'</td>';
+        
+		html += '</tr>';
+	});
+	
+	html += '</table>';
+	
+	if(server_count==0){
+		$('#btn_start').show();
+		$('#btn_stop').hide();
+	}else{
+		$('#btn_start').hide();
+		$('#btn_stop').show();
+	}
+	
+	return html;
+}
+
+function getTickerServerStatus(type){
+    if(!type) type=bean.type;
+    var backdata;
+    var domobj = $('#result-status');
+    domobj.html('loading....');
+    $.getJSON('/?mode=TickerServer/getStatus&type='+type, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( writeServerBody(backdata) );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+function getTickerServerRestart(type){
+    if(!type) type=bean.type;
+    if(!confirm("서버를 재시작 시 페이지에 접속되어 있는 사용자들은 새로고침을 하기전 까지 시세를 받을 수 없습니다.\n\n정말 서버를 재시작 하시겠습니까?")){
+            return;
+    }
+
+    var backdata;
+    var domobj = $('#result-status');
+    domobj.html('loading....');
+    $.getJSON('/?mode=TickerServer/getReStartServer&type='+type, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( writeServerBody(backdata) );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+function getTickerServerStop(type){
+    if(!type) type=bean.type;
+    if(!confirm("서버 점검시에만 작동하세요.\n\n정말 서버를 중지 하시겠습니까?")){
+            return;
+    }
+
+    var backdata;
+    var domobj = $('#result-status');
+    domobj.html('loading....');
+    $.getJSON('/?mode=TickerServer/getStopServer&type='+type, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( writeServerBody(backdata) );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+function getTickerServerStart(type){
+    if(!type) type=bean.type;
+    var backdata;
+    var domobj = $('#result-status');
+    domobj.html('loading....');
+    $.getJSON('/?mode=TickerServer/getStartServer&type='+type, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( writeServerBody(backdata) );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+setTimeout(function(){
+    getTickerServerStatus(param_type);
+},100);
+
+
+window.onload = function(){
+    $('select[name="type"]').val(bean.type);
+};
+
+</script>
+</body>

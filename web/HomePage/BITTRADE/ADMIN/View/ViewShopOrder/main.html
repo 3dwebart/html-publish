@@ -1,0 +1,131 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"odId":"주문ID","itName":"아이템","mbId":"아이디","odTemp":"주문액","odReceipt":"입금액","odDcAmount":"할인액","odRefundAmount":"환불액","odDepositName":"입금자","odHopeDate":"입금예정일","odDatetime":"시간","odSettleCase":"결제방법","odDelYn":"삭제"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+		headItems.push('<th width="70">' + val.odId + '</th>');
+		headItems.push('<th width:100px;>' + val.itName + '</th>');
+		headItems.push('<th>' + val.mbId + '</th>');
+		headItems.push('<th>' + val.odTemp + '</th>');
+		headItems.push('<th width="80">' + val.odReceipt + '</th>');
+		headItems.push('<th width="80">' + val.odDcAmount + '</th>');
+		headItems.push('<th>' + val.odRefundAmount + '</th>');
+		headItems.push('<th width="80">' + val.odDepositName + '</th>');
+		headItems.push('<th>' + val.odSettleCase + '</th>');
+        headItems.push('<th width="100">' + val.odDatetime + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'">');
+		listItems.push('<th class="num" onclick=\"viewLink(\''+val.odId+'\')\">' + val.odId + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\">[' + val.itId + ']'+val.itName+'</th>');
+		listItems.push('<td><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">[' + val.mbNo + '] ' + val.mbId + '</a></u></td>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\">' + (val.odTempTotal+'').formatBitcoin() + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\"style="color:red">' + (val.odReceiptTotal+'').formatBitcoin() + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\">' + (val.odDcAmount+'').formatBitcoin() + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\">' + (val.odRefundAmount+'').formatBitcoin() + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\">' + val.odDepositName + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\">' + val.odSettleCase + '</th>');
+        listItems.push('<th class="time">' + val.odDatetime + '</th>');
+		listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">내역이 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+            <div class="list_search">
+            <input type="hidden" name="mode" value="ViewShopOrder" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="od_id">주문번호</option>
+                        <option value="od_deposit_name">입금자명</option>
+                        <option value="od_name">주문자명</option>
+                        <option value="mb_id">아이디</option>
+                        <option value="it_name">상품명</option>
+                </select>
+            </span>
+            <input maxlength="24" type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </div>
+            
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            
+        </div>
+        </form>
+        
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+        <div style="clear:both;margin:70px 0 0 0;background:#f5f5f5;padding:10px 20px;line-height:40px">
+            <img src="/Web/img/icon_excel.png" width="30" align="absmiddle">
+            <span style="padding:7px 0 0 5px;"><b>엑셀다운로드</b>(페이지 당
+                <select onchange="weiteExcelDownlod(this.value);">
+                    <option value="100" selected="selected">선택없음</option>
+                    <option value="100">100개</option>
+                    <option value="200">200개</option>
+                    <option value="300">300개</option>
+                    
+                    
+                </select>
+                개)</span>
+            <span style="margin:5px 0 0 10px;color:#999;font-size:11px"> * 다운로드는 서버에 부하를 줄 수 있으니 사용자가 적은 시간에 이용해 주세요.</span>
+            <br />
+            <div id="list_download_excel"></div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

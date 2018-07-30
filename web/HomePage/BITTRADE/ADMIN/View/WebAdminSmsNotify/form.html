@@ -1,0 +1,89 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+<script type="text/javascript" src="$link{script}/json/nations.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="snNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>성명</th>
+                        <td><input type="text" name="snName" value="" required style="width:150px" /></td>
+                    </tr><tr>
+                        <th>국가</th>
+                        <td><select name="snCountryCode"></select></td>
+                    </tr><tr>
+                    <th>연락처</th>
+                        <td><input type="text" name="snCountryDialCode" value="" style="width:50px;" readonly /><input type="text" name="snHp" class="input-numberic" value="" required style="width:150px" maxlength="12" /></td>
+                    </tr><tr>
+                        <th>입금알림여부</th>
+                        <td><select name="snNDepositYn" required /><option value="Y">Y</option><option value="N">N</option></select></td>
+                    </tr><tr>
+                        <th>출금알림여부</th>
+                        <td><select name="snNWithdrawalsYn" required /><option value="Y">Y</option><option value="N">N</option></select></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    // 연락처 숫자만 입력
+    $(".input-numberic").on("input keypress keyup change", $(this), function () {
+        var code = $(this).which?$(this).which:event.keyCode;
+        if(code < 48 || code > 57){
+            return false;
+        }
+    });
+
+    $('input[name=snCountryDialCode]').attr("readonly",true).css("background","#f5f5f5");
+
+    for (var i=0;i<nations.length;i++){
+        $("<option></option>")
+        .text(nations[i].nation)
+        .attr("value", nations[i].code)
+        .attr("data-dial", nations[i].dial_code)
+        .appendTo("select[name='snCountryCode']");
+    }
+    if(bean.data.snCountryCode){
+        $('select[name=snCountryCode]').val(bean.data.snCountryCode);
+    }else{
+        $('select[name=snCountryCode]').val('KR');
+        $("input[name='snCountryDialCode']").val('+82');
+    }
+
+    $('select[name=snCountryCode]').change(function(){
+    $("input[name='snCountryDialCode']").val($("select[name='snCountryCode'] option:selected").data('dial'));
+});
+</script>
+</body>

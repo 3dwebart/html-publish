@@ -1,0 +1,20 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "valid":{
+        "sql_walletconf":"SELECT * FROM web_config_wallet_server WHERE po_type=? ORDER BY wa_no DESC limit 1",
+        "mapkeys_walletconf":{
+            "po_type":{"required": true,"alphanumber": true,"maxlength": 11}
+        },
+        "sql":"SELECT mb_no FROM web_member_desposit_wallet WHERE po_type=? AND mw_address=? ORDER BY mw_no DESC LIMIT 1",
+        "mapkeys":{
+            "po_type":{"required":true,"maxlength":100},
+            "od_addr":{"required":true,"maxlength":100}
+        },
+        "datamodel":"ValidAddress"
+    }
+  }
+}

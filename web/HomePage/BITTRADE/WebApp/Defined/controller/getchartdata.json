@@ -1,0 +1,31 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "chartlist":{
+        "description":"시세차트 - candlestick month",
+        "database":{
+            "etc":"fns_trade_order_etc",
+            "eth":"fns_trade_order_eth",
+            "ltc":"fns_trade_order_ltc",
+            "btc":"fns_trade_order_btc",
+            "bch":"fns_trade_order_bch"
+        },
+        "min_sql":"SELECT t1.*, t2.q from (SELECT MAX(ch_date) AS i, UNIX_TIMESTAMP(ch_date) AS j, SUM(ch_total_amount) AS k ,ch_begin_cost AS x, MAX(ch_max_cost) AS y, MIN(ch_min_cost)  AS z FROM web_chart_data_minute_krw_{currency}  GROUP BY DATE_FORMAT(ch_date, '%Y-%m-%d %H'), floor(date_format(ch_date, '%i')/?) ORDER BY ch_date) t1 LEFT JOIN (SELECT ch_date, ch_close_cost AS q FROM web_chart_data_minute_krw_{currency}) t2 ON t1.i = t2.ch_date",
+        "min_mapkeys":{
+            "candlesticks":{"required":true,"number":true}
+        },
+        "hour_sql":"SELECT t1.*, t2.q from (SELECT MAX(ch_date) AS i, UNIX_TIMESTAMP(ch_date) AS j, SUM(ch_total_amount) AS k ,ch_begin_cost AS x, MAX(ch_max_cost) AS y, MIN(ch_min_cost)  AS z FROM web_chart_data_minute_krw_{currency}  GROUP BY DATE_FORMAT(ch_date, '%Y-%m-%d'), floor(date_format(ch_date, '%H')/?) ORDER BY ch_date) t1 LEFT JOIN (SELECT ch_date, ch_close_cost AS q FROM web_chart_data_minute_krw_{currency}) t2 ON t1.i = t2.ch_date",
+        "hour_mapkeys":{
+            "candlesticks":{"required":true,"number":true}
+        },
+        "day_sql":"SELECT t1.*, t2.q from (SELECT MAX(ch_date) AS i, UNIX_TIMESTAMP(ch_date) AS j, SUM(ch_total_amount) AS k ,ch_begin_cost AS x, MAX(ch_max_cost) AS y, MIN(ch_min_cost)  AS z FROM web_chart_data_minute_krw_{currency}  GROUP BY DATE_FORMAT(ch_date, '%Y-%m'), floor(date_format(ch_date, '%d')/?) ORDER BY ch_date) t1 LEFT JOIN (SELECT ch_date, ch_close_cost AS q FROM web_chart_data_minute_krw_{currency}) t2 ON t1.i = t2.ch_date",
+        "day_mapkeys":{
+            "candlesticks":{"required":true,"number":true}
+        },
+        "datamodel":"CreateChartFile"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"lhNo":"No","lhRegDt":"날짜","lhType":"구분","mbId":"아이디","mbKey":"접속정보","lhResultCode":"결과코드","lhResultMsg":"결과","lhRegIp":"아이피","lhIpBlock":"차단"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.lhNo + '</th>');
+        headItems.push('<th width="60">' + val.lhRegDt + '</th>');
+		headItems.push('<th width="50">' + val.lhType + '</th>');
+		headItems.push('<th width="120">' + val.mbId + '</th>');
+		headItems.push('<th width="50">' + val.lhResultCode + '</th>');
+		headItems.push('<th width="130">' + val.lhResultMsg + '</th>');
+        headItems.push('<th>' + val.mbKey + '</th>');
+		headItems.push('<th width="100">' + val.lhRegIp + '</th>');
+        headItems.push('<th width="30">' + val.lhIpBlock + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    var ck = "";
+    var paramIp = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'">');
+		listItems.push('<th class="time" onclick=\"viewLink(\''+val.lhNo+'\')\">' + num + '</th>');
+        listItems.push('<td class="num" onclick=\"viewLink(\''+val.lhNo+'\')\">' + val.lhRegDt + '</td>');
+		listItems.push('<td onclick=\"viewLink(\''+val.lhNo+'\')\">' + val.lhType + '</td>');
+		listItems.push('<td onclick=\"viewLink(\''+val.lhNo+'\')\">' + val.mbId + '</td>');
+		listItems.push('<td class="num" onclick=\"viewLink(\''+val.lhNo+'\')\">' + val.lhResultCode + '</td>');
+		listItems.push('<th onclick=\"viewLink(\''+val.lhNo+'\')\">' + val.lhResultMsg + '</th>');
+        listItems.push('<td onclick=\"viewLink(\''+val.lhNo+'\')\">' + val.mbKey + '...</td>');
+		listItems.push('<td class="num">' + val.lhRegIp + '</td>');
+        if(val.lhIpBlock=="1"){
+            ck = "checked";
+            paramIp = 0;
+        }else{
+            ck = "";
+            paramIp = 1;
+        }
+        listItems.push('<th><input type="checkbox" name="block'+val.lhNo+'" value="' + val.lhNo + '" onclick=\"setIpBlock(\''+val.lhNo+'\',\''+paramIp+'\')\" '+ck+'></th>');
+		listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div>
+            <form name="search" method="get" action="/">
+             <div class="list_search left">
+                <input type="hidden" name="mode" value="WebAdminLoginHis" />
+                <span class="custom-dropdown custom-dropdown--white">
+
+                    <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                            <option value="mb_id">아이디</option>
+                            <option value="lh_reg_ip">아이피</option>
+                            <option value="lh_result_msg">결과</option>
+                            <option value="lh_ip_block">차단(1)</option>
+                    </select>
+                </span>
+                <input maxlength="24" type="text" name="sv" />
+                <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+             </div>
+                
+             <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            </div>   
+            </form>
+            
+            <input type="button" value="차단아이피" class="right btn-default" onclick="getIpBlockList()">
+        </div>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+    <script type="text/javascript">
+        function setIpBlock(pri,mode){
+           $('body').showDialogProgress();
+           $.post(bean.link.update, { "lhNo": pri ,"mode": mode },
+            function(json){
+            result = parseInt(json.result);
+                if(result>0){
+                    if(mode == 1){
+                        $('input[name=block'+json.lhNo+']').attr("checked",true);
+                        $('input[name=block'+json.lhNo+']').removeAttr("onclick");
+                        $('input[name=block'+json.lhNo+']').attr("onclick",'setIpBlock(\''+json.lhNo+'\',\'0\')');
+                        $('body').viewDialogMessage('<p>해당 IP에 대해 관리자 페이지 접속을 차단하였습니다.</p><br /><span class="explain">해당 IP 접속시 "404페이지를 표시할 수 없다"는 메시지가 나타납니다.</span>');
+                    }else{
+                        $('input[name=block'+json.lhNo+']').removeAttr("checked");
+                        $('input[name=block'+json.lhNo+']').removeAttr("onclick");
+                        $('input[name=block'+json.lhNo+']').attr("onclick",'setIpBlock(\''+json.lhNo+'\',\'1\')');
+                        $('body').viewDialogMessage('<p>해당 IP에 대해 페이지 접속을 허용하였습니다.</p>');
+                    }
+
+                }else if(result==0){
+                    $('body').viewDialogMessage('<p>저장된 값과 입력된 값이 같아 변경된 항목이 없습니다.</p>');
+                }else{
+                    showUpdateError(result);
+                }
+            }, "json")
+            .done(function() { $('body').hideDialogProgress();})
+            .fail(function() { $('body').viewDialogMessage('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>'); })
+        }
+
+        function getIpBlockList(){
+            $(location).attr("href","/?mode=WebAdminLoginHis&sf=lh_ip_block&sv=1");
+        }
+    </script>
+</body>

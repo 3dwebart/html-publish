@@ -1,0 +1,38 @@
+{  
+    "system":{
+        "db_connect_fail":"데이타베이스 연결에 실패하였습니다.",
+        "db_connect_fail2":"데이타베이스 연결에 실패하였습니다."
+    },
+    "response":{
+        "err302":"사이트 점검중입니다.",
+        "err400":"요청한 구문을 파악할 수 없습니다.",
+        "err401":"인증이 필요합니다.",
+        "err403":"접근이 거부되었습니다.",
+        "err404":"페이지를 찾을 수 없습니다.",
+        "err500":"서버에러",
+        "err503":"서버가 많이 바뻐서 처리에 지연이 있습니다."
+    },
+    "validator":{
+        "required":"필수입력 값이 입력되지 않았습니다.",
+        "minlength":"최소 {0} 글자 이상 입력해 주세요.",
+        "maxlength":"{0} 글자 이하로 입력해 주세요.",
+        "alpha":"영문만 입력가능합니다.",
+        "alphaunderbar":"_와 영문만 입력가능합니다.",
+        "email":"이메일 주소 형식이 올바르지 않습니다."
+    },
+    "tradesign":{
+        "sell":"매도",
+        "buy":"매수",
+        "bitcoin":"비트코인",
+        "partsign":"부분체결",
+        "completesign":"체결",
+        "complete":"거래소 주문이 체결되었습니다.",
+        "emailsubject":"거래소 주문이 체결되었습니다.",
+        "unitbitcoin":"BTC",
+        "unitcurrency":"KRW"
+    },
+    "solution":{
+        "title":"뻔한소프트 솔루션",
+        "version":"V0.0.1"
+    }   
+}

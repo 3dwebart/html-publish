@@ -1,0 +1,76 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="itNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>마켓ID</th>
+                            <td colspan="3"><input type="text" name="itMarketId" value="" style="width:100px" maxlength="10" required /> * 고유값으로 구분 합니다. 예)KRW_ETH</td>
+                        </tr><tr>
+                        <th>마켓이름</th><td colspan="3"><input type="text" name="itName" value="" required /></td>
+                        </tr><tr>
+                        <th>설명</th><td colspan="3"><input type="text" name="itExplain" value="" required /></td>
+                        </tr><tr>
+                        <th>기준코인</th>
+                            <td><input type="text" name="itStdCoId" value="" required /></td>
+                        <th>환전코인</th>
+                            <td><input type="text" name="itExcCoId" value="" required /></td>
+                        </tr><tr>
+                         <th>정렬순서</th>
+                         <td>
+                             <input type="text" name="itSort" value="" required style="width:100px" /> 숫자가 클수록 상위(-170 ~ 170까지 )
+                         </td>
+                        <th>마켓사용</th><td>
+                            <select name="itUse" required /><option value="Y">활성화</option><option value="D">비활성</option><option value="P">일시정지</option><option value="R">준비중</option></select>
+            
+            
+                            입/출지갑사용 
+                            <select name="itWalletUse" required /><option value="Y">사용</option><option value="N">중지</option></select>
+                        </td>
+                        </tr><tr>
+                        <th>시세서버HOST</th><td colspan="3"><input type="text" name="itServerIp" value="" placeholder="서버호스트명 혹은 IP" style="width:150px;margin-right: 10px" required />
+                                    <input type="text" name="itServerPort" value="" placeholder="PORT" style="width:80px" maxlength="10" required />
+                                </td>
+                        </tr><tr>
+                        <th>체결서버HOST</th><td colspan="3"><input type="text" name="itServerSignIp" value="" placeholder="서버호스트명 혹은 IP" style="width:150px;margin-right: 10px" required />
+                        <input type="text" name="itServerSignPort" value="" placeholder="PORT" style="width:80px" maxlength="10" required />
+                        </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

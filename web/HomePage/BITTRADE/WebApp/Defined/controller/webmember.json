@@ -1,0 +1,285 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "login":{
+        "database":{"point":"fns_trade_point","etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+        "description":"recaptcha 유효성 체크",
+        "recaptchaurl":"https://www.google.com/recaptcha/api/siteverify",
+        "sql":"SELECT * FROM web_member WHERE mb_id=? AND mb_del_yn='N' limit 1",
+        "mapkeys":{
+            "mb_id":{"required": true,"maxlength": 50}
+        },
+        "description":"블록 사용자 확인",
+        "sql_block_check":"SELECT lh_type,mb_no,mb_id,lh_reg_dt,lh_reg_ip FROM web_member_login_his WHERE lh_block_yn='Y' and lh_reg_ip=? and lh_reg_dt>(now()- INTERVAL 20 MINUTE) ORDER BY lh_no DESC limit 1",
+        "mapkeys_block_check":{
+            "query":{"required": true,"maxlength": 100}
+        },
+        "description":"레디스 갱신용 데이터",
+        "sql_balance":"CALL proc_get_all_balance(?)",
+        "mapkeys_balance":{
+            "mb_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "description":"누적 거래량 합산",
+        "sql_sum_volume":"SELECT ABS(SUM(po_point)) AS volume FROM web_point_krw WHERE mb_no=?",
+        "mapkeys_sum_volume":{
+            "mb_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "description":"누적 거래량 삽입",
+        "sql_insert_volume":"INSERT INTO web_member_total_volume(mb_no,ta_volume)VALUES(?,?)",
+        "mapkeys_insert_volume":{
+            "mb_no":{"required":true,"maxlength":11,"number": true}
+            ,"ta_volume":{"required":true,"maxlength":50}
+        },
+        "description":"누적 거래량 업데이트",
+        "sql_update_volume":"UPDATE web_member SET mb_volume=? WHERE mb_no=?",
+        "mapkeys_update_volume":{
+            "mb_volume":{"required":true,"maxlength":50}
+            ,"mb_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "description":"OTP 사용용도",
+        "sql_otp_use_info":"SELECT * FROM web_otp WHERE mb_no=?",
+        "mapkeys_otp_use_info":{
+            "mb_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "description":"로그인 히스토리 삽입",
+        "sql_loginsert":"INSERT INTO web_member_login_his(lh_type,mb_no,mb_id,mb_key,lh_result_code,lh_result_msg,lh_agent,lh_block_yn,lh_block_force_yn,lh_reg_ip)VALUES(?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys_loginsert":{
+            "lh_type":{"required":true,"maxlength":10}
+             ,"mb_no":{"required":true,"maxlength":11,"number": true}
+             ,"mb_id":{"required":true,"maxlength":50}
+             ,"mb_key":{"required":false,"maxlength":50}
+             ,"lh_result_code":{"required":true,"maxlength":11}
+             ,"lh_result_msg":{"required":false,"maxlength":100}
+             ,"lh_agent":{"required":false,"maxlength":255}
+             ,"lh_block_yn":{"required":true,"maxlength":10}
+             ,"lh_block_force_yn":{"required":true,"maxlength":10}
+             ,"lh_reg_ip":{"required":true,"maxlength":40}
+        },
+        "description":"코인 매수 누적 거래량 합산",
+        "sql_buy_sum":"CALL proc_buy_sell_sum(?)",
+        "mapkeys_buy_sum":{
+             "mb_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "sql_point_accumulate":"CALL proc_update_point_accumulate(?,?,?,?)",
+        "mapkeys_point_accumulate":{
+            "mb_no":{"required":true,"maxlength":11,"number": true},
+            "po_type":{"required":true},
+            "po_sell_price":{"required":true},
+            "po_buy_price":{"required":true}
+        },
+        "datamodel":"LoginBasic",
+        "oauthurl":{
+            "reqactoken":"/oauth/reqactoken"
+        }
+    },
+    "login2ch":{
+        "description":"OTP",
+        "sql":"SELECT * FROM web_member WHERE mb_id=? AND mb_del_yn='N' limit 1",
+        "mapkeys":{
+            "mb_id":{"required": true,"maxlength": 50}
+        },
+        "sql_balance":"SELECT *,(total-on_trade-on_etc-on_lend ) as poss FROM view_member_point_balance WHERE mb_no=?",
+        "mapkeys_balance":{
+            "mb_no":{"default":"SS_MB_NO"}
+         },
+        "description":"블록 사용자 확인",
+        "sql_block_check":"SELECT lh_type,mb_no,mb_id,lh_reg_dt,lh_reg_ip FROM web_member_login_his WHERE lh_block_yn='Y' and mb_id=? and lh_reg_dt>(now()- INTERVAL 20 MINUTE) ORDER BY lh_no DESC limit 1",
+        "mapkeys_block_check":{
+            "query":{"required": true,"maxlength": 100}
+        },
+        "sql_otp_regist":"UPDATE web_member SET mb_otp_use=?,mb_otp_key=?,mb_up_ip=?,mb_up_dt=NOW() WHERE mb_no=?",
+        "mapkeys_otp_regist":{
+            "mb_otp_use":{"required":false},  
+            "g_key":{"required":true,"maxlength":100},
+            "up_ip":{"default":"CLIENT_IP"},
+            "mb_no":{"default": "SS_MB_NO"}
+        },
+        "description":"OTP 사용용도",
+        "sql_otp_use_info":"SELECT * FROM web_otp WHERE mb_no=?",
+        "mapkeys_otp_use_info":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "description":"OTP 사용용도",
+        "sql_otp_use_type":"INSERT INTO web_otp(mb_no,mb_id)VALUES(?,?)",
+        "mapkeys_otp_use_type":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "mb_id":{"required": true,"maxlength": 50}
+        },
+        "description":"로그인 히스토리 삽입",
+        "sql_loginsert":"INSERT INTO web_member_login_his(lh_type,mb_no,mb_id,mb_key,lh_result_code,lh_result_msg,lh_agent,lh_block_yn,lh_block_force_yn,lh_reg_ip)VALUES(?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys_loginsert":{
+            "lh_type":{"required":true,"maxlength":10}
+             ,"mb_no":{"required":true,"maxlength":11,"number": true}
+             ,"mb_id":{"required":true,"maxlength":50}
+             ,"mb_key":{"required":false,"maxlength":50}
+             ,"lh_result_code":{"required":true,"maxlength":11}
+             ,"lh_result_msg":{"required":false,"maxlength":100}
+             ,"lh_agent":{"required":false,"maxlength":255}
+             ,"lh_block_yn":{"required":true,"maxlength":10}
+             ,"lh_block_force_yn":{"required":true,"maxlength":10}
+             ,"lh_reg_ip":{"required":true,"maxlength":40}
+        },
+        "datamodel":"Login2ch"
+    },
+    
+    "otpstatus":{
+        "description":"OTP",
+        "sql":"SELECT * FROM web_member WHERE mb_id=? AND mb_del_yn='N' limit 1",
+        "mapkeys":{
+            "mb_id":{"required": true,"maxlength": 50}
+        },
+        "sql_otp_delete":"UPDATE web_member SET mb_otp_use=?,mb_otp_key=?,mb_up_ip=?,mb_up_dt=NOW() WHERE mb_no=?",
+        "mapkeys_otp_delete":{
+            "mb_otp_use":{"default":"N"},  
+            "g_key":{"default":""},
+            "up_ip":{"default":"CLIENT_IP"},
+            "mb_no":{"default": "SS_MB_NO"}
+        },
+        "sql_otp_update":"UPDATE web_otp SET wo_login_yn=?,wo_withdraw_yn=? WHERE mb_no=?",
+        "mapkeys_otp_update":{
+            "wo_login_yn":{"required":true},  
+            "wo_withdraw_yn":{"required":true},
+            "mb_no":{"default": "SS_MB_NO"}
+        },
+        "datamodel":"OtpStatus"
+    },
+
+    "regist":{
+        "description":"회원가입",
+        "method":"POST",
+        "sql_regist":"INSERT INTO web_member(mb_id,mb_name,mb_last_name,mb_first_name,mb_hp,mb_pwd,mb_key,mb_country_dial_code,mb_agent,contry_code,mb_reg_ip,mb_del_yn,mb_zip_code,mb_address,mb_detail_address)VALUES(?,?,?,?,?,?,MD5(?),?,?,?,?,'N',?,?,?)",
+        "mapkeys_regist":{
+            "mb_id":{"required":true,"maxlength":50}
+            ,"mb_name":{"required":false,"maxlength":50}
+            ,"mb_last_name":{"required":false,"maxlength":50}
+            ,"mb_first_name":{"required":false,"maxlength":50}
+            ,"mb_hp":{"required":false,"maxlength":20}
+            ,"mb_pwd":{"required":true,"maxlength":255}
+            ,"mb_key":{"required":true,"maxlength":255}
+            ,"mb_country_dial_code":{"required":false,"maxlength":10}
+            ,"mb_agent":{"default":"CLIENT_AGENT"}
+            ,"contry_code":{"required":false,"maxlength":3}
+            ,"mb_reg_ip":{"default":"CLIENT_IP"}
+			,"mb_zip_code":{"required":true,"maxlength":10}
+			,"mb_address":{"required":true,"maxlength":255}
+			,"mb_detail_address":{"required":true,"maxlength":255}
+        },
+        "description":"회원 가입시 요청한 인증번호 가져오기",
+        "sql_get_sms_certify":"SELECT sms_certify FROM web_sms_certify WHERE sms_hp=? AND sms_type='PROVE' AND sms_status='REQ' AND reg_dt >= DATE_FORMAT( DATE_ADD(NOW(), INTERVAL -10 MINUTE ), '%Y-%m-%d %H:00:00' ) ORDER BY sms_no DESC LIMIT 1",
+        "mapkeys_get_sms_certify":{
+            "sms_hp":{"required":true, "maxlength":20}
+        },
+        "authlevel":0,
+        "recaptchaurl":"https://www.google.com/recaptcha/api/siteverify",
+        "description":"메일링, 회원 가입 인증을 위한 코드값 가져오기",
+        "sql_get_email_key":"SELECT mk_no, mb_no, mb_id, mk_email_key, mk_confirm_yn, mk_expire_dt FROM web_member_email_key WHERE mk_type=? AND mb_id=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys_get_email_key":{
+            "type":{"required":true,"maxlength":10}
+            ,"mb_id":{"required":true,"maxlength":50}
+        },
+        "sql_sms_certification":"INSERT INTO web_member_sms_certification(mb_no,mb_id,mb_name,mb_hp,contry_code,mb_country_dial_code,sc_reg_ip)VALUES(?,?,?,?,?,?,?)",
+        "mapkeys_sms_certification":{
+            "mb_no":{"required":true,"maxlength":11,"number": true}
+            ,"mb_id":{"required":true,"maxlength":50}
+            ,"mb_name":{"required":true,"maxlength":50}
+            ,"mb_hp":{"required":true,"maxlength":20}
+            ,"contry_code":{"required":true,"maxlength":3}
+            ,"mb_country_dial_code":{"required":true,"maxlength":10}
+            ,"sc_reg_ip":{"default":"CLIENT_IP"}
+        },
+        "datamodel":"SignUp"
+    },
+
+    "duplication":{
+        "description":"회원가입시 중복체크 - 포커스아웃, SMS 인증번호 요청시(요청전 id, hp 입력시) 사용 ",
+        "method":"POST",
+        "sql":"SELECT IFNULL(COUNT(mb_no), 0) AS mb_count FROM web_member WHERE mb_id=?",
+        "mapkeys":{
+            "mb_id":{"required":true,"maxlength":60}
+        },
+        "datamodel":"EmailDuplication"
+    },
+    
+    "namecheck":{
+        "description":"본인인증 - 본인인증시 레벨 2",
+        "sql_get_mb_info":"SELECT mb_no, mb_id, mb_name, mb_level FROM web_member WHERE mb_no=?",
+        "mapkeys_get_mb_info":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "sql_set_mb_info":"UPDATE web_member SET mb_certificate='Y', mb_name=?, mb_birth=?, mb_gender=?, mb_level=?, mb_up_dt=NOW() WHERE mb_no=?",
+        "mapkeys_set_mb_info":{
+            "mb_name":{"required":true,"maxlength":10}
+            ,"mb_birth":{"required":true,"maxlength":10}
+            ,"mb_gender":{"required":true,"maxlength":10}
+            ,"mb_level":{"required":true,"maxlength":11}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "sql_verification_regist":"INSERT INTO web_member_level_request(mb_no,mb_id,mb_cur_level,mb_req_level,mb_prove_method,mb_prove_file1,mb_prove_file2,mb_prove_file3,req_ip,admin_confirm,admin_confirm_dt,admin_memo)VALUES(?,?,?,?,?,?,?,?,?,?,NOW(),?)",
+        "mapkeys_verification_regist":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"mb_cur_level":{"required":true,"maxlength":4,"number": true}
+            ,"mb_req_level":{"required":true,"maxlength":4,"number": true}
+            ,"mb_prove_method":{"required":true,"maxlength":10}
+            ,"mb_prove_file1":{"required":false,"maxlength":255}
+            ,"mb_prove_file2":{"required":false,"maxlength":255}
+            ,"mb_prove_file3":{"required":false,"maxlength":255}
+            ,"req_ip":{"default":"CLIENT_IP"}
+            ,"admin_confirm":{"required":false,"maxlength":10}
+            ,"admin_memo":{"required":false,"maxlength":255}
+        },
+        "datamodel":"NameCheck"
+    },
+
+    "update":{
+        "description":"사용자 정보 업데이트",
+        "sql":"UPDATE web_member SET mb_pwd=?, mb_key = MD5(?), mb_up_ip=?, mb_up_dt = NOW() WHERE  mb_no=? AND mb_pwd = ?",
+        "mapkeys":{
+            "mb_new_encPwd":{"required":true,"maxlength":255}
+            ,"mb_encPwd":{"required":true,"maxlength":255}
+            ,"up_ip":{"default":"CLIENT_IP"}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mb_pwd":{"required":true,"maxlength":255}
+        },
+        "datamodel":"ChangePassword"
+    },
+    
+    "logout":{
+        "description":"로그아웃 히스토리 삽입",
+        "sql":"INSERT INTO web_member_login_his(lh_type,mb_no,mb_id,mb_key,lh_result_code,lh_result_msg,lh_agent,lh_block_yn,lh_block_force_yn,lh_reg_ip)VALUES(?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys":{
+            "lh_type":{"default":"LOGIN"}
+             ,"mb_no":{"default":"SS_MB_NO"}
+             ,"mb_id":{"default":"SS_MB_ID"}
+             ,"mb_key":{"default":""}
+             ,"lh_result_code":{"default":"2"}
+             ,"lh_result_msg":{"default":"SignOut"}
+             ,"lh_agent":{"default":"CLIENT_AGENT"}
+             ,"lh_block_yn":{"default":"N"}
+             ,"lh_block_force_yn":{"default":"N"}
+             ,"lh_reg_ip":{"default":"CLIENT_IP"}
+        },
+        "datamodel":"SignOut"
+    },
+     "update_buy_sell":{
+        "database":{"point":"fns_trade_point","etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+        "description":"코인 매수 누적 거래량 합산",
+        "sql_real_buy_sum":"CALL proc_buy_sell_sum(?)",
+        "mapkeys_real_buy_sum":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "sql_real_point_accumulate":"CALL proc_update_point_accumulate(?,?,?,?)",
+        "mapkeys_real_point_accumulate":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true},
+            "po_sell_price":{"required":true},
+            "po_buy_price":{"required":true}
+        },
+        "datamodel":"UpdateBuySell"
+     }
+
+  }
+}

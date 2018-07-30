@@ -1,0 +1,202 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"cfNo":"No","cfWalletType":"지갑구분","cfMbLevel":"회원레벨","cfMaxDeposit":"입금한도","cfMaxWithdraw":"출금최대한도","cfMinWithdraw":"출금최소한도","cfMaxDay":"일기준","cfRegDt":"등록일"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.cfNo + '</th>');
+		headItems.push('<th>' + val.cfWalletType + '</th>');
+		headItems.push('<th>' + val.cfMbLevel + '</th>');
+		headItems.push('<th>' + val.cfMaxDeposit + '</th>');
+		headItems.push('<th>' + val.cfMaxWithdraw + '</th>');
+                headItems.push('<th>' + val.cfMinWithdraw + '</th>');
+		headItems.push('<th>' + val.cfMaxDay + '</th>');
+		headItems.push('<th>' + val.cfRegDt + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    var cfMaxDeposit = 0;
+    var cfMaxWithdraw = 0;
+    var cfMinWithdraw = 0;
+    var cfWalletType = '';
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'" >');
+        listItems.push('<th class="num" onclick=\"viewLink(\''+val.cfNo+'\')\" >' + num + '</th>');
+        if(val.cfWalletType=='BTC'){
+            cfWalletType = '비트코인';
+        }else if(val.cfWalletType=='LTC'){
+            cfWalletType = '라이트코인';
+        }else if(val.cfWalletType=='ETC'){
+            cfWalletType = '이더리움 클래식';
+        }else if(val.cfWalletType=='ETH'){
+            cfWalletType = '이더리움';
+        }else if(val.cfWalletType=='BCH'){
+            cfWalletType = '비트코인 캐시';
+        }else if(val.cfWalletType=='CASH'){
+            cfWalletType = '원화';
+        }
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + cfWalletType + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfMbLevel + '</th>');
+
+        if(val.cfWalletType=='CASH'){
+            if(val.cfMaxDeposit<0){
+                cfMaxDeposit = '무제한';
+            }else{
+                cfMaxDeposit    = (val.cfMaxDeposit+'').formatNumber()+' KRW';
+            }
+            if(val.cfMaxWithdraw<0){
+                cfMaxWithdraw   = '무제한';
+            }else{
+                cfMaxWithdraw   = (val.cfMaxWithdraw+'').formatNumber()+' KRW';
+            }
+            cfMinWithdraw = (val.cfMinWithdraw+'').formatNumber()+' KRW';
+        }else if(val.cfWalletType=='BTC'){
+            if(val.cfMaxDeposit<0){
+                cfMaxDeposit = '무제한';
+            }else{
+                cfMaxDeposit = (val.cfMaxDeposit+'') +' BTC';
+            }
+            if(val.cfMaxWithdraw<0){
+                cfMaxWithdraw = '무제한';
+            }else{
+                cfMaxWithdraw   = (val.cfMaxWithdraw+'')+' BTC';
+            }
+            cfMinWithdraw = (val.cfMinWithdraw+'')+' BTC';
+        }else if(val.cfWalletType=='LTC'){
+            if(val.cfMaxDeposit<0){
+                cfMaxDeposit = '무제한';
+            }else{
+                cfMaxDeposit = (val.cfMaxDeposit+'') +' LTC';
+            }
+            if(val.cfMaxWithdraw<0){
+                cfMaxWithdraw = '무제한';
+            }else{
+                cfMaxWithdraw   = (val.cfMaxWithdraw+'')+' LTC';
+            }
+            cfMinWithdraw = (val.cfMinWithdraw+'')+' LTC';
+        }else if(val.cfWalletType=='ETC'){
+            if(val.cfMaxDeposit<0){
+                cfMaxDeposit = '무제한';
+            }else{
+                cfMaxDeposit = (val.cfMaxDeposit+'') +' ETC';
+            }
+            if(val.cfMaxWithdraw<0){
+                cfMaxWithdraw = '무제한';
+            }else{
+                cfMaxWithdraw   = (val.cfMaxWithdraw+'')+' ETC';
+            }
+            cfMinWithdraw = (val.cfMinWithdraw+'')+' ETC';
+        }else if(val.cfWalletType=='ETH'){
+            if(val.cfMaxDeposit<0){
+                cfMaxDeposit = '무제한';
+            }else{
+                cfMaxDeposit = (val.cfMaxDeposit+'') +' ETH';
+            }
+            if(val.cfMaxWithdraw<0){
+                cfMaxWithdraw = '무제한';
+            }else{
+                cfMaxWithdraw   = (val.cfMaxWithdraw+'')+' ETH';
+            }
+            cfMinWithdraw = (val.cfMinWithdraw+'')+' ETH';
+        }else if(val.cfWalletType=='BCH'){
+            if(val.cfMaxDeposit<0){
+                cfMaxDeposit = '무제한';
+            }else{
+                cfMaxDeposit = (val.cfMaxDeposit+'') +' BCH';
+            }
+            if(val.cfMaxWithdraw<0){
+                cfMaxWithdraw = '무제한';
+            }else{
+                cfMaxWithdraw   = (val.cfMaxWithdraw+'')+' BCH';
+            }
+            cfMinWithdraw = (val.cfMinWithdraw+'')+' BCH';
+        }
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + cfMaxDeposit + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + cfMaxWithdraw + '</th>');
+                listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + cfMinWithdraw + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfMaxDay + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.cfNo+'\')\" >' + val.cfRegDt + '</th>');
+		listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+            <div class="list_search">
+        
+            <input type="hidden" name="mode" value="WebConfigWalletLimit" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                    <option value="cf_no">번호</option>
+                    <option value="cf_mb_level">레벨</option>
+                    <option value="cf_wallet_type">지갑구분</option>
+                    <option value="cf_country_code">국가코드</option>
+                </select>
+            </span>
+            <input maxlength="24" type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </div>
+            
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            </div>
+        </form>
+        
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_s" value="입 력" class="right btn-default" onclick="document.location.href=bean.link.write" />
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

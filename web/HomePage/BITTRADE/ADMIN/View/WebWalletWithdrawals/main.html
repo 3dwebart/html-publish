@@ -1,0 +1,228 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+tr.itPayREQ td{
+
+}
+tr.itPayHOLD td,tr.itPayN th{
+    color:#cccccc !important;
+}
+td.tmpcost{
+    color:#0084ff !important;
+}
+td.reccost{
+    color:#FF0000 !important;
+}
+</style>
+<script type="text/javascript">
+var listHeader = '[{"odId":"No","odStatus":"상태","odStatusMsg":"사용자메시지","mbNo":"회원번호","isUserConfirmYn":"인증여부","isUserConfirmDt":"인증시간","isUserConfirmIp":"인증IP","isAdminConfirmYn":"관리자확인","isAdminConfirmDt":"관리자확인시간","odTempAmount":"요청수량","odTempCurrencyTotal":"KRW환산량","odReceiptAmount":"완료수량","odAddr":"출금지갑주소","odAddrMsg":"비고","odSendto":"친구에게전송시","odFee":"수수료","odTxid":"TXID","poType":"자산구분","poAmount":"자산수량","poPayYn":"자산처리여부","odRegDt":"등록일","odRegCnt":"요청횟수"}]';
+function writeListHead(jsondata){
+     var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+	headItems.push('<th width="50">ID</th>');
+	headItems.push('<th width="30">' + val.odStatus + '</th>');
+        headItems.push('<th width="30">' + val.poType + '</th>');
+	headItems.push('<th width="50">' + val.mbNo + '</th>');
+	headItems.push('<th width="70">' + val.isUserConfirmYn + '</th>');
+        headItems.push('<th width="50">관리자<br>확인</th>');
+        headItems.push('<th width="120">' + val.odRegCnt + '</th>');
+	headItems.push('<th width="120">' + val.odTempAmount + '</th>');
+        headItems.push('<th width="120">' + val.odFee + '</th>');
+        headItems.push('<th width="120">수수료제외금액</th>');
+        headItems.push('<th width="120">KRW환산(등록시점)</th>');
+		
+		
+	headItems.push('<th width="80">' + val.poPayYn + '</th>');
+	headItems.push('<th>' + val.odRegDt + '</th>');
+	headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+                
+        var reqstr = '';
+        var trcss = 'itPayREQ';
+        
+        //'WAIT','REQ','REJ','OK','HOLD','CAN'
+        //'대기','요청','거부','완료','중지','취소'
+        if(val.odStatus=='WAIT'){
+            reqstr='대기';
+        }else if(val.odStatus=='REQ'){
+            reqstr='요청';
+        }else if(val.odStatus=='REJ'){
+            reqstr='거부';
+        }else if(val.odStatus=='OK'){
+            reqstr='<span style="color:#0084ff;">완료</span>';
+        }else if(val.odStatus=='HOLD'){
+            reqstr='보류';
+            trcss = 'itPayHOLD';
+        }else if(val.odStatus=='CAN'){
+            reqstr='취소';
+            trcss = 'itPayHOLD';
+        }
+        
+        
+        
+        var coincurrency = val.poType.toUpperCase();
+        listItems.push('<tr class="list'+c+' '+trcss+'" >');
+		listItems.push('<th class="num">' + val.odId + '</th>');
+        
+        listItems.push('<td>' + reqstr + '</td>');
+        listItems.push('<td onclick=\"viewLink(\''+val.odId+'\')\" >' + coincurrency + '</td>');
+		listItems.push('<th>' + val.mbNo + '</th>');
+        
+        
+        var cert = '';
+        if(val.isUserConfirmYn=='Y') cert = '✔';
+		listItems.push('<td >' + cert + '</td>');
+        
+        var cert = '';
+        if(val.isAdminConfirmYn=='Y') cert = '✔';
+		listItems.push('<td >' + cert + '</td>');
+                
+        listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odRegCnt + '</th>');
+        
+        var boldcolor = 'num';
+        if(val.odTempAmount>0) boldcolor = 'tmpcost';
+                listItems.push('<td class="'+boldcolor+'"  onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odTempAmount + '</td>');
+        
+        boldcolor = 'num';
+        if(val.odReceiptAmount>0) boldcolor = 'tmpcost';
+        listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odFee + '</th>');
+        
+        
+         var receiptkrw = (val.odTempAmount>0)? ((val.odTempAmount- val.odFee).toFixed(8) ):0;
+        var admin_cost = (receiptkrw+"<font color=\"#999\"> "+coincurrency+"</font>") ;
+		listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\" >' + admin_cost + '</th>');
+        listItems.push('<th onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odTempCurrencyTotal + '</th>');
+
+        
+        var pay_result = '';
+        if(val.poPayYn=='Y'){
+            pay_result = '<input onclick=\"getViewInsertPoint(\''+val.odId+'\')\" type="button" style="font-size:11px;" value="확인" class="btn-default"  />';
+        }
+            
+		listItems.push('<td  >' + pay_result + '</td>');
+		listItems.push('<td onclick=\"viewLink(\''+val.odId+'\')\" >' + val.odRegDt + '</td>');
+		listItems.push('</tr>');
+        listItems.push('<tr style="display:none;" id="point_view'+val.odId+'"><td colspan="'+getColCount()+'"  class="console" style="display:none;">');
+        listItems.push('<th colspan="'+getColCount()+'"> <div id="point_currency'+val.odId+'" ></div></th></tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+            <div class="list_search">
+        
+                <input type="hidden" name="mode" value="WebWalletWithdrawals" />
+                <span class="custom-dropdown custom-dropdown--white">
+
+                    <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                            <option value="mb_no">회원번호</option>
+                            <option value="po_type">코인종류</option>
+                    </select>
+                </span>
+                <input type="text" name="sv" />
+                <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </div>
+            
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            </div>
+        
+        </form>
+        
+        
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page"> 
+                <!-- optional left control buttons--> 					
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a> 
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added --> 
+                    </div>
+                </div>
+                <!-- optional right control buttons--> 
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a> 
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+    <script>
+        var param_mode = $.getUrlVar('mode')+'';
+        var idxtmp = param_mode.indexOf('#');
+        if(idxtmp!==-1){
+            param_mode = param_mode.substring(0,idxtmp);
+        }
+
+        function writePointListBody(jsondata){
+            var listItems = [];
+            listItems.push('<table class="point-table"><tr style="background:#f5f5f5;" ><th>날짜</th><th>포인트자산</th><th>Content</th></tr>');
+            
+            var total_amount = 0;
+            $.each(jsondata, function (key, val) {
+                listItems.push('<tr >');
+                listItems.push('<td style="width:140px" >' + val.poRegDt + '</td>');
+                listItems.push('<td style="min-width:100px">' + val.poPoint + '</td>');
+                listItems.push('<td>' + val.poContent + '</td>');
+                listItems.push('</tr>');
+                total_amount += Number(val.poPoint);
+            });
+            listItems.push('</table>');
+            return listItems.join('');
+        }
+
+        function getViewInsertPoint(odid){
+            
+            var domobj = $('#point_view'+odid);
+            domobj.show();
+            console.log('/?mode='+param_mode+'/getViewInsertPoint&odid='+odid);
+            $.getJSON('/?mode='+param_mode+'/getViewInsertPoint&odid='+odid, 'json', function (data) {
+                console.log(data);
+                    if(Array.isArray(data.pointcurrency)) $('#point_currency'+odid).html(writePointListBody(data.pointcurrency));
+                })
+                .fail(function() {
+                    domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+                })
+                .always(function() {});
+        }
+    </script>
+</body>

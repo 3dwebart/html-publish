@@ -1,0 +1,116 @@
+{
+    "cmd":{
+        "debug":true
+    },
+    "redis":{
+        "host":"localhost",
+        "port":6379,
+        "db_ticker":0,
+        "db_channel":5,
+        "db_member":10,
+	    "db_member_noti":11,
+        "db_trade_email":13
+    },
+    "redis_member":{
+        "host":"localhost",
+        "port":6379,
+        "db_ticker":0,
+        "db_channel":5,
+        "db_member":10,
+		"db_member_noti":11,
+        "db_trade_email":13
+    },
+    "mysqldb":
+    {
+        "port":"3306",
+        "host":"localhost",
+        "slave_host":"localhost",
+	    "user":"rhaon_web",
+        "password":"q24gijtop90uq2345tjyj9045y90jmw5",
+        "database":"fns_trade_order_ltc"
+    },
+    "mysqldb_point":
+    {
+        "port":"3306",
+	    "host":"localhost",
+        "slave_host":"localhost",
+	    "user":"rhaon_web",
+        "password":"q24gijtop90uq2345tjyj9045y90jmw5",
+        "database":"fns_trade_point"
+    },
+    "mysqldb_web":
+    {
+        "port":"3306",
+	    "host":"localhost",
+        "slave_host":"localhost",
+        "user":"rhaon_web",
+        "password":"q24gijtop90uq2345tjyj9045y90jmw5",
+        "database":"fns_web"
+    },
+    "server":{
+        "list":[
+            {"script":"fns_ltc/TickerServer","name":"LTC Ticker","pid":"","logfile":"","uptime":""},
+            {"script":"fns_ltc/TradeSignServer","name":"LTC Sign","pid":"","logfile":"","uptime":""},
+            {"script":"fns_ltc/SyncTradePoint","name":"LTC Point Sync","pid":"","logfile":"","uptime":""},
+			{"script":"fns_ltc/SyncLockTradePoint","name":"LTC Lock Point Sync","pid":"","logfile":"","uptime":""}
+        ],
+        "port":17073
+    },
+    "syncpoint":
+    {
+        "port":30073
+    },
+    "timer":
+    {
+        "outerticker":60000,
+        "exchange_delay":5000
+    },
+    "cachetime":
+    {
+        "outerticker":6000000
+    },
+    "ticker":
+    {
+        "port":3073
+    },
+    "trade":
+    {
+        "tr_port":7073,
+        "tr_channel_id":"krw_ltc",
+        "tr_channel_name":"KRW_LTC",
+        "tr_tracker_fee":0.0,
+        "tr_marketmaker_fee":0.0,
+	    "config":{
+            "proto":"http",
+            "volumefeeurl":"www.devpopcon.com/getconfigtrade/volumefee/market-KRW_LTC",
+            "basicfeeurl":"www.devpopcon.com/getconfigtrade/basicfee/market-KRW_LTC"
+        }
+    },
+    "email":
+    {
+        "templet":{
+            "proto":"http",
+            "hosturl":"www.devpopcon.com/api/templetemail"
+        },
+        "setting":{
+            "ignoreTLS":false,
+            "host": "smtp.worksmobile.com",
+            "port": 465,
+            "secure": true,
+            "auth": {
+                "user": "customer@devpopcon.com",
+                "pass": "customer1!@#$"
+            },
+            "maxConnections": 5,
+            "maxMessages": 10,
+            "rateLimit": 5
+        },
+        "from":"GoldenFutures<customer@devpopcon.com>",
+        "send":false
+    },
+    "licence":
+    {
+        "key":"10f9dcf3ce2f69e647d30fdbe0c9ff0b"
+    },
+    "domain":["devpopcon.com"]
+}

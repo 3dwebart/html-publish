@@ -1,0 +1,46 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "history":{
+        "description":"시세차트 - candlestick month",
+        "database":{
+            "etc":"fns_trade_order_etc",
+            "eth":"fns_trade_order_eth",
+            "ltc":"fns_trade_order_ltc",
+            "btc":"fns_trade_order_btc",
+            "bch":"fns_trade_order_bch"
+        },
+        "min_sql":"SELECT t1.*, t2.c from (SELECT MAX(ch_date) AS i, ch_reg_unix_dt AS t, ch_begin_cost AS o, MAX(ch_max_cost) AS h, MIN(ch_min_cost) AS l, SUM(ch_total_amount) AS v FROM web_chart_data_minute_krw_{currency} WHERE ch_reg_unix_dt >= ? AND ch_reg_unix_dt < ? GROUP BY DATE_FORMAT(ch_date, '%Y-%m-%d %H'), FLOOR(DATE_FORMAT(ch_date, '%i')/?)  ORDER BY ch_date ASC) t1 LEFT JOIN (SELECT ch_date, ch_close_cost AS c FROM web_chart_data_minute_krw_{currency}) t2 ON t1.i = t2.ch_date",
+        "min_mapkeys":{
+            "from_dt":{"required":true,"number":true},
+            "to_dt":{"required":true,"number":true},
+            "candlesticks":{"required":true,"number":true}
+        },
+        "hour_sql":"SELECT t1.*, t2.c from (SELECT MAX(ch_date) AS i, ch_reg_unix_dt AS t, ch_begin_cost AS o, MAX(ch_max_cost) AS h, MIN(ch_min_cost) AS l, SUM(ch_total_amount) AS v FROM web_chart_data_minute_krw_{currency} WHERE ch_reg_unix_dt >= ? AND ch_reg_unix_dt < ? GROUP BY DATE_FORMAT(ch_date, '%Y-%m-%d'), FLOOR(date_format(ch_date, '%H')/?) ORDER BY ch_date ASC) t1 LEFT JOIN (SELECT ch_date, ch_close_cost AS c FROM web_chart_data_minute_krw_{currency}) t2 ON t1.i = t2.ch_date",
+        "hour_mapkeys":{
+            "from_dt":{"required":true,"number":true},
+            "to_dt":{"required":true,"number":true},
+            "candlesticks":{"required":true,"number":true}
+        },
+        "day_sql":"SELECT t1.*, t2.c from (SELECT MAX(ch_date) AS i, ch_reg_unix_dt AS t, ch_begin_cost AS o, MAX(ch_max_cost) AS h, MIN(ch_min_cost) AS l, SUM(ch_total_amount) AS v FROM web_chart_data_minute_krw_{currency} WHERE ch_reg_unix_dt >= ? AND ch_reg_unix_dt < ? GROUP BY DATE_FORMAT(ch_date, '%Y-%m'), FLOOR(date_format(ch_date, '%d')/?) ORDER BY ch_date ASC) t1 LEFT JOIN (SELECT ch_date, ch_close_cost AS c FROM web_chart_data_minute_krw_{currency}) t2 ON t1.i = t2.ch_date",
+        "day_mapkeys":{
+            "from_dt":{"required":true,"number":true},
+            "to_dt":{"required":true,"number":true},
+            "candlesticks":{"required":true,"number":true}
+        },
+        "datamodel":"Tradingview"
+    },
+    "config":{
+        "datamodel":"Tradingview"
+    },
+    "time":{
+        "datamodel":"Tradingview"
+    },
+    "symbols":{
+        "datamodel":"Tradingview"
+    }
+  }
+}

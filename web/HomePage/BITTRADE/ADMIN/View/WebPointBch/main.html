@@ -1,0 +1,228 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+    
+
+var listHeader = '[{"poNo":"No","mbNo":"회원번호","mbId":"아이디","poContent":"내용","poPoint":"환전된코인","odTotalCost":"지불금액","poRelId":"주문ID","poRelAction":"구분","poRegDt":"일시"}]';
+var coinname = '비트코인';
+var mark = 'BCH';
+
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+        headItems.push('<th width=55>Sync시간</th>');
+        headItems.push('<th width=55>체결시간</th>');
+        headItems.push('<th width="50">' + val.poNo + '</th>');
+        headItems.push('<th width="50">' + val.mbNo + '</th>');
+        headItems.push('<th>' + val.poContent + '</th>');
+        headItems.push('<th width="120">' + mark + '</th>');
+        headItems.push('<th width="120">이전값 총합산</th>');
+		headItems.push('<th width="120">' + val.odTotalCost + '</th>');
+		headItems.push('<th width="70">' + val.poRelId + '</th>');
+		headItems.push('<th width="80">' + val.poRelAction + '</th>');
+        headItems.push('<th width="100">등록IP</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'">');
+        listItems.push('<th onclick=\"viewLink(\''+val.poNo+'\')\" class="num">' + val.poRegDt + '</th>');
+        listItems.push('<th onclick=\"viewLink(\''+val.poNo+'\')\" class="num">' + val.poTradeDt + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.poNo+'\')\" class="num">' + num + '</th>');
+		listItems.push('<td><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">' + val.mbNo + '</a></u></td>');
+        
+        var content = '';
+        if(val.poContent) content = val.poContent;
+        else{
+            
+            if(val.poRelAction.indexOf('sell_') !== -1){
+                content = coinname + ' 판매';
+            }else if(val.poRelAction.indexOf('buy_') !== -1){
+                content = coinname + ' 구매';
+                mark = 'KRW';
+            }
+            
+            
+            if(content && val.isTracker == 'Y'){
+                content = content + ' - 테이커';
+            }else if(content && val.isTracker == 'N'){
+                content = content + ' - 마켓메이커';
+                
+            }
+            
+        }
+        
+        
+		listItems.push('<td onclick=\"viewLink(\''+val.poNo+'\')\">' + content + '</td>');
+		listItems.push('<td onclick=\"viewLink(\''+val.poNo+'\')\" align=right class="num medium"><b>' + (calfloat('ROUND',parseFloat(val.poPoint),8)+'').formatBitcoin() + '</b> </td>');
+        listItems.push('<td onclick=\"viewLink(\''+val.poNo+'\')\" align=right class="num medium"><b>' + (calfloat('ROUND',parseFloat(val.poPointSum),8)+'').formatBitcoin() + '</b> </td>');
+        
+        
+        var excost = Number(calfloat('ROUND',parseFloat(val.odTotalCost),8));
+        
+        
+        if(!val.odTotalCost || !excost){
+            mark = '';
+            excost = '';
+        }
+        
+		listItems.push('<td onclick=\"viewLink(\''+val.poNo+'\')\" align=right class="num medium"><b>' + excost + '</b>'+mark+'</td>');
+		var tmpodid = (val.poRelId && val.poRelId.indexOf('-'))?val.poRelId.split("-"):val.poRelId;
+        var od_id =0;
+        if(Array.isArray(tmpodid)) od_id = tmpodid[0];
+		var searchlink = '';
+        if(val.poRelAction=='tradebuy' || val.poRelAction=='tradesell'){
+            var searchlink = '/?mode=WebTradeBitcoin&sf=od_id&sv=' + od_id;
+        }else if(val.poRelAction=='order'){
+            searchlink = '/?mode=WebPointRequestOrder&sf=od_id&sv=' + od_id;
+        }else if(val.poRelAction=='fromwallet'){
+            searchlink = '/?mode=Transactions&sf=account&sv=' + val.mbId;
+        }else{
+
+        }
+        var linkstr = '' + val.poRelId + '';
+        if(searchlink != '') linkstr = '<u><a href="' + searchlink + '">' + val.poRelId + '</a></u>';
+		listItems.push('<th class="num">'+linkstr+'</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.poNo+'\')\" class="num">' + val.poRelAction + '</th>');
+		listItems.push('<th onclick=\"viewLink(\''+val.poNo+'\')\" class="num">' + ((!val.poRegIp || val.poRegIp=='system')?"체결서버":val.poRegIp) + '</th>');
+		listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="10" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+
+  $(function() {
+    $( "input[type=sdate]" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "input[type=edate]" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  });
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+            <div class="list_search">
+                <input type="hidden" name="mode" value="WebPointBch" />
+                <span class="custom-dropdown custom-dropdown--white">
+
+                    <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="mb_no">회원번호</option>
+                        <option value="po_rel_id">주문ID</option>
+                        <option value="po_rel_action">구분</option>
+                        <option value="po_reg_dt">날짜</option>
+                    </select>
+                </span>
+                <input maxlength="24" type="text" name="sv" />
+                <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </div>
+            
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+            </div>
+        </form>
+        <div class="list_search_btnarea">
+            <input type="button" value="입금" class="left btn-default" onclick="searchBtn('fromwallet');">
+            <input type="button" value="출금" class="left btn-default" onclick="searchBtn('reqorder');">
+            <input type="button" value="구매" class="left btn-default" onclick="searchBtn('buy_krw_');">
+            <input type="button" value="판매" class="left btn-default" onclick="searchBtn('sell_krw_');">
+            <input type="button" value="회원에게전송" class="left btn-default" onclick="searchBtn('reqordersend');">
+            <input type="button" value="회원에게받기" class="left btn-default" onclick="searchBtn('reqorderrecv');">
+        </div>
+
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_s" value="관리자수기입력" class="right btn-default" onclick="confirmPointChargeMove()" />
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+        <div style="clear:both;margin:70px 0 0 0;background:#f5f5f5;padding:10px 20px;line-height:40px">
+            <img src="/Web/img/icon_excel.png" width="30" align="absmiddle">
+            <span style="padding:7px 0 0 5px;"><b>엑셀다운로드</b>(페이지 당
+                <select onchange="weiteExcelDownlod(this.value);">
+                    <option value="100" selected="selected">선택없음</option>
+                    <option value="100">100개</option>
+                    <option value="200">200개</option>
+                    <option value="300">300개</option>
+                    
+                    
+                </select>
+                개)</span>
+            <span style="margin:5px 0 0 10px;color:#999;font-size:11px"> * 다운로드는 서버에 부하를 줄 수 있으니 사용자가 적은 시간에 이용해 주세요.</span>
+            <br />
+            <div id="list_download_excel"></div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    function confirmPointChargeMove(){
+        if (confirm("포인트 수기입력은 거래내역, 전산내역 등이 안맞을 경우에만 입력하는 기능으로 긴급상황시에만 사용해 주십시오.\n진행하시겠습니까?") == true){
+            document.location.href=bean.link.write
+        }else{
+            return;
+        }
+    }
+    function searchBtn(value){
+        document.location.href='/?mode='+$.getUrlVar('mode')+'&sf=po_rel_action&sv='+value;
+    }
+    
+    
+    $("form input[name='mode']").val($.getUrlVar('mode'));
+
+</script>
+</body>

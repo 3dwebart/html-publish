@@ -1,0 +1,5 @@
+brief : 해당 사이트 이외에 재배포를 엄격히 금지합니다.
+Version : V0.1
+auth : Funhansoft Co., Ltd
+date : 2015-09-12
+license : http://funhansoft.com

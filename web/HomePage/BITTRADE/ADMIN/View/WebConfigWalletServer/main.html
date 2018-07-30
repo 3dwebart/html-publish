@@ -1,0 +1,101 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"waNo":"No","coId":"코인ID","poType":"기호","waExplain":"설명","waStaus":"상태","waRpcProto":"프로토콜","waRpcIp":"서버IP","waRpcPort":"서버PORT","waAccountCnt":"계정수","waUser":"계정ID","waPass":"계정PWD","waWalletPwd":"계정별PWD","trRegDt":"등록일"}]';
+function writeListHead(jsondata){
+     var headItems = [];
+    $.each(jsondata, function (key, val) {
+        	headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.waNo + '</th>');
+		headItems.push('<th>' + val.coId + '</th>');
+		headItems.push('<th>' + val.poType + '</th>');
+		headItems.push('<th>' + val.waExplain + '</th>');
+		headItems.push('<th>' + val.waStaus + '</th>');
+		headItems.push('<th>' + val.waRpcProto + '</th>');
+		headItems.push('<th>' + val.waRpcIp + '</th>');
+		headItems.push('<th>출금수수료</th>');
+		headItems.push('<th>' + val.waAccountCnt + '</th>');
+		headItems.push('<th>' + val.trRegDt + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+            var c = i%2;
+            num = parseInt(getLastestNum(selectedPage) - i);
+            listItems.push('<tr class="list'+c+'" >');
+            listItems.push('<th class="num" onclick=\"viewLink(\''+val.waNo+'\')\" >' + num + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.coId + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.poType + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.waExplain + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.waStaus + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.waRpcProto + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.waRpcIp +':' +val.waRpcPort + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.waTxFee + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.waAccountCnt + '</th>');
+            listItems.push('<th onclick=\"viewLink(\''+val.waNo+'\')\" >' + val.trRegDt + '</th>');
+            listItems.push('</tr>');
+            i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="list_search">
+        <form name="search" method="get" action="/">
+            <input type="hidden" name="mode" value="WebConfigWalletServer" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="po_type">기호</option>
+                </select>
+            </span>
+            <input type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+        </form>
+        </div>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page"> 
+                <!-- optional left control buttons--> 					
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a> 
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added --> 
+                    </div>
+                </div>
+                <!-- optional right control buttons--> 
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a> 
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

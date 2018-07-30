@@ -1,0 +1,121 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"snNo":"No","snName":"성명","snCountryCode":"국가","snHp":"연락처","snNDepositYn":"입금알림여부","snNWithdrawalsYn":"출금알림여부","snRegDt":"등록일","snRegIp":"등록아이피","snUpDt":"변경일"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.snNo + '</th>');
+        headItems.push('<th>' + val.snName + '</th>');
+		headItems.push('<th>' + val.snCountryCode + '</th>');
+		headItems.push('<th>' + val.snHp + '</th>');
+		headItems.push('<th>' + val.snNDepositYn + '</th>');
+		headItems.push('<th>' + val.snNWithdrawalsYn + '</th>');
+		headItems.push('<th>' + val.snRegDt + '</th>');
+		headItems.push('<th>' + val.snRegIp + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    var snNDepositYn = '';
+    var snNWithdrawalsYn = '';
+
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+'" >');
+		listItems.push('<th align="center" class="num" onclick=\"viewLink(\''+val.snNo+'\')\" >' + num + '</th>');
+		listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + val.snName + '</td>');
+        listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + val.snCountryCode + '</td>');
+		listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + val.snCountryDialCode +' '+val.snHp + '</td>');
+        if(val.snNDepositYn=='Y'){
+            snNDepositYn = '✔';
+        }else{
+            snNDepositYn = 'N';
+        }
+		listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + snNDepositYn + '</td>');
+        if(val.snNWithdrawalsYn=='Y'){
+            snNWithdrawalsYn = '✔';
+        }else{
+            snNWithdrawalsYn = 'N';
+        }
+		listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + snNWithdrawalsYn + '</td>');
+		listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + val.snRegDt + '</td>');
+		listItems.push('<td align="center" onclick=\"viewLink(\''+val.snNo+'\')\" >' + val.snRegIp + '</td>');
+		listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="8" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+         <div class="list_search">
+            <input type="hidden" name="mode" value="WebAdminSmsNotify" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="sn_name">이름</option>
+                        <option value="sn_hp">휴대폰번호</option>
+                </select>
+            </span>
+            <input maxlength="24" type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+         </div>
+            
+            <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+        </div>
+        </form>
+        
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_s" value="입 력" class="right btn-default" onclick="document.location.href=bean.link.write" />
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

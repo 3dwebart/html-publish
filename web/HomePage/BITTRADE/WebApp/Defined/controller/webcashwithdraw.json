@@ -1,0 +1,137 @@
+{
+  "Database":{
+    "name":"fns_trade_point"
+  },
+  "Controller":
+  {
+    "regist":{
+        "database":{"web":"fns_web"},
+        "sql_getinfo":"SELECT * FROM web_member WHERE mb_no=? LIMIT 1",
+        "mapkeys_getinfo":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "sql_wallet_limit_conf":"SELECT cf_max_deposit, cf_max_withdraw, cf_min_withdraw, cf_max_day FROM web_config_wallet_limit WHERE cf_country_code=? AND cf_wallet_type=? AND cf_mb_level=? LIMIT 1",
+        "mapkeys_wallet_limit_conf":{
+            "countrycode":{"default":"kr"}
+            ,"wallettype":{"default":"CASH"}
+            ,"mblevel":{"default":"SS_MB_LEVEL"}
+        }, 
+        "description":"출금요청 순번 가져오기",
+        "sql_withdrawcnt":"SELECT COUNT(od_id) AS od_cnt FROM web_cash_withdraw WHERE mb_no=? LIMIT 1 ",
+        "mapkeys_withdrawcnt":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "description":"KRW 출금요청",
+        "sql_regist":"INSERT INTO web_cash_withdraw(od_name,od_status,mb_no,mk_no,mb_id,od_temp_amount,od_receipt_amount,od_fee,od_bank_name,od_bank_account,od_bank_holder,od_reg_ip,od_reg_cnt)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys_regist":{
+            "od_name":{"required":true,"maxlength":50}
+            ,"od_status":{"default":"WAIT","maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mk_no":{"required":false}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"od_temp_amount":{"required":true,"maxlength":11,"number": true}
+            ,"od_receipt_amount":{"required":true,"maxlength":11,"number": true}
+            ,"od_fee":{"required":true}
+            ,"od_bank_name":{"required":false,"maxlength":30}
+            ,"od_bank_account":{"required":false,"maxlength":30}
+            ,"od_bank_holder":{"required":false,"maxlength":20}
+            ,"od_reg_ip":{"default":"CLIENT_IP"}
+            ,"od_reg_cnt":{"required":true,"number":true}
+        },
+        "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance WHERE po_no IN (SELECT MAX(po_no) FROM trade_member_point_balance WHERE mb_no=? GROUP BY po_type)",
+        "mapkeys_balanceupdate":{
+            "mb_no":{"required":true}
+        },
+        "sql_regist_mail_key":"INSERT INTO web_member_email_key(mb_no,mb_id,mk_type,mk_explain,mk_email_key,mk_expire_dt) VALUES (? ,? ,? ,? ,SHA2(CONCAT(MD5(?), (RAND()*100) ), 256) , DATE_ADD(NOW(), INTERVAL+1 DAY) )",
+        "mapkeys_regist_mail_key":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"mk_type":{"required":false,"maxlength":50}
+            ,"mk_explain":{"required":false,"maxlength":50}
+            ,"md5_mb_id":{"required":false,"maxlength":50}
+        },
+        "sql_getinfo_mail_key":"SELECT mk_no, mb_no, mb_id, mk_email_key FROM web_member_email_key WHERE mb_no=? AND mk_type=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys_getinfo_mail_key":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "mk_type":{"default":"WITHDC"}
+        },
+        "sql_balance_update":"UPDATE trade_member_point_balance SET po_on_etc = po_on_etc + ? WHERE mb_no = ? AND po_type='krw'",
+        "mapkeys_balance_update":{
+            "po_on_etc":{"required":true},
+            "mb_no":{"required":true}
+        },
+        "rowlimit":1,
+        "authlevel":0,
+        "datamodel":"RequestWithdraw"
+    },
+
+
+
+    "requestconfirm":{
+        "database":{"web":"fns_web"},
+        "sql_getinfo_mail_key":"SELECT mk_no, mb_no, mb_id, mk_email_key, mk_confirm_yn,mk_expire_dt FROM web_member_email_key WHERE  mb_id=? AND mk_no=? AND mk_type=? AND mk_confirm_yn='N' ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys_getinfo_mail_key":{
+            "mb_id":{"default":"SS_MB_ID"},
+            "mk":{"required":true,"maxlength":10},
+            "mk_type":{"default":"WITHDC"}
+        },
+        "sql_getinfo_request_order":"SELECT * FROM web_cash_withdraw WHERE mb_no=? AND od_status=? ORDER BY od_reg_dt DESC LIMIT 1",
+        "mapkeys_getinfo_request_order":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "od_status":{"default":"WAIT"}
+        },
+        "sql_request_order_update":"UPDATE web_cash_withdraw SET od_status=?, is_user_confirm_yn=?, is_user_confirm_dt=NOW(), is_user_confirm_ip=?, is_admin_confirm_yn='Y' WHERE od_status=? AND mb_no=? AND mk_no=? LIMIT 1",
+        "mapkeys_request_order_update":{
+            "new_od_pay_status":{"required":true,"maxlength":20}
+            ,"is_user_confirm_yn":{"default":"Y"}
+            ,"is_user_confirm_ip":{"default":"CLIENT_IP"}
+            ,"od_status":{"default":"WAIT"}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mk":{"required":true,"maxlength":11}
+        },
+        "sql_mail_key_update":"UPDATE web_member_email_key SET mk_confirm_yn=?, mk_confirm_ip=? WHERE mk_type=? AND mb_no=? AND mk_no=?",
+        "mapkeys_mail_key_update":{
+            "mk_confirm_yn":{"default":"Y"}
+            ,"mk_confirm_ip":{"default":"CLIENT_IP"}
+            ,"mk_type":{"default":"WITHDC"}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mk":{"required":true,"maxlength":11}
+        },
+        "datamodel":"RequestWithdraw"
+    },
+
+    "cancel":{
+        "description":"출금요청 취소",
+        "sql":"UPDATE web_cash_withdraw SET od_status=? WHERE od_id=? AND mb_no=? AND (od_status='REQ' OR od_status='WAIT')",
+        "mapkeys":{
+            "od_status":{"required":true,"maxlength":30}
+            ,"od_id":{"required":true,"maxlength":11,"number": true}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "datamodel":"RequestWithdrawCancel"
+    },
+    "withdrawsum":{
+        "description":"KRW 출금요청 합계",
+        "sql":"SELECT IFNULL(SUM(od_temp_amount), 0) AS sum_krw FROM web_cash_withdraw WHERE mb_no=? AND (od_status='WAIT' OR od_status='REQ' OR od_status='OK') AND (od_reg_dt BETWEEN DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -? DAY ), '%Y-%m-%d 00:00:00') AND NOW())",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"day":{"required":true,"maxlength":11}
+        },
+        "authlevel":0
+    },
+    "listsenv":{
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM web_cash_withdraw WHERE mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        }
+    },
+    "lists":{
+        "sql":"SELECT od_id,od_status,od_status_msg,mb_no,is_user_confirm_yn,od_temp_amount,od_receipt_amount,od_fee,po_pay_yn as com_yn,od_reg_dt FROM web_cash_withdraw WHERE mb_no=? ORDER BY od_id DESC limit ?,?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "rowlimit":5
+    }
+
+  }
+}

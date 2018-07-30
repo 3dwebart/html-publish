@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <!-- <script src="js/jquery-3.3.1.js"></script> -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+</head>
+<body>
+<a href="ajax.html" class="popup-ajax">Open ajax</a>
+<script>
+$(document).ready(function() {
+    $('.popup-ajax').magnificPopup({
+        type: 'ajax'
+    });
+});
+</script>
+</body>
+</html>

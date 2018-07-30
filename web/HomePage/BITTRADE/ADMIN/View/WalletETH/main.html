@@ -1,0 +1,291 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+
+
+</script>
+<style>
+    .resultbox{
+        border:1px solid #f5f5f5;overflow-y: auto;padding:10px;color:#f5f5f5; text-align:left;
+        margin:10px;
+        background: #000;
+        line-height: 150%;
+    }
+    td{
+        line-height: 150%;
+    }
+    td ul{
+        margin: 10px 30px;
+    }
+
+</style>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div id="fwrite">
+        <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th colspan="4">지갑 서버 상태체크 Console</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sender계정</td>
+                        <td colspan="3"><span class='result-mainaddress'>
+
+ [ ]
+
+                            </span></td>
+                    </tr>
+                    <tr>
+                        <th>BLOCKS HEIGHT
+                            <br /><input type="button"  class="btn-default" value="다시체크" onclick="getblockNum();" /></th>
+                        <td>
+                            <div id="result-getblockNum" style="width:270px;height:20px;" class="resultbox">
+                            Loading..
+                            </div>
+                        </td>
+                        <th>시스템계정잔액
+                            <br />
+                            <input type="button"  class="btn-default" value="다시체크" onclick="getbalance();" /></th>
+                            <td>
+                            <div id="result-getbalance" style="width:270px;height:50px;" class="resultbox">
+                            Loading..
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>사용자계정잔액
+                            <br />
+                            <input type="button"  class="btn-default" value="다시체크" onclick="getUserBalance();" /></th>
+                            <td>
+                            <div id="result-getbalance-user" style="width:270px;height:50px;" class="resultbox">
+                            계정이 많을 경우 부하가 발생될 수 있습니다.
+                            </div>
+                            <input type="button" id="move-system" class="btn-default orange" value="시스템계정으로 잔액통합" onclick="moveSystemBalance();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="color:red">*</th>
+                        <td style="color:red">이더계열의 경우 보유지갑의 갯수가 5000~10000개 이상일 경우 지갑서버를 추가하여 사용하시길 권장합니다.</td>
+                    </tr>
+<!--                    <tr>
+                        <th>최근트렌젝션들
+                            <br /><input type="button"  class="btn-default" value="다시체크" onclick="listtransactions();" /></th>
+                        <td colspan="3">
+                            <input type="text" id='tran-user' placeholder="MB+회원번호"  style="width:400px;"  />
+                            <input type="button"  class="btn-default" value="검색" onclick="listtransactions($('#tran-user').val());" />
+                            <div id="result-listtransactions" style="width:95%;height:400px;"  class="resultbox" >
+                            Loading..
+                            </div>
+                        </td>
+
+                    </tr>-->
+
+
+                    
+
+
+                </tbody>
+        </table>
+
+<!--        <center>
+          <input type="button"  class="btn-default orange" value="전문가모드 (잔액증명 & MOVE)" onclick="exportModeToogle()" />
+        </center>
+        <table id="exportmode" style="display:none;">
+          <tr>
+              <th>코인이동(local)<br />메인->유저지갑</th>
+              <td style="padding:10px 0">
+                  <input type="text" id='moveto-to-user' placeholder="받는 MB+회원번호"  style="width:150px;"/>
+                  <input type="text" id='moveto-to-coin' placeholder="0.0"  style="width:50px;"/>
+                  <input type="button"  class="btn-default" value="MOVE" onclick="moveto($('#moveto-to-user').val(), $('#moveto-to-coin').val() )" />
+                  <div id="result-system-moveto" style="width:270px;height:80px;"  class="resultbox">
+                  geth#
+                  </div>
+              </td>
+
+              <th>코인이동(local)<br />유저->유저지갑</th>
+              <td style="padding:10px 0">
+                  <input type="text" id='move-from-user' placeholder="보내는 MB+회원번호"  style="width:150px;"/>
+                  <input type="text" id='move-to-user' placeholder="받는 MB+회원번호"  style="width:150px;"/>
+                  <input type="text" id='move-to-coin' placeholder="0.0"  style="width:50px;"/>
+                  <input type="button"  class="btn-default" value="MOVE" onclick="move($('#move-from-user').val(), $('#move-to-user').val(), $('#move-to-coin').val() )" />
+                  <div id="result-move-utu" style="width:270px;height:50px;"  class="resultbox">
+                  geth#
+                  </div>
+
+              </td>
+          </tr>
+
+          <tr>
+              <th>사용자 잔액 증명</th>
+              <td style="padding:10px 0">
+                  <input type="text" name="suser" id='s-user' placeholder="MB+회원번호"  style="width:200px;"/>
+                  <input type="button"  class="btn-default" value="검색" onclick="getbalance($('#s-user').val())" />
+                  <div id="result-getbalance-user" style="width:270px;height:80px;"  class="resultbox">
+                  geth#
+                  </div>
+              </td>
+
+              <th>사용자 계좌정보</th>
+              <td style="padding:10px 0">
+
+                  <input type="text" name="suser" id='s-user2' placeholder="MB+회원번호"  style="width:200px;"/>
+                  <input type="button"  class="btn-default" value="검색" onclick="getaddressesbyaccount($('#s-user2').val())" />
+                  <div id="result-getaddressesbyaccount" style="width:270px;height:80px;"  class="resultbox">
+                  geth#
+                  </div>
+              </td>
+          </tr>
+
+
+        </table>-->
+
+
+        <table>
+          <tr>
+              <td style='padding:10px 0'>
+<!--                  코인지갑서버 설명
+                  <ul>
+                      <li>유저가 코인을 입금하면 1컨펌 전까지 입금한 SC를 가지고 있습니다.</li>
+                      <li>1컨펌 이후 해당 유저의 SC는 system계정으로 MOVE되어 해당 유저의 지갑SC는 0이되고 <b>SC포인트</b>가 입금됩니다.</li>
+                      <li>모든 유저의 지갑잔액은 0이되어야 정상입니다.</li>
+                  </ul>-->
+              </td>
+          </tr>
+        </table>
+
+        </div>
+
+    </div>
+    <div id="footer"></div>
+</div>
+
+<script>
+    
+
+var parammode = $.getUrlVar('mode');
+
+getblockNum();
+getbalance();
+//getUserBalance();
+getSystemAddress();
+//listtransactions();
+function exportModeToogle(){
+  $('#exportmode').toggle();
+}
+
+function getSystemAddress(){ 
+    $.getJSON('/?mode='+parammode+'/getSystemAddress', 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            $('.result-mainaddress').html( '['+backdata +']');
+        })
+        .fail(function() {
+            $('.result-mainaddress').html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+function getblockNum(){ 
+     $('#result-getblockNum').html('geth#');
+    $.getJSON('/?mode='+parammode+'/blockNumber', 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            $('#result-getblockNum').html( 'geth# '+backdata );
+        })
+        .fail(function() {
+            $('#result-getblockNum').html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+function getbalance(param){
+    var domobj = $('#result-getbalance');
+    var urladd = '';
+
+    domobj.html('geth#');
+    $.getJSON('/?mode='+parammode+'/systemBalance'+urladd, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( 'geth# '+JSON.stringify(backdata) );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+function getUserBalance(param){
+    var domobj = $('#result-getbalance-user');
+    var urladd = '';
+
+    domobj.html('geth#');
+    $.getJSON('/?mode='+parammode+'/userBalance'+urladd, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( 'geth# '+JSON.stringify(backdata) );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+function moveSystemBalance(){
+    var domobj = $('#result-getbalance');
+    $('#move-system').attr('disabled',true);
+
+    $.getJSON('/?mode='+parammode+'/moveSystemBalance', 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.append( 'txid# '+JSON.stringify(backdata, null, '<br />') );
+        })
+        .fail(function() {
+            domobj.append('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+
+function listtransactions(param){
+    var domobj = $('#result-listtransactions');
+    domobj.html('geth#');
+
+    var urladd = '';
+    if(param) {
+        domobj = $('#result-listtransactions');
+        urladd = '&param='+param;
+    }
+    $.getJSON('/?mode='+parammode+'/latesttransactions'+urladd, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( 'geth# '+JSON.stringify(backdata, null, '<br />') );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+
+
+</script>
+</body>

@@ -1,0 +1,24 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "select":{
+        "sql":"SELECT cf_max_deposit, cf_max_withdraw, cf_min_withdraw, cf_max_day FROM web_config_wallet_limit WHERE cf_wallet_type=? AND cf_mb_level=(SELECT mb_level FROM web_member WHERE mb_no=?) LIMIT 1",
+        "authlevel":0,
+        "mapkeys":{
+            "wallettype":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        }
+    },
+
+    "selectdepositwithdraw":{
+        "sql":"SELECT cf_wallet_type, cf_mb_level, cf_max_deposit, cf_max_withdraw FROM web_config_wallet_limit WHERE cf_country_code=? ORDER BY cf_mb_level, cf_no ASC",
+        "authlevel":0,
+        "mapkeys":{
+            "countrycode":{"default":"kr"}
+        }
+    }
+  }
+}

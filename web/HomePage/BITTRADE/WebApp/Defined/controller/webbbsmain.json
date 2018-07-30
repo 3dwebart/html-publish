@@ -1,0 +1,74 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "noticelistsenv":{
+        "description":"고객센터 > 공지사항 페이징 설정값",
+        "sql":"SELECT COUNT(bbs_no) AS totalcount, CONCAT('10') AS rowlimit FROM web_bbs_main WHERE ch_no=?",
+        "mapkeys":{
+            "chno":{"default":"100"}
+        },
+        "authlevel":0
+    },
+    
+    "noticelists":{
+        "description:":"고객센터 > 공지사항 리스트",
+        "sql":"SELECT bbs_no, mb_nick, subject, subject_kr, subject_cn, content, content_kr, content_cn, reg_dt FROM web_bbs_main WHERE ch_no=? ORDER BY bbs_no DESC LIMIT ?,?",
+        "mapkeys":{
+            "chno":{"default":"100"}
+        },
+        "rowlimit":10,
+        "authlevel":0
+    },
+    
+    "customerlistsenv":{
+        "description":"고객센터 > 1:1문의 페이징 설정값 - 20, 1:1문의 ch_no = 110",
+        "sql":"SELECT COUNT(bbs_no) AS totalcount, CONCAT('20') AS rowlimit FROM web_bbs_main WHERE ch_no=110 AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        }
+    },
+    
+    "customerlists":{
+        "description":"고객센터 > 1:1문의 - 20ea",
+        "sql":"SELECT bbs_no,cate_name,parent_bbs_no,is_notice,is_secret,mb_id,mb_level,mb_nick,subject,content,hit,cmt_cnt,reg_dt FROM web_bbs_main WHERE ch_no=110 AND mb_no=? ORDER BY bbs_no DESC limit ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    
+    "customerview":{
+        "description":"고객센터 > 1:1문의뷰",
+        "sql":"SELECT a.bbs_no,a.subject,a.content,a.reg_dt,b.content as rep_content FROM web_bbs_main a LEFT JOIN web_bbs_main_cmt b ON a.bbs_no=b.bbs_no WHERE a.mb_no=? AND a.bbs_no=? LIMIT 1",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"bbsno":{"required":true,"maxlength":11,"number": false}
+        },
+        "authlevel":0
+    },
+    
+    "regist":{
+        "description":"고객센터 > 1:1문의 등록",
+        "method":"POST",
+        "sql":"INSERT INTO web_bbs_main(ch_no,cate_name,mb_no,mb_id,mb_nick,subject,content,reg_ip,etc1)VALUES(?,?,?,?,?,?,?,?,?)",
+        "mapkeys":{
+            "ch_no":{"default":"110"}
+             ,"cate_name":{"defaulr":110}
+             ,"mb_no":{"default":"SS_MB_NO"}
+             ,"mb_id":{"default":"SS_MB_ID"}
+             ,"mb_nick":{"required":false,"maxlength":100}
+             ,"subject":{"required":true,"maxlength":255}
+             ,"contents":{"required":true}
+             ,"reg_ip":{"default":"CLIENT_IP"}
+             ,"etc1":{"required":false,"maxlength":255}
+        },
+        "model":"BbsInsert",
+        "authlevel":0
+    }
+
+  }
+}

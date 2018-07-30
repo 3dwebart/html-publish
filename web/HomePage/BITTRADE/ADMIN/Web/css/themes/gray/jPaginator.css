@@ -1,0 +1,77 @@
+/* must set border width with px */
+.paginator_p {
+    text-align:center;
+    color:#666666;
+    float:left;
+    padding: 1px 0 3px 0;
+    cursor:pointer;
+    border:1px solid #cccccc;
+    list-style-type:none;
+    height:12px;
+    font-family:tahoma, AppleGothic, Sans-serif;font-style:normal;
+}
+.paginator_p.over {
+    background-color:#f7f7f7;
+    height:12px;
+}
+.paginator_p.selected {
+    background-color:#666;
+    color:white;
+    border:1px solid #000;
+}
+.paginator_p_wrap {
+    position:relative;
+    overflow:hidden;
+    float:left;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.paginator_p_bloc {
+    position:relative;
+    width:3000px;
+}
+.paginator_slider {
+    float:left;
+    height: 4px;
+    top: 4px;
+    background: white;
+    border: solid 1px black;
+    position:relative;
+}
+
+
+.jPaginatorOver {
+    color:#666666;
+    float:left;
+    padding: 2px 4px;
+    cursor:pointer;
+    border:1px solid #cccccc;
+    list-style-type:none;
+    height:12px;
+    margin:0 3px;
+}
+
+.jPaginatorMax {
+    cursor: pointer;
+    color:#666666;
+    float:left;
+    padding: 2px 4px;
+    cursor:pointer;
+    border:1px solid #cccccc;
+    list-style-type:none;
+    height:12px;
+}
+
+.jPaginatorOver.disabled, .jPaginatorMax.disabled{
+    color:#cccccc;
+    cursor:default ;
+}
+a:hover.jPaginatorOver.disabled , a:hover.jPaginatorMax.disabled {
+    text-decoration:none;
+}
+a:link.jPaginatorOver.disabled , a:link.jPaginatorMax.disabled {
+    text-decoration:none;
+}

@@ -1,0 +1,49 @@
+{
+  "Database":{
+    "name":"fns_trade_point"
+  },
+  "Controller":
+  {
+    "trade":{
+        "description":"포인트 잔액 계산",
+        "sql_call_proc":"CALL proc_set_member_point_balance_action(?,?,?)",
+        "mapkeys_call_proc":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "market_type":{"default":"ALL"},
+            "ac":{"required":true,"maxlength":10}
+         },
+        "sql":"CALL proc_get_all_balance(?)",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+         },
+        "description":"매수 누적 거래량 읽기",
+        "sql_select_buy_sum":"SELECT po_type,po_sell_price,po_buy_price FROM web_memeber_point_accumulate WHERE mb_no=?",
+        "mapkeys_select_buy_sum":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "database":{"etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+        "description":"미체결 코인개수 읽기",
+        "sql_select_uncomplete_count":"SELECT COUNT(od_id) AS totalcount  FROM mem_open_order_krw_{currency} WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=?",
+        "mapkeys_select_uncomplete_count":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "datamodel":"BalanceRedis"
+        ,"response":"base64"
+    },
+    "server":{
+        "description":"서버에서 포인트 잔액 계산",
+        "sql_call_proc":"CALL proc_set_member_point_balance_action(?,?,?)",
+        "mapkeys_call_proc":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "market_type":{"default":"ALL"},
+            "ac":{"required":true,"maxlength":10}
+         },
+        "sql":"call proc_get_all_balance(?)",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+         }
+        ,"datamodel":"BalanceRedisFromServer"
+        ,"response":"base64"
+    }
+  }
+}

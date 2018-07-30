@@ -1,0 +1,56 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+								<th>odAction</th><td><select name="odAction" required /><option value="buy">buy</option><option value="sell">sell</option><option value=""></option></select></td>
+								</tr><tr>
+								<th>체결가</th><td><input type="text" name="trMarketCost" value="0.00000000" required /></td>
+								</tr><tr>
+								<th>trTotalCoin</th><td><input type="text" name="trTotalCoin" value="0.00000000" required /></td>
+								</tr><tr>
+								<th>trRegDt</th><td><input type="text" name="trRegDt" value="" required /></td>
+								</tr><tr>
+								<th>주문서OD_ID</th><td><input type="text" name="odId" value="" required /></td>
+								</tr><tr>
+								<th>trTotalCost</th><td><input type="text" name="trTotalCost" value="0.00000000" required /></td>
+								</tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

@@ -1,0 +1,15 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "select":{
+        "sql":"SELECT wa_tx_fee FROM web_config_wallet_server WHERE po_type=? LIMIT 1",
+        "authlevel":0,
+        "mapkeys":{
+            "po_type":{"required":true,"maxlength":10}
+        }
+    }
+  }
+}

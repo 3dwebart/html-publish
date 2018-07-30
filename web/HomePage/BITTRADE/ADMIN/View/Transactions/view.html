@@ -1,0 +1,76 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                                <th>거래ID(txid)</th>
+                                <td><span id="txid"></span></td>
+                            </tr><tr>
+                                <th>지갑서버IP</th>
+                                <td><span id="server"></span></td>
+                            </tr><tr>
+                                <th>계정</th>
+                                <td><span id="account"></span></td>
+                            </tr><tr>
+                                <th>구분</th>
+                                <td><span id="category"></span></td>
+                            </tr><tr>
+                                <th>지갑주소</th>
+                                <td><span id="address"></span></td>
+                            </tr><tr>
+                                <th>금액</th>
+                                <td><span id="amount"></span></td>
+                            </tr><tr>
+                                <th>수수료</th>
+                                <td><span id="fee"></span></td>
+                            </tr><tr>
+                                <th>컴펌</th>
+                                <td><span id="confirmations"></span></td>
+                            </tr><tr>
+                                <th>blockhash</th>
+                                <td><span id="blockhash"></span></td>
+                            </tr><tr>
+                                <th>blockindex</th>
+                                <td><span id="blockindex"></span></td>
+                            </tr><tr>
+                                <th>blocktime</th>
+                                <td><span id="blocktime"></span></td>
+                            </tr><tr>
+                                <th>walletconflicts</th>
+                                <td><span id="walletconflicts"></span></td>
+                            </tr><tr>
+                                <th>등록일시</th>
+                                <td><span id="regDt"></span></td>
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

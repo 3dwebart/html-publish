@@ -1,0 +1,9 @@
+로그인 여부를 판단하는 방법
+php의 경우
+if(!$this->member || !isset($this->member['mb_no']) || !$this->member['mb_no']){
+
+}
+
+js의 경우
+if( get_member.hasOwnProperty('mb_id') ){
+}

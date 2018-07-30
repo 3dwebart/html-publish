@@ -1,0 +1,76 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="odId" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+								<th>전송구분</th><td><input type="text" name="odCategory" value="" required /></td>
+								</tr><tr>
+								<th>회원번호</th><td><input type="text" name="mbNo" value="" required /></td>
+								</tr><tr>
+								<th>입금수량</th><td><input type="text" name="odAmount" value="" required /></td>
+								</tr><tr>
+								<th>TXID</th><td><input type="text" name="odTxid" value="" required /></td>
+								</tr><tr>
+								<th>수수료</th><td><input type="text" name="odFee" value="" required /></td>
+								</tr><tr>
+								<th>출금지갑주소</th><td><input type="text" name="odFromAddr" value="" required /></td>
+								</tr><tr>
+								<th>입금지갑주소</th><td><input type="text" name="odToAddr" value="" required /></td>
+								</tr><tr>
+								<th>컨펌</th><td><input type="text" name="odConfirm" value="" required /></td>
+								</tr><tr>
+								<th>자산구분</th><td><input type="text" name="poType" value="" required /></td>
+								</tr><tr>
+								<th>충전수량</th><td><input type="text" name="poAmount" value="" required /></td>
+								</tr><tr>
+								<th>자산지급여부</th><td><select name="poPayYn" required /><option value="Y">Y</option><option value="N">N</option></select></td>
+								</tr><tr>
+								<th>자산지급시간</th><td><input type="text" name="poPayDt" value="0000-00-00 00:00:00" required /></td>
+								</tr><tr>
+								<th>등록일</th><td><input type="text" name="odRegDt" value="0000-00-00 00:00:00" required /></td>
+								</tr><tr>
+								<th>기타1</th><td><input type="text" name="odEtc1" value="" required /></td>
+								</tr><tr>
+								<th>기타2</th><td><input type="text" name="odEtc2" value="" required /></td>
+								</tr><tr>
+								<th>기타3</th><td><input type="text" name="odEtc3" value="" required /></td>
+								</tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

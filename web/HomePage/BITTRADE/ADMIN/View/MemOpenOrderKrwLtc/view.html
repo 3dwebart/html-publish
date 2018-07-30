@@ -1,0 +1,127 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>구분</th>
+                        <td><span id="odAction"></span></td>
+                        <th>상태</th>
+                        <td><span id="odPayStatus"></span></td>
+                    </tr>
+                    <tr>
+                        <th>주문 수량</th>
+                        <td><span id="odTempCoin" style="font-weight:bold"></span></td>
+                        <th>주문시 수수료</th>
+                        <td><span id="odTempFee"></span></td>
+                    </tr>
+                    <tr>
+                        <th>체결 수량</th>
+                        <td><span id="odReceiptCoin" style="font-weight:bold"></span></td>
+                        <th>처리된 수수료</th>
+                        <td><span id="odReceiptFee"></span><span id="odReceiptFeeUnit"></span></td>
+                    </tr>
+                    <tr>
+                        <th>주문가(1LTC)</th>
+                        <td><span id="odMarketPrice"></span> KRW</td>
+                        <th>주문총액</th>
+                        <td><span id="odTotalCost"></span></td>
+                    </tr>
+					<tr>
+                        <th>체결가(1LTC)</th>
+                        <td><span id="odReceiptAvg"></span> KRW</td>
+                        <th>체결총액</th>
+                        <td><span id="odReceiptAvgToal"></span> KRW</td>
+                    </tr>
+                    <tr>
+                        <th>즉시 체결된 포인트 NO</th>
+                        <td colspan="3"><span id="odPayPoIds"></span> &nbsp;(주문서 등록시 즉시 체결된 포인트 번호, 없을 경우 대기주문)</td>
+                    </tr>
+                    <tr>
+                        <th>회원번호</th>
+                        <td><span id="mbNo"></span></td>
+                        <th>아이디</th>
+                        <td><span id="mbId"></span></td>
+                    </tr>
+                    <tr>
+                        <th>주문시간</th>
+                        <td><span id="odRegDt"></span></td>
+                        <th>체결시간</th>
+                        <td><span id="odReceiptDt"></span></td>
+                        
+  
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+    <script>
+    function writePointListBody(jsondata){
+        var listItems = [];
+        listItems.push('<table>');
+        $.each(jsondata, function (key, val) {
+            listItems.push('<tr>');
+            listItems.push('<td style="width:100px" >' + val.poRegDt + '</td>');
+            listItems.push('<td width="100">' + val.poPoint + '</td>');
+            listItems.push('</tr>');
+        });
+        listItems.push('</table>');
+        return listItems.join('');
+    }
+
+    var receiptTotalAvg = bean.data.odReceiptCoin * bean.data.odReceiptAvg;
+    if(Number(bean.data.odReceiptKrw)>0){
+        receiptTotalAvg = bean.data.odReceiptKrw;
+    }
+
+    $(document).ready(function(){
+        if(typeof(bean.data)!=='undefined'){
+            $('#odMarketPrice').html( (bean.data.odMarketPrice).formatNumber() );
+            $('#odTotalCost').html( (bean.data.odTotalCost).formatNumber() );
+            $('#odReceiptAvg').html( (bean.data.odReceiptAvg).formatNumber() );
+
+            $('span#odReceiptAvgToal').html((calfloat('ROUND',parseFloat(receiptTotalAvg),0)+'').formatNumber());
+
+        }
+        if(bean.data.odAction=='sell'){
+            $('#odReceiptFee').html( (calfloat('ROUND',parseFloat(bean.data.odReceiptFee),0)+'').formatNumber() );
+            $('#odReceiptFeeUnit').html(' KRW');
+            
+            $('#odTotalCost').html((bean.data.odTotalCost).formatNumber() + ' KRW');
+            
+        }else if(bean.data.odAction=='buy'){
+            $('#odReceiptFee').html( (calfloat('ROUND',parseFloat(bean.data.odReceiptFee),0)+'').formatNumber() );
+            $('#odReceiptFeeUnit').html(' KRW');
+            
+            $('#odTotalCost').html((bean.data.odTotalCost).formatNumber() + ' KRW');
+        }
+    });
+    </script>
+</body>

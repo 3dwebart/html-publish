@@ -1,0 +1,188 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="odId" value="" />
+        <input type="hidden" name="itIdPay" value="N" /><!-- hidden으로 변경 -->
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th colspan="4">입금 주문서</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>결제방법</th>
+                        <td>
+                            <select name="odSettleCase">
+                                <option value="">결제방법을 선택해 주세요.</option>
+                                <option value="무통장">무통장</option>
+                                <option value="카드">카드</option>
+                                <option value="모바일">모바일</option>
+                                <option value="가상계좌">가상계좌</option>
+                            </select>
+                        </td>
+                        <th>삭제</th>
+                        <td><select name="odDelYn">
+                                <option value="N">아니오</option>
+                                <option value="Y">예</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">주문자정보</th>
+                    </tr>
+                    <tr>
+                        <th>아이디</th>
+                        <td colspan="3"><input type="text" name="mbId" required style="width:200px" title="아이디를 입력하시고 반드시 확인 버튼을 눌러주세요." />
+                            <input type="button" name="btn_list" id="member_check" class="btn-gray" value="회원확인" onclick="memberCheck('mbId',this.form.mbId.value)"/>
+                            <input type="hidden" name="mbNo" />
+                            <input type="hidden" name="mbNick" />
+                            <label for="mbId" class="explain">회원을 확인해 주세요.<label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>주문자명</th>
+                        <td><input type="text" name="odName" required /></td>
+                        <th>주문자이메일</th>
+                        <td><input type="text" name="odEmail" /></td>
+                    </tr>
+                    <tr>
+                        <th>주문자전화번호</th>
+                        <td><input type="text" name="odTel" /></td>
+                        <th>주문자모바일번호</th>
+                        <td><input type="text" name="odHp" /></td>
+                    </tr>
+                    <tr>
+                        <th>주문시요청사항</th>
+                        <td colspan="3"><input type="text" name="odMemo" value="" /></td>
+                    </tr>
+                    <tr>
+                        <th>주문횟수</th>
+                        <td colspan="3"><input type="text" name="odCnt" style="width:100px;" /></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">입금정보</th>
+                    </tr>
+                    <tr>
+                        <th>입금자명</th>
+                        <td><input type="text" name="odDepositName" value="" style="width:50px;" /> 입금될 계좌 <input type="text" name="odBankAccount" value="" style="width:100px;" /></td>
+                        <th>입금예정일</th>
+                        <td><input type="text" name="odHopeDate" value="" style="width:100px;" />
+<!--                        <input type="button" class="btn-gray" value="현재" onclick="this.form.odHopeDate.value=new Date().format('yyyy-MM-dd')"/>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>무통장주문액</th>
+                        <td><input type="text" name="odTempBank" value="0" style="width:90px;" required />원</td>
+                        <th>무통장입금</th>
+                        <td>
+                            <input type="button" class="btn-default orange" value="입금완료처리"
+                                   onclick="this.form.odBankTime.value=new Date().format('yyyy-MM-dd HH:mm:ss');this.form.odItemPut.value='Y';
+                                       this.form.odReceiptBank.value=this.form.odTempBank.value;
+                                       this.form.itIdPay.value='Y';
+                                       this.form.odHopeDate.value=new Date().format('yyyy-MM-dd')" /><br /> 
+                            <input type="text" name="odReceiptBank" value="0" style="width:90px;" required />원 /
+                            
+                            <input type="hidden" name="odItemPut" value="N" />
+                            입금완료시간 <input type="text" name="odBankTime" value="" style="width:150px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>모바일결제액</th>
+                        <td><input type="text" name="odTempMobile" value="0" style="width:90px;" required />원</td>
+                        <th>모바일입금</th>
+                        <td><input type="text" name="odReceiptMobile" value="0" style="width:90px;" required />원</td>
+                    </tr>
+                    <tr>
+                        <th>카드주문액</th>
+                        <td><input type="text" name="odTempCard" value="0" style="width:90px;" required />원</td>
+                        <th>카드입금</th>
+                        <td><input type="text" name="odReceiptCard" value="0" style="width:90px;" required />원 /
+                            카드승인 <input type="text" name="odCardTime"  value="" style="width:100px;" />
+                            <input type="button" class="btn-gray" value="현재" onclick="this.form.odCardTime.value=new Date().format('yyyy-MM-dd HH:mm:ss')"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>승인일시</th>
+                        <td colspan="3"><input type="text" name="odPayTime" style="width:150px;"/>
+                            <input type="button" class="btn-gray" value="현재" onclick="this.form.odPayTime.value=new Date().format('yyyy-MM-dd HH:mm:ss')"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">환불/취소정보</th>
+                    </tr>
+                    <tr>
+                        <th>카드취소</th>
+                        <td><input type="text" name="odCancelCard" value="0" style="width:100px;" />원</td>
+                        <th>직접환불금액</th>
+                        <td><input type="text" name="odRefundAmount" value="0" style="width:50px;" />원 /
+                            일시 <input type="text" name="odRefundDt" value="" style="width:100px;" />
+                            <input type="button" class="btn-gray" value="현재" onclick="this.form.odRefundDt.value=new Date().format('yyyy-MM-dd HH:mm:ss')"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">관리자</th>
+                    </tr>
+                    <tr>
+                        <th>관리자메모</th>
+                        <td><input type="text" name="odShopMemo"  value="" /></td>
+                        <th>주민번호보안키</th>
+                        <td><input type="text" name="odScno" /></td>
+                    </tr>
+                    <tr>
+                        <th>완료DB실행</th>
+                        <td>
+                            <select name="odProcDb">
+                                <option value="Y">예</option>
+                                <option value="N">아니오</option>
+                            </select>
+                           </td>
+                        <th>파트너코드</th>
+                        <td><input type="text" name="partner" /></td>
+                    </tr>
+                    <tr>
+                        <th>ETC</th>
+                        <td><input type="text" name="odEtc" /></td>
+                        <th>기타1</th>
+                        <td><input type="text" name="odEscrow1" /></td>
+                    </tr>
+                    <tr>
+                        <th>기타2</th>
+                        <td><input type="text" name="odEscrow2" /></td>
+                        <th>기타3</th>
+                        <td><input type="text" name="odEscrow3"  /></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script type="text/javascript">
+
+</script>
+</body>

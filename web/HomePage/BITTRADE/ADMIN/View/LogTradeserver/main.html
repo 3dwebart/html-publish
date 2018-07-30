@@ -1,0 +1,109 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+var listHeader = '[{"csNo":"No","csCode":"csCode","csSubject":"csSubject","csContent":"csContent","csRegDt":"등록일"}]';
+function writeListHead(jsondata){
+     var headItems = [];
+    $.each(jsondata, function (key, val) {
+        	headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.csNo + '</th>');
+		headItems.push('<th width="50">CODE</th>');
+		headItems.push('<th>TITLE</th>');
+		headItems.push('<th>CONTENT</th>');
+		headItems.push('<th width="120">DATE</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+            var c = i%2;
+            num = parseInt(getLastestNum(selectedPage) - i);
+            listItems.push('<tr class="list'+c+'" >');
+		listItems.push('<td class="num" onclick=\"viewLinkTrade(\''+val.csNo+'\')\" >' + num + '</td>');
+		listItems.push('<th onclick=\"viewLinkTrade(\''+val.csNo+'\')\" >' + val.csCode + '</th>');
+		listItems.push('<td onclick=\"viewLinkTrade(\''+val.csNo+'\')\" >' + val.csSubject + '</td>');
+		listItems.push('<td onclick=\"viewLinkTrade(\''+val.csNo+'\')\" >' + val.csContent + '</td>');
+		listItems.push('<td onclick=\"viewLinkTrade(\''+val.csNo+'\')\" >' + val.csRegDt + '</td>');
+		listItems.push('</tr>');
+            i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="list_search">
+        <form name="search" method="get" action="/">
+            <input type="hidden" name="mode" value="LogTradeserver" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                        <option value="cs_subject">TITLE</option>
+                        <option value="cs_content">CONTENT</option>
+                </select>
+            </span>
+            <input type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+        </form>
+        </div>
+            <select name="type" onchange="location.href='/?mode=LogTradeserver&type='+this.value ">
+                <option value="">코인선택</option>
+                <option value="btc">비트코인</option>
+                <option value="eth">이더리움</option>
+                <option value="etc">이더리움 클레식</option>
+                <option value="ltc">라이트코인</option>
+                <option value="bch">비트코인 캐시</option>
+            </select>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page"> 
+                <!-- optional left control buttons--> 					
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a> 
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added --> 
+                    </div>
+                </div>
+                <!-- optional right control buttons--> 
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a> 
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+window.onload = function(){
+    $('select[name="type"]').val(bean.type);
+};
+
+function viewLinkTrade(id){
+    $(location).attr('href',bean.link.view+'&type='+bean.type+'&id='+id+'#page:'+selectedPage);
+}
+</script>
+</body>

@@ -1,0 +1,233 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  position: relative;
+  background: #fff;
+}
+
+/*
+ * Sidebar
+ */
+
+
+/* Hide for mobile, show later */
+.sidebar {
+    position: absolute;
+    z-index: 100;
+    display: block;
+    padding: 0 20px 0px 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #fff;
+    border-right: 1px solid #e2e8f1;
+    border-left:1px solid #f3f3f3;
+    /*border-bottom:1px solid #f3f3f3;*/
+}
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  /*margin-bottom: 20px;*/
+  margin-left: -20px;
+  line-height: 30px;
+/*  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+  font-weight:800;
+  width:200px;
+}
+.nav-sidebar-sub {
+    display:block;
+    list-style: none;
+    background: #f9f9f9;
+    line-height: 30px;
+    padding:10px 5px 15px 5px;
+    border-top:1px solid #f3f3f3;
+    margin: 0;
+}
+.nav-sidebar > li{
+    border-bottom:1px solid #f3f3f3;
+}
+
+/*.mywalletbar{
+    display:none;
+}*/
+
+@media (max-width: 768px) {
+    .sidebar {
+      position: relative;
+      z-index:100;
+      /*z-index: 1000;*/
+      display: block;
+      padding: 0 0px 0px 0px;
+      overflow-x: hidden;
+      overflow-y: auto; 
+      background-color: #fff;
+      border-right: 1px solid #e2e8f1;
+      border-left:1px solid #f3f3f3;
+      border-bottom:1px solid #f3f3f3;
+      width:100%;
+    }
+    .nav-sidebar > li{
+        border-bottom:1px solid #f3f3f3;
+        display:block;
+        float:left;
+    }
+
+    /* Sidebar navigation */
+    .nav-sidebar {
+      margin-right: 0px;
+      margin-left: 0px;
+      line-height: 30px;
+      /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+      font-weight:800;
+      width:100%;
+      /*border-bottom:1px solid #f3f3f3;*/
+    }
+    .nav-sidebar-sub {
+        display:none;
+    }
+/*    .mywalletbar{
+        display:none;
+        position:absolute;
+        z-index:100;
+        width:95%;
+    }
+    .mywalletbar table{
+        width:100%;
+        font-size:13px;
+    }
+    .mywalletbar table tr{
+        height:24px;
+    }
+    .mywalletbar table td{
+        width:33.3%;
+        text-align:right;
+        padding-right:10px;
+        background-color:#f9f9f9;
+        border-top:1px solid #f3f3f3;
+        border-bottom:1px solid #f3f3f3;
+        border-left:1px solid #f3f3f3;
+        border-right:1px solid #f3f3f3;
+    }*/
+}
+
+.nav-sidebar > li{
+    border-bottom:1px solid #f3f3f3;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color:#555555;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #3c7bb7;
+}
+
+.nav-sidebar i{
+    color:#555;
+    margin:0 10px 0 0;
+    
+}
+.nav-sidebar > .active > a > i,
+.nav-sidebar > .active > a > i:hover,
+.nav-sidebar > .active > a > i:focus {
+  color: #3c7bb7;
+}
+
+
+.nav-sidebar-sub > li{
+  padding: 0 15px;
+  color: #888888;
+  font-weight: 100;
+  height: 25px;
+}
+.nav-sidebar-sub > hr{
+  padding:0px;
+  margin: 20px 0 10px 0 !important;
+}
+.nav-sidebar-sub > .active > a,
+.nav-sidebar-sub > .active > a:hover,
+.nav-sidebar-sub > .active > a:focus {
+  color: #3c7bb7;
+}
+.nav-sidebar-sub .balance{
+    position: absolute;right:20px;
+    font-size: 13px;
+    font-family: tahoma,AppleGothic,Sans-serif;
+}
+.nav-sidebar-sub .balance .mark{
+    font-size: 11px;
+    background: none;
+    color:#ccc;
+}
+
+.nav-sidebar-sub .label.label-default{
+    background-color:  #bbbcbf;
+}
+
+/*기타*/
+
+.number_font{
+    font-family: tahoma,AppleGothic,Sans-serif;
+}
+.number_font.gray,
+.glyphicon.gray{
+    color:#bbbcbf;
+}
+.blue_font{
+    color:#326bbf
+}
+
+
+.glyphicon.space{
+    margin: 0 5px;
+}
+
+.label.gray{
+    background:#bbbcbf;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+
+/*
+ * Table notice use - no line
+ */
+.borderless td, .borderless th {
+    border-top : 0px solid #000000 !important;
+    border: none !important;
+}
+
+/*오직모바일*/
+@media screen and (max-width: 800px) {
+    .form-signin{
+        font-size: 90%;
+    }
+    .main-top{
+        display: none;
+    }
+    .main-splash{
+        display: none;
+    }
+}

@@ -1,0 +1,85 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>날짜</th>
+                        <td><span id="poRegDt"></span></td>
+                    </tr>
+                    <tr>
+                        <th>회원번호</th>
+                        <td><span id="mbNo"></span></td>
+                    </tr><tr>
+                        <th>내용</th>
+                        <td><span id="poContent"></span></td>
+                    </tr>
+                    <tr>
+                        <th>코인수량</th>
+                        <td><b><span id="poPoint"></span> ETH</b> (지불한금액 : <span id="odTotalCost"></span> <span id="odTotalCostUnit"> </span>)</td>
+                    </tr>
+                    <tr>
+                        <th>IP</th>
+                        <td><span id="poRegIp"></span></td>
+                    </tr>
+                    <tr>
+                        <th>등록일</th>
+                        <td><span id="poRegDt"></span></td>
+                    </tr>
+                    <tr>
+                        <th>고유키</th>
+                        <td><span id="poRelId"></span> / <span id="poRelAction"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <input type="button" id="btn_s" name="btn_s" class="btn-default right" onclick="confirmPointChargeMove()" value="등 록" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        if(typeof(bean.data)!=='undefined'){
+            $('#poPoint').html( (calfloat('ROUND',parseFloat(bean.data.poPoint),8)+'').formatBitcoin() );
+            if(bean.data.poRelAction=='reqorder'){
+                $('#odTotalCost').html( (calfloat('ROUND',parseFloat(bean.data.odTotalCost),8)+'').formatBitcoin() );
+                $('#odTotalCostUnit').html(' KRW');
+            }else{
+                $('#odTotalCost').html( (calfloat('ROUND',parseFloat(bean.data.odTotalCost),0)+'').formatBitcoin() );
+            }
+        }
+    });
+
+    function confirmPointChargeMove(){
+        if (confirm("포인트 수기입력은 거래내역, 전산내역 등이 안맞을 경우에만 입력하는 기능으로 긴급상황시에만 사용해 주십시오.\n진행하시겠습니까?") == true){    //확인
+            document.location.href=bean.link.write
+        }else{
+            return;
+        }
+    }
+</script>
+</body>

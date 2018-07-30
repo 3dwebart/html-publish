@@ -1,0 +1,71 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="poNo" value="" />
+        <input type="hidden" name="chNo" value="0" />
+        <input type="hidden" name="od_total_cost" value="0" />
+        <input type="hidden" name="poRefundYn" value="N" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="4"><label>유동가격 <input type="radio" name="pricetype" value="dynamic" /></label></th>
+                    </tr>
+                    <tr>
+                        <th>비트코인 살때</th>
+                        <td>시장가 + (시장가 * <input type="text" name="buybitcoin0" required style="width:60px" value="0.01"/>%) </td>
+                        <th>비트코인 팔때</th>
+                        <td>시장가 - (시장가 * <input type="text" name="sellbitcoin0" required  style="width:60px" value="0.01"/>%)</td>
+                    </tr>
+                    <tr>
+                        <th colspan="4"><label>고정가격 <input type="radio" name="pricetype" value="static" /></label></th>
+                    </tr>
+                    <tr>
+                        <th>비트코인 살때</th>
+                        <td><input type="text" name="buybitcoin1" required style="width:100px" value="0"/>KRW</td>
+                        <th>비트코인 팔때</th>
+                        <td><input type="text" name="sellbitcoin1" required  style="width:100px" value="0"/>KRW</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="수정" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+if(bean.data.pricetype=='static'){
+    $('input:radio[name=pricetype]:input[value='+bean.data.pricetype+']').attr("checked", true);
+}else{
+    $('input:radio[name=pricetype]:input[value='+bean.data.pricetype+']').attr("checked", true);
+}
+</script>
+</body>

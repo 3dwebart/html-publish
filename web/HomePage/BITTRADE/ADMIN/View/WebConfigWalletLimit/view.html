@@ -1,0 +1,94 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>국가코드</th>
+                        <td><span id="cfCountryCode"></span></td>
+                    </tr><tr>
+                        <th>지갑구분</th>
+                        <td><span id="cfWalletType"></span></td>
+                    </tr><tr>
+                        <th>회원레벨</th>
+                        <td><span id="cfMbLevel"></span></td>
+                    </tr><tr>
+                        <th>최대입금한도</th>
+                        <td><span id="cfMaxDeposit"></span></td>
+                    </tr><tr>
+                        <th>최대출금한도</th>
+                        <td><span id="cfMaxWithdraw"></span></td>
+                    </tr>
+                    <tr>
+                        <th>최소출금한도</th>
+                        <td><span id="cfMinWithdraw"></span></td>
+                    </tr>
+                    <tr>
+                        <th>일기준</th>
+                        <td><span id="cfMaxDay"></span></td>
+                    </tr><tr>
+                        <th>등록일</th>
+                        <td><span id="cfRegDt"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <input type="button" id="btn_write" name="btn_submit" class="btn-default right" value="등 록" />
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.cfNo" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        if(typeof(bean.data)!=='undefined'){
+            if(bean.data.cfWalletType=='CASH'){
+                if(parseInt(bean.data.cfMaxDeposit)<0){
+                    $('#cfMaxDeposit').html('무제한');
+                }else{
+                    $('#cfMaxDeposit').html( (bean.data.cfMaxDeposit+'').formatNumber()+' KRW' );
+                }
+                if(parseInt(bean.data.cfMaxWithdraw)<0){
+                    $('#cfMaxWithdraw').html('무제한');
+                }else{
+                    $('#cfMaxWithdraw').html( (bean.data.cfMaxWithdraw+'').formatNumber()+' KRW' );
+                }
+            }else{
+                if(parseFloat(bean.data.cfMaxDeposit)<0){
+                    $('#cfMaxDeposit').html('무제한');
+                }else{
+                    $('#cfMaxDeposit').html( (bean.data.cfMaxDeposit+'')+' '+bean.data.cfWalletType );
+                }
+                if(parseFloat(bean.data.cfMaxWithdraw)<0){
+                    $('#cfMaxWithdraw').html('무제한');
+                }else{
+                    $('#cfMaxWithdraw').html( (bean.data.cfMaxWithdraw+'')+' '+bean.data.cfWalletType );
+                }
+            }
+        }
+    });
+</script>
+</body>

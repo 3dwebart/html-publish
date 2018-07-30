@@ -1,0 +1,42 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "regist":{
+        "description":"KRW 입금요청 정보",
+        "sql_depositkrw":"SELECT * FROM web_cash_deposits WHERE od_id=? LIMIT 1",
+        "mapkeys_depositkrw":{
+            "od_id":{"required":true,"number": true}
+        },
+        "description":"KRW 입금요청 완료 수 ",
+        "sql_depositkrw_cnt":"SELECT COUNT(od_id) AS cnt FROM web_cash_deposits WHERE mb_no=? AND it_id_pay='Y'",
+        "mapkeys_depositkrw_cnt":{
+            "mb_no":{"required":true,"number": true}
+        },
+        "description":"관리자 SMS 입금 알림 서비스 조회",
+        "sql_sms_notify_deposit":"SELECT sn_hp, sn_country_code, sn_country_dial_code, sn_name, sn_n_deposit_yn FROM web_admin_sms_notify WHERE sn_n_deposit_yn='Y' LIMIT 50",
+        "mapkeys_sms_notify_deposit":{
+        },
+        "description":"관리자 SMS 출금 알림 서비스 조회",
+        "sql_sms_notify_withdraw":"SELECT sn_hp, sn_country_code, sn_country_dial_code, sn_name, sn_n_withdrawals_yn FROM web_admin_sms_notify WHERE sn_n_withdrawals_yn='Y' LIMIT 50",
+        "mapkeys_sms_notify_withdraw":{
+        },
+        "description":"SMS 공통 모듈 데이터 삽입 분기에 따라 SMS 전송 처리",
+        "sql_insert_sms_sender":"INSERT INTO web_sms_sender(mb_id, ss_is_mms, ss_is_inter, ss_tel_code, ss_tel_num, ss_content, ss_page_type, ss_provider) VALUES (?,?,?,?,?,?,?,?)",
+        "mapkeys_insert_sms_sender":{
+            "mb_id":{"required":true, "maxlength":100}
+            ,"ss_is_mms":{"required":true, "maxlength":10}
+            ,"ss_is_inter":{"required":false, "maxlength":10}
+            ,"ss_tel_code":{"required":true, "maxlength":10}
+            ,"ss_tel_num":{"required":true, "maxlength":20}
+            ,"ss_content":{"required":true, "maxlength":255}
+            ,"ss_page_type":{"required":true, "maxlength":20}
+            ,"ss_provider":{"required":true, "maxlength":50}
+        },
+        "rowlimit":1,
+        "datamodel":"SmsNotify"
+    }
+  }
+}

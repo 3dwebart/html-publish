@@ -1,0 +1,136 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "remainbtc":{
+        "database":{"wallet":"fns_trade_point"},
+        "sql_serverconf":"SELECT po_type,max(wa_tx_fee) as tx_fee FROM web_config_wallet_server WHERE wa_staus='running' GROUP BY po_type",
+        "sql_daywithdrawsumamount":"SELECT IFNULL(SUM(od_temp_currency_total), 0) AS sum_std_coin FROM web_wallet_withdrawals WHERE mb_no=? AND (od_status='WAIT' OR od_status='REQ' OR od_status='OK') AND (DATE(od_reg_dt) BETWEEN DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -? DAY ), '%Y-%m-%d 00:00:00') AND NOW())",
+        "mapkeys_daywithdrawsumamount":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"day":{"required":true,"number": true}
+        },
+        "sql":"SELECT cf_max_withdraw as max_withdraw, cf_min_withdraw as min_withdraw FROM web_config_wallet_limit WHERE cf_country_code=? AND cf_wallet_type=? AND cf_mb_level=? LIMIT 1",
+        "mapkeys":{
+            "countrycode":{"default":"kr"}
+            ,"wallettype":{"default":"BTC"}
+            ,"mblevel":{"default":"SS_MB_LEVEL"}
+        },
+        "datamodel":"WalletWithdrawalView"
+    },
+    "regist":{
+        "database":{"wallet":"fns_trade_point"},
+        "method":"POST",
+        "sql_serverconf":"SELECT po_type,max(wa_tx_fee) as tx_fee FROM web_config_wallet_server WHERE wa_staus='running' AND po_type=? GROUP BY po_type limit 1",
+        "mapkeys_serverconf":{
+            "po_type":{"required":true,"maxlength":10}
+        },
+        "sql_walletconf":"SELECT * FROM web_config_wallet_server WHERE po_type=? ORDER BY wa_no DESC limit 1",
+        "mapkeys_walletconf":{
+            "po_type":{"required": true,"alphanumber": true,"maxlength": 11}
+        },
+        "sql_wallet_limit_conf":"SELECT cf_max_deposit, cf_max_withdraw, cf_min_withdraw, cf_max_day FROM web_config_wallet_limit WHERE cf_country_code=? AND cf_wallet_type=? AND cf_mb_level=? LIMIT 1",
+        "mapkeys_wallet_limit_conf":{
+            "countrycode":{"default":"kr"}
+            ,"wallettype":{"required": true}
+            ,"mblevel":{"default":"SS_MB_LEVEL"}
+        }, 
+        "sql_daywithdrawsumamount":"SELECT IFNULL(SUM(od_temp_currency_total), 0) AS sum_std_coin FROM web_wallet_withdrawals WHERE mb_no=? AND (od_status='WAIT' OR od_status='REQ' OR od_status='OK') AND (DATE(od_reg_dt) BETWEEN DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -? DAY ), '%Y-%m-%d 00:00:00') AND NOW())",
+        "mapkeys_daywithdrawsumamount":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"day":{"required":true,"number": true}
+        },
+        "sql_withdrawcnt":"SELECT COUNT(od_id) AS od_reg_cnt FROM web_wallet_withdrawals WHERE mb_no=? AND od_status=? LIMIT 1 ",
+        "mapkeys_withdrawcnt":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"od_status":{"required":true,"maxlength":50}
+        },
+        "sql_regist_mail_key":"INSERT INTO web_member_email_key(mb_no,mb_id,mk_type,mk_explain,mk_email_key,mk_expire_dt) VALUES (? ,? ,? ,? ,SHA2(CONCAT(MD5(?), (RAND()*100) ), 256) , DATE_ADD(NOW(), INTERVAL+1 HOUR) )",
+        "mapkeys_regist_mail_key":{
+            "mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"mk_type":{"required":false,"maxlength":50}
+            ,"mk_explain":{"required":false,"maxlength":50}
+            ,"md5_mb_id":{"required":false,"maxlength":50}
+        },
+        "sql_getinfo_mail_key":"SELECT mk_no, mb_no, mb_id, mk_email_key FROM web_member_email_key WHERE mb_no=? AND mk_type=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys_getinfo_mail_key":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "mk_type":{"default":"WITHDC"}
+        },
+        "sql_member_address":"SELECT mb_no FROM web_member_desposit_wallet WHERE po_type=? AND mw_address=? ORDER BY mw_no DESC LIMIT 1",
+        "mapkeys_member_address":{
+            "po_type":{"required":true,"maxlength":100},
+            "od_addr":{"required":true,"maxlength":100}
+        },
+        "sql":"INSERT INTO web_wallet_withdrawals(od_status,mb_no,mk_no,od_temp_amount,od_temp_currency_total,od_addr,od_addr_msg,od_sendto,od_fee,po_type,po_amount,od_reg_cnt)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys":{
+            "od_status":{"required":true,"maxlength":10}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mk_no":{"required":false}
+            ,"od_temp_amount":{"required":true}
+            ,"od_temp_currency_total":{"required":false}
+            ,"od_addr":{"required":true,"maxlength":100}
+            ,"od_addr_msg":{"required":false,"maxlength":255}
+            ,"od_sendto":{"required":false,"maxlength":100}
+            ,"od_fee":{"required":false}
+            ,"po_type":{"required":true,"maxlength":10}
+            ,"po_amount":{"required":false}
+            ,"od_reg_cnt":{"required":false}
+        },
+        "sql_balance_update":"UPDATE trade_member_point_balance SET po_on_etc = po_on_etc + ? WHERE mb_no = ? AND po_type = ?",
+        "mapkeys_balance_update":{
+            "po_on_etc":{"required":true},
+            "mb_no":{"required":true},
+            "po_type":{"required":true}
+        },
+        "authlevel":0,
+        "datamodel":"WalletWithdrawal"
+    },
+    "requestconfirm":{
+        "database":{"wallet":"fns_trade_point"},
+        "sql_getinfo_mail_key":"SELECT mk_no, mb_no, mb_id, mk_email_key, mk_confirm_yn,mk_expire_dt FROM web_member_email_key WHERE  mb_id=? AND mk_no=? AND mk_type=? AND mk_confirm_yn='N' ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys_getinfo_mail_key":{
+            "mb_id":{"default":"SS_MB_ID"},
+            "mk":{"required":true,"maxlength":10},
+            "mk_type":{"default":"WITHDC"}
+        },
+        "sql_getinfo_request_order":"SELECT * FROM web_wallet_withdrawals WHERE mb_no=? AND od_status=? ORDER BY od_reg_dt DESC LIMIT 1",
+        "mapkeys_getinfo_request_order":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "od_status":{"default":"WAIT"}
+        },
+        "sql_request_order_update":"UPDATE web_wallet_withdrawals SET od_status=?, is_user_confirm_yn=?, is_user_confirm_dt=NOW(), is_user_confirm_ip=?, is_admin_confirm_yn='Y' WHERE od_status=? AND mb_no=? AND mk_no=? LIMIT 1",
+        "mapkeys_request_order_update":{
+            "new_od_pay_status":{"required":true,"maxlength":20}
+            ,"is_user_confirm_yn":{"default":"Y"}
+            ,"is_user_confirm_ip":{"default":"CLIENT_IP"}
+            ,"od_status":{"default":"WAIT"}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mk":{"required":true,"maxlength":11}
+        },
+        "sql_mail_key_update":"UPDATE web_member_email_key SET mk_confirm_yn=?, mk_confirm_ip=? WHERE mk_type=? AND mb_no=? AND mk_no=?",
+        "mapkeys_mail_key_update":{
+            "mk_confirm_yn":{"default":"Y"}
+            ,"mk_confirm_ip":{"default":"CLIENT_IP"}
+            ,"mk_type":{"default":"WITHDC"}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mk":{"required":true,"maxlength":11}
+        },
+        "datamodel":"WalletWithdrawal"
+    },
+    
+    "withdrawsum":{
+        "database":{"wallet":"fns_trade_point"},
+        "sql":"SELECT SUM(od_temp_amount) AS sum_coin FROM web_wallet_withdrawals WHERE mb_no=? AND po_type=? AND (od_status='WAIT' OR od_status='REQ' OR od_status='OK') AND (DATE(od_reg_dt) BETWEEN DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -? DAY ), '%Y-%m-%d 00:00:00') AND NOW())",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3},
+            "day":{"required":true,"number": true}
+        },
+        "datamodel":"WalletWithdrawalSum"
+    }
+  }
+}

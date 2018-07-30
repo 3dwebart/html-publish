@@ -1,0 +1,278 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<style>
+    html{
+        overflow-y: scroll;
+    }
+    .sh_1{
+        margin-top: 30px;
+        padding-top: 18px;
+        height: 35px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        color: #666;
+        text-align: center;
+    }
+    .select_box{
+        padding-top: 30px;
+        display: flex;
+        flex-flow: row no-wrap;
+        justify-content: space-around;
+    }
+    .sales_date{
+        text-align: center;
+    }
+    tr{
+        height: 30px;
+    }
+    th{
+        width: 70px;
+        border: 1px solid #ccc;
+    }
+    td{
+        padding-left: 30px;
+        text-align: center;
+    }
+    .total_sales{
+        margin-top: 30px;
+    }
+</style>
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">
+    
+var bean = $.parseJSON($.base64.decode(jsonObject));
+console.log(bean);
+
+function salesStatement(jsondata){
+    var listItems = [];
+    
+    $.each(jsondata, function (key, val) {
+        listItems.push('<tr><th style="background-color:#f2f2f2;">코 인</th><th style="background-color:#f2f2f2;">구 분</th><th style="background-color:#f2f2f2;">금 액</th></tr>');
+        listItems.push('<tr><th rowspan="3" style="background-color:#f2f2f2;"><b>BTC</b></th></tr>');
+        listItems.push('<tr><td>BTC 거래대금</td>');
+        listItems.push('<td>'+ val.odTotalCost + '</td></tr>'); 
+        listItems.push('<tr><td>거래 수수료</td><td>');
+        listItems.push(+ (val.odTotalCost)*0.05 +'</td></tr>');
+        listItems.push('<tr><th rowspan="3" style="background-color:#f2f2f2;"><b>BCH</b></th></tr>');
+        listItems.push('<tr><td>BCH 거래대금</td>');
+        listItems.push('<td>'+ val + '</td></tr>');
+        listItems.push('<tr><td>거래 수수료</td><td>');
+        listItems.push(+ (val)*0.05 +'</td></tr>');
+        listItems.push('<tr><th rowspan="3" style="background-color:#f2f2f2;"><b>LTC</b></th></tr>');
+        listItems.push('<tr><td>LTC 거래대금</td>');
+        listItems.push('<td>'+ val + '</td></tr>');
+        listItems.push('<tr><td>거래 수수료</td><td>');
+        listItems.push(+ (val)*0.05 +'</td></tr>');
+        listItems.push('<tr><th rowspan="3" style="background-color:#f2f2f2;"><b>ETH</b></th></tr>');
+        listItems.push('<tr><td>ETH 거래대금</td>');
+        listItems.push('<td>'+ val + '</td></tr>');
+        listItems.push('<tr><td>거래 수수료</td><td>');
+        listItems.push(+ (val)*0.05 +'</td></tr>');
+        listItems.push('<tr><th rowspan="3" style="background-color:#f2f2f2;"><b>ETC</b></th></tr>');
+        listItems.push('<tr><td>ETC 거래대금</td>');
+        listItems.push('<td>'+ val + '</td></tr>');
+        listItems.push('<tr><td>거래 수수료</td><td>');
+        listItems.push(+ (val)*0.05 +'</td></tr>');
+    });
+    
+    return listItems.join('');
+}
+
+
+$(function() {
+    
+    $('.lists').html($('<table />', {
+        'class' : 'tlists_basic',
+        'html':  salesStatement(bean.data)
+    }));
+    
+    $( ".sdate" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      altField : ".sdate",
+      dateFormat : 'yy-mm-dd',
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    
+    $( ".edate" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      altField : ".edate",
+      dateFormat : 'yy-mm-dd',
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+    
+    function getFormatDate(date){
+	var year = date.getFullYear();             
+	var month = (1 + date.getMonth());        
+	month = month >= 10 ? month : '0' + month; 
+	var day = date.getDate();                  
+	day = day >= 10 ? day : '0' + day;         
+	return  year + '-' + month + '-' + day;
+    }
+    
+    $(".btn-search").click(function(){
+        var sdate = getFormatDate($(".sdate").datepicker("getDate"));
+        console.log(sdate);
+        var edate = getFormatDate($(".edate").datepicker("getDate"));
+        console.log(edate);
+        $.getJSON('/?mode=WebSalesStatement/selectedDate&sdate='+sdate, 'json', function (data) {
+            backdata = data;
+            console.log(backdata);
+        });
+        $.getJSON('/?mode=WebSalesStatement/selectedDate&edate='+edate, 'json', function (data) {
+            backdata = data;
+            console.log(backdata);
+        });
+    });
+});
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<!--<script type="text/javascript" src="$link{script}/view-list.min.js"></script>-->
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <h1 class="sh_1">매출현황</h1>
+        <form name="search" method="get" action="/">
+            <input type="hidden" name="mode" value="WebSalesStatement" />
+            <div class="list_search date">
+                <div>
+                    <input class="sdate" maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input class="edate" maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" src="/Web/img/search.png" class="btn-search" alt="검색" onclick="this.form.submit()"/>
+                </div>
+            </div>
+        </form>
+
+        <div class="sales_date">2018/03/14일</div>
+        
+        <div class="lists">
+            <table style="margin-top: 30px;">
+                <tr>
+                    <th style="background-color:#f2f2f2;">코 인</th>
+                    <th style="background-color:#f2f2f2;">구 분</th>
+                    <th style="background-color:#f2f2f2;">금 액</th>
+                </tr>
+                <tr>
+                    <th rowspan="3" style="background-color:#f2f2f2;"><b>BTC</b></th>
+                </tr>
+                <tr>
+                    <td>BTC 거래대금</td>
+                    <td class="btc-cost">2,345,123,300 (KRW)</td>
+                </tr>
+                <tr>
+                    <td>거래 수수료</td>
+                    <td class="btc-fee">117,256,125 (KRW)</td>
+                </tr>
+                <tr>
+                    <th rowspan="3" style="background-color:#f2f2f2;"><b>BCH</b></th>
+                </tr>
+                <tr>
+                    <td>BCH 거래대금</td>
+                    <td>2,345,123,300 (KRW)</td>
+                </tr>
+                <tr>
+                    <td>거래 수수료</td>
+                    <td>117,256,125 (KRW)</td>
+                </tr>
+                <tr>
+                    <th rowspan="3" style="background-color:#f2f2f2;"><b>LTC</b></th>
+                </tr>
+                <tr>
+                    <td>LTC 거래대금</td>
+                    <td>2,345,123,300 (KRW)</td>
+                </tr>
+                <tr>
+                    <td>거래 수수료</td>
+                    <td>117,256,125 (KRW)</td>
+                </tr>
+                <tr>
+                    <th rowspan="3" style="background-color:#f2f2f2;"><b>ETC</b></th>
+                </tr>
+                <tr>
+                    <td>ETC 거래대금</td>
+                    <td>2,345,123,300 (KRW)</td>
+                </tr>
+                <tr>
+                    <td>거래 수수료</td>
+                    <td>117,256,125 (KRW)</td>
+                </tr>
+                <tr>
+                    <th rowspan="3" style="background-color:#f2f2f2;"><b>ETH</b></th>
+                </tr>
+                <tr>
+                    <td>ETH 거래대금</td>
+                    <td>2,345,123,300 (KRW)</td>
+                </tr>
+                <tr>
+                    <td>거래 수수료</td>
+                    <td>117,256,125 (KRW)</td>
+                </tr>
+            </table>
+        
+        
+            <table class="total_sales">
+                <div style="margin-top:70px;text-align:center;font-weight: bold;"><p>TOTAL</p></div>
+                <tr>
+                    <th style="background-color:#f2f2f2;">구 분</th>
+                    <th style="background-color:#f2f2f2;">금 액</th>
+                </tr>
+                <tr>
+                    <th rowspan="2" style="background-color:#f2f2f2; width:">총 거래대금(24H)</th>
+                </tr>
+                <tr>
+                    <td>117,256,616,500 (KRW)</td>
+                </tr>
+                <tr>    
+                    <th rowspan="2" style="background-color:#f2f2f2;">총 거래 수수료(0.05%)</th>
+                </tr>
+                <tr>
+                    <td>586,280,625 (KRW)</td>
+                </tr>
+                <tr>
+                    <th rowspan="2" style="background-color:#f2f2f2;">총 계(VAT제외)</th>
+                </tr>
+                <tr>
+                    <td>527,652,562.5 (KRW)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="clear:both;margin:70px 0 0 0;background:#f5f5f5;padding:10px 20px;line-height:40px">
+            <img src="/Web/img/icon_excel.png" width="30" align="absmiddle">
+            <span style="padding:7px 0 0 5px;"><b>엑셀다운로드</b>(페이지 당
+                <select onchange="weiteExcelDownlod(this.value);">
+                    <option value="100" selected="selected">선택없음</option>
+                    <option value="100">100개</option>
+                    <option value="200">200개</option>
+                    <option value="300">300개</option>
+                    <option value="500">500개</option>
+                    <option value="1000">1000개</option>
+                </select>
+                개)</span>
+            <span style="margin:5px 0 0 10px;color:#999;font-size:11px"> * 다운로드는 서버에 부하를 줄 수 있으니 사용자가 적은 시간에 이용해 주세요.</span>
+            <br />
+            <div id="list_download_excel"></div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

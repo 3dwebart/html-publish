@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /Class/
+Disallow: /Plugin/
+Disallow: /View/
+Disallow: /Web/
+Allow: /
+Sitemap: http://bittrade.funhansoft.com/sitemap.xml

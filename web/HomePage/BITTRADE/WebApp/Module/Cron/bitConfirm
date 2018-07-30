@@ -1,0 +1,1 @@
+curl -v --cookie "cookieName=cookieValue" --header "Accept-Language: en" --header "X-Forwarded-For: 119.205.217.220" "http://admin.cybot.me/cron.php?pri=c3lzdGVt&mode=CronSchedule%2FbitCheckConfirmation&token=43ce2cbcb12c9ad88e1b757349c738bf-d46dcc24f383565085f1a4c63f79b3c7-baf2fa137a21777b7308845407e7a72c"

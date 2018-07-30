@@ -1,0 +1,58 @@
+{
+    "none":"channel_id로 분기 된 쿼리문",
+    "krw_ltc":{
+        "trade_config_fee":{
+            "tablename":"fns_web.web_config_trade_fee"
+        },
+        "trade_order":{
+            "tablename":"web_trade_order_history_krw_ltc",
+            "memtablename":"mem_open_order_krw_ltc",
+            "on_trade_currency":"SELECT TRUNCATE(IFNULL(SUM( (od_temp_coin - od_receipt_coin ) * od_market_price),0.00000000),8) as on_currency FROM `fns_trade_order_ltc`.`mem_open_order_krw_ltc` WHERE od_action='buy' AND (od_pay_status='WAIT' OR od_pay_status='REQ' OR od_pay_status='PART') AND mb_no=?",
+            "on_trade_coin":"SELECT TRUNCATE(IFNULL(SUM(od_temp_coin - od_receipt_coin), 0.00000000), 8) as on_coin FROM `fns_trade_order_ltc`.`mem_open_order_krw_ltc` WHERE od_action='sell' AND (od_pay_status='WAIT' OR od_pay_status='REQ' OR od_pay_status='PART') AND mb_no=?",
+            "procedure_orderid_reset":"call proc_order_id_sync_ltc()"
+        },
+        "trade_order_complete":{
+            "tablename":"mem_trade_complete_krw_ltc",
+            "memtablename":"mem_trade_complete_krw_ltc",
+            "procedure_history_insert":"CALL proc_trade_complete_insert_krw_ltc()",
+            "procedure_point_insert":"select fns_trade_point.proc_point_insert_krw_ltc() as remaincnt",
+            "procedure_balance_sum":"CALL fns_trade_point.proc_set_member_point_balance_from_sign_sv(?,?,?)"
+        },
+        "trade_point_currency":{
+            "tablename":"fns_trade_point.web_point_krw"
+        },
+        "trade_point_excoin":{
+            "tablename":"fns_trade_point.web_point_ltc"
+        },
+        "trade_point_on_trade":{
+            "sqlstrpre":"INSERT INTO fns_trade_point.web_point_on_trade_latest_his (po_type,po_market_type,mb_no,po_action,po_point_on) VALUES ",
+            "sqlstrbody":"(?,?,?,?,?)"
+        },
+        "trade_orderbook_buy_detail":{
+            "tablename":"view_trade_orderbook_buy_detail_krw_ltc"
+        },
+        "trade_orderbook_sell_detail":{
+            "tablename":"view_trade_orderbook_sell_detail_krw_ltc"
+        },
+        "trade_orderbook_complete":{
+            "tablename":"view_trade_orderbook_complete_detail_krw_ltc"
+        },
+        "trade_master_24volume":{
+                "tablename":"view_trade_master_24volume_krw_ltc",
+                "sqlcolumn":"CONCAT(volume) as volume ,CONCAT(maxprice) as maxprice ,CONCAT(minprice) as minprice,CONCAT(closeprice) as closeprice",
+                "rowlimit":1,
+                "cachesec":3
+        },
+        "log_server":{
+            "tablename":"log_tradeserver",
+            "sql":"INSERT INTO log_tradeserver (cs_code,cs_channel,cs_subject,cs_content) VALUES (?,'ltc',?,?)"
+        },
+        "log_db_lock":{
+            "tablename":"log_db_lock",
+            "sql":"INSERT INTO log_db_lock (cs_type,cs_code,cs_query,cs_auto_retry,cs_mb_nos) VALUES (?,?,?,?,?)",
+            "sqllocksearchwhere":"cs_auto_retry='Y' AND cs_is_proc_yn='N' AND ( cs_type='POINT' OR cs_type='ONTRADE' OR cs_type='ORDER' )",
+            "sqllocksearchlimit":"50"
+        }
+
+    }
+}

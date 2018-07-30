@@ -1,0 +1,58 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="waNo" value="" />
+        <input type="hidden" name="waAccountCnt" value="0" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>코인ID</th><td><input type="text" name="coId" value="" required style="width:80px;" /></td>
+                        <th>상태</th><td><select name="waStaus" required /><option value="running">running</option><option value="full">full</option></select></td>
+                        
+                        </tr><tr>
+                        <th>설명</th><td colspan="3"><input type="text" name="waExplain" value="" required /></td>
+                        </tr><tr>
+                        <th>출금수수료</th><td><input type="text" name="waTxFee" value="" required maxlength="10" /></td>
+                        </tr><tr>
+                        <th>서버IP</th><td>
+                            <select name="waRpcProto" required /><option value="http">http</option><option value="https">https</option></select>
+                            <input type="text" name="waRpcIp" value="" required  style="width:80%;" /></td>
+                        <th>서버PORT</th><td><input type="text" name="waRpcPort" value="" required  style="width:120px;"/></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

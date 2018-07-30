@@ -1,0 +1,273 @@
+{
+  "Database":{
+    "name":"fns_trade_order_ltc"
+  },
+  "Controller":
+  {
+
+    "liststradecompleteshort":{
+        "description":"최근 거래 내역 exchange page에서 사용",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_receipt_fee,od_receipt_avg,od_reg_dt,od_receipt_dt FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? ORDER BY od_receipt_dt DESC, od_id DESC LIMIT ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "listsopenordershort":{
+        "description":"거래소 미체결 내역 리스트 exchange page에서 사용",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt,od_receipt_avg,od_receipt_dt FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? ORDER BY od_id DESC limit ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "tradecompletehistoryenv":{
+        "description":"거래완료내역 전체",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "tradecompletehistory":{
+        "description":"거래완료내역 전체",
+        "sql":"SELECT od_action,od_pay_po_ids,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_receipt_fee,od_receipt_avg,od_reg_dt,od_receipt_dt FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? ORDER BY od_receipt_dt DESC LIMIT ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "tradecompletehistoryactionenv":{
+        "description":"거래완료내역 buy/sell 구분",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? AND od_action=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "listaction":{"required":true,"maxlength":10}
+        },
+        "authlevel":0
+    },
+    "tradecompletehistoryaction":{
+        "description":"거래완료내역 buy/sell 구분",
+        "sql":"SELECT od_action,od_pay_po_ids,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_receipt_fee,od_receipt_avg,od_reg_dt,od_receipt_dt FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? AND od_action=? ORDER BY od_receipt_dt DESC LIMIT ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "listaction":{"required":true,"maxlength":10}
+        },
+        "authlevel":0
+    },
+    "liststradecomplete":{
+        "description":"거래내역 - 최근 체결 내역",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_receipt_fee,od_receipt_avg,od_reg_dt,od_receipt_dt FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? ORDER BY od_receipt_dt DESC, od_id DESC LIMIT ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "listsopenorder":{
+        "description":"거래내역 - 미체결 내역",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt,od_receipt_avg,od_receipt_dt FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? ORDER BY od_id DESC limit ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    
+    
+    
+    "listsopenorderenv":{
+        "description":"거래소 미체결 내역 설정값 - 20ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "listsopenorder":{
+        "description":"거래소 미체결 내역 리스트",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt,od_receipt_dt,od_receipt_avg FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? ORDER BY od_id DESC LIMIT ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "listsopenorderactionenv":{
+        "description":"거래소 거래 미체결 설정값 - 20ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? AND od_action=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "listaction":{"required":true,"maxlength":10}
+        },
+        "authlevel":0
+    },
+    "listsopenorderaction":{
+        "description":"거래소 미체결 내역 리스트",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt,od_receipt_dt,od_receipt_avg FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? AND od_action=? ORDER BY od_id DESC LIMIT ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "listaction":{"required":true,"maxlength":10}
+        },
+        "authlevel":0
+    },
+
+
+
+
+
+
+
+    "lists":{
+        "description":"거래소 트레이드 리스트 -20ea",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt,od_receipt_dt,partner FROM web_trade_order_history_krw_ltc WHERE od_pay_status!='CAN' AND od_action=? AND mb_no=? ORDER BY od_id DESC limit ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "itaction":{"required":true,"maxlength":50}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "cancel":{
+        "database":{"balance":"fns_trade_point"},
+        "description":"거래소 트레이드 취소 액션",
+        "sql":"UPDATE mem_open_order_krw_ltc SET od_pay_status=? WHERE od_pay_status<>'OK' AND od_id=? AND mb_no=? limit 1",
+        "mapkeys":{
+            "od_pay_status":{"default":"CAN"}
+            ,"od_id":{"required":true}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "sql_cancel_list":"SELECT od_action,od_market_price,od_temp_coin,od_receipt_coin FROM mem_open_order_krw_ltc WHERE od_pay_status<>'OK' AND od_id=? AND mb_no=? limit 1",
+        "mapkeys_cancel_list":{
+            "od_id":{"required":true}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "sql_balance":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance WHERE mb_no=?",
+        "mapkeys_balance":{
+            "mb_no":{"required":true}
+        },
+        "sql_balance_update":"UPDATE trade_member_point_balance SET po_on_trade = po_on_trade - ? WHERE mb_no = ? AND po_type = 'ltc'",
+        "mapkeys_balance_update":{
+            "po_on_trade":{"required":true},
+            "mb_no":{"required":true}
+        },
+        "sql_balance_update_krw":"UPDATE trade_member_point_balance SET po_on_trade = po_on_trade - ? WHERE mb_no = ? AND po_type = 'krw'",
+        "mapkeys_balance_update_krw":{
+            "po_on_trade":{"required":true},
+            "mb_no":{"required":true}
+        },
+        "authlevel":0,
+        "datamodel":"TradeExchangeCancel"
+    },
+
+
+    "envlistopenordershort":{
+        "description":"거래소 미체결 내역 설정값 - 10ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "envliststradecompleteshort":{
+        "description":"거래소 최근 체결 내역 설정값 - 10ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "envlistopenorder":{
+        "description":"거래내역 - 미체결 내역 설정값 - 10ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "envliststradecomplete":{
+        "description":"거래내역 - 최근 체결 내역 설정값 - 10ea",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    
+
+    
+    
+
+    "listtradeactionenv":{
+        "description":"거래소 buy or sell 내역 설정 페이징",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('20') AS rowlimit FROM mem_open_order_krw_ltc WHERE od_action=? AND mb_no=? AND ((od_pay_status = 'CAN' and od_receipt_coin > 0.0) OR od_pay_status!='CAN')",
+        "rowlimit":20,
+        "mapkeys":{
+            "itaction":{"required":true,"maxlength":20}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+    "listtradeaction":{
+        "description":"거래소 buy or sell 내역 리스트 - 20개",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt FROM mem_open_order_krw_ltc WHERE od_action=? AND mb_no=? AND ((od_pay_status = 'CAN' and od_receipt_coin > 0.0) OR od_pay_status!='CAN') ORDER BY od_id DESC LIMIT ?,?",
+        "rowlimit":20,
+        "mapkeys":{
+            "itaction":{"required":true,"maxlength":20}
+            ,"mb_no":{"default":"SS_MB_NO"}
+        },
+        "authlevel":0
+    },
+
+    "regist":{
+        "method":"POST",
+        "database":{"balance":"fns_trade_point","etc":"fns_trade_order_etc", "eth":"fns_trade_order_eth", "ltc":"fns_trade_order_ltc", "btc":"fns_trade_order_btc", "bch":"fns_trade_order_bch"},
+        "sql":"INSERT INTO web_open_order_krw_ltc(od_action,od_pay_status,od_market_price,od_total_cost,mb_no,mb_id,od_temp_coin,od_fee_rate,od_receipt_coin,od_receipt_fee,od_reg_ip)VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "mapkeys":{
+            "od_action":{"required":true,"maxlength":50}
+            ,"od_pay_status":{"required":false,"maxlength":10}
+            ,"od_market_price":{"required":true}
+            ,"od_total_cost":{"required":true}
+            ,"mb_no":{"default":"SS_MB_NO"}
+            ,"mb_id":{"default":"SS_MB_ID"}
+            ,"od_temp_coin":{"required":true}
+            ,"od_fee_rate":{"required":true}
+            ,"od_receipt_coin":{"required":true}
+            ,"od_receipt_fee":{"required":false}
+            ,"od_reg_ip":{"default":"CLIENT_IP"}
+        },
+        "sql_balanceupdate":"SELECT po_type,po_total as total,po_on_trade as on_trade,po_on_etc as on_etc,po_on_lend as on_lend, (po_total-po_on_trade-po_on_etc-po_on_lend ) as poss  FROM trade_member_point_balance  WHERE mb_no=?",
+            "mapkeys_balanceupdate":{
+                "mb_no":{"required":true}
+            },
+        "sql_sell_view":"select od_market_price from view_trade_orderbook_sell_detail_krw_ltc limit 1",
+        "sql_buy_view":"select od_market_price from view_trade_orderbook_buy_detail_krw_ltc  limit 1",
+        "sql_order_sum":"SELECT COUNT(*) as order_count FROM mem_open_order_krw_ltc WHERE mb_no = ?",
+        "mapkeys_order_sum":{
+            "mb_no":{"default":"SS_MB_NO"}    
+        },
+        "sql_balance_update":"UPDATE trade_member_point_balance SET po_on_trade = po_on_trade + ? WHERE mb_no = ? AND po_type = 'ltc'",
+        "mapkeys_balance_update":{
+            "po_on_trade":{"required":true},
+            "mb_no":{"required":true}
+        },
+        "sql_balance_update_krw":"UPDATE trade_member_point_balance SET po_on_trade = po_on_trade + ? WHERE mb_no = ? AND po_type = 'krw'",
+        "mapkeys_balance_update_krw":{
+            "po_on_trade":{"required":true},
+            "mb_no":{"required":true}
+        },
+        "sql_lock":"SELECT cs_mb_nos,update_cnt FROM log_db_lock WHERE cs_is_proc_yn = ?",
+        "mapkeys_lock":{
+            "cs_is_proc_yn":{"default":"N"}
+        },
+        "datamodel":"TradeExchange",
+        "authlevel":0
+    }
+  }
+
+}

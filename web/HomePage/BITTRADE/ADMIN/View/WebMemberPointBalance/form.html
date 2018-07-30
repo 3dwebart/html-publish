@@ -1,0 +1,58 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="poNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+								<th>poType</th><td><input type="text" name="poType" value="" required /></td>
+								</tr><tr>
+								<th>mbNo</th><td><input type="text" name="mbNo" value="" required /></td>
+								</tr><tr>
+								<th>poPoint</th><td><input type="text" name="poPoint" value="" required /></td>
+								</tr><tr>
+								<th>poPointOntrade</th><td><input type="text" name="poPointOntrade" value="" required /></td>
+								</tr><tr>
+								<th>poPointOnetc</th><td><input type="text" name="poPointOnetc" value="" required /></td>
+								</tr><tr>
+								<th>등록일</th><td><input type="text" name="poRegDt" value="0000-00-00 00:00:00" required /></td>
+								</tr><tr>
+								<th>poUpDt</th><td><input type="text" name="poUpDt" value="0000-00-00 00:00:00" required /></td>
+								</tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

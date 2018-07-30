@@ -1,0 +1,72 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                                <th>마켓타입</th>
+                                <td><span id="itMarketId"></span></td>
+                            </tr><tr>
+                                <th>마켓이름</th>
+                                <td><span id="itName"></span></td>
+                            </tr><tr>
+                                <th>설명</th>
+                                <td><span id="itExplain"></span></td>
+                            </tr><tr>
+                                <th>기준코인</th>
+                                <td><span id="itStdCoId"></span></td>
+                            </tr><tr>
+                                <th>환전코인</th>
+                                <td><span id="itExcCoId"></span></td>
+                            </tr><tr>
+                                <th>사용여부</th>
+                                <td><span id="itUse"></span></td>
+                            </tr><tr>
+                                <th>시세서버IP</th>
+                                <td><span id="itServerIp"></span></td>
+                            </tr><tr>
+                                <th>시세서버PORT</th>
+                                <td><span id="itServerPort"></span></td>
+                            </tr><tr>
+                                <th>체결서버IP</th>
+                                <td><span id="itServerSignIp"></span></td>
+                            </tr><tr>
+                                <th>체결서버PORT</th>
+                                <td><span id="itServerSignPort"></span></td>
+                            </tr><tr>
+                                <th>등록일</th>
+                                <td><span id="itRegDt"></span></td>
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+            <input type="button" id="btn_write" name="btn_submit" class="btn-default right" value="등 록" />
+            <input type="button" id="btn_modify" name="btn_modify" class="btn-default right" value="수 정" onclick="location.href=bean.link.write+'&id='+bean.data.itNo" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>

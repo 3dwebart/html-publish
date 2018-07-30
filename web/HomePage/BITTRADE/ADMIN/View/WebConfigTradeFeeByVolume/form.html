@@ -1,0 +1,96 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="cfNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th style="width:250px;">항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>거래소구분</th>
+                            <td>
+                                <select name="cfMarketType">
+                                    <option value="KRW_ETH">KRW_ETH</option>
+                                    <option value="KRW_ETC">KRW_ETC</option>
+                                    <option value="KRW_LTC">KRW_LTC</option>
+                                    <option value="KRW_BTC">KRW_BTC</option>
+                                </select>
+                            </td>
+                        </tr><tr>
+                        <th>회원 거래량별</th>
+                        <td><b><input type="text" name="cfMaxDay" value="30" readonly required style="width:50px;background-color:#f5f5f5;" />일</b>기준
+                                <span style="padding:0 20px"> 회원 <b>거래량</b>이</span>
+                                
+                                ≥
+                                <input type="text" name="cfMaxVolume" value=""  required style="width:50px;" /> (KRW기준) 보다 클경우
+                            </td>
+                        </tr><tr>
+                        <th>트래커수수료(즉시체결)</th>
+                        <td>(<input type="text" name="cfTrTrackerFee" class="input-calculation" value="" required style="width:50px;" /> * 100) = <span id="cfTrTrackerFeeResult" style="font-weight:bold;">0.0</span> %</td>
+                        </tr><tr>
+                        <th>마켓메이커수수료(대기주문)</th>
+                        <td>(<input type="text" name="cfTrMarketmakerFee" class="input-calculation" value="" required style="width:50px;" /> * 100) = <span id="cfTrMarketmakerFeeResult" style="font-weight:bold;">0.0</span> %</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(".input-calculation").on("input keypress keyup change", $(this), function () {
+        var regex = /^(\d*\.?\d{0,4})$|^\$?[\d,]+(\d*)?$/g;
+        var input = $(this).val();
+        if (regex.test(input)) {
+            var matches = input.match(regex);
+            for (var match in matches) {
+                if(input>1.0){ $(this).val(''); }
+                displayInputAmount(this.name);
+            }
+        } else if (isNaN($(this).val())) {
+            $(this).val(input.slice(0, -1));
+            return false;
+        } else {
+            $(this).val(input.slice(0, -1));
+            return false;
+        }
+    });
+
+    function displayInputAmount(data){
+        var value = $('input[name="'+data+'"]').val();
+        if($.isNumeric(value)){
+            value = value * 100;
+            value = parseFloat(value.toFixed(4));
+            $('span#'+data+'Result').html(value);
+        }
+    }
+</script>
+</body>

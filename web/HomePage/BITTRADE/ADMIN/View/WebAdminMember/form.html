@@ -1,0 +1,149 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{js}/sha256.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form>
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="mbNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>아이디</th>
+                        <td><input type="text" name="mbId" required style="width:200px;" /></td>
+                    </tr><tr>
+                        <th>비밀번호</th>
+                        <td><input type="password" name="mbPassword" required style="width:200px;" /> &nbsp; <span class="explain">사용할 비밀번호를 입력하세요.</span></td>
+                    </tr><tr>
+                        <th>관리자이름</th>
+                        <td><input type="text" name="mbName" required style="width:200px;" /></td>
+                    </tr>
+                    <tr>
+                        <th>관리자권한</th>
+                        <td><select name="mbAuth">
+                                <option value="">기본권한(관리자관리제외)</option>
+                                <option value="super">최고관리자권한</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>접근허용아이피</th>
+                        <td><input type="text" name="mbAccessIp" required /> <br /> <span class="explain">0.0.0.0 : 모든아이피 접근 허용, 허용 IP와 IP사이는 콤마(,)로 구분</span><br /> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit_mbadm" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script type="text/javascript">
+if(bean.result==-210){
+    $('body').viewDialogMessage('권한이 없습니다.', bean.link.lists);
+}else{
+    if(typeof(bean.auth) != 'undefined' && bean.auth != 'super'){
+        $("select[name='mbAuth'] option[value='super']").remove();
+    }
+    if(bean.data.mbId!=null){
+        $('input[name=mbId]').attr("readonly",true).css("background","#f5f5f5").css("color","#999");
+    }
+
+    $("#btn_submit_mbadm").click(function(){
+        var result = -1;
+        $('body').showDialogProgress();
+        $("form").attr("action",bean.link.update);
+        $("#btn_submit").attr("disabled",true);
+
+        var mid  = $("input[name=mbId]").val();
+        var mpwd = $("input[name=mbPassword]").val();
+
+        var en_mid = $.base64.encode(mid);
+        var en_mpwd = '';
+        if(mpwd != ''){
+            en_mpwd = sha256_digest(mpwd);
+        }else{
+            en_mpwd = '';
+        }
+        $("input[name=mbId]").val(en_mid);
+        $("input[name=mbPassword]").val(en_mpwd);
+        var pdata = $("form").serialize();
+        $("input[name=mbId]").val(mid);
+        $("input[name=mbPassword]").val('');
+
+        $.post(bean.link.update,
+            pdata,
+            function(json){
+                result = parseInt(json.result);
+                if(result>0){
+                    $(location).attr('href',bean.link.done);
+                }else if(result==0){
+                    $('body').viewDialogMessage('<p>저장된 값과 입력된 값이 같아 변경된 항목이 없습니다.</p>');
+                }else{
+                    msg = '';
+                    errorId = '';
+                    for (var key in json){
+
+                        $('input[name='+key+'][required]').removeClass('errorinput');
+                        $('select[name='+key+']').removeClass('errorinput');
+                        $('textarea[name='+key+'][required]').removeClass('errorinput');
+
+                        if(($('input[name='+key+'][required]').length
+                                || $('select[name='+key+']').length
+                                || $('textarea[name='+key+'][required]').length)
+                                && (json[key]==null || json[key].length==0 || json[key]=='null'))
+                        {
+
+                            if(errorId === '') errorId = key;
+
+                            $('input[name='+key+'][required]').addClass('errorinput');
+                            $('select[name='+key+']').addClass('errorinput');
+                            $('textarea[name='+key+'][required]').addClass('errorinput');
+
+                        }else{
+                            var datavalue = json[key]+'';
+                            datavalue = datavalue.replace(/\\'/gi,"'");
+                            datavalue = datavalue.replace(/\\"/gi,"\"");
+
+                            $('input[name='+key+']').val(datavalue);
+                            $('select[name='+key+']').val(datavalue);
+                            $('textarea[name='+key+']').val(datavalue.replace(/\\r\\n/gi,"\r\n"));
+                        }
+                    }
+                    if(json.msg) msg = '<p>'+json.msg+'</p>';
+                    showUpdateError(result,errorId,msg);
+                }
+            }, "json")
+            .done(function() { $("#btn_submit").removeAttr("disabled"); $('body').hideDialogProgress();})
+            .fail(function() { $('body').viewDialogMessage('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>',reload); })
+            .always(function() {});
+        return false;
+    });
+}
+</script>
+</body>

@@ -1,0 +1,656 @@
+@charset "utf-8";
+/*@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);*/
+@import url(xeicon.css);
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../fonts/NotoSansKR-Thin.woff2) format('woff2'),
+       url(../fonts/NotoSansKR-Thin.woff) format('woff'),
+       url(../fonts/NotoSansKR-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../fonts/NotoSansKR-Light.woff2) format('woff2'),
+       url(../fonts/NotoSansKR-Light.woff) format('woff'),
+       url(../fonts/NotoSansKR-Light.otf) format('opentype');
+}
+@font-face {
+   font-family: 'Noto Sans KR';
+   font-style: normal;
+   font-weight: 400;
+   src: url(../fonts/NotoSansKR-Regular.woff2) format('woff2'),
+        url(../fonts/NotoSansKR-Regular.woff) format('woff'),
+        url(../fonts/NotoSansKR-Regular.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans KR';
+   font-style: normal;
+   font-weight: 500;
+   src: url(../fonts/NotoSansKR-Medium.woff2) format('woff2'),
+        url(../fonts/NotoSansKR-Medium.woff) format('woff'),
+        url(../fonts/NotoSansKR-Medium.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans KR';
+   font-style: normal;
+   font-weight: 700;
+   src: url(../fonts/NotoSansKR-Bold.woff2) format('woff2'),
+        url(../fonts/NotoSansKR-Bold.woff) format('woff'),
+        url(../fonts/NotoSansKR-Bold.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans KR';
+   font-style: normal;
+   font-weight: 900;
+   src: url(../fonts/NotoSansKR-Black.woff2) format('woff2'),
+        url(../fonts/NotoSansKR-Black.woff) format('woff'),
+        url(../fonts/NotoSansKR-Black.otf) format('opentype');
+ }
+
+body{ padding: 0; margin: 0; background: #f9f9fb; font-size:12px; font-family:'Noto Sans KR', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; }  
+    a{ text-decoration: none;}
+ul,li{ padding: 0; margin: 0; list-style: none}
+.mobile-header{     
+    height: 45px;     
+    position: relative;
+    z-index: 8000;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    }
+.mobile-header h1{    
+    float: left;
+    padding: 5px 0 0 20px;
+    margin: 0;
+    }
+.mobile-header h1 a{    
+
+    display: inline-block;
+    vertical-align: middle;
+    width: 100px;
+    height: 40px;
+    background: url(../img/common/Popcon_Logo.png) no-repeat 0 0;
+    background-size:100px 40px;
+    
+    text-indent: -9999px;
+    }
+.pc-gnb{ }
+    .btn-mobile-tour{
+    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    border: 1px solid #ffffff;
+    padding: 5px 10px;
+    color: #fff;
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    }
+   
+.main-visual{  
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding-top: 72px;
+    padding-bottom: 140.5px;
+    background-image: linear-gradient(135deg, rgb(0, 75, 178), rgb(0, 148, 210), rgb(0, 173, 221));
+    background-size: 200%;
+    background-position: 50% center;
+    padding: 0;
+    margin: 0;
+
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+        box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    }
+
+ 
+.mobile-main-slide-wrap{ 
+    position: relative; 
+    width: 100%; 
+    height: auto;
+    z-index: 1;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+    padding: 50px 0 0 0;
+ }
+    
+.mobile-main-slide-content{
+    text-align: center;
+    width: 100%;
+    padding: 90px 0 0 0;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 110px;
+    
+    }
+
+.mobile-main-slide-content em{ 
+        font-size:13px; 
+        color:#88d5ea;
+        display: block; 
+        font-style: normal;
+    padding-top:10px;
+        }
+    
+ 
+
+
+
+.ico-bitcoin-mobile{ 
+    background: url(../img/common/ico_bitcoin_mobile.png) no-repeat 50% 0;
+    background-size: 70px 70px;
+    }
+
+.ico-ehtcoin-mobile{ 
+    background: url(../img/common/ico_ethcoin_mobile.png) no-repeat 50% 0;
+    background-size: 70px 70px;
+    }
+
+.ico-blockchain-mobile{ 
+    background: url(../img/common/ico_blockchain_mobile.png) no-repeat 50% 0;
+    background-size: 70px 70px;
+    }
+
+.ico-wallet-mobile{ 
+    background: url(../img/common/ico_wallet_mobile.png) no-repeat 50% 0;
+    background-size: 70px 70px;
+    }
+
+    
+    
+.btn-mobile-join-wrap{position: relative; text-align: center; z-index: 5; padding: 20px 0 0 0;} 
+    
+ .btn-mobile-join{    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    background:#ff6c00;
+    padding: 20px 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    }
+
+ .btn-mobile-login{    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    background:#fff;
+    padding: 12px 0;
+    color: #26375e;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+    border:1px solid #26375e;
+    }
+    .btn-mobile-join-wrap em{ padding: 30px 0 20px 0; 
+    display: block;
+    color: #26375e;
+    font-style:normal;
+    font-size: 12px;
+    }
+    .slide-dot{     display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-height: 21px; position: relative; z-index: 10}
+.slide-dot span{ margin: 0 3px}
+    
+    
+    .btn-slide-dot{     display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background: rgb(77, 178, 222);
+    transition: background 0.3s ease;}
+    
+.m-main-wrap{ position: relative; height: 590px; overflow: hidden}
+    
+ .main-bottom-shape{position: absolute;
+    bottom: -90px;
+    right: 0px;
+    transform: skewX(-0.1deg);
+    border-width: 303px 1515px 1px 303px;
+    border-style: solid;
+    border-color: transparent rgb(249, 249, 251) rgb(249, 249, 251) transparent;
+    border-image: initial;
+    border-right: 2000px solid rgb(249, 249, 251);
+    border-bottom: 1px solid rgb(249, 249, 251); z-index:0}
+.pc-main-title { display: none}
+      .pc-main-title em{ display: none}
+.pc-gnb { display: none;}  
+.gnb-right{ display: none}
+#pc-slider{ display: none}
+
+
+  @media (max-width:768px)  {  
+.main-bottom-shape{       position: absolute;
+    bottom: -60px;
+    right: 0px;
+    height: auto;
+    transform: skewX(-0.1deg);
+    border-width: 303px 1515px 1px 303px;
+    border-style: solid;
+    border-color: transparent rgb(249, 249, 251) rgb(249, 249, 251) transparent;
+    border-image: initial;
+    border-right: 2000px solid rgb(249, 249, 251);
+    border-bottom: 1px solid #fff;}
+.pc-main-wrap { display: none}
+      
+.modal-close {
+    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    border: 1px solid #0070c2;
+    padding: 10px !important;
+    color: #fff;
+    font-size: 13px;
+    float: right;
+    display: none;
+    color: #0070c2;
+    margin: 10px auto;
+    display: block;
+    width: 95%;
+    text-align: center;
+}
+.modal-content{display: inline-block;}
+   
+
+      } 
+
+/* ########################// media768 */
+
+@media (min-width:1024px)  {
+.btn-mobile-join-wrap{ display: none}
+.pc-main-wrap{ max-width: 1190px; margin: 0 auto; position: relative; display:grid; z-index: 90}
+.m-main-wrap{ position: relative; min-height: 500px; overflow: inherit}
+.mobile-header{     
+    height: 45px;     
+    position: relative;
+    z-index: 8000;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    max-width: 1190px; 
+    margin: 0 auto
+    }
+    
+.mobile-main-slide-wrap{ 
+    position: relative; 
+    max-width: 1190px; 
+    height: 130px;
+    z-index: 1;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+    padding: 25px 0 0 0;
+    border: 2px solid #30a9db;
+    margin: 160px auto 20px auto;
+    border-radius: 50px;
+    
+ }
+    .main-visual{ bottom: -90px;}
+    
+    #mobile{ display: none}
+.pc-main-title{ position: absolute; top: -110px; left: 420px; font-size: 25px; color: #fff; font-weight: bold; text-align: center; display: block}
+.pc-main-title em{ font-size: 15px; display: block; font-style: normal; color: #88d5ea }
+    .btn-mobile-tour{ display: none}
+    .pc-gnb{  position: absolute; top: 0px; left: 220px; display: block}
+    .pc-gnb li{ float: left}
+    .pc-gnb  li a {
+    display: block;
+    font-size: 15px;
+    color: #9de1fb;
+    height: 69px;
+    line-height: 68px;
+    padding: 0 50px 0 0;
+    font-weight: 400;
+}
+    .pc-gnb  li a.active{ color: #fff}
+  .btn-register{
+    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    border: 1px solid #ffffff;
+    padding: 5px 10px 5px 10px;
+    color: #fff;
+    font-size: 13px;
+    float: right;
+    display: block;
+    position: absolute; top: 20px;
+      color: #fff !important;
+    }
+.gnb-right{ float: right; min-width: 150px; display: block}
+    .gnb-right a{ color: #aceaff}
+    .gnb-right li{ display: block;
+    font-size: 15px;
+    color: #9de1fb;
+    float: left;
+    padding: 22px 30px 0 0;
+    font-weight: 400; position: relative; min-width: 50px}
+#pc-slider{ display: block; margin: 0 auto}
+    .pc-slider-content{ width: 95%; overflow: hidden; margin: 0 auto;}
+    .pc-slider-content ul{ display: table; margin: 0 auto}
+.pc-slider-content li{ float: left; padding: 0 0 0 110px; color: #fff; font-weight: 300;  min-height: 91px;  margin: 0 20px 0 0;  font-weight: bold}
+    
+.pc-slider-content li em {
+    font-size: 13px;
+    color: #88d5ea;
+    display: block;
+    font-style: normal;
+    padding-top: 10px;
+}
+.ico-bitcoin-pc {
+    background: url(../img/common/ico_bitcoin_mobile.png) no-repeat 25px 0px;
+    background-size: 68px 68px;
+}
+.ico-blockchain-pc {
+    background: url(../img/common/ico_blockchain_mobile.png) no-repeat 25px 0px;
+    background-size: 68px 68px;
+}
+.ico-wallet-pc {
+    background: url(../img/common/ico_wallet_mobile.png) no-repeat 25px 0px;
+    background-size: 68px 68px;
+}
+    
+    
+    
+}
+/* ########################// media 1024 for Desktop */
+
+@media only screen and (max-width: 320px){
+    .mobile-main-slide-wrap{ 
+    padding: 30px 0 0 0;
+ }
+.m-main-wrap {
+    position: relative;
+    height: 560px;
+    overflow: hidden;
+}
+    
+}
+            
+ /* ########################// media 320 */           
+
+
+
+
+.pc-main-ctype-list{
+        background-color: white;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    box-shadow: rgba(33, 102, 212, 0.15) 0px 7px 30px 0px;
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    padding: 20px;
+
+}
+
+.pc-main-ctype-list table {
+   
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+ 
+}
+
+.pc-main-ctype-list table th {
+ 
+    padding: 10px;
+    text-align:center;
+    color: #6e788f;
+    font-size: 13px;
+    background-color: #ecf2f8;
+    height: 30px;
+    
+}
+
+
+.pc-main-ctype-list table td{
+    border-bottom: 1px solid #e7eef5;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-collapse: collapse;
+    padding: 15px;
+    text-align: center;
+     font-size: 13px;
+    color: #6e788f;
+    }
+.pc-main-ctype-list table td:first-child{ font-weight: bold; text-align: left; width: 160px; }
+
+
+.coin-kind{
+    display: inline-block;
+    vertical-align: middle;
+    width: 22px;
+    height: 22px;
+    background-size: 22px 22px;
+}
+
+.round-tab-wrap{
+     padding: 10px 0 10px 0;
+    display: block;
+    text-align: center;
+    height: 55px;
+    background-color: #fff;
+    width: 600px; 
+    margin: 0 auto;
+}
+.round-tab-wrap li{    float: left;
+    width: 33.33333333333333%;
+    text-align: center;}
+.round-btn {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: auto;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 20px;
+    padding: 5px 50px;
+    line-height: 32px;
+    margin: 0 auto;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #e7eef5;
+    font-weight: bold;
+}
+
+.round-btn.active {
+    color: #fff;
+    background-color: #005bc2;
+    border: 1px solid #005bc2;
+}
+
+.service-info-wrap{ padding: 40px 0 80px 0; position: relative; display: inline-block}
+.service-info-wrap ul:after{content: ""; clear: both; }
+.service-info-wrap li{ float: left;
+    width: 396.66px;
+    text-align: left;  margin:45px 0 0 0; }
+.service-info-wrap li .content{
+   background-color: white;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    box-shadow: rgba(33, 102, 212, 0.15) 0px 7px 30px 0px;
+    box-sizing: border-box;
+    position: relative;
+    height:160px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+       width: 92%;
+    margin: 0 auto;
+  }
+ 
+
+.service-info-wrap li .content span {
+    display: block;
+    padding: 20px 0 0 135px;
+    width: 200px;
+    font-size: 12px;
+    color: #7c8394;
+    min-height: 120px;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+ 
+}
+
+.service-info-wrap li .content span h3{ font-weight: bold; display:block; margin: 0; padding: 0 0 5px 0; font-size: 16px; word-break: break-all; color: #000}
+.service-info-ico-wallet{ background: url(../img/common/ico_serviceinfo_wallet.png)38px 40px no-repeat;}
+.service-info-ico-security{ background: url(../img/common/ico_security.png)38px 40px no-repeat;}
+.service-info-ico-commission{ background: url(../img/common/ico_commission.png)38px 40px no-repeat;}
+
+.app-info-wrap{ width: 100%; height: 520px; background: #fff; }
+.app-info{ width: 1190px; margin: 0 auto;  min-height: 520px;}
+.app-info span{ display: block; padding:74px 0 0 478px; background: url(../img/common/mobile_app.png)56px bottom no-repeat;     min-height: 450px; font-size: 13px;}
+.app-info span h4{ display: block; font-size: 33px; font-weight: 300; }
+
+#footer{ width: 100%; min-height: 160px;  background: #035fa2; display: block; color: #abd2ee; line-height: 180%;}
+.footer-wrap{ max-width: 1400px; margin: 0 auto;}
+.footer-left{ float: left; width: 345px;    padding: 75px 0 0 0;  background: url(../img/common/footer_logo.png)25px 16px no-repeat;}
+.footer-left em{ font-size: 10px; font-style: normal; display: block; padding-bottom:8px; }
+.footer-left span{ width: 2px; height: 12px; display: inline-block; background: #abd2ee; margin: 0 2px; }
+.footer-right{ float: right; padding-top: 30px; min-width: 550px;}
+.footer-right li{ float: left; width: 33.33333333333333%; }
+    .footer-right li:last-child{ margin-top: 30px;}
+.footer-right li a{color: #abd2ee; }
+.footer-right h5{ color: #fff; font-size: 12px; padding: 0; margin: 0 0 5px 0;}
+.footer-right .ico-fb{ width: 31px; height: 31px; background: url(../img/common/footer_ico_facebook.png) no-repeat; display: block; margin: 0 10px 0 0; float: left;}
+.footer-right .ico-twitter{ width: 31px; height: 31px; background: url(../img/common/footer_ico_twitter.png) no-repeat; display: block; margin: 0 10px 0 0; float: left;}
+@media (max-width: 900px)  {
+        .footer-right{ display: none}  
+        .footer-left{ margin-left: 13px;}
+    }
+
+.lang { float:left; position: absolute; top: 0; right: 0; 
+    }
+
+.lang > a { font-size:15px; color: #fff; display: block; line-height: 68px; padding:0 10px;}
+.lang > a > span { margin-right:4px; font-weight: 200;}
+.lang > a.ko:after { content: 'KOR';}
+.lang > a.en:after { content: 'ENG';}
+.lang > a.zh:after { content: 'CHN';}
+.lang ul { display: none;position: absolute; left:50%; transform:translateX(-50%); -webkit-transform:translateX(-50%); top:68px;  padding:10px; background: #fff; }
+.lang ul:before { content: ''; position: absolute; left: 50%; top:-5px; transform:translateX(-50%); -webkit-transform:translateX(-50%); border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid #fff;  }
+.lang li{ padding: 0; margin: 0;}
+.lang ul li + li { border-top:1px dashed #d6d6d6; }
+.lang ul li a { font-size:12px; color: #333; display: block; white-space: nowrap; padding:4px 5px; }
+.lang:hover ul { display: block; }
+
+.ico-coin.ico-krw { background: url(../img/common/coin/krw.png) no-repeat 50% 50%;}
+.ico-coin.ico-btc { background: url(../img/common/coin/btc.png) no-repeat 50% 50%;}
+.ico-coin.ico-bch { background: url(../img/common/coin/bch.png) no-repeat 50% 50%;}
+.ico-coin.ico-ltc { background: url(../img/common/coin/ltc.png) no-repeat 50% 50%;}
+.ico-coin.ico-eth { background: url(../img/common/coin/eth.png) no-repeat 50% 50%;}
+.ico-coin.ico-etc { background: url(../img/common/coin/etc.png) no-repeat 50% 50%;}
+.ico-coin.ico-dash { background: url(../img/common/coin/dash.png) no-repeat 50% 50%;}
+.ico-coin.ico-sc { background: url(../img/common/coin/sc.png) no-repeat 50% 50%;}
+.ico-coin.ico-eos { background: url(../img/common/coin/eos.png) no-repeat 50% 50%;}
+
+.main-modal-wrap{     
+    padding-left: 0px;
+    display: block;
+    background: rgba(0,0,0,.2);
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+        z-index: 50000000;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+   -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+    }
+        
+    .modal-dialog {    
+    position: relative;
+    top: 40%;
+    margin: 0 auto;
+    padding-top: 0;
+    width: 93%;
+    max-width: 550px;
+    height: auto;
+    transform: translateY(-50%);}
+.modal-content{    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    background-color: #fff;
+    border: 0;
+    -webkit-box-shadow: 0 4px 80px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 4px 80px rgba(0,0,0,.3);
+    -ms-box-shadow: 0 4px 80px rgba(0,0,0,.3);
+    -o-box-shadow: 0 4px 80px rgba(0,0,0,.3);
+    box-shadow: 0 4px 80px rgba(0,0,0,.3);
+        position: relative;
+    background-color: #fff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    background-clip: padding-box;
+    outline: 0;
+    padding: 20px;
+        
+        }
+.modal-body{    margin-top: 15px;
+    margin-bottom: 15px;
+padding: 16px 24px;
+    margin-top: 10px;
+    margin-bottom: 10px;position: relative;
+        }
+.modal-content h4{ border-bottom: 1px solid #ccc; padding: 0 0 10px 0; font-size: 13px; line-height: 150%; color: #484848} 
+.modal-body{ 
+        margin: ;
+        padding: 16px 24px;
+        position: relative;
+        max-height: 180px;
+        overflow-y: scroll;
+    background: #f7f7f7;
+    line-height: 180%;
+    word-break: break-all;
+    white-space: normal
+}
+.modal-close{    border-radius: 40px 40px 40px 40px;
+    -moz-border-radius: 40px 40px 40px 40px;
+    -webkit-border-radius: 40px 40px 40px 40px;
+    border: 1px solid #0070c2;
+    padding: 3px 10px 3px 10px;
+    color: #fff;
+    font-size: 13px;
+    float: right;
+    display: none;
+    color: #0070c2;}

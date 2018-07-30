@@ -1,0 +1,333 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+tr.delY td{
+    color:#aaa !important;
+}
+tr.delN td,tr.delN th{
+}
+
+td.buycost{
+    color:#FF0000 !important;
+}
+td.sellcost{
+    color:#0084ff !important;
+}
+
+table.point-table{
+    border:1px solid #f5f5f5; margin:10px 0;
+    padding: 0px;
+}
+table.point-table tr td{ 
+    height: 25px !important;
+}
+table.point-table tr th{ 
+    height: 30px !important;
+}
+table.point-table tr:first-child{
+    background: #f5f5f5;
+}
+table.point-table tr{
+    background: #fff;
+}
+table.point-table tr td{
+    text-align: center;
+}
+</style>
+<script type="text/javascript">
+var listHeader = '[{"odId":"주문ID","odAction":"구분","odPayStatus":"상태","odMarketPrice":"주문가","odTotalCost":"주문총액<br>(KRW)","mbId":"아이디","odTempCoin":"주문수량","odTempKrw":"주문할","odReceiptAvg":"평균체결가","odRecvTotalCost":"평균체결총액<br>(KRW)","odReceiptCoin":"체결된수량","odReceiptKrw":"입금받은","odReceiptFee":"수수료","odDelYn":"삭제","odRegDt":"주문시간","odRegIp":"IP"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.odId + '</th>');
+		headItems.push('<th colspan="2">' + val.odAction + '</th>');
+		//headItems.push('<th>' + val.odPayStatus + '</th>');
+		headItems.push('<th>' + val.odMarketPrice + '</th>');
+		headItems.push('<th>' + val.odTotalCost + '</th>');
+		headItems.push('<th>' + val.mbId + '</th>');
+		headItems.push('<th>' + val.odTempCoin + '</th>');
+        headItems.push('<th>' + val.odReceiptAvg + '</th>');
+        headItems.push('<th>' + val.odReceiptCoin + '</th>');
+        headItems.push('<th>' + val.odRecvTotalCost + '</th>');
+        headItems.push('<th>' + val.odReceiptFee + '</th>');
+        headItems.push('<th>자산확인</th>');
+        headItems.push('<th>' + val.odRegDt + '</th>');
+        headItems.push('<th>' + val.odRegIp + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+
+
+    $.each(jsondata, function (key, val) {
+        var classadd = 'delN';
+        if(val.odDelYn==='Y'){
+            classadd = 'delY';
+        }
+        var actionclsadd = val.odAction+'cost';
+
+        var action = '';
+        if(val.odAction=='sell'){
+            action = '판매';
+        }else if(val.odAction=='buy'){
+            action = '구매';
+        }
+
+        var statusmsg = val.odPayStatus;
+        if(val.odPayStatus=='REQ'){
+            statusmsg = '주문';
+        }else if(val.odPayStatus=='OK'){
+            statusmsg = '체결';
+        }else if(val.odPayStatus=='CAN'){
+            statusmsg = '취소';
+            classadd = 'delY';
+            if(val.odReceiptCoin>0){
+                statusmsg = '잔량취소';
+                classadd = 'delN';
+            }
+        }else if(val.odPayStatus=='PART'){
+            statusmsg = '부분체결';
+        }
+
+        var odReceiptFeeValue = val.odReceiptFee;
+        if(val.odAction=='sell' && odReceiptFeeValue>0){
+            odReceiptFeeValue = odReceiptFeeValue.formatBitcoin() + '<span class="gray">KRW</span>';
+        }else if(val.odAction=='buy' && odReceiptFeeValue>0){
+            odReceiptFeeValue = (odReceiptFeeValue+'').formatBitcoin()+ '<span class="gray"></span>';
+        }else{
+             odReceiptFeeValue = '-';
+        }
+        
+        // 체결총액(KRW)
+        var odRecvTotalCost = 0;
+        if(Number(val.odReceiptCoin) > 0){
+            odRecvTotalCost = (calfloat('ROUND', ( parseFloat(val.odReceiptAvg) * parseFloat(val.odReceiptCoin) ),8 )+'').formatBitcoin();
+            if(Number(val.odReceiptKrw) > 0 ){
+                odRecvTotalCost = (val.odReceiptKrw+'').formatBitcoin();
+            }
+        }
+        
+        
+
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        listItems.push('<tr class="list'+c+' '+classadd+'">');
+		listItems.push('<th class="num" style="cursor:auto;width:40px">' + val.odId + '</th>');
+		listItems.push('<td  style="width:30px;padding:0 0;" class="'+actionclsadd+'" onclick=\"viewLink(\''+val.odId+'\')\">' + action + '</td>');
+		listItems.push('<td  style="width:30px;padding:0 0;" onclick=\"viewLink(\''+val.odId+'\')\">' + statusmsg + '</td>');
+		listItems.push('<td style="width:80px;padding:0 0;" onclick=\"viewLink(\''+val.odId+'\')\">' + (val.odMarketPrice+'').formatNumber()  + '</td>');
+		listItems.push('<td style="width:80px;padding:0 0;" onclick=\"viewLink(\''+val.odId+'\')\" align="right">' + (val.odTotalCost+'').formatNumber() + '</td>');
+        listItems.push('<td style="cursor:auto;"><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">[' + val.mbNo + '] ' + (val.mbId).cut(14,'...') + '</a></u></td>');
+		listItems.push('<td class="'+actionclsadd+'" style="width:100px" onclick=\"viewLink(\''+val.odId+'\')\">' + val.odTempCoin + '</td>');
+        listItems.push('<td style="width:80px" onclick=\"viewLink(\''+val.odId+'\')\">' + (val.odReceiptAvg).formatNumber() + '</td>');
+        
+        
+        
+        var pay_result = '<input onclick=\"getViewInsertPoint(\''+val.odId+'\')\" type="button" style="font-size:11px;" value="확인" class="btn-default btn-toggle"  />';
+        if(val.odPayStatus=='PART'){
+            listItems.push('<td colspan="2" align="center">상세는 <u><a href="/?mode=MemOpenOrderKrwBtc&sf=od_id&sv='+val.odId+'">미체결내역</a></u>에서 확인</td>');
+            pay_result = '<input onclick=\"getViewInsertPoint(\''+val.odId+'\')\" type="button" style="font-size:11px;" value="부분체결확인" class="btn-default"  />';
+            listItems.push('<td  class="num" style="width:50px"  colspan="2">'+pay_result+'</td>');
+        }else{
+            listItems.push('<td style="width:80px" onclick=\"viewLink(\''+val.odId+'\')\">' + val.odReceiptCoin + '</td>');
+            listItems.push('<td style="width:80px" onclick=\"viewLink(\''+val.odId+'\')\" align="right">' + (odRecvTotalCost).formatNumber() + '</td>');
+            listItems.push('<td  class="num" style="width:80px" onclick=\"viewLink(\''+val.odId+'\')\" align="right">' + odReceiptFeeValue + '</td>');
+            listItems.push('<td  class="num" style="width:50px" >'+pay_result+'</td>');
+        }
+
+        
+       
+        
+        
+		listItems.push('<td class="num" style="width:55px" onclick=\"viewLink(\''+val.odId+'\')\">' + val.odRegDt + '</td>');
+		listItems.push('<td class="num" style="width:50px;" onclick=\"viewLink(\''+val.odId+'\')\">' + val.odRegIp + '</td>');
+        
+        listItems.push('</tr>');
+        listItems.push('<tr style="display:none;" id="point_view'+val.odId+'"><td colspan="'+getColCount()+'"  class="console" style="display:none;">');
+        listItems.push('<th colspan="2"><b>체결된수량</b><span id="po_type"></span></th><td valign="top" colspan="5"> <div id="point_coin'+val.odId+'" style="background:#f5f5f5;" ></div></td>');
+        listItems.push('<th><b>KRW</b></th><td valign="top" colspan="6"> <div id="point_currency'+val.odId+'" style="background:#f5f5f5;"></div> </td>');
+        listItems.push('<tr id="btn-area'+val.odId+'" style="display:none;"><td colspan="30" style="text-align:center;"><input type="button" name="btn_more" value="더 보기" class="btn-default" onclick="getViewInsertMorePoint('+val.odId+')" /></td></tr>');
+        listItems.push('</tr>');
+        
+        
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form name="search" method="get" action="/">
+        <div class="list_search">
+        
+            <input type="hidden" name="mode" value="WebTradeOrderHistoryKrwBch" />
+            <span class="custom-dropdown custom-dropdown--white">
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                    <option value="mb_no">회원번호</option>
+                    <option value="mb_id">아이디</option>
+                    <option value="od_id">주문번호</option>
+                    <option value="od_market_price">주문가</option>
+                </select>
+            </span>
+            <input maxlength="24"  type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+        </div>
+        
+        <div class="list_search date">
+                <div>
+                    <input maxlength="10" type="text" name="svdf" placeholder="시작일">
+                    <input maxlength="10" type="text" name="svdt" placeholder="종료일">
+                    <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+                </div>
+        </div>
+        </form>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+        <div style="clear:both;margin:40px 0 0 0;background:#f5f5f5;padding:10px 20px;font-size:11px">
+            * 주문이 완료되었고 자산이 들어와있는 상태인데 Wait상태로 오래 동안 표시될 경우 체결서버를 점검해야 합니다.<br />
+        </div>
+        
+        <div style="clear:both;margin:20px 0 0 0;background:#f5f5f5;padding:10px 20px;line-height:40px">
+            <img src="/Web/img/icon_excel.png" width="30" align="absmiddle">
+            <span style="padding:7px 0 0 5px;"><b>엑셀다운로드</b>(페이지 당
+                <select onchange="weiteExcelDownlod(this.value);">
+                    <option value="100" selected="selected">선택없음</option>
+                    <option value="100">100개</option>
+                    <option value="200">200개</option>
+                    <option value="300">300개</option>
+                    
+                    
+                </select>
+                개)</span>
+            <span style="margin:5px 0 0 10px;color:#999;font-size:11px"> * 다운로드는 서버에 부하를 줄 수 있으니 사용자가 적은 시간에 이용해 주세요.</span>
+            <br />
+            <div id="list_download_excel"></div>
+        </div>
+
+    </div>
+    <div id="footer"></div>
+</div>
+    
+    <script>
+        var param_mode = $.getUrlVar('mode');
+        var idxtmp = param_mode.indexOf('#');
+        if(idxtmp!==-1){
+            param_mode = param_mode.substring(0,idxtmp);
+        }
+        
+        
+        function writePointListBody(jsondata){
+            var listItems = [];
+            
+            if(jsondata.length===0){
+                listItems.push('<p style="text-align:center;">데이터가 없습니다.<p>');
+            } else {
+                listItems.push('<table class="point-table"><tr><th>날짜</th><th>포인트자산</th><th>상대주문서</th><th>테이커</th></tr>');
+            
+                var total_amount = 0;
+                $.each(jsondata, function (key, val) {
+                    listItems.push('<tr>');
+                    listItems.push('<td style="width:140px" >' + val.poRegDt + '</td>');
+                    listItems.push('<td style="min-width:100px">' + val.poPoint + '</td>');
+                    listItems.push('<td style="min-width:60px"><u><a href="/?mode='+param_mode+'&sf=od_id&sv='+val.poRelId+'" target="_blank">' + val.poRelId + '</a></u></td>');
+
+                    var isTracker = (val.isTracker=='Y')?'✔':'';
+                    listItems.push('<td style="width:60px">' + isTracker + '</td>');
+                    listItems.push('</tr>');
+
+                    total_amount += Number(val.poPoint);
+                });
+                listItems.push('<tr style="background:#f1f1f1">');
+                    listItems.push('<td >합산</td>');
+                    listItems.push('<td style="font-weight:bold">' + total_amount.toString().formatBitcoin() + '</td>');
+                    listItems.push('<td style="width:60px" colspan="2"></td>');
+                listItems.push('</tr>');
+                
+                listItems.push('</table>');
+            }
+            return listItems.join('');
+        }
+    
+           
+        function getViewInsertPoint(odid){
+            
+            var domobj = $('#point_view'+odid);
+            domobj.toggle();
+            $('#btn-area'+odid).toggle();
+            $.getJSON('/?mode='+param_mode+'/getViewInsertPoint&odid='+odid, 'json', function (data) {
+                console.log(data);
+                    if(Array.isArray(data.pointcoin)) $('#point_coin'+odid).html(writePointListBody(data.pointcoin));
+                    if(Array.isArray(data.pointcurrency)) $('#point_currency'+odid).html(writePointListBody(data.pointcurrency));
+                })
+                .fail(function() {
+                    domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+                })
+                .always(function() {});
+        }
+        
+        var current_page =1;
+        function getViewInsertMorePoint(odid){
+            
+            var domobj = $('#point_view'+odid);
+            domobj.show();
+            $.getJSON('/?mode='+param_mode+'/getViewInsertMorePoint&odid='+odid+'&page='+current_page, 'json', function (data) {
+                backdata = data;
+                console.log('backdata', backdata);
+                })
+                .done(function() {
+                    current_page++;
+                    $('#point_coin'+odid).append($('<div />', {
+                        'class' : 'tlists_more',
+                        'html': writePointListBody(backdata.pointcoin)
+                    }));
+                    $('#point_currency'+odid).append($('<div />', {
+                        'class' : 'tlists_more',
+                        'html': writePointListBody(backdata.pointcurrency)
+                    }));
+                })
+                .fail(function() {
+                    domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+                })
+                .always(function() {});
+        }
+    </script>
+</body>

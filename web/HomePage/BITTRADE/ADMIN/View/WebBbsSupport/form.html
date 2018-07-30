@@ -1,0 +1,115 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="/Plugin/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="$link{script}/view-form-bbs.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="bbsNo" value="" />
+        
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="imageUrl" value="" />
+        <input type="hidden" name="hit" value="" />
+        <input type="hidden" name="cmtCnt" value="" />
+        <input type="hidden" name="etc1" value="" />
+        <input type="hidden" name="etc2" value="" />
+        <input type="hidden" name="etc3" value="" />
+        <input type="hidden" name="etc4" value="" />
+        <input type="hidden" name="etc5" value="" />
+        
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>카테고리번호</th><td><input type="text" name="cateNo" value="" required style="width:100px;" /></td>
+                    </tr>
+                    <tr>
+                    <tr id="enSubject">
+                        <th id="enSubject_header">제목</th>
+                        <td><input type="text" name="subject" required /></td>
+                    </tr>
+                    <tr id="krSubject">
+                        <th>[한국어]제목</th>
+                        <td><input type="text" name="subjectKr" /></td>
+                    </tr>
+                    <tr id="jpSubject">
+                        <th>[일본어]제목</th>
+                        <td><input type="text" name="subjectJp" /></td>
+                    </tr>
+                    <tr id="cnSubject">
+                        <th>[중국어]제목</th>
+                        <td><input type="text" name="subjectCn" /></td>
+                    </tr>
+                    <tr id="enContent">
+                        <th id="enContent_header">내용</th>
+                        <td style="padding:10px 0 5px 10px;text-align:center;">
+                            <textarea id="textarea-content" name="content" required  rows="10" cols="100" style="margin:auto;width:750px; height:250px; display:none;"></textarea>
+                        </td>
+                    </tr>
+                    <tr id="krContent">
+                        <th>[한국어]내용</th>
+                        <td style="padding:10px 0 5px 10px;text-align:center;">
+                            <textarea id="textarea-contentKr" name="contentKr" rows="10" cols="100" style="margin:auto;width:750px; height:250px; display:none;"></textarea>
+                        </td>
+                    </tr>
+                    <tr id="jpContent">
+                        <th>[일본어]내용</th>
+                        <td style="padding:10px 0 5px 10px;text-align:center;">
+                            <textarea id="textarea-contentJp" name="contentJp" rows="10" cols="100" style="margin:auto;width:750px; height:250px; display:none;"></textarea>
+                        </td>
+                    </tr>
+                    <tr id="cnContent">
+                        <th>[중국어]내용</th>
+                        <td style="padding:10px 0 5px 10px;text-align:center;">
+                            <textarea id="textarea-contentCn" name="contentCn" rows="10" cols="100" style="margin:auto;width:750px; height:250px; display:none;"></textarea>
+                        </td>
+                    </tr>
+
+								
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script type="text/javascript">
+    setEditor('textarea-content');
+    setEditor('textarea-contentKr');
+    setEditor('textarea-contentJp');
+    setEditor('textarea-contentCn');
+
+
+    $(document).ready(function(){
+        
+
+        
+    });
+
+    
+</script>
+</body>

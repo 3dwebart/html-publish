@@ -1,0 +1,14 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "depositinfo":{
+        "sql":"SELECT cf_bank_name, cf_bank_account, cf_bank_owner FROM web_config_bankaccount WHERE cf_use_yn='Y' AND cf_country_code='kr' ORDER BY cf_no DESC LIMIT 1",
+        "authlevel":0,
+        "mapkeys":{
+        }
+    }
+  }
+}

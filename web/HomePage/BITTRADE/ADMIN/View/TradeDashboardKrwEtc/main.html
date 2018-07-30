@@ -1,0 +1,186 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+
+td.buycost{
+    color:#FF0000 !important;
+}
+td.sellcost{
+    color:#0084ff !important;
+}
+input.btn-default{
+    font-size: 11px !important;
+}
+</style>
+<script type="text/javascript">
+function writeListSellHead(){
+    var headItems = [];
+    headItems.push('<thead><th>판매</th>');
+    headItems.push('<th>1ETC가격</th>');
+    headItems.push('<th align=center>잔여수량[ETC]</th>');
+    headItems.push('<th align=center style="width:-30px";>주문서</th>');
+    headItems.push('</tr></thead>');
+    return headItems.join('');
+}
+function writeListSellBody(jsondata){
+//    console.log('sell', jsondata);
+    var listItems = [];
+    var i = 0;
+
+    $.each(jsondata, function (key, val) {
+        
+        listItems.push('<td style=color:blue align=center class="' + val.odAction + 'cost">' + val.odAction + '</td>');
+        listItems.push('<th class="">' + (val.odMarketPrice+'').formatBitcoin() + '</th>');
+        listItems.push('<td align=center>' + (val.odTempCoin - val.odReceiptCoin).toFixed(8) + '</td>');
+        listItems.push('<td align=center style="width:30px"><input type="button" value="보기" class="center btn-default" onclick="costOrderLists(\''+val.odMarketPrice+'\')" />');
+        listItems.push('</tr>');
+        i++;
+
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="4" align="center">데이터가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+function writeListBuyHead(){
+    var headItems = [];
+    headItems.push('<thead><th>구매</th>');
+    headItems.push('<th>1ETC가격</th>');
+    headItems.push('<th align=center>잔여수량[ETC]</th>');
+    headItems.push('<th align=center style="width:-30px";>주문서</th>');
+    headItems.push('</tr></thead>');
+    return headItems.join('');
+}
+
+function writeListBuyBody(jsondata){
+//    console.log('buy', jsondata);
+    var listItems = [];
+    var i = 0;
+
+    $.each(jsondata, function (key, val) {
+        
+        listItems.push('<td style=color:blue align=center class="' + val.odAction + 'cost">' + val.odAction + '</td>');
+        listItems.push('<th class="">' + (val.odMarketPrice+'').formatBitcoin() + '</th>');
+        listItems.push('<td align=center>' + (val.odTempCoin - val.odReceiptCoin).toFixed(8) + '</td>');
+        listItems.push('<td align=center style="width:30px"><input type="button" value="보기" class="center btn-default" onclick="costOrderLists(\''+val.odMarketPrice+'\')" />');
+        listItems.push('</tr>');
+        i++;
+        
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="4" align="center">데이터가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+
+function writeCostOrderListHead(){
+    var headItems = [];
+    headItems.push('<thead>');
+    headItems.push('<th align="center">구분</th>');
+    headItems.push('<th>주문가</th>');
+    headItems.push('<th>주문총액(KRW)</th>');
+    headItems.push('<th>회원번호</th>');
+    headItems.push('<th>주문</th>');
+    headItems.push('<th>잔여</th>');
+    headItems.push('</tr></thead>');
+    return headItems.join('');
+}
+
+function writeCostOrderListBody(jsondata){
+
+    var listItems = [];
+    var i = 0;
+    
+    $.each(jsondata, function (key, val) {
+        var actionclsadd = val.odAction+'cost';
+        var statusmsg = val.odPayStatus;
+        var fMarketPrice = Math.floor(val.odMarketPrice);
+        if(val.odPayStatus=='REQ'){
+            statusmsg = '대기';
+        }else if(val.odPayStatus=='PART'){
+            statusmsg = '부분체결';
+        }
+            var c = i%2;
+            listItems.push('<td style="width:30px"align="center" class="'+actionclsadd+'" onclick=\"viewLink(\''+ val.odId +'\')\">' + statusmsg + '</td></td>');
+            listItems.push('<td style="width:55px" align="center">' + fMarketPrice + '</th>');
+            listItems.push('<td style="width:65px"  align="center">' + (val.odTotalCost+'').formatBitcoin() + '</td>');
+            listItems.push('<td style="width:70px" align=center ><u><a href="/?mode=WebMemberBalance&sf=mb_no&sv=' + val.mbNo + '">' + val.mbNo + '</a></u></td>');
+            listItems.push('<td style="width:70px" align=center>' + val.odTempCoin + '</td>');
+            listItems.push('<td style="width:70px" align=center>' +  (val.odTempCoin - val.odReceiptCoin).toFixed(8) + '</td>');
+            listItems.push('</tr>');
+            i++;
+    });
+  
+    return listItems.join('');
+}
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <table >
+            <thead>
+                <tr>
+                    <th width="50%">시장현황(BUY / SELL)</th>
+                    <th width="50%">주문서 상세내역</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:0 10px;" valign="top"><div class="lists-market"></div></td>
+                    <td style="padding:0 10px;" valign="top"><div class="lists-cost"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+var bean = $.parseJSON($.base64.decode(jsonObject));
+
+//console.log(bean);
+
+$(document).ready(function(){
+
+    $('.lists-market').html($('<table />', {
+        'class' : 'tlists_basic',
+        'html':  writeListSellHead() + writeListSellBody(bean.selldata) + writeListBuyHead + writeListBuyBody(bean.buydata)
+    }));
+});
+var backdata;
+
+function costOrderLists(cost){
+//    $('#pagination').viewLoading('pageloading');
+    $.getJSON('/?mode=TradeDashboardKrwEtc/marketList&cost='+cost, 'json', function (data) {
+        backdata = data;
+//        console.log('bb', backdata);
+    })
+    .done(function() {
+        $('.lists-cost').html($('<table />', {
+            'class' : 'tlists_basic',
+            'html':  writeCostOrderListHead() + writeCostOrderListBody(backdata)
+        }));
+//        $('#pageloading').hide();
+
+    })
+    .fail(function() {
+//        $('#pageloading').hide();
+        $('body').viewDialogMessage('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+    })
+    
+}
+</script>
+</body>

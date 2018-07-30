@@ -1,0 +1,58 @@
+{
+  "Database":{
+    "name":"fns_trade_point"
+  },
+  "Controller":
+  {
+    "withdrawallistsenv":{
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM web_wallet_withdrawals WHERE mb_no=? AND po_type=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3}
+        }
+    },
+    "withdrawallists":{
+        "sql":"SELECT od_id,od_status,od_status_msg,mb_no,is_user_confirm_yn,od_temp_amount,od_temp_currency_total,od_receipt_amount,od_addr,od_addr_msg,od_sendto,od_fee,od_txid,po_type,po_pay_yn as com_yn,od_reg_dt FROM web_wallet_withdrawals WHERE mb_no=? AND po_type=? ORDER BY od_id DESC limit ?,?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3}
+        },
+        "rowlimit":10
+    },
+    "depositlistsenv":{
+        "description":"입금내역 페이징값",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM web_wallet_deposits WHERE mb_no=? AND od_category='receive' AND od_status='OK' AND po_type=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3}
+        }
+    },
+    "depositlists":{
+        "description":"입금내역 리스트 - 10ea",
+        "sql":"SELECT od_id,od_status,od_category,od_amount,od_txid,od_fee,od_from_addr,od_to_addr,od_confirm,po_type,po_pay_yn as com_yn,od_reg_dt FROM web_wallet_deposits WHERE mb_no=? AND od_category='receive' AND od_status='OK' AND po_type=? ORDER BY od_id DESC limit ?,?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3}
+        },
+        "rowlimit":10
+    },
+    "depositwaitlistsenv":{
+        "description":"입금대기내역 페이징값",
+        "sql":"SELECT COUNT(od_id) AS totalcount, CONCAT('10') AS rowlimit FROM web_wallet_deposits WHERE mb_no=? AND od_category='receive' AND od_status='WAIT' AND po_type=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3}
+        }
+    },
+    "depositwaitlists":{
+        "description":"입금대기내역 리스트 - 20ea",
+        "sql":"SELECT od_id,od_status,od_category,od_amount,od_txid,od_fee,od_from_addr,od_to_addr,od_confirm,po_type,po_pay_yn as com_yn,od_reg_dt FROM web_wallet_deposits WHERE mb_no=? AND od_category='receive' AND od_status='WAIT' AND po_type=? ORDER BY od_id DESC limit ?,?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "po_type":{"required":true,"maxlength":3}
+        },
+        "rowlimit":10
+    }
+    
+  }
+}

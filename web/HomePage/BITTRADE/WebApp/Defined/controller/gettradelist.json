@@ -1,0 +1,21 @@
+{
+  "Database":{
+    "name":"fns_trade_point"
+  },
+  "Controller":
+  {
+
+    "select":{
+        "description":"최근 거래 내역 exchange page에서 사용",
+        "sql":"SELECT po_reg_dt,po_point,od_total_cost FROM web_point_krw WHERE mb_no=? AND od_id=? AND po_rel_action=?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"},
+            "odid":{"required":true},
+            "action":{"required":true}
+        },
+        "authlevel":0
+    }
+  }
+
+}

@@ -1,0 +1,15 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "check":{
+        "sql":"SELECT * FROM web_member WHERE mb_no=?",
+        "mapkeys":{
+            "mb_no":{"default":"SS_MB_NO"}
+        },
+        "datamodel":"CheckOtp"
+    }
+  }
+}

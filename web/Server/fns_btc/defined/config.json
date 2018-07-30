@@ -1,0 +1,116 @@
+{
+    "cmd":{
+        "debug":true
+    },
+    "redis":{
+        "host":"localhost",
+        "port":6379,
+        "db_ticker":0,
+        "db_channel":5,
+        "db_member":10,
+		"db_member_noti":11,
+        "db_trade_email":13
+    },
+    "redis_member":{
+        "host":"localhost",
+        "port":6379,
+        "db_ticker":0,
+        "db_channel":5,
+        "db_member":10,
+		"db_member_noti":11,
+        "db_trade_email":13
+    },
+    "mysqldb":
+    {
+        "port":"3306",
+        "host":"localhost",
+        "slave_host":"localhost",
+	    "user":"rhaon_web",
+        "password":"q24gijtop90uq2345tjyj9045y90jmw5",
+        "database":"fns_trade_order_btc"
+    },
+    "mysqldb_point":
+    {
+        "port":"3306",
+	    "host":"localhost",
+        "slave_host":"localhost",
+	    "user":"rhaon_web",
+        "password":"q24gijtop90uq2345tjyj9045y90jmw5",
+        "database":"fns_trade_point"
+    },
+    "mysqldb_web":
+    {
+        "port":"3306",
+	    "host":"localhost",
+        "slave_host":"localhost",
+        "user":"rhaon_web",
+        "password":"q24gijtop90uq2345tjyj9045y90jmw5",
+        "database":"fns_web"
+    },
+    "server":{
+        "list":[
+            {"script":"fns_btc/TickerServer","name":"BTC Ticker","pid":"","logfile":"","uptime":""},
+            {"script":"fns_btc/TradeSignServer","name":"BTC Sign","pid":"","logfile":"","uptime":""},
+            {"script":"fns_btc/SyncTradePoint","name":"BTC Point Sync","pid":"","logfile":"","uptime":""},
+			{"script":"fns_btc/SyncLockTradePoint","name":"BTC Lock Point Sync","pid":"","logfile":"","uptime":""}
+        ],
+        "port":17071
+    },
+    "syncpoint":
+    {
+        "port":30071
+    },
+    "timer":
+    {
+        "outerticker":60000,
+        "exchange_delay":5000
+    },
+    "cachetime":
+    {
+        "outerticker":6000000
+    },
+    "ticker":
+    {
+        "port":3071
+    },
+    "trade":
+    {
+        "tr_port":7071,
+        "tr_channel_id":"krw_btc",
+        "tr_channel_name":"KRW_BTC",
+        "tr_tracker_fee":0.0,
+        "tr_marketmaker_fee":0.0,
+	    "config":{
+            "proto":"http",
+            "volumefeeurl":"www.devpopcon.com/getconfigtrade/volumefee/market-KRW_BTC",
+            "basicfeeurl":"www.devpopcon.com/getconfigtrade/basicfee/market-KRW_BTC"
+        }
+    },
+    "email":
+    {
+        "templet":{
+            "proto":"http",
+            "hosturl":"www.devpopcon.com/api/templetemail"
+        },
+        "setting":{
+            "ignoreTLS":false,
+            "host": "smtp.worksmobile.com",
+            "port": 465,
+            "secure": true,
+            "auth": {
+                "user": "customer@devpopcon.com",
+                "pass": "customer1!@#$"
+            },
+            "maxConnections": 5,
+            "maxMessages": 10,
+            "rateLimit": 5
+        },
+        "from":"GoldenFutures<customer@devpopcon.com>",
+        "send":false
+    },
+    "licence":
+    {
+        "key":"10f9dcf3ce2f69e647d30fdbe0c9ff0b"
+    },
+    "domain":["devpopcon.com"]
+}

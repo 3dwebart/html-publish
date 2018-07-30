@@ -1,0 +1,88 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="cfNo" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>국가코드</th>
+                        <td><select name="cfCountryCode">
+                                <option value="kr">KR</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th>지갑구분</th>
+                        <td><select name="cfWalletType" required onchange="cfWalletTypeSelected()">
+                                <option value="CASH">원화</option>
+                                <option value="BTC">비트코인</option>
+                                <option value="BCH">비트코인캐시</option>
+                                <option value="LTC">라이트코인</option>
+                                <option value="ETH">이더리움</option>
+                                <option value="ETC">이더리움클레식</option>
+                            </select></td>
+                    </tr><tr>
+                        <th>회원레벨</th>
+                        <td><input type="text" name="cfMbLevel" value="" required style="width:50px;" /></td>
+                    </tr><tr>
+                        <th>최대입금한도</th>
+                        <td><input type="text" name="cfMaxDeposit" value="" required style="width:100px;" /><span id="cfMaxDepositDesc"></span>
+                        무제한 : -1 입력
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>최대출금한도</th>
+                        <td><input type="text" name="cfMaxWithdraw" value="" required style="width:100px;" /></td>
+                    </tr>
+                    <tr>
+                        <th>최소출금한도</th>
+                        <td><input type="text" name="cfMinWithdraw" value="0.01000000" required style="width:100px;" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>기준일</th>
+                        <td><input type="text" name="cfMaxDay" value="1" required style="width:50px;"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    function cfWalletTypeSelected(){
+        //var value = $('select[name="cfWalletType"] option:selected').val();
+        $('input[name=cfMaxDeposit]').attr("type",'text');
+        $('#cfMaxDepositDesc').html('');
+    }
+</script>
+</body>

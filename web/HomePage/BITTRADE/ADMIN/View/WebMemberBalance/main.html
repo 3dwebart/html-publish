@@ -1,0 +1,234 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+.console{
+    overflow:auto;
+    word-break: break-all;
+    background: #000;
+    color:#f5f5f5 !important;
+    font-size: 12px!important;
+    padding:10px;
+}
+.rpctra{
+    font-size:12px !important;
+    overflow: hidden;
+    width:100px;        white-space: nowrap;
+    text-overflow: ellipsis;
+}
+th.total{
+    color:#666 !important;
+}
+th.total span.amount{
+    color:#999 !important;
+    padding:0px 0px 0px 10px;
+}
+
+span.unit{
+    color:#ccc !important;
+}
+</style>
+<script type="text/javascript">
+var listHeader = '[]';
+function writeListHead(jsondata){
+    headItems = [];
+    headItems.push('<thead><tr>');
+		headItems.push('<th style="width:70px;">회원번호</th>');
+		headItems.push('<th style="width:120px;">아이디</th>');
+		headItems.push('<th style="width:190px;">누적거래량(KRW)</th>');
+		headItems.push('<th style="width:190px;">볼륨2</th>');
+        headItems.push('<th style="width:220px;">볼륨3</th>');
+//		headItems.push('<th style="width:210px;">누적 입/출금</th>');
+        headItems.push('<th style="width:210px;">재합산</th>');
+        headItems.push('<th style="width:210px;">재합산(복구용)</th>');
+		headItems.push('</tr></thead>');
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+        
+        var tmp = '준비중';
+
+        listItems.push('<tr class="" style="cursor:auto" >');
+        listItems.push('<td colspan="2"><b><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">[' + val.mbNo + '] ' + val.mbId + '</a></u><b></td>');
+        listItems.push('<th class="num medium">' + (val.volume.taVolume+'').formatNumber() + '<span class="unit"></span></th>');
+        listItems.push('<th class="num medium">' + tmp + '<span class="unit"></span></th>');
+        listItems.push('<th class="num medium">' + tmp + '<span class="unit"></span></th>');
+        listItems.push('<th class="num"><input onclick=\"getbalanceSum(\''+val.mbNo+'\')\" type="button" style="font-size:11px;" value="포인트SUM" class="btn-default"  /></th>');
+        listItems.push('<th class="num"><input onclick=\"getbalanceSumRecovery(\''+val.mbNo+'\')\" type="button" style="font-size:11px;" value="포인트SUM(복구용)" class="btn-default"  /></th>');
+        listItems.push('</tr>');
+
+        
+        listItems.push('<tr><td colspan="7">');
+        //서브리스트
+        if(val.balance){
+
+            listItems.push('<table style="width:100%;border:1px solid #e1e1e1">');
+            listItems.push('<tr style="background:#f5f5f5"><td>자산구분</td><td>총자산</td><td>사용가능</td><td>트레이딩중</td><td>출금중</td><td>랜딩중</td></tr>');
+            for(var k=0;k<val.balance.length;k++){
+                var dto = val.balance[k];
+                var poss = Number(dto.poTotal) - (Number(dto.poOnTrade) + Number(dto.poOnEtc) + Number(dto.poOnLend));
+                poss = poss.toFixed(8);
+                listItems.push('<tr><td>'+(dto.poType).toUpperCase()+'</td><td>'+dto.poTotal+'</td><td>'+poss+'</td><td>'+dto.poOnTrade+'</td><td>'+dto.poOnEtc+'</td><td>'+dto.poOnLend+'</td></tr>');
+            }
+            if(k==0) listItems.push('<tr><td colspan="6" align="center">자산 내역이 없습니다.</td></tr>');
+            listItems.push('</table>');
+        }
+        listItems.push('</td></tr>');
+        
+//        listItems.push('<th colspan="2" class="total">누적 입금 : <span style="cursor:pointer;" onClick="linkedUrl(\'WebPointDepositOrder\',\''+val.mbId+'\')"><u><span class="amount">' + val.mbDepositKrw + '</span><span class="unit">KRW</span></u></span>');
+//        listItems.push('<span style="cursor:pointer;" onClick="linkedUrl(\'Transactions\',\''+val.mbId+'\')"><u><span class="amount">' + val.mbDepositBtc + '</span><span class="unit">BTC</span></u></span></th>');
+//        
+//        listItems.push('<th colspan="2" class="total">누적 출금 : <span style="cursor:pointer;" onClick="linkedUrl(\'WebPointRequestOrder\',\''+val.mbId+'\')"><u><span class="amount">' + val.mbWithdrawKrw + '</span><span class="unit">KRW</span></u></span>');
+//        listItems.push('<span style="cursor:pointer;" onClick="linkedUrl(\'WebPointRequestOrder\',\''+val.mbId+'\')"><u><span class="amount">' + val.mbWithdrawBtc + '</span><span class="unit">BTC</span></u></span></th>');
+//        listItems.push('<td style="word-break: break-all;" class="num">' + (val.mbBitWallet?val.mbBitWallet:'') + '</td>');
+//        listItems.push('<th><input type="button" value="지갑콘솔" style="width:73px;height:28px;" class="btn-default rpctra" onclick=\"getbalance(\''+ val.mbId +'\',\'#tran'+val.mbNo+'\')\"><input type="button" value="SUM" style="width:60px;height:28px;" class="btn-default rpctra" onclick=\"getbalanceSum(\''+ val.mbNo +'\')\"></th>');
+//        listItems.push('</tr>');
+//        listItems.push('<tr style="display:none;"><td colspan="6" id="tran'+val.mbNo+'" class="console" style="display:none;"></tr>');
+        i++;
+    });
+    if(i==0){
+        listItems.push('<tr><td colspan="6" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="list_search">
+        <form name="search" method="get" action="/">
+            <input type="hidden" name="mode" value="WebMemberBalance" />
+            <span class="custom-dropdown custom-dropdown--white">
+
+                <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+                    <option value="mb_no">회원번호</option>
+                    <option value="mb_id">아이디</option>
+                    <option value="mb_name">성명</option>
+                    <!--<option value="mb_bit_wallet">BTC계좌</option>-->
+                    <option value="mb_level">레벨</option>
+                    <option value="mb_gender">성별(M,W)</option>
+                    <option value="contry_code">국가코드</option>
+                    <option value="mb_reg_ip">아이피</option>
+                </select>
+            </span>
+            <input type="text" name="sv" />
+            <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+        </form>
+        </div>
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+        <div style="clear:both;margin:70px 0 0 0;background:#f5f5f5;padding:10px 20px;line-height:40px">
+            <img src="/Web/img/icon_excel.png" width="30" align="absmiddle">
+            <span style="padding:7px 0 0 5px;"><b>엑셀다운로드</b>(페이지 당
+                <select onchange="weiteExcelDownlod(this.value);">
+                    <option value="100" selected="selected">선택없음</option>
+                    <option value="100">100개</option>
+                    <option value="200">200개</option>
+                    <option value="300">300개</option>
+                    
+                    
+                </select>
+                개)</span>
+            <span style="margin:5px 0 0 10px;color:#999;font-size:11px"> * 다운로드는 서버에 부하를 줄 수 있으니 사용자가 적은 시간에 이용해 주세요.</span>
+            <br />
+            <div id="list_download_excel"></div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+function linkedUrl(mode, value){
+    var url = '';
+    if(mode=='WebPointDepositOrder'){
+        url = '/?mode='+mode+'&sf=mb_id&sv='+value;
+    }else if(mode=='Transactions'){
+        url = '/?mode='+mode+'&sf=account&sv='+value;
+    }else if(mode=='WebPointRequestOrder'){
+        url = '/?mode='+mode+'&sf=mb_id&sv='+value;
+    }
+    document.location.href=url;
+}
+
+function getbalance(user,domobjid){
+    var domobj = $(domobjid);
+    domobj.html('loading..');
+    domobj.show();
+    domobj.parent().show();
+    $.getJSON('/?mode=BitcoinWallet/bitgetinfo&func=getbalance&param='+user, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( 'bitcoin# getbalance '+JSON.stringify(backdata, null, '<br />') );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+function getbalanceSum(mb_no){
+
+    $.getJSON('/?mode=WebMemberBalance/balanceSum&param='+mb_no, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function(backdata) {
+            document.location.reload();
+        })
+        .fail(function() {
+//            alert('서버와 연결중 에러가 발생하였습니다. 잠시 뒤 다시 시도해 보세요.');
+        })
+        .always(function() {});
+}
+
+function getbalanceSumRecovery(mb_no){
+
+    $.getJSON('/?mode=WebMemberBalance/balanceSumRecovery&param='+mb_no, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function(backdata) {
+            document.location.reload();
+        })
+        .fail(function() {
+//            alert('서버와 연결중 에러가 발생하였습니다. 잠시 뒤 다시 시도해 보세요.');
+        })
+        .always(function() {});
+}
+
+
+</script>
+</body>

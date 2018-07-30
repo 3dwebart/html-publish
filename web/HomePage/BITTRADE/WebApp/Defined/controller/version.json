@@ -1,0 +1,16 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "version":{
+        "sql":"SELECT check_version,check_address,live_address FROM web_app_version WHERE phone_type=?",
+        "mapkeys":{
+            "phone_type":{"default": 1}
+            
+        },
+        "datamodel":"GetVersion"
+    }
+  }
+}

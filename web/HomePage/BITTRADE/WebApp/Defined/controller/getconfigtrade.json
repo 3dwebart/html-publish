@@ -1,0 +1,32 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "volumefee":{
+        "sql":"SELECT cf_max_day,cf_max_volume,cf_tr_tracker_fee,cf_tr_marketmaker_fee FROM web_config_trade_fee_by_volume WHERE cf_market_type=? ORDER BY cf_max_day ASC, cf_max_volume DESC limit 30",
+        "mapkeys":{
+            "market":{"required": true,"maxlength": 30}
+        },
+        "authlevel":0
+    },
+    "basicfee":{
+        "sql":"SELECT cf_tr_tracker_fee,cf_tr_marketmaker_fee FROM web_config_trade_fee WHERE cf_market_type=? ORDER BY cf_no DESC LIMIT 1",
+        "mapkeys":{
+            "market":{"required": true,"maxlength": 30}
+        },
+        "authlevel":0
+    },
+    "listsearch":{
+		"disabled":true,
+        "sql":"SELECT cf_no,cf_market_type,cf_max_volume,cf_tr_tracker_fee,cf_tr_marketmaker_fee,cf_max_day,cf_reg_dt FROM web_config_trade_fee_by_volume WHERE cf_no=? ORDER BY cf_no DESC limit ?,?",
+        "rowlimit":15,
+	"mapkeys":{
+            "query":{"required": true,"alphanumber": true,"maxlength": 30}
+        },
+        "authlevel":0
+    }
+    
+  }
+}

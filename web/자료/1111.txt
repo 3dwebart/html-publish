@@ -1,0 +1,7 @@
+shopping mall project
+
+now connecting
+user connect = real time adm message = 30sec after close = databases => close message
+
+after connect
+all message time asc sort : top -> bottom

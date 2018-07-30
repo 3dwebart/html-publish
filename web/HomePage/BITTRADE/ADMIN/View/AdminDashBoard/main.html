@@ -1,0 +1,133 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<link rel="stylesheet" href="$link{css_root}/simplegrid.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+
+<script type="text/javascript" src="$link{js}/highcharts.js"></script>
+<script type="text/javascript" src="$link{js}/exporting.js"></script>
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    
+    
+
+    <div id="content-main">
+
+            <!--h4 class="alert_info">회원 총 1000명, 차단 2명, 탈퇴 3명</h4-->
+
+
+            <div class="clear"></div>
+
+            <div id="container" style="min-width: 200px; height: 350px; margin: 20px auto"></div>
+            
+    </div>
+
+</div>
+<script type="text/javascript">
+var bean = $.parseJSON($.base64.decode(jsonObject));
+$(function () {
+        var daycnt = [];
+        var k=0;
+        var startday;
+        var startmonth;
+        var startyear;
+        var itemcate = [];
+        var itemdata1 = [];
+        $.each(bean.data, function (key, val) {
+
+//            startyear = parseInt(val.date.substring(0,4));
+//            startmonth = parseInt(val.date.substring(4,6));
+//            startday = parseInt(val.date.substring(6,8)); 
+//              daycnt.push('[Date.UTC('+startyear+','+startmonth+','+startday+'),'+val.cnt+']');
+            itemcate.push( val.date );
+            itemdata1.push(val.cnt);
+            
+           //console.log(val.cnt);
+        });
+        
+        var stritemcate = '['+itemcate.join(',')+']';
+        var stritemdata1 = '['+itemdata1.join(',')+']';
+
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: '최근3개월 가입자'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: eval(stritemcate)
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}명',
+                    style: {
+                        color: '#89A54E'
+                    }
+                },
+                title: {
+                    text: '가입자',
+                    style: {
+                        color: '#89A54E'
+                    }
+                }
+            }, { // Secondary yAxis
+                title: {
+                    text: '가입자',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                labels: {
+                    format: '{value} 명',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 1000,
+                floating: true,
+                backgroundColor: '#FFFFFF'
+            },
+            series: [{
+                name: '가입자',
+                color: '#4572A7',
+                type: 'column',
+                yAxis: 1,
+                data: eval(stritemdata1),
+                tooltip: {
+                    valueSuffix: ' 명'
+                }
+            }]
+        });
+    });
+    
+
+</script>
+</body>

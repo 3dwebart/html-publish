@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CONFIGURE>
+  <COMMON>
+    <DB_INFO>
+      <!-- 고객사 DB 정보 -->
+      <TYPE>2</TYPE>
+      <!-- 1:MSSQL, 2:MySQL, 3:ORACLE 4:TIBERO 5:POSTGRE-->
+      <HOST>sms디비주소</HOST>
+      <ORACLE_RAC_FLAG>N</ORACLE_RAC_FLAG>
+      <!-- ORACLE RAC 구성여부   -->
+      <HOST_RAC />
+      <!-- ORACLE RAC DB2 IP주소 -->
+      <ORACLE_RAC_LB_FLAG>N</ORACLE_RAC_LB_FLAG>
+      <!-- ORACLE RAC 구성시 LOAD BALANCE(분산처리) 여부 -->
+      <PORT>3306</PORT>
+      <USER>디비계정</USER>
+      <PASSWORD>디비비밀번호</PASSWORD>
+      <DBNAME>fns_sms_surem</DBNAME>
+      <DATA_TABLE>SMSData</DATA_TABLE>
+      <!-- 발송 대기 데이터가 입력 될 테이블 -->
+      <DB_SELECT_COUNT>100</DB_SELECT_COUNT>
+      <!-- DB SELECT QUEUE에 담을크기 100~500 설정가능 -->
+    </DB_INFO>
+    <SOCKET_INFO>
+      <!-- 슈어엠 서버 정보 -->
+      <SMSDST_IP>messenger.surem.com</SMSDST_IP>
+      <SMSDST_PORT>8080</SMSDST_PORT>
+      <SMSDST_SUB_IP>messenger3.surem.com</SMSDST_SUB_IP>
+      <SMSDST_SUB_PORT>8080</SMSDST_SUB_PORT>
+      <MMSDST_IP>mms.surem.com</MMSDST_IP>
+      <MMSDST_PORT>7744</MMSDST_PORT>
+      <MMSDST_SUB_IP>mms2.surem.com</MMSDST_SUB_IP>
+      <MMSDST_SUB_PORT>7744</MMSDST_SUB_PORT>
+      <INTLDST_IP>messenger3.surem.com</INTLDST_IP>
+      <INTLDST_PORT>8080</INTLDST_PORT>
+      <IMMSDST_IP>mms.surem.com</IMMSDST_IP>
+      <IMMSDST_PORT>7744</IMMSDST_PORT>
+      <RESULT_IP>messenger2.surem.com</RESULT_IP>
+      <RESULT_PORT>8080</RESULT_PORT>
+      <RESULT_INTL_PORT>8083</RESULT_INTL_PORT>
+    </SOCKET_INFO>
+    <COMPANY_INFO>
+      <!-- 고객사 기본 정보 -->
+      <DEPTCODE>EV----------</DEPTCODE>
+      <!-- 회사코드(슈어엠에서 발급) -->
+    </COMPANY_INFO>
+    <ACTIVE_EXE>
+      <!-- 전송 서비스 선택 -->
+      <EXE>123</EXE>
+      <!-- 1:SMS, 2:MMS, 3:INTL 4:IMMS  (SMS,INTL모듈을 사용할 경우 입력 값:13) -->
+      <SENDER_SLEEP_TIME>10</SENDER_SLEEP_TIME>
+      <!-- DB에서 SELECT 된 갯수가 0일시 sleep time 1초<=SENDER-SLEEP_TIME<=60초 -->
+      <ALIMTALK>false</ALIMTALK>
+      <!-- 알림톡 전송 FLAG -->
+    </ACTIVE_EXE>
+    <ENCODE_INFO>
+      <ENCODE_FLAG>N</ENCODE_FLAG>
+      <ENCODE_TYPE>1</ENCODE_TYPE>
+      <!-- 1:RSA -->
+      <ENCODE_COLUMN>12</ENCODE_COLUMN>
+      <!-- 1:메시지, 2:수신번호 (둘다 사용할 경우)-->
+      <DECODE_KEY />
+    </ENCODE_INFO>
+  </COMMON>
+  <SMS_INFO>
+    <!-- 국내 SMS 서비스 정보 -->
+    <PORT>4841</PORT>
+    <!-- 중복 실행 방지하기 위한 로컬 포트 점유 (사용하지 않는 포트로 입력할 것) -->
+    <LOG_TABLE>SUREData_Log</LOG_TABLE>
+    <!-- 최종 결과가 확정된 레코드가 이동될 로그 테이블 -->
+    <LOG_FLAG>Y</LOG_FLAG>
+    <!-- SYSTEM LOG 이외에 전송 상황에 대한 로깅 여부를 결정 (Y or N) -->
+    <LOG_DIR>log/sms/</LOG_DIR>
+    <!-- 일별 Log 생성 위치 -->
+    <PRINT_FLAG>Y</PRINT_FLAG>
+    <!-- Command 창에 현재 전송 상황에 대한 프린팅 여부를 결정 (Y or N) -->
+  </SMS_INFO>
+  <MMS_INFO>
+    <!-- 국내 MMS 서비스 정보 -->
+    <PORT>4842</PORT>
+    <CONTENTS_TABLE>MMSContents</CONTENTS_TABLE>
+    <!-- MMS 전송 시 이미지 파일의 경로를 입력하는 테이블 -->
+    <LOG_TABLE>SUREData_Log</LOG_TABLE>
+    <LOG_FLAG>Y</LOG_FLAG>
+    <LOG_DIR>log/mms/</LOG_DIR>
+    <PRINT_FLAG>Y</PRINT_FLAG>
+  </MMS_INFO>
+  <INTL_INFO>
+    <!-- 국제 문자 서비스 정보 -->
+    <PORT>4843</PORT>
+    <!-- 중복 실행 방지하기 위한 로컬 포트 점유 (사용하지 않는 포트로 입력할 것) -->
+    <LOG_TABLE>SUREData_Log</LOG_TABLE>
+    <LOG_FLAG>Y</LOG_FLAG>
+    <LOG_DIR>log/intl/</LOG_DIR>
+    <PRINT_FLAG>Y</PRINT_FLAG>
+    <ENCODING>U</ENCODING>
+    <!-- 국제 문자 전송 시 문자의 인코딩을 지정. UTF-16 HEX코드 형태로 데이터를 전송할 경우 'U', default '0' -->
+  </INTL_INFO>
+  <IMMS_INFO>
+    <!-- 국제 문자 서비스 정보 -->
+    <PORT>4844</PORT>
+    <CONTENTS_TABLE>MMSContents</CONTENTS_TABLE>
+    <!-- 중복 실행 방지하기 위한 로컬 포트 점유 (사용하지 않는 포트로 입력할 것) -->
+    <LOG_TABLE>SUREData_Log</LOG_TABLE>
+    <LOG_FLAG>Y</LOG_FLAG>
+    <LOG_DIR>log/imms/</LOG_DIR>
+    <PRINT_FLAG>Y</PRINT_FLAG>
+    <ENCODING>U</ENCODING>
+    <!-- 국제 문자 전송 시 문자의 인코딩을 지정. UTF-16 HEX코드 형태로 데이터를 전송할 경우 'U', default '0' -->
+  </IMMS_INFO>
+  <BATCH_INFO>
+    <!-- Batch 환경변수 설정 (예약문자처리, completed data 로그 테이블로 이동 등) -->
+    <PORT>4845</PORT>
+    <LOG_FLAG>Y</LOG_FLAG>
+    <LOG_TABLE_FLAG>Y</LOG_TABLE_FLAG>
+    <!-- 로그테이블 사용여부 -->
+    <LOG_DIR>log/batch/</LOG_DIR>
+    <PRINT_FLAG>Y</PRINT_FLAG>
+    <CYCLE_TERM>1</CYCLE_TERM>
+    <!-- Batch가 동작하는 주기 설정 (10초 단위) -->
+    <MULTI_ACCOUNT_SEND>false</MULTI_ACCOUNT_SEND>
+    <!-- 하나의 모듈로 다계정 전송시 입력하는 FLAG, DB컬럼에 DEPTCODE가 추가되어야만 동작가능하며, true로 변경해야함 -->
+    <RETRY>3</RETRY>
+    <!-- Result N에 관하여 재시도 횟수 설정 3~10의 숫자 가능 -->
+  </BATCH_INFO>
+  <MONITOR_INFO>
+    <SMS_FLAG>N</SMS_FLAG>
+    <!-- SMS 모니터링 여부 -->
+    <SMS_USERCODE />
+    <!-- 위 회사코드에 맞는 유저코드 (ID)-->
+    <SMS_CALLPHONE1 />
+    <!-- SMS 모니터링 받을 수신번호 11자여야 발송가능-->
+    <SMS_CALLPHONE2 />
+    <SMS_CALLPHONE3 />
+    <SMS_CALLPHONE4 />
+    <SMS_CALLPHONE5 />
+    <SMS_REQPHONE1>02</SMS_REQPHONE1>
+    <!-- SMS 모니터링메시지 회신번호 -->
+    <SMS_REQPHONE2>1588</SMS_REQPHONE2>
+    <SMS_REQPHONE3>4640</SMS_REQPHONE3>
+    <SMS_MESSAGE>@name@가 재시작 되었습니다.</SMS_MESSAGE>
+    <!-- SMS 모니터링 메시지 : name = xMS Sender or Receiver-->
+    <SMS_CHECK_CYCLE>1</SMS_CHECK_CYCLE>
+    <!-- BATCH 주기 * N (위의 cycle_term이 1일 때 check_cycle이 6 : 60초) -->
+  </MONITOR_INFO>
+</CONFIGURE>
+

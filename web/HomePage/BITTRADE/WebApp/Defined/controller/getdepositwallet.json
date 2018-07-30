@@ -1,0 +1,41 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "walletaddress":{
+        "sql":"SELECT a.mw_no,a.po_type,a.mw_address as address,c.wa_html,c.wa_tx_fee FROM web_member_desposit_wallet a left join web_config_wallet_server c ON a.po_type = c.po_type WHERE a.mb_no=? AND a.po_type=?  ORDER BY mw_no DESC limit 1",
+        "authlevel":0,
+        "mapkeys":{
+            "mb_no":{"default": "SS_MB_NO"},
+            "currency":{"required": true,"alphanumber": true,"maxlength": 11}
+        }
+    },
+    "showaddress":{
+        "method":"POST",
+        "sql_conf":"SELECT * FROM web_config_wallet_server WHERE po_type=? ORDER BY wa_no DESC limit 1",
+        "mapkeys_conf":{
+            "currency":{"required": true,"alphanumber": true,"maxlength": 11}
+        },
+        "sql_mb":"SELECT * FROM web_member_desposit_wallet WHERE mb_no=? AND po_type=? ORDER BY mw_no DESC limit 1",
+        "mapkeys_mb":{
+            "mb_no":{"default": "SS_MB_NO"},
+            "currency":{"required": true,"alphanumber": true,"maxlength": 11}
+        },
+        "sql_regist":"INSERT INTO web_member_desposit_wallet(po_type,mb_no,mw_address,mb_reg_ip,mw_server_host,mw_etc1,mw_etc2)VALUES(?,?,?,?,?,?,?)",
+        "mapkeys_regist":{
+            "currency":{"required":true,"maxlength":11},
+            "mb_no":{"default": "SS_MB_NO"},
+            "address":{"required":true,"maxlength":100},
+            "mb_reg_ip":{"default": "CLIENT_IP"},
+            "mw_server_host":{"required":true,"maxlength":50},
+            "mw_etc1":{"required":false,"maxlength":50},
+            "mw_etc2":{"required":false,"maxlength":50}
+        },
+        "datamodel":"WalletRPC",
+        "authlevel":0
+    }
+    
+  }
+}

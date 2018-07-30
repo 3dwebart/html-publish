@@ -1,0 +1,192 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-view.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <div class="form">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th colspan="4">주문서 미수금( = 주문합계 - 주문취소 - DC - 입금합계 + 입금취소)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr bgcolor="fbfbfb">
+                        <th>주문서번호</th>
+                        <td><span id="odId"></span></td>
+                        <th>결제방법</th>
+                        <td><span id="odSettleCase" style="color:#0084ff"></span></td>
+                    </tr>
+                    <tr>
+                        <th>PG사고유번호</th>
+                        <td><span id="odPgId"></span></td>
+                        <th>삭제여부</th>
+                        <td><span id="odDelYn"></span></td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">주문자정보</th>
+                    </tr>
+                    <tr>
+                        <th>회원번호</th>
+                        <td><span id="mbNo"></span></td>
+                        <th>아이디</th>
+                        <td><span id="mbId"></span></td>
+                    </tr><tr>
+                        <th>주문자명</th>
+                        <td><span id="odName"></span></td>
+                        <th>주문자이메일</th>
+                        <td><span id="odEmail"></span></td>
+                    </tr><tr>
+                        <th>주문자전화번호</th>
+                        <td><span id="odTel"></span></td>
+                        <th>주문자모바일번호</th>
+                        <td><span id="odHp"></span></td>
+                    </tr>
+                    <tr>
+                        <th>주문시요청사항</th>
+                        <td colspan="3"><span id="odMemo"></span></td>
+                    </tr>
+                    <tr>
+                        <th>주문횟수</th>
+                        <td colspan="3"><span id="odCnt"></span></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">주문아이템</th>
+                    </tr>
+                    <tr>
+                        <th>아이템코드</th>
+                        <td><span id="itId"></span></td>
+                        <th>아이템지급완료</th>
+                        <td><span id="itIdPay" style="color:#0084ff"></span></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">입금정보</th>
+                    </tr>
+                    <tr>
+                        <th>입금자명</th>
+                        <td><span id="odDepositName"></span> / 입금될계좌 <span id="odBankAccount"></span></td>
+                        <th>입금예정일</th>
+                        <td><span id="odHopeDate"></span></td>
+                    </tr>
+                    <tr>
+                        <th>무통장주문액</th>
+                        <td><span id="odTempBank"></span>원</td>
+                        <th>무통장입금</th>
+                        <td><span id="odReceiptBank"></span>원 / 입금시간 <span id="odBankTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>모바일결제액</th>
+                        <td><span id="odTempMobile"></span>원</td>
+                        <th>모바일입금</th>
+                        <td><span id="odReceiptMobile"></span>원</td>
+                    </tr>
+                    <tr>
+                        <th>폰빌주문액</th>
+                        <td><span id="odTempPhonebill"></span>원</td>
+                        <th>폰빌입금</th>
+                        <td><span id="odReceiptPhonebill"></span>원</td>
+                    </tr>
+                    <tr>
+                        <th>카드주문액</th>
+                        <td><span id="odTempCard"></span>원</td>
+                        <th>카드입금</th>
+                        <td><span id="odReceiptCard"></span>원 / 카드승인 <span id="odCardTime"></span></td>
+                    </tr>
+
+                    <tr>
+                        <th>ARS주문액</th>
+                        <td><span id="odTempArs"></span>원</td>
+                        <th>ARS입금</th>
+                        <td><span id="odReceiptArs"></span>원</td>
+                    </tr>
+                    <tr>
+                        <th>승인일시</th>
+                        <td ><span id="odPayTime"></span></td>
+                        <th>DC금액</th>
+                        <td><span id="odDcAmount"></span>원</td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">환불/취소정보</th>
+                    </tr>
+                    <tr>
+                        <th>카드취소</th>
+                        <td><span id="odCancelCard"></span>원</td>
+                        <th>직접환불금액</th>
+                        <td><span id="odRefundAmount"></span> / 일시 <span id="odRefundDt"></span></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" bgcolor="fbfbfb">관리자</th>
+                    </tr>
+                    <tr>
+                        <th>주문서생성일</th>
+                        <td><span id="odDatetime"></span></td>
+                        <th>등록아이피</th>
+                        <td><span id="odIp"></span></td>
+                    </tr>
+                    <tr>
+                        <th>삭제여부</th>
+                        <td><span id="odDelYn"></span></td>
+                        <th>주민번호보안키</th>
+                        <td><span id="odScno"></span></td>
+                    </tr>
+                    <tr>
+                        <th>관리자메모</th>
+                        <td><div style="overflow:auto;height:200px;width:300px;padding:10px 0"><span id="odShopMemo"></span></div></td>
+                        <th>수정내역</th>
+                        <td><div style="overflow:auto;height:200px;width:300px;padding:10px 0"><span id="odModifyHistory"></span></div></td>
+                    </tr>
+                    <tr>
+                        <th>완료DB실행</th>
+                        <td><span id="odProcDb"></span></td>
+                        <th>파트너코드</th>
+                        <td><span id="partner"></span></td>
+                    </tr>
+                    <tr>
+                        <th>ETC</th>
+                        <td><span id="odEtc"></span></td>
+                        <th>기타1</th>
+                        <td><span id="odEscrow1"></span></td>
+                    </tr>
+                    <tr>
+                        <th>기타2</th>
+                        <td><span id="odEscrow2"></span></td>
+                        <th>기타3</th>
+                        <td><span id="odEscrow3"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="목 록" />
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        if(typeof(bean.data)!=='undefined'){
+            $('#odTempBank').html( (bean.data.odTempBank+'').formatNumber() );
+            $('#odReceiptBank').html( (bean.data.odReceiptBank+'').formatNumber() );
+            $('#odTempMobile').html( (bean.data.odTempMobile+'').formatNumber() );
+            $('#odReceiptMobile').html( (bean.data.odReceiptMobile+'').formatNumber() );
+            $('#odTempPhonebill').html( (bean.data.odTempPhonebill+'').formatNumber() );
+            $('#odReceiptPhonebill').html( (bean.data.odReceiptPhonebill+'').formatNumber() );
+            $('#odTempCard').html( (bean.data.odTempCard+'').formatNumber() );
+            $('#odReceiptCard').html( (bean.data.odReceiptCard+'').formatNumber() );
+        }
+    });
+</script>
+</body>

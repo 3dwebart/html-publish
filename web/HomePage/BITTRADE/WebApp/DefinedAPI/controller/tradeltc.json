@@ -1,0 +1,65 @@
+{
+  "Database":{
+    "name":"fns_trade_order_ltc"
+  },
+  "Controller":
+  {
+  "order":{
+        "method":"POST",
+        "sql":"INSERT INTO web_trade_order_history_krw_ltc(od_action,od_pay_status,od_pay_po_ids,od_market_price,od_total_cost,mb_no,mb_id,od_temp_coin,od_fee_rate,od_receipt_coin,od_receipt_fee,od_reg_ip)VALUES(?,?,?,?,?,?,?,?,(SELECT ROUND(IFNULL(SUM(ABS(po_point)),0),2) FROM fns_trade_point.web_point_krw WHERE mb_no=?),?,?,?)",
+        "mapkeys":{
+            "od_action":{"required":true,"maxlength":50}
+            ,"od_pay_status":{"required":false,"maxlength":10}
+            ,"od_pay_po_ids":{"required":false}
+            ,"od_market_price":{"required":true}
+            ,"od_total_cost":{"required":true}
+            ,"mb_no":{"default":"6"}
+            ,"mb_id":{"default":"merners@naver.com"}
+            ,"od_temp_coin":{"required":true}
+            ,"od_fee_rate":{"default":"6"}
+            ,"od_receipt_coin":{"default":0}
+            ,"od_receipt_fee":{"required":false}
+            ,"od_reg_ip":{"default":"CLIENT_IP"}
+        },
+        "sql_sell_view":"select od_market_price from view_trade_orderbook_sell_detail_krw_etc limit 1",
+        "sql_buy_view":"select od_market_price from view_trade_orderbook_buy_detail_krw_etc  limit 1",
+        "datamodel":"TradeOrderReg",
+        "authlevel":0
+    },
+	"cancel":{
+		"method":"POST",
+        "description":"거래소 트레이드 취소 액션",
+        "sql":"UPDATE web_trade_order_history_krw_ltc SET od_pay_status=?, od_cancel_dt=NOW() WHERE od_pay_status<>'OK' AND od_id=? AND mb_no=? limit 1",
+        "mapkeys":{
+            "od_pay_status":{"default":"CAN"}
+            ,"od_id":{"required":true}
+            ,"mb_no":{"default":"6"}
+        },
+        "authlevel":0,
+        "datamodel":"TradeOrderCancel"
+    },
+	"tradehistory":{
+		"method":"POST",
+        "description":"최근 거래 내역",
+        "sql":"SELECT od_action,od_pay_status,od_pay_po_ids,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_receipt_fee,od_receipt_avg,od_reg_dt,od_receipt_dt FROM web_trade_order_history_krw_ltc WHERE (od_pay_status='OK' OR (od_pay_status='CAN' AND od_receipt_coin!=0.00000000)) AND mb_no=? ORDER BY od_receipt_dt DESC, od_id DESC LIMIT ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"required":true}
+        },
+		"datamodel":"TradeCompleteHistory",
+        "authlevel":0
+    },
+	"tradeopenhistory":{
+		"method":"POST",
+        "description":"거래소 미체결 내역 리스트 ",
+        "sql":"SELECT od_id,od_action,od_pay_status,od_market_price,od_total_cost,od_temp_coin,od_receipt_coin,od_reg_dt,od_receipt_avg,od_receipt_dt FROM mem_open_order_krw_ltc WHERE (od_pay_status='REQ' OR od_pay_status='WAIT' OR od_pay_status='PART') AND mb_no=? ORDER BY od_id DESC limit ?,?",
+        "rowlimit":10,
+        "mapkeys":{
+            "mb_no":{"required":true}
+        },
+		"datamodel":"TradeOpenHistory",
+        "authlevel":0
+    }
+  }
+
+}

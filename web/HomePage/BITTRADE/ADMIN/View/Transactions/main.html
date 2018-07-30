@@ -1,0 +1,234 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<style>
+    .console{
+        width:350px;
+        overflow:auto;
+        word-break: break-all;
+        background: #000;
+        color:#f5f5f5;
+        font-size: 12px;
+        padding:10px;
+        display: none;
+        height: 300px;
+    }
+    .btn-rpctra{
+        background-color: #bebebe;
+        background-image: -webkit-gradient(linear,left top,left bottom,from(#fefefe),to(#e6e6e6));
+        background-image: -webkit-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: -moz-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: -ms-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: -o-linear-gradient(top,#fefefe,#e6e6e6);
+        background-image: linear-gradient(top,#fefefe,#e6e6e6);
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+        -moz-box-shadow: 0 0 1px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.3) inset;
+        -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.3) inset;
+        box-shadow: 0 0 1px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.3) inset;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #bababa #ababab #bebebe;
+        padding: 5px 10px;
+        cursor: pointer;
+        font: bold 15px Arial,Helvetica;
+        color: #6a6e77;
+        margin: 2px;
+        font-size:12px;
+        overflow: hidden;
+        width:100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .btn-transaction-info{
+        font-size:12px !important;
+    }
+
+    tr.itPayY td{
+
+    }
+
+    tr.itPayN td,tr.itPayN th{
+        color:#cccccc !important;
+    }
+    tr.send td,tr.send th{
+        color:#ff6868 !important;
+    }
+
+</style>
+<script type="text/javascript">
+var listHeader = '[{"trNo":"ID","txid":"항목","server":"서버","account":"계정","category":"구분","address":"주소","amount":"금액","fee":"수수료","confirmations":"컨펌","walletconflicts":"항목"}]';
+function writeListHead(jsondata){
+    var headItems = [];
+    $.each(jsondata, function (key, val) {
+        headItems.push('<thead><tr>');
+		headItems.push('<th width="50">' + val.trNo + '</th>');
+		headItems.push('<th width="70">' + val.server + '</th>');
+		headItems.push('<th>' + val.account + '</th>');
+		headItems.push('<th>' + val.address + '</th>');
+        headItems.push('<th>' + val.category + '</th>');
+		headItems.push('<th>' + val.amount + '</th>');
+		headItems.push('<th>' + val.fee + '</th>');
+		headItems.push('<th>' + val.confirmations + '</th>');
+		headItems.push('<th>' + val.walletconflicts + '</th>');
+		headItems.push('</tr></thead>');
+    });
+    return headItems.join('');
+}
+function writeListBody(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        num = parseInt(getLastestNum(selectedPage) - i);
+
+        var point_explain = ((val.pointPayDt)?val.pointPayDt:'포인트 미지급');
+
+        var classadd = 'itPayN';
+        if(val.isPointPayYn==='Y'){
+            classadd = 'itPayY';
+        }
+        if(val.category=='send'){
+            classadd = 'send';
+            point_explain = ((val.pointPayDt)?val.pointPayDt:'포인트 미차감');
+        }
+
+        listItems.push('<tr class="list'+c+' '+classadd+'" onclick=\"viewLink(\''+val.trNo+'\')\">');
+		listItems.push('<th class="num">' + val.trNo + '</th>');
+		listItems.push('<td class="num">' + val.server + '</td>');
+		listItems.push('<td>' + val.account + '</td>');
+		listItems.push('<td class="num">' + val.address + '</td>');
+        listItems.push('<td><b>' + val.category + '</b></td>');
+		listItems.push('<td class="num medium" align=right>' + val.amount + '</td>');
+		listItems.push('<td class="num medium" align=right>' + val.fee + '</td>');
+		listItems.push('<th>' + val.confirmations + '</th>');
+		listItems.push('<td class="time">' + val.regDt + '</td>');
+		listItems.push('</tr>');
+
+        listItems.push('<tr class="list'+c+' '+classadd+'" style="cursor:auto">');
+        if(val.category == 'member'){
+            listItems.push('<th class="num" colspan=2></th>');
+            listItems.push('<td colspan=4 align="left" class="num"><b>전송구분 : </b> ' + val.txid + '<div id="tran'+val.trNo+'" class="console"></div></td>');
+        }else{
+            listItems.push('<th class="num" colspan=2><button class="btn-rpctra" onclick=\"gettransaction(\''+ val.txid +'\',\'#tran'+val.trNo+'\')\">Bitcoin 콘솔</button></th>');
+            listItems.push('<td colspan=2 align="left" class="num"><b>txid:</b> ' + val.txid + '<div id="tran'+val.trNo+'" class="console"></div></td>');
+            listItems.push('<td class="num" colspan=2 align="left"><input type="button" class="btn-default orange btn-transaction-info" onclick=\"goTransactionInfo(\''+ val.txid +'\')\" value="거래원장" /></td>');
+        }
+        
+//        listItems.push('<td class="num" colspan=1 align="right">' + val.walletconflicts + '</td>');
+        listItems.push('<td class="num" colspan=3 align="right">포인트 지급시간: ' + point_explain + '</td>');
+        listItems.push('</tr>');
+        if(val.walletconflicts){
+            listItems.push('<tr class="list'+c+' '+classadd+'" style="cursor:auto">');
+            listItems.push('<td class="num" colspan=9 align="right">walletconflicts : ' + val.walletconflicts + '</td>');
+            listItems.push('</tr>');
+        }
+//        listItems.push('<div id="tran'+val.trNo+'"></div>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="'+getColCount()+'" align="center">결과가 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+</script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-list.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+
+        <div>
+            <div class="list_search left">
+            <form name="search" method="get" action="/">
+                <input type="hidden" name="mode" value="Transactions" />
+                <span class="custom-dropdown custom-dropdown--white">
+
+                    <select name="sf" class="custom-dropdown__select custom-dropdown__select--white">
+
+                        <option value="account">아이디</option>
+                        <option value="txid">txid</option>
+                        <option value="address">주소</option>
+                    </select>
+                </span>
+                <input type="text" name="sv" />
+                <input type="image" value="검색" src="/Web/img/search.png" class="btn-search" onclick="this.form.submit();" />
+            </form>
+
+            </div>
+            <div class="right"></div>
+            <input type="button" name="btn_s" value="포인트 지급이 안된건 다시 대기" class="right btn-default"  onclick="initLoadUnConfirmation()" />
+            </div>
+
+        <div class="lists"></div>
+
+        <div class="list_buttons" >
+            <div id="pagination" class="page">
+                <!-- optional left control buttons-->
+                <a class="jPaginatorMax ui-corner-all" id="max_backward">처음</a>
+                <a class="jPaginatorOver ui-corner-all" id="over_backward">이전</a>
+                <div class='paginator_p_wrap'>
+                    <div class='paginator_p_bloc'>
+                        <!--<a class='paginator_p'></a> // page number : dynamically added -->
+                    </div>
+                </div>
+                <!-- optional right control buttons-->
+                <a class="jPaginatorOver ui-corner-all" id="over_forward">다음</a>
+                <a class="jPaginatorMax ui-corner-all" id="max_forward">맨끝</a>
+                <input type="button" name="btn_list_all" value="전체목록" class="right btn-default hidden" onclick="document.location.href=bean.link.list" />
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+function initLoadUnConfirmation(){
+    var backdata;
+    $.getJSON('/?mode=CronSchedule/initLoadUnConfirmation', 'json', function (data) {
+        backdata = data;
+    })
+    .done(function() {
+        alert(backdata.result+'건의 포인트지급이 안된 건을 승인요청 서버에 대기시켰습니다.');
+    })
+    .fail(function() {
+        $('body').viewDialogMessage('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+    })
+    .always(function() {$('#pageloading').hide();$('html, body').animate( {scrollTop:0} );});
+}
+
+
+function gettransaction(txid,domobjid){
+    var domobj = $(domobjid);
+    domobj.html('loading..');
+    domobj.show();
+    $.getJSON('/?mode=BitcoinWallet/bitgetinfo&func=gettransaction&param='+txid, 'json', function (data) {
+            backdata = data;
+        })
+        .done(function() {
+            domobj.html( 'bitcoin# '+JSON.stringify(backdata, null, '<br />') );
+        })
+        .fail(function() {
+            domobj.html('<p>서버와 연결중 에러가 발생하였습니다.</p><p>잠시 뒤 다시 시도해 보세요.</p>');
+        })
+        .always(function() {});
+}
+
+function goTransactionInfo(txid){
+    window.open('https://blockchain.info/tx/'+txid, 'transactioinfo');
+}
+</script>
+</body>

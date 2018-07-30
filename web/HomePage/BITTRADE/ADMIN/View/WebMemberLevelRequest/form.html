@@ -1,0 +1,92 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-inputhints.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-form.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+    <div id="content-main">
+        <form method="post">
+        <input type="hidden" name="token" value="" />
+        <input type="hidden" name="reqNo" value="" />
+        <input type="hidden" name="mbNo" value="" />
+        <input type="hidden" name="mbProveFile1" value="" />
+        <input type="hidden" name="mbProveFile2" value="" />
+        <input type="hidden" name="mbProveFile3" value="" />
+        <div id="fwrite">
+            <table class="twrite_basic">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th colspan="3">내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>아이디</th>
+                        <td colspan="3"><input type="text" name="mbId" value="" style="width:200px" maxlength="50" required /></td>
+                    </tr><tr>
+                        <th>현재레벨</th>
+                        <td><input type="text" name="mbCurLevel" value="" required style="width:100px;" /></td>
+                        <th>요청레벨</th>
+                        <td><input type="text" name="mbReqLevel" value="" required style="width:100px;" /></td>
+                    </tr><tr>
+                        <th>증명방법</th>
+                        <td colspan="3"><select name="mbProveMethod" required >
+                                <option value="Fax">팩스</option>
+                                <option value="Email">이메일</option>
+                                <option value="Attach">파일첨부</option>
+                            </select></td>
+                    </tr><tr>
+                        <th>등록일</th>
+                        <td><input type="text" name="reqDt" value="0000-00-00 00:00:00" required style="width:200px;" /></td>
+                        <th>등록IP</th>
+                        <td><input type="text" name="reqIp" value="" required style="width:200px;" /></td>
+                    </tr><tr>
+                        <th>관리자확인</th>
+                        <td><select name="adminConfirm" required >
+                                <option value="N">미확인</option>
+                                <option value="Y">승인</option>
+                                <option value="R">거부</option>
+                            </select> /
+                            <input type="button" class="btn-default orange" value="승인처리"
+                                   onclick="this.form.adminConfirmDt.value=new Date().format('yyyy-MM-dd HH:mm:ss');
+                                       this.form.adminConfirm.value='Y';" />
+                            </td>
+                        <th>관리자확인일</th>
+                        <td><input type="text" name="adminConfirmDt" value="0000-00-00 00:00:00" required style="width:200px;" />
+                            <input type="button" class="btn-gray" value="현재" onclick="this.form.adminConfirmDt.value=new Date().format('yyyy-MM-dd HH:mm:ss')"/></td>
+                    </tr><tr>
+                        <th>사용자에게<br />보여줄 메시지<br />(거부사유 등)</th>
+                        <td colspan="3"><input type="text" name="adminMemo" value="" required /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="write_buttons">
+            <input type="button" id="btn_list" name="btn_list" class="btn-default" value="취 소" />
+            <input type="button" id="btn_submit" name="btn_submit" class="btn-default orange" value="등 록" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+</div>
+<script>
+    if(bean.data.mbId){
+        $('input[name=mbId]').attr("readonly",true).css("background","#f5f5f5").css("color","#999");
+        $('input[name=mbCurLevel]').attr("readonly",true).css("background","#f5f5f5").css("color","#999");
+        $('input[name=mbReqLevel]').attr("readonly",true).css("background","#f5f5f5").css("color","#999");
+    }
+</script>
+</body>

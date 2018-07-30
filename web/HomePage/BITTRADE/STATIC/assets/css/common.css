@@ -1,0 +1,146 @@
+body {
+    min-width: 100%;
+}
+* {
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.font-14 {font-size: 14px;}
+.font-15 {font-size: 15px;}
+.font-16 {font-size: 16px;}
+.text-normal {
+    font-weight: normal;
+}
+#contents.err {
+    width: 100%;
+    max-width: 1400px;
+}
+@media(min-width: 769px) {
+    .mobile-show {
+        display: none !important;
+    }
+}
+@media(max-width: 768px) {
+    .pc-show {
+        display: none !important;
+    }
+    .m-block {
+        display: block;
+        text-align: center;
+    }
+}
+@media(max-width: 1400px) {
+    #contents.err {
+        width: calc(100% - 30px);
+        max-width: 100%;
+    }
+}
+#contents.err {
+    margin-top: 20px;
+    padding: 20px;
+}
+@media(max-width: 768px) {
+    #wrap.single {
+        background-color: #fff;
+    }
+    #contents.err {
+        margin-top: 65px;
+        width: calc(100% - 30px);
+    }
+}
+table caption {display: none;}
+.flex-box {
+	display: flex;
+}
+.flex-column {
+    flex-direction: column;
+}
+.flex-row {
+    flex-direction: row;
+}
+.flex-center {
+	align-content: center;
+}
+.trade-slider-menu.list {
+    display: none;
+}
+.mobile-main-tab ul:before,
+.mobile-main-tab ul:after {
+    content: "";
+    display: table;
+}
+.hidden-block {
+    display: none;
+}
+@media(min-width: 769px) {
+    #header {
+        background-color: rgba(0, 112, 194, 1); /* 그레디언트가 지원되지 않는 경우의 색상(fallback color) */
+        background-image: -webkit-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
+        background-image:    -moz-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* Fx 3.6 부터 Fx 15 까지 처리 */
+        background-image:     -ms-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* IE 10 Platform Previews, Consumer Preview */
+        background-image:      -o-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* Opera 11.1 부터 12.0 까지 처리 */ 
+        background-image:         linear-gradient(to right, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* 표준구문, 표준구문은 반드시 마지막에 삽입해야한다. */
+        -webkit-transition: all .5s ease;
+        transition: all .5s ease;
+        opacity: 1;
+    }
+    #header.active {
+        background-color: rgba(0, 112, 194, .3); /* 그레디언트가 지원되지 않는 경우의 색상(fallback color) */
+        background-image: -webkit-linear-gradient(left, rgba(0, 112, 194, .3) 0%, rgba(0, 191, 238, .3) 100%);
+        background-image:    -moz-linear-gradient(left, rgba(0, 112, 194, .3) 0%, rgba(0, 191, 238, .3) 100%); /* Fx 3.6 부터 Fx 15 까지 처리 */
+        background-image:     -ms-linear-gradient(left, rgba(0, 112, 194, .3) 0%, rgba(0, 191, 238, .3) 100%); /* IE 10 Platform Previews, Consumer Preview */
+        background-image:      -o-linear-gradient(left, rgba(0, 112, 194, .3) 0%, rgba(0, 191, 238, .3) 100%); /* Opera 11.1 부터 12.0 까지 처리 */ 
+        background-image:         linear-gradient(to right, rgba(0, 112, 194, .3) 0%, rgba(0, 191, 238, .3) 100%); /* 표준구문, 표준구문은 반드시 마지막에 삽입해야한다. */
+        -webkit-transition: all .5s ease;
+        transition: all .5s ease;
+        opacity: 0;
+    }
+}
+@media(max-width: 768px) {
+    #header {
+        background-color: rgba(0, 112, 194, 1); /* 그레디언트가 지원되지 않는 경우의 색상(fallback color) */
+        background-image: -webkit-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
+        background-image:    -moz-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* Fx 3.6 부터 Fx 15 까지 처리 */
+        background-image:     -ms-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* IE 10 Platform Previews, Consumer Preview */
+        background-image:      -o-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* Opera 11.1 부터 12.0 까지 처리 */ 
+        background-image:         linear-gradient(to right, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* 표준구문, 표준구문은 반드시 마지막에 삽입해야한다. */
+    }
+    #header.active {
+        background-color: rgba(0, 112, 194, 1); /* 그레디언트가 지원되지 않는 경우의 색상(fallback color) */
+        background-image: -webkit-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
+        background-image:    -moz-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* Fx 3.6 부터 Fx 15 까지 처리 */
+        background-image:     -ms-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* IE 10 Platform Previews, Consumer Preview */
+        background-image:      -o-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* Opera 11.1 부터 12.0 까지 처리 */ 
+        background-image:         linear-gradient(to right, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%); /* 표준구문, 표준구문은 반드시 마지막에 삽입해야한다. */
+    }
+}
+#gnb li a {
+    color: #efefef;
+}
+#welcome .text {
+    line-height: 68px;
+    font-size: 15px;
+    color: #fff;
+}
+#m-nav .logo span {
+    display: inline-block;
+    width: 144px;
+    height: 62px;
+    background: url(../img/common/Popcon_Logo.png) no-repeat 0 0;
+    background-size: 144px auto;
+}
+/*
+#footer {
+    height: 36px;
+    background: #101316;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+*/
+.pagenate a.active, .pagenate a:hover {
+    color: #1b38a1;
+    border-color: #1b38a1;
+}

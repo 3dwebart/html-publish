@@ -1,0 +1,523 @@
+<head>
+<link rel="stylesheet" href="$link{css}/common.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/contents.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jPaginator.min.css" type="text/css">
+<link rel="stylesheet" href="$link{css}/jquery-ui.min.css" />
+<link rel="stylesheet" href="$link{css_root}/simplegrid.css" />
+<script type="text/javascript" src="$link{js}/jPaginator.min.js"></script>
+<script type="text/javascript" src="$link{js}/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="$link{script}/view-common.js"></script>
+
+<script type="text/javascript" src="$link{js}/highcharts.js"></script>
+<script type="text/javascript" src="$link{js}/exporting.js"></script>
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+tr.delY td{
+    color:#aaa !important;
+}
+tr.delN td,tr.delN th{
+}
+
+h2 a.more{
+    float: right;
+    text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <hgroup></hgroup>
+        <section class="secondary_bar"></section>
+    </div>
+    <aside class="sidebar"></aside>
+
+    <div id="content-main">
+
+        <div class="clear"></div>
+
+        <div id="container" style="min-width: 200px; height: 350px; margin: 20px auto"></div>
+
+        <div class="lists">
+            <h2>최근 원화 입금 내역 <a class="more" href="/?mode=WebCashDeposits">더보기</a></h2>
+            <table class="tlists_basic box totalBalance">
+                <thead>
+                <tr>
+                    <th style="width:20%;">회원ID</th>
+                    <th style="width:20%;">구분</th>
+                    <th style="width:20%;">입금금액</th>
+                    <th style="width:20%;">입금여부</th>
+                    <th style="width:20%;">지급일</th>
+                </tr>
+                </thead>
+                <tbody  id="listKrwDeposit">
+                </tbody>
+            </table>
+        </div>
+        <br />
+
+        <div class="lists">
+            <h2>최근 원화 출금 내역 <a class="more" href="/?mode=WebCashWithdrawals">더보기</a></h2>
+            <table class="tlists_basic box totalBalance">
+                <thead>
+                <tr>
+                    <th style="width:20%;">회원ID</th>
+                    <th style="width:20%;">구분</th>
+                    <th style="width:20%;">신청금액</th>
+                    <th style="width:20%;">지급여부</th>
+                    <th style="width:20%;">신청일</th>
+                </tr>
+                </thead>
+                <tbody  id="listKrwWithdraw">
+                </tbody>
+            </table>
+        </div>
+        <br />
+
+        <div class="lists">
+            <h2>최근 코인 입금 내역 <a class="more" href="/?mode=WebWalletDeposits">더보기</a></h2>
+            <table class="tlists_basic box totalBalance">
+                <thead>
+                <tr>
+                    <th style="width:20%;">회원번호</th>
+                    <th style="width:20%;">구분</th>
+                    <th style="width:20%;">입금수량</th>
+                    <th style="width:20%;">txid</th>
+                    <th style="width:20%;">지갑주소</th>
+                </tr>
+                </thead>
+                <tbody  id="listDeposit">
+                </tbody>
+            </table>
+        </div>
+        <br />
+
+        <div class="lists">
+            <h2>최근 코인 출금 내역 <a class="more" href="/?mode=WebWalletWithdrawals">더보기</a></h2>
+            <table class="tlists_basic box totalBalance">
+                <thead>
+                <tr>
+                    <th style="width:20%;">회원번호</th>
+                    <th style="width:20%;">구분</th>
+                    <th style="width:20%;">신청수량</th>
+                    <th style="width:20%;">수수료</th>
+                    <th style="width:20%;">수수료제외금액</th>
+                </tr>
+                </thead>
+                <tbody  id="listWithdraw">
+                </tbody>
+            </table>
+        </div>
+        <br />
+
+        <div class="lists">
+            <h2>최근 회원레벨인증 미확인 내역 <a class="more" href="/?mode=WebMemberLevelRequest">더보기</a></h2>
+            <table class="tlists_basic box totalBalance">
+                <thead>
+                <tr>
+                    <th style="width:20%;">회원ID</th>
+                    <th style="width:20%;">요청레벨</th>
+                    <th style="width:20%;">증명방법</th>
+                    <th style="width:20%;">신청일</th>
+                    <th style="width:20%;">확인여부</th>
+                </tr>
+                </thead>
+                <tbody  id="listLevelRequest">
+                </tbody>
+            </table>
+        </div>
+        <br />
+        
+    </div>
+
+</div>
+<script type="text/javascript">
+var bean = $.parseJSON($.base64.decode(jsonObject));
+$(function () {
+        var daycnt = [];
+        var k=0;
+        var startday;
+        var startmonth;
+        var startyear;
+        var itemcate = [];
+        var itemdata1 = [];
+        $.each(bean.data, function (key, val) {
+
+//            startyear = parseInt(val.date.substring(0,4));
+//            startmonth = parseInt(val.date.substring(4,6));
+//            startday = parseInt(val.date.substring(6,8)); 
+//              daycnt.push('[Date.UTC('+startyear+','+startmonth+','+startday+'),'+val.cnt+']');
+            itemcate.push( val.date );
+            itemdata1.push(val.cnt);
+            
+           //console.log(val.cnt);
+        });
+        
+        var stritemcate = '['+itemcate.join(',')+']';
+        var stritemdata1 = '['+itemdata1.join(',')+']';
+
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: '최근2개월 가입자'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: eval(stritemcate)
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}명',
+                    style: {
+                        color: '#89A54E'
+                    }
+                },
+                title: {
+                    text: '가입자',
+                    style: {
+                        color: '#89A54E'
+                    }
+                }
+            }, { // Secondary yAxis
+                title: {
+                    text: '가입자',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                labels: {
+                    format: '{value} 명',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 1000,
+                floating: true,
+                backgroundColor: '#FFFFFF'
+            },
+            series: [{
+                name: '가입자',
+                color: '#4572A7',
+                type: 'column',
+                yAxis: 1,
+                data: eval(stritemdata1),
+                tooltip: {
+                    valueSuffix: ' 명'
+                }
+            }]
+        });
+    });
+    
+
+function writeRequestLevelList(jsondata){
+    var listItems = [];
+    var i = 0;
+    var num = 0;
+    var addcss = '';
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        
+        // 라인 css
+        if(val.adminConfirm=='R'){  // 거부
+            addcss = 'reject';
+        }else if(val.adminConfirm=='A'){
+            addcss = 'auto';
+        }else{
+            addcss = '';
+        }
+        listItems.push('<tr class="list'+c+' '+addcss+'"  >');
+		listItems.push('<td >' + val.mbId + '</td>');
+		listItems.push('<td align="center">' + val.mbReqLevel + '</td>');
+        var mbProveMethod = '';
+        if(val.mbProveMethod=='Fax'){
+            mbProveMethod = '팩스';
+        }else if(val.mbProveMethod=='Email'){
+            mbProveMethod = '이메일';
+        }else if(val.mbProveMethod=='Attach'){
+            mbProveMethod = '파일첨부';
+        }else if(val.mbProveMethod=='NiceID'){
+            mbProveMethod = '본인인증';
+        }
+		listItems.push('<td align="center">' + mbProveMethod + '</td>');
+		listItems.push('<td >' + val.reqDt + '</td>');
+        var adminConfirm = '';
+        if(val.adminConfirm=='N'){
+            adminConfirm = '<button class="nocheck btn-default" style="font-size:12px;height:26px;" onClick="location.href=\'/?mode=WebMemberLevelRequest%2Fview&id='+val.reqNo +'\'">미확인</button>';
+        }else if(val.adminConfirm=='R'){
+            adminConfirm = '거부';
+        }else if(val.adminConfirm=='Y'){
+            adminConfirm = '<span class="check">승인완료</span>';
+        }else if(val.adminConfirm=='A'){
+            adminConfirm = '자동승인';
+        }
+        listItems.push('<td align="center">' + adminConfirm + '</td>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="5" align="center">레벨인증 미확인 내역이 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+$('#listLevelRequest').html(writeRequestLevelList(bean.lastesLevelReq));
+
+
+
+function writeKrwDepositList(jsondata){
+    var listItems = [];
+    var i = 0;
+    var itemstatus = '';
+    var itemdate = '';
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        if(val.itIdPay=='Y'){
+            itemstatus = '확인';
+        }else{
+            itemstatus = '-';
+        }
+        if(val.odBankTime == null){
+            itemdate = '-';
+        }else{
+            itemdate = val.odBankTime;
+        }
+        listItems.push('<tr class="list'+c+'">');
+        listItems.push('<th><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">[' + val.mbNo + '] ' + val.mbId + '</a></u></th>');
+        listItems.push('<th>KRW</th>');
+        listItems.push('<th style="color:red">' + (val.odTempBank).formatNumber() + '</th>');
+        listItems.push('<th>' + itemstatus + '</th>');
+        listItems.push('<th class="time">' + itemdate + '</th>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="5" align="center">최근 입금요청 내역이 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+$('#listKrwDeposit').html(writeKrwDepositList(bean.krwDeposit));
+
+function writeKrwWithdrawList(jsondata){
+    var listItems = [];
+    var i = 0;
+    
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        var reqstr = '';
+        var trcss = 'itPayREQ';
+
+        //'WAIT','REQ','REJ','OK','HOLD','CAN'
+        //'대기','요청','거부','완료','중지','취소'
+        if(val.odStatus=='WAIT'){
+            reqstr='대기';
+        }else if(val.odStatus=='REQ'){
+            reqstr='요청';
+        }else if(val.odStatus=='REJ'){
+            reqstr='거부';
+        }else if(val.odStatus=='OK'){
+            reqstr='<span style="color:#0084ff;">완료</span>';
+        }else if(val.odStatus=='HOLD'){
+            reqstr='보류';
+            trcss = 'itPayHOLD';
+        }else if(val.odStatus=='CAN'){
+            reqstr='취소';
+            trcss = 'itPayHOLD';
+        }
+
+        listItems.push('<tr class="list'+c+' '+trcss+'" >');
+        listItems.push('<th><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">[' + val.mbNo + '] ' + val.mbId + '</a></u></th>');
+        listItems.push('<th>KRW</th>');
+        listItems.push('<th style="color:red">' + (val.odTempAmount).formatNumber() + '</th>');
+        listItems.push('<th>' + reqstr + '</th>');
+        listItems.push('<th class="time">' + val.odRegDt + '</th>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="10" align="center">최근 출금요청 내역이 없습니다.</td></tr>');
+    }
+
+    return listItems.join('');
+}
+
+$('#listKrwWithdraw').html(writeKrwWithdrawList(bean.krwWithdraw));
+
+
+function writeDepositList(jsondata){
+    var listItems = [];
+    var i = 0;
+    var itemstatus = '';
+    var itemdate = '';
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        
+        listItems.push('<tr class="list'+c+'">');
+        listItems.push('<th><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">' + val.mbNo + '</a></u></th>');
+        listItems.push('<th>' + (val.poType).toUpperCase() + '</th>');
+        listItems.push('<th style="color:red">' + val.odAmount + '</th>');
+        listItems.push('<th>' + val.odTxid + '</th>');
+        listItems.push('<th class="time">' + val.odToAddr + '</th>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="5" align="center">최근 입금요청 내역이 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+
+$('#listDeposit').html(writeDepositList(bean.coinDeposit));
+
+function writeWithdrawList(jsondata){
+    var listItems = [];
+    var i = 0;
+    
+    $.each(jsondata, function (key, val) {
+        var c = i%2;
+        var reqstr = '';
+        var trcss = 'itPayREQ';
+
+        //'WAIT','REQ','OK','HOLD','CAN'
+        //'대기','요청','완료','중지','취소'
+        if(val.odStatus=='WAIT'){
+            reqstr='대기';
+        }else if(val.odStatus=='REQ'){
+            reqstr='요청';
+        }else if(val.odStatus=='OK'){
+            reqstr='<span style="color:#0084ff;">완료</span>';
+        }else if(val.odStatus=='HOLD'){
+            reqstr='보류';
+            trcss = 'itPayHOLD';
+        }else if(val.odStatus=='CAN'){
+            reqstr='취소';
+            trcss = 'itPayHOLD';
+        }
+
+        listItems.push('<tr class="list'+c+' '+trcss+'" >');
+        listItems.push('<th><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">' + val.mbNo + '</a></u></th>');
+        listItems.push('<th>' + (val.poType).toUpperCase() + '</th>');
+        listItems.push('<th>' + val.odTempAmount + '</th>');
+        listItems.push('<th>' + val.odFee + '</th>');
+        listItems.push('<th style="color:red">' + val.poAmount + '</th>');
+        listItems.push('</tr>');
+        i++;
+    });
+    if(i===0){
+        listItems.push('<tr><td colspan="10" align="center">최근 출금요청 내역이 없습니다.</td></tr>');
+    }
+    
+    return listItems.join('');
+}
+
+$('#listWithdraw').html(writeWithdrawList(bean.coinWithdraw));
+
+
+function writeTradeOrderList(jsondata){
+    var listItems = [];
+    var i = 0;
+    
+    if(jsondata !== undefined){
+        $.each(jsondata, function (key, val) {
+            var classadd = 'delN';
+            if(val.odDelYn==='Y'){
+                classadd = 'delY';
+            }
+            var actionclsadd = val.odAction+'cost';
+
+            var action = '';
+            if(val.odAction=='sell'){
+                action = '판매';
+            }else if(val.odAction=='buy'){
+                action = '구매';
+            }
+
+            var statusmsg = val.odPayStatus;
+            if(val.odPayStatus=='REQ'){
+                statusmsg = '주문';
+            }else if(val.odPayStatus=='OK'){
+                statusmsg = '체결';
+            }else if(val.odPayStatus=='CAN'){
+                statusmsg = '취소';
+                if(val.odReceiptCoin>0){
+                    statusmsg = '잔량취소';
+                    classadd = 'delN';
+                }
+            }else if(val.odPayStatus=='PART'){
+                statusmsg = '부분체결';
+            }
+
+            var odReceiptFeeValue = val.odReceiptFee;
+            if(val.odAction=='sell' && odReceiptFeeValue>0){
+                odReceiptFeeValue = (calfloat('ROUND',parseFloat(odReceiptFeeValue),0)+'').formatNumber() + '<span class="gray">KRW</span>';
+                odReceiptFeeValue = (odReceiptFeeValue+'').formatNumber() + '<span class="gray">KRW</span>';
+            }else if(val.odAction=='buy' && odReceiptFeeValue>0){
+                odReceiptFeeValue = (odReceiptFeeValue+'').formatBitcoin()+ '<span class="gray">BTC</span>';
+            }else{
+                 odReceiptFeeValue = '-';
+            }
+
+            // 체결총액(BTC)
+            var odRecvTotalCost = 0;
+            if(Number(val.odReceiptCoin) > 0.0){
+                odRecvTotalCost = (calfloat('ROUND', ( parseFloat(val.odReceiptAvg) * parseFloat(val.odReceiptCoin) ),0 )+'').formatNumber();
+            }
+            var odReceiptAvg = (calfloat('ROUND',Number(val.odReceiptAvg),0)+'').formatNumber();
+
+            var c = i%2;
+            listItems.push('<tr class="list'+c+' '+classadd+'">');
+                    listItems.push('<td  style="cursor:auto;width:50px;padding:0 0 0 20px;" class="'+actionclsadd+'" >' + action + '</td>');
+                    listItems.push('<td  style="cursor:auto;width:30px;padding:0 0;">' + statusmsg + '</td>');
+                    listItems.push('<td><u><a href="/?mode=WebMember&sf=mb_no&sv=' + val.mbNo + '">[' + val.mbNo + '] ' + val.mbId + '</a></u></td>');
+                    listItems.push('<td style="cursor:auto;width:50px" >' + (val.odMarketPrice+'').formatNumber()  + '</td>');
+                    listItems.push('<td style="cursor:auto;width:60px" align="right">' + (val.odTotalCost+'').formatNumber() + '</td>');
+
+                    listItems.push('<td class="'+actionclsadd+'" style="cursor:auto;width:70px" >' + val.odTempCoin + '</td>');
+            listItems.push('<td style="cursor:auto;width:60px" >' + odReceiptAvg + '</td>');
+                    listItems.push('<td style="cursor:auto;width:70px">' + val.odReceiptCoin + '</td>');
+            listItems.push('<td style="cursor:auto;width:60px" align="right">' + odRecvTotalCost + '</td>');
+
+
+
+
+            var alert = '';
+            var colorstyle = '';
+            var tmpinsertpoint = [];
+                    if(val.odPayPoIds){
+                            tmpinsertpoint = JSON.parse(val.odPayPoIds);
+                    }
+
+            if(tmpinsertpoint.indexOf(0)!=-1){
+                alert = '[이상]';
+                colorstyle = 'color:red;';
+            }
+            listItems.push('<th class="num" style="cursor:auto;width:50px"><input onclick=\"location.href=\'/?mode=WebTradeBitcoin%2Fview&id='+val.odId+'\'\" type="button" style="font-size:11px;'+colorstyle+'" value="'+alert+'확인" class="btn-default"  /></th>');
+                    listItems.push('</tr>');
+            i++;
+        });
+    }else{
+        listItems.push('<tr><td colspan="10" align="center">최근 거래 내역 없습니다.</td></tr>');
+    }
+    return listItems.join('');
+}
+$('#listTradeOrder').html(writeTradeOrderList(bean.lastesTradeOrder));
+</script>
+</body>

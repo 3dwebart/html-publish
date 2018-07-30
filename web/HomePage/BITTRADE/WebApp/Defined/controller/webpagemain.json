@@ -1,0 +1,15 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "view":{
+        "sql":"SELECT pm_subject,pm_content,pm_content_kr,pm_content_cn,pm_reg_dt,pm_mod_dt FROM web_page_main WHERE pm_id=? limit 1",
+        "authlevel":0,
+        "mapkeys":{
+            "index":{"required": true,"alphanumber": true,"maxlength": 11}
+        }
+    }
+  }
+}

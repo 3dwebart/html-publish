@@ -1,0 +1,101 @@
+{
+  "Database":{
+    "name":"fns_web"
+  },
+  "Controller":
+  {
+    "registconfirm":{
+        "sql":"SELECT mk_no, mb_no, mb_id, mk_email_key, mk_confirm_yn, mk_expire_dt FROM web_member_email_key WHERE mk_type=? AND mb_id=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys":{
+            "type":{"required":false,"maxlength":10}
+            ,"mb_id":{"required":false,"maxlength":50}
+        },
+        "rowlimit":1,
+        "sql_get_member":"SELECT * FROM web_member WHERE mb_id=? LIMIT 1",
+        "mapkeys_get_member":{
+            "mb_id":{"required":true,"maxlength":50}
+        },
+        "sql_prove_update":"UPDATE web_member_email_key SET mk_confirm_yn=?, mk_confirm_ip=?, mk_etc=? WHERE mk_type=? AND mb_id=? AND mk_expire_dt > NOW()",
+        "mapkeys_prove_update":{
+            "mk_confirm_yn":{"required":true,"maxlength":50}
+            ,"mk_confirm_ip":{"required":true,"maxlength":50}
+            ,"mk_etc":{"required":false,"maxlength":255}
+            ,"type":{"required":false,"maxlength":10}
+            ,"mb_id":{"required":true,"maxlength":50}
+        },
+        "rowlimit":1,
+        "datamodel":"EmailConfirm"
+    },
+    "requestconfirm":{
+        "sql":"SELECT * FROM web_member WHERE mb_id=? ORDER BY mb_no DESC LIMIT 1",
+        "mapkeys":{
+            "mb_id":{"required":true,"maxlength":50}
+        },
+        "rowlimit":1,
+        "sql_regist_email_key":"INSERT INTO web_member_email_key(mb_no,mb_id,mk_type,mk_explain,mk_email_key,mk_expire_dt,mk_reg_ip) VALUES (? ,? ,? ,? ,SHA2(CONCAT(MD5(?), (RAND()*100) ), 256) , DATE_ADD(NOW(), INTERVAL+15 MINUTE) ,?)",
+        "mapkeys_regist_email_key":{
+            "mb_no":{"required":false,"maxlength":11,"number": true}
+            ,"mb_id":{"required":false,"maxlength":50}
+            ,"mk_type":{"required":false,"maxlength":50}
+            ,"mk_explain":{"required":false,"maxlength":50}
+            ,"md5_mb_id":{"required":false,"maxlength":50}
+            ,"mk_reg_ip":{"default":"CLIENT_IP"}
+        },
+        "rowlimit":1,
+        "sql_get_email_key":"SELECT mk_no, mb_no, mb_id, mk_email_key FROM web_member_email_key WHERE mk_type=? AND mb_no=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys_get_email_key":{
+            "type":{"required":false,"maxlength":10}
+            ,"mb_no":{"required":false,"maxlength":11,"number": true}
+        },
+        "rowlimit":1,
+        "datamodel":"EmailConfirm"
+    },
+    "pwdconfirm":{
+        "sql":"SELECT mk_no, mb_no, mb_id, mk_email_key, mk_confirm_yn, mk_expire_dt FROM web_member_email_key WHERE mk_confirm_yn='N' AND mk_type=? AND mb_id=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys":{
+            "type":{"required":false,"maxlength":50}
+            ,"mb_id":{"required":false,"maxlength":50}
+        },
+        "rowlimit":1,
+        "sql_update":"UPDATE web_member SET mb_pwd = ?, mb_key = MD5(?), mb_up_dt = NOW() WHERE mb_no = ?",
+        "mapkeys_update":{
+            "mb_encPwd":{"required":true,"maxlength":255}
+            ,"mb_pwd":{"required":true,"maxlength":255}
+            ,"mb_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "rowlimit":1,
+        "sql_email_key_update":"UPDATE web_member_email_key SET mk_confirm_yn=?, mk_confirm_ip=? WHERE mk_no = ?",
+        "mapkeys_email_key_update":{
+            "mk_confirm_yn":{"required":true,"maxlength":255}
+            ,"mk_confirm_ip":{"required":true,"maxlength":50}
+            ,"mk_no":{"required":true,"maxlength":11,"number": true}
+        },
+        "rowlimit":1,
+        "datamodel":"EmailConfirm"
+    },
+    
+    "secretkeysend":{
+        "sql":"SELECT mk_no, mb_no, mb_id, mk_api_key, mk_secret FROM web_member_api_key WHERE mk_trade_yn = 'Y' AND mb_id=? ORDER BY mk_no DESC LIMIT 1",
+        "mapkeys":{
+            "mb_id":{"required":false,"maxlength":50}
+        },        
+        "rowlimit":1,
+        "datamodel":"EmailSecretKey"
+    },
+
+    "regist":{
+		"disabled":true,
+        "method":"POST",
+        "sql":"INSERT INTO web_member_email_key(mb_no,mb_id,mk_type,mk_explain,mk_email_key,mk_expire_dt)VALUES(?,?,?,?,?,?)",
+        "mapkeys":{
+            "mb_no":{"required":false,"maxlength":11,"number": true}
+            ,"mb_id":{"required":false,"maxlength":50}
+            ,"mk_type":{"required":false,"maxlength":20}
+            ,"mk_explain":{"required":false,"maxlength":255}
+            ,"mk_email_key":{"required":false,"maxlength":255}
+            ,"mk_expire_dt":{"required":false}
+        },
+        "authlevel":0
+    }
+  }
+}

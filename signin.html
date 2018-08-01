@@ -10,7 +10,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
+<style>
+::-webkit-input-placeholder{color: #0070c2  !important; ; font-size: 14px; opacity: 0.5 important; }
+::-moz-placeholder {  color: #0070c2  !important; ; font-size: 14px; opacity: 0.5  !important; }
+ 
+:-moz-placeholder {color:#0070c2  !important; ; font-size: 14px; opacity: 0.5 !important; } 
+::placeholder{   color:#0070c2  !important; ; font-size: 14px; opacity: 0.5 !important; } 
+    body{ background: url(img/login_bg.gif) no-repeat #fff; background-size: cover;  background-position: center center;}
+input:focus{outline: none !important; border: none !important;}
+    *:focus {outline: none !important;  border: none !important;}
+</style>
 
 
 
@@ -27,7 +36,7 @@
 
           <div class="navbar-collapse  offcanvas-collapse" id="gnb">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
@@ -43,43 +52,45 @@
               <a class="nav-link" href="#">고객센터</a>
             </li>
           </ul>
-            <div class="nav-bar-logininfo">
-              <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
-            </div>
-              <button type="button" class="btn btn-outline-light btn-round">로그인</button>
+ 
+              <button type="button" class="btn btn-outline-light btn-round">회원가입</button>
         </div>
       </div>
 </nav>
     <div id="container" class="container mt11 mb-4">
-       <div class="card max-width5 box-shadow">
-          <div class="card-header"><h5>Log-in  </h5></div>
+       <div class="max-width5  mt-3">
+    
         <form class="p-3">
-            
+          <div class="form-group"><h4 style="color: #0070c2">LOGIN</h4> </div>  
           <div class="form-group">
             
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="아이디">
+            <input style=" background: none!important; border: none;  border-bottom: 2px solid #0070c2 ; border-radius: 0;"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="아이디">
  
           </div>
-          <div class="form-group">
+          <div class="form-group mt-2">
            
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
+            <input style="background: none!important;
+    border: none;
+    border-bottom: 2px solid #0070c2 ;
+    border-radius: 0;" type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
           </div>
             <div class="mb-3 font13">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-              <label class="form-check-label" for="inlineCheckbox1">아이디저장</label>
+              <input style="" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+              <label class="form-check-label text-muted font-11 " for="inlineCheckbox1">아이디저장</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-              <label class="form-check-label" for="inlineCheckbox2">비밀번호저장</label>
+              <label class="form-check-label text-muted font-11" for="inlineCheckbox2">비밀번호저장</label>
             </div>
             </div>
-          <button type="submit" class="btn btn-primary btn-block">로그인 </button>
+          <button type="submit" class="btn btn-primary btn-block btn-round p-2">로그인 </button>
         </form>
-           <div class="text-right p-2">
-           <button type="button" class="btn btn-link btn-sm">회원가입</button>
-           <button type="button" class="btn btn-link btn-sm">비밀번호 찾기</button>
-               </div>
+          
+           <button type="button" class="btn btn-link btn-sm float-left font-12">회원가입</button>
+            
+           <button type="button" class="btn btn-link btn-sm float-right font-12">비밀번호 찾기</button>
+             
         </div> <!--card-->
  
     </div> <!--container-->

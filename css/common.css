@@ -1,4 +1,5 @@
 @charset "utf-8";
+/*### 웹폰트 ###*/
 @font-face{
  font-family:'BareunDotum';
  font-style:normal;
@@ -20,58 +21,63 @@
  src:url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff2') format('woff2'),
      url('http://cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff') format('woff');
 }
- 
+ /*###END 웹폰트 ###*/
+
 html{ -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale; height: 100%;}
- body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; padding: 0; margin: 0;  background: #eff0f5;     min-height: 100%;   justify-content: space-between; display: flex; flex-direction: column;}
-/****** BIGIN :: Nav bar ******/
-/* nav-blue : 메뉴바의 배경색 지정(그라데이션으로 지정) */
+ body{font-size: 12px;font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif; padding: 0 !important; margin: 0;  background: #eff0f5;     min-height: 100%;   justify-content: space-between; display: flex; flex-direction: column; overflow: auto !important;}
+.navbar-brand img{ width: 100px; height: 43px;} /*### 로고 이미지 ###*/
+.nav-link{ font-size: 16px}   /*### 상단메뉴 폰트사이즈 ###*/
+.navbar-nav li{ padding: 0 10px 0 10px;} /*### 상단메뉴 여백 ###*/
+.text-primary {color: #0070c2 !important;}
+/*### nav-blue 상단 헤더 배경색 / 세로사이즈 ###*/
 .nav-blue{background-color: #0070c2 !important; height: 80px;     background-image: -webkit-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
     background-image: -moz-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
     background-image: -ms-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
     background-image: -o-linear-gradient(left, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
     background-image: linear-gradient(to right, rgba(0, 112, 194, 1) 0%, rgba(0, 191, 238, 1) 100%);
-    -webkit-transition: all .5s ease;  transition: all .5s ease; opacity: 1;}
-/* 로고이미지 width 사이즈 고정함 */
-.navbar-brand img{ width: 100px;}
-/* 메뉴의 사이즈 설정 */
-.nav-link{ font-size: 16px}
-/* 각 메뉴의 간격 설정 */
-.navbar-nav li{ padding: 0 10px 0 10px;}
-/* 로그인 한 유저의 네이밍 정보 */
-.nav-bar-logininfo{ margin: 0 20px 0 0; color: #cdf3ff; font-size: 13px;line-height: 64px; font-weight: 300; vertical-align: middle;display: flex;align-items: center;}
-/****** END :: Nav bar ******/
-/****** BIGIN :: width limit ******/
+    -webkit-transition: all .5s ease;  transition: all .5s ease; opacity: 1; padding: 0 !important;}
+
+.nav-bar-logininfo{ margin: 0 20px 0 0; color: #cdf3ff; font-size: 13px;line-height: 64px; font-weight: 300; vertical-align: middle}
+
+/*### 중앙 컨텐츠사이즈 ###*/
 .max-width9{ max-width: 900px; margin: 0 auto;}
 .max-width8{ max-width: 800px; margin: 0 auto;}
 .max-width5{ max-width: 500px; margin: 0 auto;}
 .max-width6{ max-width: 600px; margin: 0 auto;}
 .max-width7{ max-width: 700px; margin: 0 auto;}
-/****** END :: width limit ******/
-/****** BIGIN :: box shadow ******/
-.box-shadow{ box-shadow: rgba(33, 102, 212, 0.15) 0px 7px 30px 0px;}
-/****** BIGIN :: box shadow ******/
-.center{ margin: 0 auto}
-.font13{ font-size: 13px;}
-.min-height300{ min-height: 300px;}
 
+.box-shadow{ box-shadow: rgba(33, 102, 212, 0.15) 0px 7px 30px 0px;} /*### 그림자효과 ###*/
+.center{ margin: 0 auto} /*### 가운데정렬 ###*/
+.font13{ font-size: 13px;}
 .mt11{ margin-top: 110px}
-#gnb li a{font-weight: 300}
+.min-height300{ min-height: 300px;}
+#gnb li a{font-weight: 300} /*### 상단메뉴 폰트굵기 ###*/
 button{ font-weight: 300 !important;}
-iframe{ min-height: 350px}
-.weight300{ font-weight: 300 !important;}
-.search-icon{ position: relative}
+
+iframe{ min-height: 350px} /*### 트레이딩뷰 세로사이즈 설정 ###*/
+
+.weight300{ font-weight: 300 !important;}/*### 폰트굵기 얇게표시 ###*/
+.search-icon{ position: relative} 
+
+/*### 코인명검색 아이콘 ###*/
 .search-icon input[type="text"]:before {
     font-family: 'FontAwesome';   position: absolute;  top: 0px; left: -5px;  content: "\f007";}
 a{color: #565656; text-decoration: none;  background-color: transparent;   -webkit-text-decoration-skip: objects;}
 .navbar-dark .navbar-toggler{ border-color: #bcf8ff;}
+
+/*### 모바일화면 사이드메뉴 버튼 패딩 ###*/
 .navbar-toggler{padding: 0.20rem; border: none;}
 
 
 @media (max-width: 991.98px) {
+
+/*### 991해상도 보다 작을경우 상단메뉴 숨김 ###*/
   .offcanvas-collapse {  position: fixed;  top: 69px;   bottom: 0; left: 100%; width: 100%;
-    padding-right: 1rem; padding-left: 1rem; overflow-y: auto; visibility: hidden;  background-color: #0070c2; transition-timing-function: ease-in-out; transition-duration: .3s; transition-property: left, visibility; }
+    padding-right: 1rem; padding-left: 1rem; overflow-y: auto; visibility: hidden;  background-color: #0070c2; transition-timing-function: ease-in-out; transition-duration: .3s; transition-property: left, visibility; }	
   .offcanvas-collapse.open { left: 0; visibility: visible;}
+	
+	/*### 991해상도 보다 작을경우 호가창 사이즈변경 ###*/
     #trade-volume{ max-width: auto}
 } /* media 991 */
 
@@ -99,31 +105,38 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 .lh-100 { line-height: 1; }
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
+
+/*### 인풋박스 아이콘 위치변경 ###*/
 .form-control-feedback{position: absolute;  top: 9px; right: 15px; font-size: 19px; color: #ccc;}
 
 
+/*### 인풋박스 placeholder 색상 크기  ###*/
 ::-webkit-input-placeholder { color:#ccc; font-size: 12px}
 ::-moz-placeholder { color: #ccc; font-size: 12px}
  :-moz-placeholder { color:#ccc; font-size: 12px}
-.tab-col2 a{ width: 50%; text-align: center;}
 
+/*### 탭 숫자에 따른 크기적용 ###*/
+.tab-col2 a{ width: 50%; text-align: center;}
 .tab-col3 a{ width: 33%; text-align: center;}
 .tab-col5 a{ width: 20%; text-align: center; font-size: 14px}
 .tab-box-col3 a{width: 33%; text-align: center; font-size: 13px;}
 #tab-deposit a{ font-size: 13px !important; background: #ececec; border-right: 1px solid #fff}
 #tab-deposit a.active{ background: #007bff}
 @media (max-width: 900px)  {
+/*### 태블릿 해상도일경우 푸터숨김 ###*/
 .footer-right{ display: none}  
 .footer-left{ margin-left: 13px;}
 #verification-wrap{ margin: 0!important;}
  }/*media 900 */
 
 @media (max-width: 1000px){
+/*### 해상도를 줄일경우 코인거래 탭 사이즈조정  ###*/
 #ctype-trade-tab a{ font-size: 11px; width: 25%; text-align: left}
 #ctype-trade-tab a:last-child{ display: none}
 }/*media 1000 */
 
 @media (max-width: 570px) {
+/*### 해상도를 줄일경우 코인거래 탭 사이즈조정  ###*/
 #ctype-trade-tab a{ font-size: 12px; width: 25%; }
 #ctype-trade-tab a:last-child{ display: none}
 .balance-table i{ display: none}    
@@ -133,76 +146,92 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 } /* media 570*/
     
 #trade-buy label{ color: #666; font-weight: 100; font-family: normal 12px Droid Sans,AppleSDGothicNeo-Regular,Malgun Gothic,Dotum,sans-serif}
-.cart-buy{ color: #dc3545 !important; border-bottom: 2px solid #dc3545 !important;  }
+.cart-buy{ /**/ }
+.nav-tabs .nav-item.cart-buy.active { color: #dc3545 !important;border-bottom: 2px solid #dc3545 !important;}
+.nav-tabs .nav-item.cart-buy:hover { color: #dc3545 !important;}
+.nav-tabs .nav-item.cart-sell.active { color: #0070c2 !important;border-bottom: 2px solid #0070c2 !important;}
+.nav-tabs .nav-item.cart-sell:hover { color: #0070c2 !important;}
+.nav-tabs .nav-item.active { color: #0070c2 !important;border-bottom: 2px solid #0070c2 !important;}
+.nav-tabs .nav-item:hover { color: #0070c2 !important;}
 .font10{ font-size: 10px !important;}
 .ctype-table-title th{ color: #9d9d9d; font-weight: 200; border-bottom:1px solid #dee2e6 !important;}
 .ctype-table th{ color: #9d9d9d; font-weight: 200}
 .ctype-table td:first-child{ font-size: 14px; }
 .ctype-table td em{ font-size: 12px}
+ .quotes-recent{font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif;  background-color: #e2e2e2;}
 
-.quotes-recent{font-family: 'BareunDotum', Helvetica,'돋움', dotum, Verdana,AppleGothic,Arial,sans-serif;  background-color: #e2e2e2;}
-.quotes-table{width: 100%;  border-collapse:collapse; border-spacing: 0px;
-      }
+/*### 호가창 테이블 스타일  ###*/
+.quotes-table{width: 100%;  border-collapse:collapse; border-spacing: 0px; }
 .quotes-table td{ padding: 7px 15px 8px 15px !important;  margin: 0!important; border: 1px solid #dee2e6; background-clip: padding-box; }
 .quotes-table td.quotes-blue{color: #0238b9; position: relative; text-align: right; background-color: #f5faff;  }
+/*### 호가창 마우스오버일 경우 색상  ###*/
 .quotes-table td.quotes-blue:hover{ background: #d6e8fa; color: #006cff; }
 
+/*### 매도 호가창 클릭시 색상 ###*/
 .quotes-table td.quotes-blue.active{ background: #d6e8fa; color: #006cff; }
 .quotes-table td.quotes-blue-center{ background: #f5faff; color: #0238b9;  margin: 0; padding: 8px;   position: relative; text-align: center; background-clip: padding-box; font-weight: bold}
 .quotes-table td.quotes-blue-center:hover{ background: #d6e8fa; color: #006cff; }
 .quotes-table td.quotes-blue-center.active{ background: #d6e8fa; color: #006cff; }
 
-
+/*### 매수 호가창 색상 ###*/
 .quotes-table td.quotes-red{ background: #fff5f8; color: #cb4140;margin: 0; padding: 8px;  position: relative; background-clip: padding-box;}
+
+/*### 매수 호가창 마우스오버 색상 ###*/
 .quotes-table td.quotes-red:hover{ background: #fcd2d2; color: #ec0200; }
+/*### 매수 호가창 클릭시 색상 ###*/
 .quotes-table td.quotes-red.active{ background: #fcd2d2; color: #ec0200; }
 .quotes-table td.quotes-red-center{ font-weight: bold; background: #fff5f8; color: #cb4140;margin: 0; padding: 8px;  position: relative; text-align: center; background-clip: padding-box;}
 .quotes-table td.quotes-red-center:hover{ background: #fcd2d2; color: #ec0200; }
 .quotes-table td.quotes-red-center.active{ background: #fcd2d2; color: #ec0200; }
 .quotes-table td.no-padding{ padding: 0 !important; margin: 0!important;}
-
-
-
-
-.quotes-blue1{ background: #f5faff; color: #0238b9;  margin: 0; padding: 8px; box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; position: relative;}
-.quotes-blue1:hover{ background: #d6e8fa; color: #006cff; }
-.quotes-blue1.active{ background: #d6e8fa; color: #006cff; }
-
-.quotes-red1{ background: #fff5f8; color: #cb4140;margin: 0; padding: 8px; box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; position: relative;}
-.quotes-red1:hover{ background: #fcd2d2; color: #ec0200; }
-.quotes-red1.active{ background: #fcd2d2; color: #ec0200; }
 .quotes-grey{  box-shadow:  1px 0 0 0 #eaeaea, 0 1px 0 0 #eaeaea,  1px 1px 0 0 #eaeaea, 1px 0 0 0 #eaeaea inset, 0 1px 0 0 #eaeaea inset; padding: 8px; min-height: 34px;}
 
+/*### 호가창 체결볼륨 ###*/
 .trade-volume-table{  width: 100%; }
 .trade-volume-table td{ padding: 7px 15px 8px 15px ;  margin: 0!important; border: 1px solid #dee2e6;}
 .trade-volume-table th{font-weight: 500;  border-top: none;  padding: 7px 15px 8px 15px ; text-align: center; border: 1px solid #dee2e6; border-top: none} 
 
+/*### 호가창 코인 현재가정보 ###*/
 .coin-status-table{ width: 100%; vertical-align: top;}
 .coin-status-table td{ padding: 0 ;  margin: 0!important; border: 1px solid #dee2e6;   border-left: none;}
 .coin-status-table th{ text-align: center; font-weight: 100;  padding: 0 ;  margin: 0!important; border: 1px solid #dee2e6; border-left: none; border-right: none;}
  
+/*### 호가창 변경된정보 표시 ###*/
 .quotes-select{ position: absolute; top: 0; left:0 ; z-index: 2; background: url(../img/select_quotes.svg) no-repeat; background-size: 100% 100%; width: 100%; height: 100%; display: block;}
  
+/*### 호가창 폰트속성 ###*/
 .quotes-data{ font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif !important;}
 .dotum{ font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif !important;}
+
+/*### 코인목록 스크롤 세로사이즈 속성 ###*/
 .ctype-maxheight{ height: 1190px; overflow-y: scroll; -ms-overflow-style: none;}
+/*### 코인목록 스크롤트랙 배경색 투명화 ###*/
 .ctype-maxheight::-webkit-scrollbar {width: 0; display: none;}
+
+/*### 호가창 스크롤 세로사이즈 속성 ###*/
 .quotes-maxheight{ height: 478px; overflow-y: scroll;  -ms-overflow-style: none; border-right: 1px solid #dee2e6; border-left: 1px solid #dee2e6;}
+/*### 호가창 스크롤트랙 배경색 투명화 ###*/
 .quotes-maxheight::-webkit-scrollbar {width: 0; display: none;  -ms-overflow-style: none;}
+
+/*### 최근체결내역 스크롤 세로사이즈 속성 ###*/
 .recent-trade{ height: 215px;overflow-y: atuo;  -ms-overflow-style: none; }
+/*### 최근체결내역 스크롤트랙 배경색 투명화 ###*/
 .recent-trade::-webkit-scrollbar {width: 0; display: none;  -ms-overflow-style: none;}
 .quotes-history{ max-height: 252px; text-align: center;    font-size: 11px;
     min-height: 226px;}
 .quotes-history th{ padding: 9px 8px 8px 0 !important;margin: 0 !important; text-align: center !important;}
 .quotes-history td{ padding: 9px 8px 8px 7px !important;    margin: 0 !important;    text-align: right !important;}
-.mCSB_scrollTools{ right: -8px !important;}
-.nounderline { text-decoration: none !important}
+ .nounderline { text-decoration: none !important}
 .font-11{ font-size: 11px;}
 .font-12{ font-size: 12px;}
 .font-14{ font-size: 14px;}
 .em-f10{ font-size: 10px; color: #828282; font-style: normal; }
+
+/*### 차트위 코인현재가 클릭시 드롭다운메뉴 스타일 ###*/
 #ctype-drop { max-height: 210px; overflow-y: scroll;}
 #ctype-drop a{  margin: 10px 0; max-height: 200px;}
+
+/*### 코인아이콘 목록 ###*/
 .ico-coin {display: inline-block; vertical-align: middle; width: 22px; height: 22px;}
 .ico-coin.ico-krw { background: url(../img/common/coin/krw.png) no-repeat 50% 50%;}
 .ico-coin.ico-btc { background: url(../img/common/coin/btc.png) no-repeat 50% 50%;}
@@ -213,28 +242,32 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 .ico-coin.ico-dash { background: url(../img/common/coin/dash.png) no-repeat 50% 50%;}
 .ico-coin.ico-sc { background: url(../img/common/coin/sc.png) no-repeat 50% 50%;}
 .ico-coin.ico-eos { background: url(../img/common/coin/eos.png) no-repeat 50% 50%;}
+
+/*### 입출금 > 보유자산내역 bar표시 ###*/
 .balance-bar{background:rgba(125, 171, 255, 0.5); height: 36px; }
 .balance-bar-data{ display: block;  line-height: 35px; font-size: 12px; white-space: nowrap; padding: 0 10px; text-align: right;}
+
+/*### 호가창 bar표시 ###*/
 .quotes-bar-red{background:rgba(230, 174, 174, 0.5); height: 20px; }
 .quotes-bar-data-red{ display: block; line-height: 20px; font-size: 12px; white-space: nowrap;  padding: 0 10px; text-align: right; position: absolute; right: 5px;}
 .quotes-bar-blue{background:#d2e3f5; height: 20px; }
 .quotes-bar-data-blue{ display: block; line-height: 20px; font-size: 12px; white-space: nowrap;  padding: 0 10px; text-align: right; position: absolute; right: 5px;}
 
 
-
+/*### 보유자산 코인클릭시 배경색 ###*/
 .balance-table .active{ background: #e9f4ff;}
-.snb-title{ height: 62px; padding-left: 30px; background: #6c757d; line-height: 62px; color: #fff; font-size: 18px; font-weight: 500;}
-.snb { padding: 0 !important; margin: 0 0 0 0 !important;}
-.snb li{ list-style: none; display: block; border-bottom: 1px solid #ccc; width: 90%; margin: 0 auto;}
-.snb li:last-child{ border: none}
-.snb li a{ height: 30px; padding: 10px; margin: 10px 0 10px 20px; display: block; font-size: 13px; width: 100%}
-.snb li.active{ background:#f7f7f7 }
+
+
+/*### 공지사항 테이블 ###*/
 .notice-board th{ border-top:none !important;}
 .notice-board td{ font-size: 13px !important;}
+
+/*### 질문답변 테이블 ###*/
 .qa-board th{ border-top:none !important;  text-align: center !important;}
 .qa-board td{ text-align: center; font-size: 13px !important;}
 .btn-position{ top: 15px !important; right: 10px !important;}
 
+/*### 거래내역 테이블 매수일경우 색상변경  ###*/
 #trade-history td{ vertical-align: middle;}
 #trade-history tr[id^="buy_"] td:nth-child(1),
 #trade-history tr[id^="buy_"] td:nth-child(3),
@@ -245,6 +278,7 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 #trade-history tr[id^="buy_"] td:nth-child(9) {
     color: #cb4240 !important; font-weight: bold;
 }
+/*### 거래내역 테이블 매도일경우 색상변경  ###*/
 #trade-history tr[id^="sell_"] td:nth-child(1),
 #trade-history tr[id^="sell_"] td:nth-child(3),
 #trade-history tr[id^="sell_"] td:nth-child(4),
@@ -254,12 +288,18 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 #trade-history tr[id^="sell_"] td:nth-child(9) {
     color: #007bff ; font-weight: bold;
 }
-#trade-history tr.more{background: #ececec;}
-.btn-round { padding: 0.25rem 0.5rem;  font-size: 0.8rem; line-height: 1.5; border-radius: 1rem;    font-weight: 100 !important;}
-.lang { float:left; position: relative; margin: 0 0 0 10px; }
 
+/*### 거래내역 상세보기 버튼 ###*/
+#trade-history tr.more{background: #ececec;}
+/*### 라운드버튼 ###*/
+.btn-round { padding: 0.25rem 0.5rem;  font-size: 0.8rem; line-height: 1.5; border-radius: 1rem;    font-weight: 100 !important;}
+
+/*### 상단 언어선택메뉴 ###*/
+.lang { float:left; position: relative; margin: 0 0 0 10px; }
 .lang > a { font-size:15px; color: #fff; display: block; line-height: 68px; padding:0 10px; text-decoration: none; width: 100%}
 .lang > a > span { margin-right:4px; font-weight: 200;}
+
+/*### 링크클래스에 ko클래스가 들어갈경우 해당영역에 자동으로KOR가 삽입됨 ###*/
 .lang > a.ko:after { content: 'KOR';}
 .lang > a.en:after { content: 'ENG';}
 .lang > a.zh:after { content: 'CHN';}
@@ -270,6 +310,7 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 .lang ul li a { font-size:12px; color: #333; display: block; white-space: nowrap; padding:4px 4px; text-align: center;  text-decoration: none; }
 .lang:hover ul { display: block; }
 
+/*### 하단 스타일 ###*/
 #footer{ width: 100%; min-height: 160px;  background: #035fa2; display: block; color: #abd2ee; line-height: 180%;}
 .footer-wrap{ max-width: 1400px; margin: 0 auto;}
 .footer-left{ float: left; width: 345px;    padding: 75px 0 0 0;  background: url(../img/common/footer_logo.png)25px 16px no-repeat;}
@@ -280,32 +321,24 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
     .footer-right li:last-child{ margin-top: 30px;}
 .footer-right li a{color: #abd2ee; }
 .footer-right h5{ color: #fff; font-size: 12px; padding: 0; margin: 0 0 5px 0;}
+
+/*### 하단 sns링크 ###*/
 .footer-right .ico-fb{ width: 31px; height: 31px; background: url(../img/common/footer_ico_facebook.png) no-repeat; display: block; margin: 0 10px 0 0; float: left;}
 .footer-right .ico-twitter{ width: 31px; height: 31px; background: url(../img/common/footer_ico_twitter.png) no-repeat; display: block; margin: 0 10px 0 0; float: left;}
 
+/*### 상단 서브메뉴 스타일###*/
 #nav-sub{position: fixed;    top: 80px;    width: 100%; z-index: 2}
 #nav-sub-wrap{     width: 1400px;  margin: 0 auto;}
 #nav-sub-wrap a{ font-size: 12px !important;}
 #nav-sub-wrap .spacing{ padding-left: 135px;}
+/*### 상단 서브메뉴 현재메뉴 색상###*/
 .nav-underline a.active{border-bottom: 2px solid #007bff; color: #007bff }
 .submenu-container{ margin-top: 150px !important;}
 .otp-size{ max-width: 650px; }
 .max-950{ max-width: 950px; }
 .max-1000{ max-width: 1000px; }
-.verification > div h6{opacity: 0.5 }
-.verification > div.active{ background: #f6fbff; opacity: 1 }
-.verification > div.active:before{ content: '';   position: absolute; left: 50%; bottom: -21px;
-    margin-left: -19px; border-radius: 100%; width: 38px; height: 38px; background: #22a2ff url(../img/common/ico_verification_complete.png) no-repeat 50% 50%; }
-.verification > div.active h6{ opacity: 1}
-.verification > div.active i{ opacity: 1}
-.verification > div em{  font-style: normal; font-size: 13px; color: #848484; padding: 7px; display: block}
-.verification > div {  margin-bottom: 30px; box-shadow:  1px 0 0 0 #d4d4d4,  0 1px 0 0 #d4d4d4, 1px 1px 0 0 #d4d4d4, 1px 0 0 0 #d4d4d4 inset,  0 1px 0 0 #d4d4d4 inset;}
-.verification > div i { display: block; height: 92px;  background-position: 50% 60%; background-repeat: no-repeat; opacity: 0.5;}
-.verification .step1 i{ background-image: url(../img/common/ico_verification1.png);}
-.verification .step2 i{ background-image: url(../img/common/ico_verification2.png);}
-.verification .step3 i{ background-image: url(../img/common/ico_verification3.png);}
-.verification .step4 i{ background-image: url(../img/common/ico_verification4.png);}
 
+/*### 보유코인 목록스타일 ###*/
 .my-asset-status {display: block; min-height: 65px;}
 .my-asset-status div {width: 33.33333333333333%; float: left}
 .my-asset-status div ul {padding: 25px; margin:0 auto; display: block; background: url(../img/common/asset_bg.png) 0  18px  no-repeat}
@@ -325,22 +358,50 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 .my-asset td button{ background: #fff; border: 1px solid #ccc; max-width: 60px; padding: 4px;  cursor: pointer}
 .my-asset td .color-grey, .color-grey { color: #808080;}
 .my-asset td em{ font-style: normal;}
+
+/*### 호가창 보더겹칩 화면수정 ###*/
 #trade-volume{ max-width: 159px;}
 #quotes-buy tr td:first-child{ width: 159px; }
 #quotes-buy tr:first-child td{ border-top: none}
 #coin-status-table{ border-bottom: 1px solid #dee2e6;}
 .quotes-spacing{ width: 497px; height: 16px; background: #fff; position: absolute; bottom: 0;   border-radius: 0.25rem; z-index: 1}
  
-
+/*### 레이어로그인 ###*/
 .layer-login-bg{  background-color: #008bd1;  min-height: 375px;  background: url(../img/layer_login_bg.png) bottom center no-repeat  #008bd1; }
 .signup-bg{  background-color: #659cc1;  min-height: 375px;  background: url(../img/signup_bg.gif) bottom center no-repeat  #659cc1; }
 .layer-login-input{background: none!important; border: none;  border-bottom: 2px solid #0070c2 ;    border-radius: 0; }
 .layer-login-deco{ position: absolute; background: url(../img/login_layer_arrow.png) no-repeat; width: 24px; height: 33px; top: 45%; right: -18px;; }
 .layer-login-deco2{ position: absolute; background: url(../img/login_layer_arrow2.png) no-repeat; width: 24px; height: 33px; top: 45%; right: -18px;; }
+
+
+
+/*###구 디자인 인증센터 ###*/
+.verification > div h6{opacity: 0.5 }
+/*### 인증완료시 색상변경 ###*/
+.verification > div.active{ background: #f6fbff; opacity: 1 }
+/*### 인증완료시 완료체크표시 ###*/
+.verification > div.active:before{ content: '';   position: absolute; left: 50%; bottom: -21px;
+    margin-left: -19px; border-radius: 100%; width: 38px; height: 38px; background: #22a2ff url(../img/common/ico_verification_complete.png) no-repeat 50% 50%; }
+.verification > div.active h6{ opacity: 1}
+.verification > div.active i{ opacity: 1}
+.verification > div em{  font-style: normal; font-size: 13px; color: #848484; padding: 7px; display: block}
+.verification > div {  margin-bottom: 30px; box-shadow:  1px 0 0 0 #d4d4d4,  0 1px 0 0 #d4d4d4, 1px 1px 0 0 #d4d4d4, 1px 0 0 0 #d4d4d4 inset,  0 1px 0 0 #d4d4d4 inset;}
+.verification > div i { display: block; height: 92px;  background-position: 50% 60%; background-repeat: no-repeat; opacity: 0.5;}
+/*### 인증아이콘 이메일 ###*/
+.verification .step1 i{ background-image: url(../img/common/ico_verification1.png);}
+/*### 인증아이콘 휴대폰 ###*/
+.verification .step2 i{ background-image: url(../img/common/ico_verification2.png);}
+/*### 인증아이콘 본인인증 ###*/
+.verification .step3 i{ background-image: url(../img/common/ico_verification3.png);}
+/*### 인증아이콘 OTP ###*/
+.verification .step4 i{ background-image: url(../img/common/ico_verification4.png);}
+
+
+/*###신규 디자인 인증센터 ###*/
 .verification-bg{  background-color: #008bd1;  min-height: 575px;  background: url(../img/verification_bg.gif) top center no-repeat  #008bd1; color: #fff }
 .verification-lv{ width: 110px; height: 110px; margin: 0 auto; display: block; text-align: center; font-size: 45px; color: #fb8b13; background-color: #fff; border-radius: 60px;  line-height: 40px; padding: 25px 0 0 0; font-weight: bold}
 .verification-lv em{ font-size:19px; font-style: normal; display: block;}
-.verification-form ul{ background: url(../img/common/verification_step_bar.gif)67px 20px no-repeat; }
+.verification-form ul{ background: url(../img/common/verification_step_bar.gif)67px 20px no-repeat;    background-size: 6px 100%; }
 .verification-form li{ position: relative; padding: 20px 0  50px 0; list-style: none;  color: #868686}
 .verification-form li.active{ opacity: 1; color: #000 }
 .verification-form li em{ font-style: normal; position: absolute; top: 20px; left:75px }
@@ -353,13 +414,15 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 .verification-form ul li span.step2 i{ background: url(../img/common/ico_verification2.png)center center no-repeat;}
 .verification-form ul li span.step3 i{ background: url(../img/common/ico_verification3.png)center center no-repeat;}
 .verification-form ul li span.step4 i{ background: url(../img/common/ico_verification4.png)center center no-repeat;}
+.verification-form ul li span.step5 i{ background: url(../img/common/ico_verification5.png)center center no-repeat;}
 
+/*###회원가입 폼 체크 툴팁 ###*/
 .valid-tooltip {  top: -2px; right: 0px;}
 .invalid-tooltip{  top: -2px; right:0px;}
 .was-validated .form-control:valid, .form-control.is-valid, .was-validated .custom-select:valid, .custom-select.is-valid { border-color: #ced4da;}
 .was-validated .form-control:invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .custom-select.is-invalid { border-color: #ced4da;}
 
-
+/*###이용약관 스타일 ###*/
 .p_agree{margin-bottom:10px;height:180px;overflow-y:scroll;border:1px solid #ccc;padding:0 20px; background: #f3f3f3;}
 .p_agree h3{color:#06C;font-size:14px;font-weight:700;margin:20px 0}
 .p_agree h4{color:#000;font-size:13px;font-weight:700;margin:10px 0}
@@ -369,7 +432,7 @@ a{color: #565656; text-decoration: none;  background-color: transparent;   -webk
 .p_agree ol li ul li ul li ul li{padding-left:6px}
 
 
-/*############## ONLY IE10,11  ########### */
+/*############## ie버그 수정  ########### */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 #container{ min-height: 71vh;}
 .navbar-toggler{ position: absolute; top: 20px; right: 20px;}
@@ -386,11 +449,13 @@ select{ padding:5px !important;}
     
 }/*############## END  ONLY IE  ########### */
 
+/*###스크롤바 크기 ###*/
 .slimScrollBar{ max-height: 100px; cursor: pointer}
-.panel-bg { background-color: #0070c2 !important; background: url(../img/common/mobile_panel_bg.png) 50% 20% no-repeat;}
-.list-group-item {background-color: transparent;	border-color: #3e8cc5 !important;	color: #fff !important;	font-size: 14px; position: relative; min-height: 47px;}
+
 
 /*############# 모바일 슬라이드메뉴 ########*/
+.panel-bg { background-color: #0070c2 !important; background: url(../img/common/mobile_panel_bg.png) 50% 20% no-repeat;}
+.list-group-item {background-color: transparent;	border-color: #3e8cc5 !important;	color: #fff !important;	font-size: 14px; position: relative; min-height: 47px;}
 #side-bg{ background-color:rgba(0,0,0,0.5); width: 100%; height: 100%; display: block; position: fixed; top:0; left: 0; z-index: 1998; display: none}
  #side-bg a{ width: 100%; height: 100%; display: block;}
 #panel-list{ position: fixed; top: 0; width: 80%;  right: -80%; z-index: 1999;transition: all .3s ease;overflow-y: auto;}
@@ -425,12 +490,14 @@ select{ padding:5px !important;}
 .faq-wrap li .answer p { display: block; color: #2b2b2b; font-size: 14px; font-weight: 400;line-height: 1.8em;}
 
 
-/*### pagination###*/
+/*### 페이징 현재선택 배경###*/
 .page-item.active .page-link {background-color: #0070c2;  border: none; width: 33px; background: url(../img/pagination_active.png) no-repeat; height: 33px; padding: 9px 0 0 0; text-align: center;}
+/*### 페이징 기본 배경###*/
 .page-link {position: relative; display: block; padding: 9px 0 0 0; margin-left: -1px; height: 33px; width: 33px; color: #007bff; background: url(../img/pagination_normal.png) no-repeat; border:none; text-align: center}
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
 
+/*### 버튼색상###*/
 #tab-deposit a.active{ background: #0070c2;}
-
 .btn-blue,
 .btn-primary {background-color: #0f79c7; border-color: #0f79c7; color: #ffffff;}
 .btn-blue:hover,
@@ -440,5 +507,5 @@ select{ padding:5px !important;}
     border: 0;
     box-shadow: 0 0;
 }
-.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
+/*### 공지사항 글내용 스타일###*/
 #notice-content{ min-height: 150px; line-height: 190%; font-family: Dotum,'돋움',Helvetica,"Apple SD Gothic Neo",sans-serif; word-break: break-all}

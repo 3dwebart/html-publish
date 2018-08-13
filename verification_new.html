@@ -1,263 +1,266 @@
 <!doctype html>
 <html>
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-      <title> </title>
-      <link rel="stylesheet" media="all" href="css/bootstrap.css">
-      <link rel="stylesheet" media="all" href="css/common.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>   
-      <script src="js/bootstrap.js"></script>
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-       <style>
-           #nav-sub{ padding: 0 !important;}
-           body{ padding: 0 !important;}
-       </style>
-   </head>
-   <body>
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary nav-blue">
-         <div class="container">
-            <a class="navbar-brand" href="#">
-            <img src="img/common/Popcon_Logo.png">
-            </a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="navbarsExample07" style="">
-               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">거래내역</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">입출금</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link active" href="#">마이페이지</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">고객센터</a>
-                  </li>
-               </ul>
-               <div class="nav-bar-logininfo">
-                  <i class="fas fa-user-circle fa-2x"></i> 게스트님
-               </div>
-               <button type="button" class="btn btn-outline-light btn-round">로그아웃</button>
-            </div>
-         </div>
-         <!--nav container-->
-      </nav>
-    <!--서브메뉴-->
-    <div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
-      <nav id="nav-sub-wrap" class="nav nav-underline">
-          <div class="spacing"> </div>
-        <a class="nav-link active" href="#">인증센터</a>
-        <a class="nav-link" href="#">회원정보 변경</a>
-        <a class="nav-link" href="#">접속정보</a>
-        <a class="nav-link" href="#">OTP</a>
-      </nav>
-    </div>
-   <!--END 서브메뉴-->
-       
-      <div class="container submenu-container mb-5"  >
-         <div class="card max-width9 Regular shadow">
-            <div class="row">
-               <div class="col verification-bg rounded-left position-relative">
-                   <div class="row">
-                       <div class="w-100 mt-3 mb-4">
-                           <span class="verification-lv mb-1"> 2<em>LV </em></span>
-                           
-                        <span class="text-center d-block"> <h6>Test 님은 현재 <b>2레벨 </b> 입니다 </h6>   입금한도 : 무제한
-                           </span>
-                       </div>
-                       <div class="col">
-                        <table class="table w-75 mx-auto mt-5 table-borderless ">
-                            <colgroup>
-                                <col width="">
-                                <col width="">
-                            </colgroup>
-                            <tr>
-                                <th colspan="2" class="text-center" style="border-bottom: 1px solid #4eb0e0; border-top: 1px solid #4eb0e0 ">출금한도</th>               
-                            </tr>
-                            <tr>
-                                <td>비트코인</td>
-                                <td>0.00000000 BTC </td>
-                            </tr>
-                            <tr>
-                                <td>비트코인캐시</td>
-                                <td>0.00000000 BCH </td>
-                            </tr>
-                            <tr>
-                                <td>이더리움</td>
-                                <td>0.00000000 ETH </td>
-                            </tr>
-                            <tr>
-                                <td>이더리움 클래식</td>
-                                <td>0.00000000 ETC </td>
-                            </tr>
-                            <tr>
-                                <td>라이트코인</td>
-                                <td>0.00000000 LTC </td>
-                            </tr>
-                            <tr>
-                                <td>에이플러스코인</td>
-                                <td>0.00000000 APN </td>
-                            </tr>
-                        </table>
-                           <button type="button" class="mx-auto btn btn-outline-light btn-round d-block" data-toggle="modal" data-target="#lvInfo">등급별한도 보기</button>
-                       </div>
-                  
-                  
-                   </div> <!--end row-->
-                  <div class="layer-login-deco"></div>
-               </div>
-               <div class="col">
-                   <div class="pt-5 pl-4 pr-5 mr-3 mb-2 verification-form">
-                      <ul>
-                        <li class="active step1">
-                            <span class="step1"> <i> </i></span>
-                            <em>레벨1 </em> <h6 class="d-inline">이메일인증</h6> 
-                            <button type="button" class="btn btn-outline-primary btn-sm float-right align-middle" disabled>test@test.com</button> 
-                        </li> 
-                          <li>
-                              <span class="step2"> <i> </i></span>
-                              <em>레벨2-1 </em><h6 class="d-inline">휴대폰 본인인증 </h6> 
-                            <button type="button" class="btn btn-outline-dark btn-sm align-middle float-right">인증하기</button>  
-                          </li>
-                          <li class="active">
-                              <span class="step3"> <i> </i></span>
-                              <em>레벨2-2 </em><h6 class="d-inline">본인인증 </h6> 
-                            <button type="button" class="btn btn-outline-primary btn-sm align-middle float-right" disabled>인증완료</button>  
-                          </li>
-                          <li>
-                              <span class="step4"> <i> </i></span>
-                              <em>레벨2-3 </em><h6 class="d-inline">계좌인증 </h6> 
-                            <button type="button" class="btn btn-outline-dark btn-sm align-middle float-right">계좌관리</button>  
-                          </li>
-                          <li>
-                              <span class="step5"> <i> </i></span>
-                              <em>보안설정 </em><h6 class="d-inline">OTP 설정 </h6> 
-                            <button type="button" class="btn btn-outline-dark btn-sm align-middle float-right">보안설정</button>  
-                          </li>
-                     </ul>
-                   </div>
-                       <div class="alert alert-secondary w-75 mx-auto mt-5" role="alert">본인인증 후 회원 2등급으로 전환되며, 이후 거래소를 이용하실 수 있습니다. 본인인증 완료 후 입금/출금이 가능합니다. </div>
-                   
-                  
-               </div>
-            </div>
-         </div>
-         <!--card-->
-      </div>
-      <!--container-->
-      <!--footer-->
-      <div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
-         <div class="footer-wrap">
-            <div class="footer-left"> <em>Copyright 2018ⓒPOPCON. All rights reserved.</em>
-               서울시 송파구 중대로 109. 대동빌딩 12층<br>
-               골든퓨쳐스 대표자 : 이수식 <span></span> 사업자등록번호 791-81-00992
-            </div>
-            <div class="footer-right">
-               <ul>
-                  <li>
-                     <h5>고객센터 </h5>
-                     고객센터 02-400-5651<br>
-                     운영시간 평일 09:00~18:00<br>
-                     <a href="/customer/questionlist">온라인 1:1 고객문의</a><br>
-                     <a href="mailto:help@popcon-ex.com">help@popcon-ex.com</a>
-                  </li>
-                  <li>
-                     <h5>QUICK LINKS </h5>
-                     <a href="/customer/main">공지사항</a><br>
-                     <a href="/about/terms">이용약관</a><br>
-                     <a href="/customer/faq"> 자주묻는질문</a><br>
-                     <a href="/about/privacy">개인정보취급방침</a>
-                  </li>
-                  <li> <span class="ico-fb"> </span>
-                     <span class="ico-twitter"> </span> 
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </div>
-      <!-- END FOOTER-->
-  <div class="modal fade" id="lvInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered " role="document">
-            <div class="modal-content">
-               <div class="modal-header bg-light">
-                  <h6 class="modal-title " id="">등급별 한도 안내</h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                 <table class="table">
-                   <colgroup>
-                      <col style="width:18%">
-                      <col style="width:22%">
-                      <col style="width:30%">
-                      <col style="width:30%">
-                   </colgroup>
-                   <thead>
-                      <tr>
-                         <th>일별한도</th>
-                         <th>종류</th>
-                         <th>Lv1</th>
-                         <th>Lv2</th>
-                      </tr>
-                   </thead>
-                   <tbody>
-                      <tr>
-                         <td>입금한도</td>
-                         <td>원화/무제한</td>
-                         <td>0</td>
-                         <td>무제한</td>
-                      </tr>
-                      <tr>
-                         <td rowspan="9">출금한도</td>
-                         <td>원화</td>
-                         <td class="lv1-KRW">0</td>
-                         <td class="lv2-KRW">10,000,000</td>
-                      </tr>
-                      <tr>
-                         <td>비트코인</td>
-                         <td class="lv1-BTC">0.00000000 BTC</td>
-                         <td class="lv2-BTC">5.00000000 BTC</td>
-                      </tr>
-                      <tr>
-                         <td>비트코인 캐시</td>
-                         <td class="lv1-BCH">0.00000000 BCH</td>
-                         <td class="lv2-BCH">30.00000000 BCH</td>
-                      </tr>
-                      <tr>
-                         <td>라이트코인</td>
-                         <td class="lv1-LTC">0.00000000 LTC</td>
-                         <td class="lv2-LTC">100.00000000 LTC</td>
-                      </tr>
-                      <tr>
-                         <td>에이플러스코인</td>
-                         <td class="lv1-APN">0.00000000 APN</td>
-                         <td class="lv2-APN">5.00000000 APN</td>
-                      </tr>
-                      <tr>
-                         <td>이더리움</td>
-                         <td class="lv1-ETH">0.00000000 ETH</td>
-                         <td class="lv2-ETH">20.00000000 ETH</td>
-                      </tr>
-                      <tr>
-                         <td>이더리움 클래식</td>
-                         <td class="lv1-ETC">0.00000000 ETC</td>
-                         <td class="lv2-ETC">50.00000000 ETC</td>
-                      </tr>
-                   </tbody>
-                </table> 
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--// Modal -->
-   </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+<title> </title>
+<link rel="stylesheet" media="all" href="css/bootstrap.css">
+<link rel="stylesheet" media="all" href="css/common.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>   
+<script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<style>
+#nav-sub{ padding: 0 !important;}
+body{ padding: 0 !important;}
+</style>
+</head>
+<body>
+<!-- BIGIN :: Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary nav-blue">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="navbar-collapse collapse" id="navbarsExample07" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">거래내역</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">입출금</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="#">마이페이지</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">고객센터</a>
+				</li>
+			</ul>
+			<div class="nav-bar-logininfo">
+				<i class="fas fa-user-circle fa-2x"></i> 게스트님
+			</div>
+			<button type="button" class="btn btn-outline-light btn-round">로그아웃</button>
+		</div>
+	</div>
+	<!--nav container-->
+</nav>
+<!-- END :: Navbar -->
+<!-- BIGIN :: 서브메뉴 -->
+<div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
+	<nav id="nav-sub-wrap" class="nav nav-underline">
+		<div class="spacing"> </div>
+		<a class="nav-link active" href="#">인증센터</a>
+		<a class="nav-link" href="#">회원정보 변경</a>
+		<a class="nav-link" href="#">접속정보</a>
+		<a class="nav-link" href="#">OTP</a>
+	</nav>
+</div>
+<!-- END :: 서브메뉴 -->
+<!-- BIGIN :: container -->
+<div class="container submenu-container mb-5">
+	<!-- BIGIN :: card -->
+	<div class="card max-width9 Regular shadow">
+		<div class="row">
+			<div class="col verification-bg rounded-left position-relative">
+				<!-- BIGIN :: row -->
+				<div class="row">
+					<div class="w-100 mt-3 mb-4">
+						<span class="verification-lv mb-1"> 2<em>LV </em></span>
+						<span class="text-center d-block">
+							<h6>Test 님은 현재 <b>2레벨 </b> 입니다 </h6>   입금한도 : 무제한
+						</span>
+					</div>
+					<div class="col">
+						<table class="table w-75 mx-auto mt-5 table-borderless ">
+							<colgroup>
+								<col width="">
+								<col width="">
+							</colgroup>
+							<tr>
+								<th colspan="2" class="text-center" style="border-bottom: 1px solid #4eb0e0; border-top: 1px solid #4eb0e0 ">출금한도</th>               
+							</tr>
+							<tr>
+								<td>비트코인</td>
+								<td>0.00000000 BTC </td>
+							</tr>
+							<tr>
+								<td>비트코인캐시</td>
+								<td>0.00000000 BCH </td>
+							</tr>
+							<tr>
+								<td>이더리움</td>
+								<td>0.00000000 ETH </td>
+							</tr>
+							<tr>
+								<td>이더리움 클래식</td>
+								<td>0.00000000 ETC </td>
+							</tr>
+							<tr>
+								<td>라이트코인</td>
+								<td>0.00000000 LTC </td>
+							</tr>
+							<tr>
+								<td>에이플러스코인</td>
+								<td>0.00000000 APN </td>
+							</tr>
+						</table>
+						<button type="button" class="mx-auto btn btn-outline-light btn-round d-block" data-toggle="modal" data-target="#lvInfo">등급별한도 보기</button>
+					</div>
+				</div>
+				<!-- end :: row -->
+				<div class="layer-login-deco"></div>
+			</div>
+			<div class="col">
+				<div class="pt-5 pl-4 pr-5 mr-3 mb-2 verification-form">
+					<ul>
+						<li class="active step1">
+							<span class="step1"> <i> </i></span>
+							<em>레벨1 </em> <h6 class="d-inline">이메일인증</h6> 
+							<button type="button" class="btn btn-outline-primary btn-sm float-right align-middle" disabled>test@test.com</button> 
+						</li> 
+						<li>
+							  <span class="step2"> <i> </i></span>
+							  <em>레벨2-1 </em><h6 class="d-inline">휴대폰 본인인증 </h6> 
+							<button type="button" class="btn btn-outline-dark btn-sm align-middle float-right">인증하기</button>  
+						</li>
+						<li class="active">
+							  <span class="step3"> <i> </i></span>
+							  <em>레벨2-2 </em><h6 class="d-inline">본인인증 </h6> 
+							<button type="button" class="btn btn-outline-primary btn-sm align-middle float-right" disabled>인증완료</button>  
+						</li>
+						<li>
+							  <span class="step4"> <i> </i></span>
+							  <em>레벨2-3 </em><h6 class="d-inline">계좌인증 </h6> 
+							<button type="button" class="btn btn-outline-dark btn-sm align-middle float-right">계좌관리</button>  
+						</li>
+						<li>
+							  <span class="step5"> <i> </i></span>
+							  <em>보안설정 </em><h6 class="d-inline">OTP 설정 </h6> 
+							<button type="button" class="btn btn-outline-dark btn-sm align-middle float-right">보안설정</button>  
+						</li>
+					</ul>
+				</div>
+				<div class="alert alert-secondary w-75 mx-auto mt-5" role="alert">본인인증 후 회원 2등급으로 전환되며, 이후 거래소를 이용하실 수 있습니다. 본인인증 완료 후 입금/출금이 가능합니다. </div>
+			</div>
+		</div>
+	</div>
+	<!-- END :: card -->
+</div>
+<!-- END :: container -->
+<!-- BIGIN :: footer -->
+<div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
+	<div class="footer-wrap">
+		<div class="footer-left"> <em>Copyright 2018ⓒPOPCON. All rights reserved.</em>
+			서울시 송파구 중대로 109. 대동빌딩 12층<br>
+			골든퓨쳐스 대표자 : 이수식 <span></span> 사업자등록번호 791-81-00992
+		</div>
+		<div class="footer-right">
+			<ul>
+				<li>
+					<h5>고객센터 </h5>
+					고객센터 02-400-5651<br>
+					운영시간 평일 09:00~18:00<br>
+					<a href="/customer/questionlist">온라인 1:1 고객문의</a><br>
+					<a href="mailto:help@popcon-ex.com">help@popcon-ex.com</a>
+				</li>
+				<li>
+					<h5>QUICK LINKS </h5>
+					<a href="/customer/main">공지사항</a><br>
+					<a href="/about/terms">이용약관</a><br>
+					<a href="/customer/faq"> 자주묻는질문</a><br>
+					<a href="/about/privacy">개인정보취급방침</a>
+				</li>
+				<li>
+			  		<span class="ico-fb"> </span>
+					<span class="ico-twitter"> </span> 
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- END :: FOOTER-->
+<!-- BIGIN :: Modal -->
+<div class="modal fade" id="lvInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered " role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-light">
+				<h6 class="modal-title " id="">등급별 한도 안내</h6>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<colgroup>
+						<col style="width:18%">
+						<col style="width:22%">
+						<col style="width:30%">
+						<col style="width:30%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>일별한도</th>
+							<th>종류</th>
+							<th>Lv1</th>
+							<th>Lv2</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>입금한도</td>
+							<td>원화/무제한</td>
+							<td>0</td>
+							<td>무제한</td>
+						</tr>
+						<tr>
+							<td rowspan="9">출금한도</td>
+							<td>원화</td>
+							<td class="lv1-KRW">0</td>
+							<td class="lv2-KRW">10,000,000</td>
+						</tr>
+						<tr>
+							<td>비트코인</td>
+							<td class="lv1-BTC">0.00000000 BTC</td>
+							<td class="lv2-BTC">5.00000000 BTC</td>
+						</tr>
+						<tr>
+							<td>비트코인 캐시</td>
+							<td class="lv1-BCH">0.00000000 BCH</td>
+							<td class="lv2-BCH">30.00000000 BCH</td>
+						</tr>
+						<tr>
+							<td>라이트코인</td>
+							<td class="lv1-LTC">0.00000000 LTC</td>
+							<td class="lv2-LTC">100.00000000 LTC</td>
+						</tr>
+						<tr>
+							<td>에이플러스코인</td>
+							<td class="lv1-APN">0.00000000 APN</td>
+							<td class="lv2-APN">5.00000000 APN</td>
+						</tr>
+						<tr>
+							<td>이더리움</td>
+							<td class="lv1-ETH">0.00000000 ETH</td>
+							<td class="lv2-ETH">20.00000000 ETH</td>
+						</tr>
+						<tr>
+							<td>이더리움 클래식</td>
+							<td class="lv1-ETC">0.00000000 ETC</td>
+							<td class="lv2-ETC">50.00000000 ETC</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END :: Modal -->
+</body>
 </html>

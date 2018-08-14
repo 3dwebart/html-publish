@@ -1,5 +1,4 @@
-
- <!doctype html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -9,114 +8,111 @@
 <link rel="stylesheet" media="all" href="css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
-     <script src="js/popper.min.js"></script>   
+<script src="js/popper.min.js"></script>   
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
+<!-- BIGIN :: Navbar -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="img/common/Popcon_Logo.png">
-          </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+			</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="offcanvas" data-target="#gnb" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-        <div class="navbar-collapse  offcanvas-collapse" id="gnb">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래내역</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">입출금</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">마이페이지</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">고객센터</a>
-            </li>
-          </ul>
-            <div class="nav-bar-logininfo">
-              <i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
-            </div>
-              <button type="button" class="btn btn-outline-light btn-round ">로그아웃</button>
-        </div>
-      </div>
-</nav> <!--END GNB-->
-    
-    <!--서브메뉴-->
-    <div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
-      <nav id="nav-sub-wrap" class="nav nav-underline">
-          <div class="spacing"> </div>
-        <a class="nav-link" href="#">인증센터</a>
-        <a class="nav-link" href="#">회원정보 변경</a>
-        <a class="nav-link" href="#">접속정보</a>
-        <a class="nav-link active" href="#">OTP</a>
-      </nav>
-    </div>
-   <!--END 서브메뉴-->
-    
-       <div class="container submenu-container mb-4 otp-size">
-            <div class="col mb-3 pb-3">
-                <div class="card shadow-sm bg-white rounded h-100">
-                    <div class="card-header">  <h5 class="pt-2 pb-1 mb-0">OTP 설정</h5></div>
-                    <div class="pl-4 pr-4 mb-3 ">
-                        <form class=" p-3">
-                            <div class="card-body">
-                                <h5 class="card-title text-center ">FAGGEAUED2WU4UJI</h5>
-                                <p class="text-center"> <img src="img/img-qrcode-otp.png" width="110" height="110"> </p>
-                                <p class="text-center text-muted">- 본코드는 OTP를 활성화시킬 때마다 변경<br>
-                                - 비활성화시키면 본 코드는 사용 불가 </p>                           
-                            <div class="custom-control custom-checkbox text-center">
-                              <input type="checkbox" class="custom-control-input" id="customCheck1">
-                              <label class="custom-control-label" for="customCheck1">확인하였습니다</label>
-                            </div>
-                            </div>
-                            <div class="alert alert-warning" role="alert">
-                             
-Google OTP앱 설치후 2단계 인증을 설정하면 인터넷이나 모바일 서비스에 연결되어 있지 않아도 Google OTP 앱을 통해 코드를 받을 수 있습니다.
-                            </div>
-                              <div class="form-group row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
-                                <div class="col-sm-10">
-                                  <input type="" class="form-control" id="" placeholder="E-mail" disabled>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
-                                <div class="col-sm-10">
-                                  <input type="" class="form-control" id="inputPassword" placeholder="비밀번호">
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">OTP코드</label>
-                                <div class="col-sm-10">
-                                  <input type="" class="form-control" id="inputPassword" placeholder="OTP코드">
-                                </div>
-                              </div>
-                            <button type="submit" class="btn btn-secondary d-block w-100 btn-sm mx-auto mb-2">Google OTP 설치</button>
-                            <button type="submit" class="btn btn-primary d-block w-100 btn-sm mx-auto">OTP 활성화</button>
-                            </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
- <!--container-->
-    <script>
-        $(function () {
-          'use strict'
-
-          $('[data-toggle="offcanvas"]').on('click', function () {
-            $('.offcanvas-collapse').toggleClass('open')
-          })
-        })  
-    </script>  
-    
-    
+		<div class="navbar-collapse  offcanvas-collapse" id="gnb">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">거래내역</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">입출금</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#">마이페이지</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">고객센터</a>
+				</li>
+			</ul>
+				<div class="nav-bar-logininfo">
+					<i class="fas fa-user-circle fa-2x align-middle"></i> 게스트님
+				</div>
+					<button type="button" class="btn btn-outline-light btn-round ">로그아웃</button>
+		</div>
+	</div>
+</nav>
+<!-- END :: Navbar -->
+<!-- BIGIN :: 서브메뉴 -->
+<div id="nav-sub" class="  bg-white box-shadow d-none d-sm-none d-md-block">
+	<nav id="nav-sub-wrap" class="nav nav-underline">
+		<div class="spacing"> </div>
+		<a class="nav-link" href="#">인증센터</a>
+		<a class="nav-link" href="#">회원정보 변경</a>
+		<a class="nav-link" href="#">접속정보</a>
+		<a class="nav-link active" href="#">OTP</a>
+	</nav>
+</div>
+<!-- END :: 서브메뉴 -->
+<!-- BIGIN :: container -->
+<div class="container submenu-container mb-4 otp-size">
+	<div class="col mb-3 pb-3">
+		<div class="card shadow-sm bg-white rounded h-100">
+			<div class="card-header"><h5 class="pt-2 pb-1 mb-0">OTP 설정</h5></div>
+			<div class="pl-4 pr-4 mb-3 ">
+				<form class=" p-3">
+					<div class="card-body">
+						<h5 class="card-title text-center ">FAGGEAUED2WU4UJI</h5>
+						<p class="text-center"><img src="img/img-qrcode-otp.png" width="110" height="110"></p>
+						<p class="text-center text-muted">
+							- 본코드는 OTP를 활성화시킬 때마다 변경<br>
+							- 비활성화시키면 본 코드는 사용 불가
+						</p>
+						<div class="custom-control custom-checkbox text-center">
+							<input type="checkbox" class="custom-control-input" id="customCheck1">
+							<label class="custom-control-label" for="customCheck1">확인하였습니다</label>
+						</div>
+					</div>
+					<div class="alert alert-warning" role="alert">
+						Google OTP앱 설치후 2단계 인증을 설정하면 인터넷이나 모바일 서비스에 연결되어 있지 않아도 Google OTP 앱을 통해 코드를 받을 수 있습니다.
+					</div>
+					<div class="form-group row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
+						<div class="col-sm-10">
+							<input type="" class="form-control" id="" placeholder="E-mail" disabled>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
+						<div class="col-sm-10">
+							<input type="" class="form-control" id="inputPassword" placeholder="비밀번호">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">OTP코드</label>
+						<div class="col-sm-10">
+							<input type="" class="form-control" id="inputPassword" placeholder="OTP코드">
+						</div>
+					</div>
+					<button type="submit" class="btn btn-secondary d-block w-100 btn-sm mx-auto mb-2">Google OTP 설치</button>
+					<button type="submit" class="btn btn-primary d-block w-100 btn-sm mx-auto">OTP 활성화</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END :: container -->
+<script>
+$(function () {
+	$('[data-toggle="offcanvas"]').on('click', function () {
+		$('.offcanvas-collapse').toggleClass('open');
+	});
+});
+</script>
 </body>
 </html>

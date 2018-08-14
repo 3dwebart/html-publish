@@ -1,5 +1,4 @@
-
- <!doctype html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,120 +12,114 @@
 <style>
 ::-webkit-input-placeholder{color: #0070c2  !important; ; font-size: 14px; opacity: 0.5 important; }
 ::-moz-placeholder {  color: #0070c2  !important; ; font-size: 14px; opacity: 0.5  !important; }
- 
 :-moz-placeholder {color:#0070c2  !important; ; font-size: 14px; opacity: 0.5 !important; } 
 ::placeholder{   color:#0070c2  !important; ; font-size: 14px; opacity: 0.5 !important; } 
-    body{ background: url(img/login_bg.gif) no-repeat #fff; background-size: cover;  background-position: center center;}
+body{ background: url(img/login_bg.gif) no-repeat #fff; background-size: cover;  background-position: center center;}
 input:focus{outline: none !important; border: none !important;}
-    *:focus {outline: none !important;  border: none !important;}
+*:focus {outline: none !important;  border: none !important;}
+.sign-in-form {
+	background: none!important;
+	border: none;
+	border-bottom: 2px solid #0070c2;
+	border-radius: 0;
+}
 </style>
-
-
-
 </head>
 <body>
+<!-- BIGIN :: Navbar -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav-blue">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="img/common/Popcon_Logo.png">
-          </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-          <div class="navbar-collapse  offcanvas-collapse" id="gnb">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">거래내역</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">입출금</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">마이페이지</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">고객센터</a>
-            </li>
-          </ul>
- 
-              <button type="button" class="btn btn-outline-light btn-round">회원가입</button>
-        </div>
-      </div>
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="img/common/Popcon_Logo.png">
+		</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="navbar-collapse  offcanvas-collapse" id="gnb">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">거래소 <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">거래내역</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">입출금</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">마이페이지</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">고객센터</a>
+				</li>
+			</ul>
+			<button type="button" class="btn btn-outline-light btn-round">회원가입</button>
+		</div>
+	</div>
 </nav>
-    <div id="container" class="container mt11 mb-4">
-       <div class="max-width5  mt-3">
-    
-        <form class="p-3">
-          <div class="form-group"><h4 style="color: #0070c2">LOGIN</h4> </div>  
-          <div class="form-group">
-            
-            <input style=" background: none!important; border: none;  border-bottom: 2px solid #0070c2 ; border-radius: 0;"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="아이디">
- 
-          </div>
-          <div class="form-group mt-2">
-           
-            <input style="background: none!important;
-    border: none;
-    border-bottom: 2px solid #0070c2 ;
-    border-radius: 0;" type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
-          </div>
-            <div class="mb-3 font13">
-            <div class="form-check form-check-inline">
-              <input style="" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-              <label class="form-check-label text-muted font-11 " for="inlineCheckbox1">아이디저장</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-              <label class="form-check-label text-muted font-11" for="inlineCheckbox2">비밀번호저장</label>
-            </div>
-            </div>
-          <button type="submit" class="btn btn-primary btn-block btn-round p-2">로그인 </button>
-        </form>
-          
-           <button type="button" class="btn btn-link btn-sm float-left font-12">회원가입</button>
-            
-           <button type="button" class="btn btn-link btn-sm float-right font-12">비밀번호 찾기</button>
-             
-        </div> <!--card-->
- 
-    </div> <!--container-->
- <!--footer-->
-        <div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
-        <div class="footer-wrap">
-            <div class="footer-left"> <em>Copyright 2018ⓒPOPCON. All rights reserved.</em>
-            서울시 송파구 중대로 109. 대동빌딩 12층<br>
-            골든퓨쳐스 대표자 : 이수식 <span></span> 사업자등록번호 791-81-00992
-            </div>
-            <div class="footer-right">
-                <ul>
-                    <li>
-                        <h5>고객센터 </h5>
-                        고객센터 02-400-5651<br>
-                        운영시간 평일 09:00~18:00<br>
-                        <a href="/customer/questionlist">온라인 1:1 고객문의</a><br>
-                        <a href="mailto:help@popcon-ex.com">help@popcon-ex.com</a>
-                    </li>
-                    <li> 
-                        <h5>QUICK LINKS </h5>
-                        <a href="/customer/main">공지사항</a><br>
-                        <a href="/about/terms">이용약관</a><br>
-                        <a href="/customer/faq"> 자주묻는질문</a><br>
-                        <a href="/about/privacy">개인정보취급방침</a>
-                    </li>
-                    <li> <span class="ico-fb"> </span>
-                         <span class="ico-twitter"> </span> 
-                    </li>
-                </ul>
-            </div>
-       </div>
+<!-- END :: Navbar -->
+<!-- BIGIN :: container -->
+<div id="container" class="container mt11 mb-4">
+	<!-- BIGIN : card -->
+	<div class="max-width5 mt-3">
+		<form class="p-3">
+			<div class="form-group"><h4 style="color: #0070c2">LOGIN</h4></div>  
+			<div class="form-group">
+				<input type="email" class="form-control sign-in-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="아이디">
+			</div>
+			<div class="form-group mt-2">
+				<input type="password" class="form-control sign-in-form" id="exampleInputPassword1" placeholder="비밀번호">
+			</div>
+			<div class="mb-3 font13">
+				<div class="form-check form-check-inline">
+					<input style="" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+					<label class="form-check-label text-muted font-11 " for="inlineCheckbox1">아이디저장</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+					<label class="form-check-label text-muted font-11" for="inlineCheckbox2">비밀번호저장</label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-block btn-round p-2">로그인 </button>
+		</form>
+		<button type="button" class="btn btn-link btn-sm float-left font-12">회원가입</button>
+		<button type="button" class="btn btn-link btn-sm float-right font-12">비밀번호 찾기</button>
+	</div>
+	<!-- END :: card -->
 </div>
-    <!-- END FOOTER-->
-    
-    
-    
+<!-- END :: container -->
+<!-- BIGIN :: footer-->
+<div id="footer" class="d-sm-none d-none d-ms-block d-lg-block d-xl-block">
+	<div class="footer-wrap">
+		<div class="footer-left">
+			<em>Copyright 2018ⓒPOPCON. All rights reserved.</em>
+			서울시 송파구 중대로 109. 대동빌딩 12층<br>
+			골든퓨쳐스 대표자 : 이수식 <span></span> 사업자등록번호 791-81-00992
+		</div>
+		<div class="footer-right">
+			<ul>
+				<li>
+					<h5>고객센터 </h5>
+					고객센터 02-400-5651<br>
+					운영시간 평일 09:00~18:00<br>
+					<a href="/customer/questionlist">온라인 1:1 고객문의</a><br>
+					<a href="mailto:help@popcon-ex.com">help@popcon-ex.com</a>
+				</li>
+				<li> 
+					<h5>QUICK LINKS </h5>
+					<a href="/customer/main">공지사항</a><br>
+					<a href="/about/terms">이용약관</a><br>
+					<a href="/customer/faq"> 자주묻는질문</a><br>
+					<a href="/about/privacy">개인정보취급방침</a>
+				</li>
+				<li>
+					<span class="ico-fb"> </span>
+					<span class="ico-twitter"> </span> 
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- END :: footer -->
 </body>
 </html>
